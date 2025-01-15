@@ -1,0 +1,2065 @@
+{
+	"abi": [
+		{
+			"type": "function",
+			"name": "acceptOwnership",
+			"inputs": [],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "accrueFee",
+			"inputs": [],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "activateProject",
+			"inputs": [{ "name": "projectId", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "addStrategy",
+			"inputs": [
+				{
+					"name": "strategy",
+					"type": "tuple",
+					"internalType": "struct StrategyData",
+					"components": [
+						{ "name": "adapter", "type": "address", "internalType": "address" },
+						{ "name": "supplement", "type": "bytes", "internalType": "bytes" }
+					]
+				}
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "balanceOf",
+			"inputs": [
+				{ "name": "account", "type": "address", "internalType": "address" },
+				{ "name": "id", "type": "uint256", "internalType": "uint256" }
+			],
+			"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "balanceOfBatch",
+			"inputs": [
+				{ "name": "accounts", "type": "address[]", "internalType": "address[]" },
+				{ "name": "ids", "type": "uint256[]", "internalType": "uint256[]" }
+			],
+			"outputs": [{ "name": "", "type": "uint256[]", "internalType": "uint256[]" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "checkRole",
+			"inputs": [{ "name": "role", "type": "bytes32", "internalType": "bytes32" }],
+			"outputs": [],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "claimStrategyRewards",
+			"inputs": [{ "name": "index", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "clientNameTaken",
+			"inputs": [{ "name": "clientName", "type": "bytes32", "internalType": "bytes32" }],
+			"outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "compound",
+			"inputs": [
+				{
+					"name": "swapArgs",
+					"type": "tuple[]",
+					"internalType": "struct SwapArgs[]",
+					"components": [
+						{ "name": "tokenIn", "type": "address", "internalType": "address" },
+						{ "name": "swapTarget", "type": "address", "internalType": "address" },
+						{ "name": "swapCallData", "type": "bytes", "internalType": "bytes" }
+					]
+				}
+			],
+			"outputs": [{ "name": "compounded", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "createClient",
+			"inputs": [
+				{ "name": "projectOwner", "type": "address", "internalType": "address" },
+				{ "name": "minProjectId", "type": "uint128", "internalType": "uint128" },
+				{ "name": "maxProjectId", "type": "uint128", "internalType": "uint128" },
+				{ "name": "clientName", "type": "bytes32", "internalType": "bytes32" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "deposit",
+			"inputs": [
+				{ "name": "assets", "type": "uint256", "internalType": "uint256" },
+				{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+				{ "name": "receiver", "type": "address", "internalType": "address" }
+			],
+			"outputs": [{ "name": "shares", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "depositHook",
+			"inputs": [
+				{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+				{ "name": "depositor", "type": "address", "internalType": "address" },
+				{ "name": "receiver", "type": "address", "internalType": "address" },
+				{ "name": "assets", "type": "uint256", "internalType": "uint256" },
+				{ "name": "shares", "type": "uint256", "internalType": "uint256" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "getDepositQueue",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "uint256[]", "internalType": "uint256[]" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "getRoleAdmin",
+			"inputs": [{ "name": "role", "type": "bytes32", "internalType": "bytes32" }],
+			"outputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "getRoleMember",
+			"inputs": [
+				{ "name": "role", "type": "bytes32", "internalType": "bytes32" },
+				{ "name": "index", "type": "uint256", "internalType": "uint256" }
+			],
+			"outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "getRoleMemberCount",
+			"inputs": [{ "name": "role", "type": "bytes32", "internalType": "bytes32" }],
+			"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "getStrategies",
+			"inputs": [],
+			"outputs": [
+				{
+					"name": "",
+					"type": "tuple[]",
+					"internalType": "struct StrategyData[]",
+					"components": [
+						{ "name": "adapter", "type": "address", "internalType": "address" },
+						{ "name": "supplement", "type": "bytes", "internalType": "bytes" }
+					]
+				}
+			],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "getWithdrawQueue",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "uint256[]", "internalType": "uint256[]" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "grantRole",
+			"inputs": [
+				{ "name": "role", "type": "bytes32", "internalType": "bytes32" },
+				{ "name": "account", "type": "address", "internalType": "address" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "hasRole",
+			"inputs": [
+				{ "name": "role", "type": "bytes32", "internalType": "bytes32" },
+				{ "name": "account", "type": "address", "internalType": "address" }
+			],
+			"outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "init",
+			"inputs": [
+				{ "name": "swapper", "type": "address", "internalType": "contract ISwapper" },
+				{ "name": "underlyingAsset", "type": "address", "internalType": "address" },
+				{ "name": "yieldExtractor", "type": "address", "internalType": "address" },
+				{ "name": "uri", "type": "string", "internalType": "string" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "isApprovedForAll",
+			"inputs": [
+				{ "name": "account", "type": "address", "internalType": "address" },
+				{ "name": "operator", "type": "address", "internalType": "address" }
+			],
+			"outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "lastProjectId",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "lastTotalAssets",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "managedDeposit",
+			"inputs": [
+				{
+					"name": "strategyArgs",
+					"type": "tuple",
+					"internalType": "struct StrategyArgs",
+					"components": [
+						{ "name": "index", "type": "uint256", "internalType": "uint256" },
+						{ "name": "amount", "type": "uint256", "internalType": "uint256" }
+					]
+				}
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "managedWithdraw",
+			"inputs": [
+				{
+					"name": "strategyArgs",
+					"type": "tuple",
+					"internalType": "struct StrategyArgs",
+					"components": [
+						{ "name": "index", "type": "uint256", "internalType": "uint256" },
+						{ "name": "amount", "type": "uint256", "internalType": "uint256" }
+					]
+				}
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "migratePosition",
+			"inputs": [
+				{ "name": "fromProjectId", "type": "uint256", "internalType": "uint256" },
+				{ "name": "toProjectId", "type": "uint256", "internalType": "uint256" },
+				{ "name": "amount", "type": "uint256", "internalType": "uint256" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "multicall",
+			"inputs": [{ "name": "data", "type": "bytes[]", "internalType": "bytes[]" }],
+			"outputs": [{ "name": "results", "type": "bytes[]", "internalType": "bytes[]" }],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "owner",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "ownerToClientData",
+			"inputs": [{ "name": "owner", "type": "address", "internalType": "address" }],
+			"outputs": [
+				{
+					"name": "",
+					"type": "tuple",
+					"internalType": "struct ClientData",
+					"components": [
+						{ "name": "minProjectId", "type": "uint128", "internalType": "uint128" },
+						{ "name": "maxProjectId", "type": "uint128", "internalType": "uint128" },
+						{ "name": "clientName", "type": "bytes32", "internalType": "bytes32" }
+					]
+				}
+			],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "pendingOwner",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "projectIdActive",
+			"inputs": [{ "name": "projectId", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "projectIdToClientName",
+			"inputs": [{ "name": "projectId", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "projectIdToLockConfig",
+			"inputs": [{ "name": "projectId", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [
+				{
+					"name": "",
+					"type": "tuple",
+					"internalType": "struct LockConfig",
+					"components": [{ "name": "duration", "type": "uint256", "internalType": "uint256" }]
+				}
+			],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "projectIdToProjectInterceptor",
+			"inputs": [{ "name": "projectId", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [{ "name": "", "type": "uint8", "internalType": "enum ProjectInterceptor" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "reallocate",
+			"inputs": [
+				{
+					"name": "withdrawals",
+					"type": "tuple[]",
+					"internalType": "struct StrategyArgs[]",
+					"components": [
+						{ "name": "index", "type": "uint256", "internalType": "uint256" },
+						{ "name": "amount", "type": "uint256", "internalType": "uint256" }
+					]
+				},
+				{
+					"name": "deposits",
+					"type": "tuple[]",
+					"internalType": "struct StrategyArgs[]",
+					"components": [
+						{ "name": "index", "type": "uint256", "internalType": "uint256" },
+						{ "name": "amount", "type": "uint256", "internalType": "uint256" }
+					]
+				}
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "redeem",
+			"inputs": [
+				{ "name": "shares", "type": "uint256", "internalType": "uint256" },
+				{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+				{ "name": "receiver", "type": "address", "internalType": "address" }
+			],
+			"outputs": [{ "name": "assets", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "redeemHook",
+			"inputs": [
+				{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+				{ "name": "redeemer", "type": "address", "internalType": "address" },
+				{ "name": "receiver", "type": "address", "internalType": "address" },
+				{ "name": "assets", "type": "uint256", "internalType": "uint256" },
+				{ "name": "shares", "type": "uint256", "internalType": "uint256" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "removeStrategy",
+			"inputs": [{ "name": "index", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "renounceRole",
+			"inputs": [
+				{ "name": "role", "type": "bytes32", "internalType": "bytes32" },
+				{ "name": "callerConfirmation", "type": "address", "internalType": "address" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "revokeRole",
+			"inputs": [
+				{ "name": "role", "type": "bytes32", "internalType": "bytes32" },
+				{ "name": "account", "type": "address", "internalType": "address" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "safeBatchTransferFrom",
+			"inputs": [
+				{ "name": "from", "type": "address", "internalType": "address" },
+				{ "name": "to", "type": "address", "internalType": "address" },
+				{ "name": "ids", "type": "uint256[]", "internalType": "uint256[]" },
+				{ "name": "values", "type": "uint256[]", "internalType": "uint256[]" },
+				{ "name": "data", "type": "bytes", "internalType": "bytes" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "safeTransferFrom",
+			"inputs": [
+				{ "name": "from", "type": "address", "internalType": "address" },
+				{ "name": "to", "type": "address", "internalType": "address" },
+				{ "name": "id", "type": "uint256", "internalType": "uint256" },
+				{ "name": "value", "type": "uint256", "internalType": "uint256" },
+				{ "name": "data", "type": "bytes", "internalType": "bytes" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "selectorToFacet",
+			"inputs": [{ "name": "selector", "type": "bytes4", "internalType": "bytes4" }],
+			"outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "setApprovalForAll",
+			"inputs": [
+				{ "name": "operator", "type": "address", "internalType": "address" },
+				{ "name": "approved", "type": "bool", "internalType": "bool" }
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "setLockConfig",
+			"inputs": [
+				{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+				{
+					"name": "lockConfig",
+					"type": "tuple",
+					"internalType": "struct LockConfig",
+					"components": [{ "name": "duration", "type": "uint256", "internalType": "uint256" }]
+				}
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "setProjectInterceptor",
+			"inputs": [
+				{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+				{
+					"name": "projectInterceptor",
+					"type": "uint8",
+					"internalType": "enum ProjectInterceptor"
+				}
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "setSelectorToFacets",
+			"inputs": [
+				{
+					"name": "arr",
+					"type": "tuple[]",
+					"internalType": "struct SelectorsToFacet[]",
+					"components": [
+						{ "name": "facet", "type": "address", "internalType": "address" },
+						{ "name": "selectors", "type": "bytes4[]", "internalType": "bytes4[]" }
+					]
+				}
+			],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "strategyAssets",
+			"inputs": [{ "name": "index", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "strategyRewards",
+			"inputs": [{ "name": "index", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [
+				{
+					"name": "rewards",
+					"type": "tuple[]",
+					"internalType": "struct Reward[]",
+					"components": [
+						{ "name": "token", "type": "address", "internalType": "address" },
+						{ "name": "amount", "type": "uint256", "internalType": "uint256" }
+					]
+				}
+			],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "supportsInterface",
+			"inputs": [{ "name": "interfaceId", "type": "bytes4", "internalType": "bytes4" }],
+			"outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "swapper",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "totalAssets",
+			"inputs": [],
+			"outputs": [{ "name": "assets", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "totalSupply",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "totalSupply",
+			"inputs": [{ "name": "id", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "transferClientOwnership",
+			"inputs": [{ "name": "newClientOwner", "type": "address", "internalType": "address" }],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "transferOwnership",
+			"inputs": [{ "name": "newOwner", "type": "address", "internalType": "address" }],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "underlyingAsset",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "underlyingBalance",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "updateDepositQueue",
+			"inputs": [{ "name": "depositQueue_", "type": "uint256[]", "internalType": "uint256[]" }],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "updateWithdrawQueue",
+			"inputs": [{ "name": "withdrawQueue_", "type": "uint256[]", "internalType": "uint256[]" }],
+			"outputs": [],
+			"stateMutability": "nonpayable"
+		},
+		{
+			"type": "function",
+			"name": "uri",
+			"inputs": [{ "name": "id", "type": "uint256", "internalType": "uint256" }],
+			"outputs": [{ "name": "", "type": "string", "internalType": "string" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "userToProjectIdToUserLock",
+			"inputs": [
+				{ "name": "user", "type": "address", "internalType": "address" },
+				{ "name": "projectId", "type": "uint256", "internalType": "uint256" }
+			],
+			"outputs": [
+				{
+					"name": "",
+					"type": "tuple",
+					"internalType": "struct UserLockData",
+					"components": [
+						{ "name": "pointer", "type": "uint256", "internalType": "uint256" },
+						{
+							"name": "locks",
+							"type": "tuple[]",
+							"internalType": "struct UserLock[]",
+							"components": [
+								{ "name": "timestamp", "type": "uint64", "internalType": "uint64" },
+								{ "name": "shares", "type": "uint192", "internalType": "uint192" }
+							]
+						}
+					]
+				}
+			],
+			"stateMutability": "view"
+		},
+		{
+			"type": "function",
+			"name": "yieldExtractor",
+			"inputs": [],
+			"outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+			"stateMutability": "view"
+		},
+		{
+			"type": "event",
+			"name": "ApprovalForAll",
+			"inputs": [
+				{
+					"name": "account",
+					"type": "address",
+					"indexed": true,
+					"internalType": "address"
+				},
+				{
+					"name": "operator",
+					"type": "address",
+					"indexed": true,
+					"internalType": "address"
+				},
+				{ "name": "approved", "type": "bool", "indexed": false, "internalType": "bool" }
+			],
+			"anonymous": false
+		},
+		{
+			"type": "event",
+			"name": "RoleAdminChanged",
+			"inputs": [
+				{ "name": "role", "type": "bytes32", "indexed": true, "internalType": "bytes32" },
+				{
+					"name": "previousAdminRole",
+					"type": "bytes32",
+					"indexed": true,
+					"internalType": "bytes32"
+				},
+				{
+					"name": "newAdminRole",
+					"type": "bytes32",
+					"indexed": true,
+					"internalType": "bytes32"
+				}
+			],
+			"anonymous": false
+		},
+		{
+			"type": "event",
+			"name": "RoleGranted",
+			"inputs": [
+				{ "name": "role", "type": "bytes32", "indexed": true, "internalType": "bytes32" },
+				{
+					"name": "account",
+					"type": "address",
+					"indexed": true,
+					"internalType": "address"
+				},
+				{ "name": "sender", "type": "address", "indexed": true, "internalType": "address" }
+			],
+			"anonymous": false
+		},
+		{
+			"type": "event",
+			"name": "RoleRevoked",
+			"inputs": [
+				{ "name": "role", "type": "bytes32", "indexed": true, "internalType": "bytes32" },
+				{
+					"name": "account",
+					"type": "address",
+					"indexed": true,
+					"internalType": "address"
+				},
+				{ "name": "sender", "type": "address", "indexed": true, "internalType": "address" }
+			],
+			"anonymous": false
+		},
+		{
+			"type": "event",
+			"name": "TransferBatch",
+			"inputs": [
+				{
+					"name": "operator",
+					"type": "address",
+					"indexed": true,
+					"internalType": "address"
+				},
+				{ "name": "from", "type": "address", "indexed": true, "internalType": "address" },
+				{ "name": "to", "type": "address", "indexed": true, "internalType": "address" },
+				{
+					"name": "ids",
+					"type": "uint256[]",
+					"indexed": false,
+					"internalType": "uint256[]"
+				},
+				{
+					"name": "values",
+					"type": "uint256[]",
+					"indexed": false,
+					"internalType": "uint256[]"
+				}
+			],
+			"anonymous": false
+		},
+		{
+			"type": "event",
+			"name": "TransferSingle",
+			"inputs": [
+				{
+					"name": "operator",
+					"type": "address",
+					"indexed": true,
+					"internalType": "address"
+				},
+				{ "name": "from", "type": "address", "indexed": true, "internalType": "address" },
+				{ "name": "to", "type": "address", "indexed": true, "internalType": "address" },
+				{ "name": "id", "type": "uint256", "indexed": false, "internalType": "uint256" },
+				{ "name": "value", "type": "uint256", "indexed": false, "internalType": "uint256" }
+			],
+			"anonymous": false
+		},
+		{
+			"type": "event",
+			"name": "URI",
+			"inputs": [
+				{ "name": "value", "type": "string", "indexed": false, "internalType": "string" },
+				{ "name": "id", "type": "uint256", "indexed": true, "internalType": "uint256" }
+			],
+			"anonymous": false
+		},
+		{ "type": "error", "name": "AccessControlBadConfirmation", "inputs": [] },
+		{
+			"type": "error",
+			"name": "AccessControlUnauthorizedAccount",
+			"inputs": [
+				{ "name": "account", "type": "address", "internalType": "address" },
+				{ "name": "neededRole", "type": "bytes32", "internalType": "bytes32" }
+			]
+		}
+	],
+	"bytecode": { "object": "0x", "sourceMap": "", "linkReferences": {} },
+	"deployedBytecode": { "object": "0x", "sourceMap": "", "linkReferences": {} },
+	"methodIdentifiers": {
+		"acceptOwnership()": "79ba5097",
+		"accrueFee()": "b26cc394",
+		"activateProject(uint256)": "41544a82",
+		"addStrategy((address,bytes))": "64568e7f",
+		"balanceOf(address,uint256)": "00fdd58e",
+		"balanceOfBatch(address[],uint256[])": "4e1273f4",
+		"checkRole(bytes32)": "c5b95190",
+		"claimStrategyRewards(uint256)": "69aba22f",
+		"clientNameTaken(bytes32)": "56c0f3d1",
+		"compound((address,address,bytes)[])": "4233ddfa",
+		"createClient(address,uint128,uint128,bytes32)": "23b18cb5",
+		"deposit(uint256,uint256,address)": "8dbdbe6d",
+		"depositHook(uint256,address,address,uint256,uint256)": "ce1b50b0",
+		"getDepositQueue()": "bf9708cd",
+		"getRoleAdmin(bytes32)": "248a9ca3",
+		"getRoleMember(bytes32,uint256)": "9010d07c",
+		"getRoleMemberCount(bytes32)": "ca15c873",
+		"getStrategies()": "b49a60bb",
+		"getWithdrawQueue()": "11183052",
+		"grantRole(bytes32,address)": "2f2ff15d",
+		"hasRole(bytes32,address)": "91d14854",
+		"init(address,address,address,string)": "24f91d83",
+		"isApprovedForAll(address,address)": "e985e9c5",
+		"lastProjectId()": "0e964465",
+		"lastTotalAssets()": "568efc07",
+		"managedDeposit((uint256,uint256))": "eaa17e6e",
+		"managedWithdraw((uint256,uint256))": "bfd4e2e2",
+		"migratePosition(uint256,uint256,uint256)": "3f1b327f",
+		"multicall(bytes[])": "ac9650d8",
+		"owner()": "8da5cb5b",
+		"ownerToClientData(address)": "db33bc5b",
+		"pendingOwner()": "e30c3978",
+		"projectIdActive(uint256)": "74fb106c",
+		"projectIdToClientName(uint256)": "e50b998b",
+		"projectIdToLockConfig(uint256)": "f29bb914",
+		"projectIdToProjectInterceptor(uint256)": "2d47ece3",
+		"reallocate((uint256,uint256)[],(uint256,uint256)[])": "dc934b6a",
+		"redeem(uint256,uint256,address)": "049104e5",
+		"redeemHook(uint256,address,address,uint256,uint256)": "159f7ba3",
+		"removeStrategy(uint256)": "c0cbbca6",
+		"renounceRole(bytes32,address)": "36568abe",
+		"revokeRole(bytes32,address)": "d547741f",
+		"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": "2eb2c2d6",
+		"safeTransferFrom(address,address,uint256,uint256,bytes)": "f242432a",
+		"selectorToFacet(bytes4)": "ae7473ac",
+		"setApprovalForAll(address,bool)": "a22cb465",
+		"setLockConfig(uint256,(uint256))": "fdeab3a2",
+		"setProjectInterceptor(uint256,uint8)": "803c7f02",
+		"setSelectorToFacets((address,bytes4[])[])": "a47dbf82",
+		"strategyAssets(uint256)": "b2db983a",
+		"strategyRewards(uint256)": "f0a83798",
+		"supportsInterface(bytes4)": "01ffc9a7",
+		"swapper()": "2b3297f9",
+		"totalAssets()": "01e1d114",
+		"totalSupply()": "18160ddd",
+		"totalSupply(uint256)": "bd85b039",
+		"transferClientOwnership(address)": "cce3de81",
+		"transferOwnership(address)": "f2fde38b",
+		"underlyingAsset()": "7158da7c",
+		"underlyingBalance()": "59356c5c",
+		"updateDepositQueue(uint256[])": "4c44a530",
+		"updateWithdrawQueue(uint256[])": "41b67833",
+		"uri(uint256)": "0e89341c",
+		"userToProjectIdToUserLock(address,uint256)": "d5a54ae8",
+		"yieldExtractor()": "0f306b3a"
+	},
+	"rawMetadata": "{\"compiler\":{\"version\":\"0.8.28+commit.7893614a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"AccessControlBadConfirmation\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"neededRole\",\"type\":\"bytes32\"}],\"name\":\"AccessControlUnauthorizedAccount\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"TransferBatch\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"TransferSingle\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"URI\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"accrueFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"}],\"name\":\"activateProject\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"adapter\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"supplement\",\"type\":\"bytes\"}],\"internalType\":\"struct StrategyData\",\"name\":\"strategy\",\"type\":\"tuple\"}],\"name\":\"addStrategy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"}],\"name\":\"balanceOfBatch\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"checkRole\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"claimStrategyRewards\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"clientName\",\"type\":\"bytes32\"}],\"name\":\"clientNameTaken\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"tokenIn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"swapTarget\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"swapCallData\",\"type\":\"bytes\"}],\"internalType\":\"struct SwapArgs[]\",\"name\":\"swapArgs\",\"type\":\"tuple[]\"}],\"name\":\"compound\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"compounded\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"projectOwner\",\"type\":\"address\"},{\"internalType\":\"uint128\",\"name\":\"minProjectId\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"maxProjectId\",\"type\":\"uint128\"},{\"internalType\":\"bytes32\",\"name\":\"clientName\",\"type\":\"bytes32\"}],\"name\":\"createClient\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"assets\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"deposit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"depositor\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"assets\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"depositHook\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDepositQueue\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getRoleMember\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleMemberCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getStrategies\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"adapter\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"supplement\",\"type\":\"bytes\"}],\"internalType\":\"struct StrategyData[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getWithdrawQueue\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISwapper\",\"name\":\"swapper\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"underlyingAsset\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"yieldExtractor\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"uri\",\"type\":\"string\"}],\"name\":\"init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lastProjectId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lastTotalAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"internalType\":\"struct StrategyArgs\",\"name\":\"strategyArgs\",\"type\":\"tuple\"}],\"name\":\"managedDeposit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"internalType\":\"struct StrategyArgs\",\"name\":\"strategyArgs\",\"type\":\"tuple\"}],\"name\":\"managedWithdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fromProjectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toProjectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"migratePosition\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes[]\",\"name\":\"data\",\"type\":\"bytes[]\"}],\"name\":\"multicall\",\"outputs\":[{\"internalType\":\"bytes[]\",\"name\":\"results\",\"type\":\"bytes[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"ownerToClientData\",\"outputs\":[{\"components\":[{\"internalType\":\"uint128\",\"name\":\"minProjectId\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"maxProjectId\",\"type\":\"uint128\"},{\"internalType\":\"bytes32\",\"name\":\"clientName\",\"type\":\"bytes32\"}],\"internalType\":\"struct ClientData\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pendingOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"}],\"name\":\"projectIdActive\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"}],\"name\":\"projectIdToClientName\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"}],\"name\":\"projectIdToLockConfig\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"}],\"internalType\":\"struct LockConfig\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"}],\"name\":\"projectIdToProjectInterceptor\",\"outputs\":[{\"internalType\":\"enum ProjectInterceptor\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"internalType\":\"struct StrategyArgs[]\",\"name\":\"withdrawals\",\"type\":\"tuple[]\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"internalType\":\"struct StrategyArgs[]\",\"name\":\"deposits\",\"type\":\"tuple[]\"}],\"name\":\"reallocate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"redeem\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"assets\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"redeemer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"assets\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"redeemHook\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"removeStrategy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"callerConfirmation\",\"type\":\"address\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeBatchTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"selector\",\"type\":\"bytes4\"}],\"name\":\"selectorToFacet\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"}],\"internalType\":\"struct LockConfig\",\"name\":\"lockConfig\",\"type\":\"tuple\"}],\"name\":\"setLockConfig\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"enum ProjectInterceptor\",\"name\":\"projectInterceptor\",\"type\":\"uint8\"}],\"name\":\"setProjectInterceptor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"facet\",\"type\":\"address\"},{\"internalType\":\"bytes4[]\",\"name\":\"selectors\",\"type\":\"bytes4[]\"}],\"internalType\":\"struct SelectorsToFacet[]\",\"name\":\"arr\",\"type\":\"tuple[]\"}],\"name\":\"setSelectorToFacets\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"strategyAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"strategyRewards\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"internalType\":\"struct Reward[]\",\"name\":\"rewards\",\"type\":\"tuple[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"swapper\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"assets\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newClientOwner\",\"type\":\"address\"}],\"name\":\"transferClientOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"underlyingAsset\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"underlyingBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"depositQueue_\",\"type\":\"uint256[]\"}],\"name\":\"updateDepositQueue\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"withdrawQueue_\",\"type\":\"uint256[]\"}],\"name\":\"updateWithdrawQueue\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"uri\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"}],\"name\":\"userToProjectIdToUserLock\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"pointer\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"uint192\",\"name\":\"shares\",\"type\":\"uint192\"}],\"internalType\":\"struct UserLock[]\",\"name\":\"locks\",\"type\":\"tuple[]\"}],\"internalType\":\"struct UserLockData\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"yieldExtractor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"errors\":{\"AccessControlBadConfirmation()\":[{\"details\":\"The caller of a function is not the expected one. NOTE: Don't confuse with {AccessControlUnauthorizedAccount}.\"}],\"AccessControlUnauthorizedAccount(address,bytes32)\":[{\"details\":\"The `account` is missing a role.\"}]},\"events\":{\"ApprovalForAll(address,address,bool)\":{\"details\":\"Emitted when `account` grants or revokes permission to `operator` to transfer their tokens, according to `approved`.\"},\"RoleAdminChanged(bytes32,bytes32,bytes32)\":{\"details\":\"Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole` `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite {RoleAdminChanged} not being emitted signaling this.\"},\"RoleGranted(bytes32,address,address)\":{\"details\":\"Emitted when `account` is granted `role`. `sender` is the account that originated the contract call. This account bears the admin role (for the granted role). Expected in cases where the role was granted using the internal {AccessControl-_grantRole}.\"},\"RoleRevoked(bytes32,address,address)\":{\"details\":\"Emitted when `account` is revoked `role`. `sender` is the account that originated the contract call:   - if using `revokeRole`, it is the admin role bearer   - if using `renounceRole`, it is the role bearer (i.e. `account`)\"},\"TransferBatch(address,address,address,uint256[],uint256[])\":{\"details\":\"Equivalent to multiple {TransferSingle} events, where `operator`, `from` and `to` are the same for all transfers.\"},\"TransferSingle(address,address,address,uint256,uint256)\":{\"details\":\"Emitted when `value` amount of tokens of type `id` are transferred from `from` to `to` by `operator`.\"},\"URI(string,uint256)\":{\"details\":\"Emitted when the URI for token type `id` changes to `value`, if it is a non-programmatic URI. If an {URI} event was emitted for `id`, the standard https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[guarantees] that `value` will equal the value returned by {IERC1155MetadataURI-uri}.\"}},\"kind\":\"dev\",\"methods\":{\"balanceOf(address,uint256)\":{\"details\":\"Returns the value of tokens of token type `id` owned by `account`.\"},\"balanceOfBatch(address[],uint256[])\":{\"details\":\"xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {balanceOf}. Requirements: - `accounts` and `ids` must have the same length.\"},\"getRoleAdmin(bytes32)\":{\"details\":\"Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {AccessControl-_setRoleAdmin}.\"},\"getRoleMember(bytes32,uint256)\":{\"details\":\"Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information.\"},\"getRoleMemberCount(bytes32)\":{\"details\":\"Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role.\"},\"grantRole(bytes32,address)\":{\"details\":\"Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.\"},\"hasRole(bytes32,address)\":{\"details\":\"Returns `true` if `account` has been granted `role`.\"},\"isApprovedForAll(address,address)\":{\"details\":\"Returns true if `operator` is approved to transfer ``account``'s tokens. See {setApprovalForAll}.\"},\"renounceRole(bytes32,address)\":{\"details\":\"Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `callerConfirmation`.\"},\"revokeRole(bytes32,address)\":{\"details\":\"Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.\"},\"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)\":{\"details\":\"xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {safeTransferFrom}. WARNING: This function can potentially allow a reentrancy attack when transferring tokens to an untrusted contract, when invoking {onERC1155BatchReceived} on the receiver. Ensure to follow the checks-effects-interactions pattern and consider employing reentrancy guards when interacting with untrusted contracts. Emits either a {TransferSingle} or a {TransferBatch} event, depending on the length of the array arguments. Requirements: - `ids` and `values` must have the same length. - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the acceptance magic value.\"},\"safeTransferFrom(address,address,uint256,uint256,bytes)\":{\"details\":\"Transfers a `value` amount of tokens of type `id` from `from` to `to`. WARNING: This function can potentially allow a reentrancy attack when transferring tokens to an untrusted contract, when invoking {onERC1155Received} on the receiver. Ensure to follow the checks-effects-interactions pattern and consider employing reentrancy guards when interacting with untrusted contracts. Emits a {TransferSingle} event. Requirements: - `to` cannot be the zero address. - If the caller is not `from`, it must have been approved to spend ``from``'s tokens via {setApprovalForAll}. - `from` must have a balance of tokens of type `id` of at least `value` amount. - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the acceptance magic value.\"},\"setApprovalForAll(address,bool)\":{\"details\":\"Grants or revokes permission to `operator` to transfer the caller's tokens, according to `approved`, Emits an {ApprovalForAll} event. Requirements: - `operator` cannot be the zero address.\"},\"supportsInterface(bytes4)\":{\"details\":\"Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[ERC section] to learn more about how these ids are created. This function call must use less than 30 000 gas.\"},\"uri(uint256)\":{\"details\":\"Returns the URI for token type `id`. If the `\\\\{id\\\\}` substring is present in the URI, it must be replaced by clients with the actual token type ID.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/interfaces/IYelayLiteVault.sol\":\"IYelayLiteVault\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@aave-v3-core/=dependencies/aave-v3-core-1.19.4/contracts/\",\":@morpho-blue/=dependencies/morpho-blue-1.0.0/src/\",\":@openzeppelin-upgradeable/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/\",\":@openzeppelin/=dependencies/openzeppelin-contracts-5.1.0/\",\":@openzeppelin/contracts-upgradeable/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/\",\":@openzeppelin/contracts/=dependencies/openzeppelin-contracts-5.1.0/contracts/\",\":@solady/=dependencies/solady-0.0.268/src/\",\":@solmate/=dependencies/solmate-6.8.0/src/\",\":aave-v3-core-1.19.4/=dependencies/aave-v3-core-1.19.4/\",\":ds-test/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/lib/erc4626-tests/\",\":forge-std-1.9.4/=dependencies/forge-std-1.9.4/src/\",\":forge-std/=dependencies/forge-std-1.9.4/src/\",\":halmos-cheatcodes/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/lib/halmos-cheatcodes/src/\",\":morpho-blue-1.0.0/=dependencies/morpho-blue-1.0.0/\",\":openzeppelin-contracts-5.1.0/=dependencies/openzeppelin-contracts-5.1.0/\",\":openzeppelin-contracts-upgradeable-5.1.0/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/\",\":openzeppelin-contracts/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/lib/openzeppelin-contracts/\",\":solady-0.0.268/=dependencies/solady-0.0.268/src/\",\":solmate-6.8.0/=dependencies/solmate-6.8.0/src/\"]},\"sources\":{\"dependencies/forge-std-1.9.4/src/console.sol\":{\"keccak256\":\"0x4bbf47eb762cef93729d6ef15e78789957147039b113e5d4df48e3d3fd16d0f5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://af9e3a7c3d82fb5b10b57ca4d1a82f2acbef80c077f6f6ef0cc0187c7bfd9f57\",\"dweb:/ipfs/QmR9VzmnBDJpgiDP6CHT6truehukF9HpYvuP6kRiJbDwPP\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/access/IAccessControl.sol\":{\"keccak256\":\"0xc1c2a7f1563b77050dc6d507db9f4ada5d042c1f6a9ddbffdc49c77cdc0a1606\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fd54abb96a6156d9a761f6fdad1d3004bc48d2d4fce47f40a3f91a7ae83fc3a1\",\"dweb:/ipfs/QmUrFSGkTDJ7WaZ6qPVVe3Gn5uN2viPb7x7QQ35UX4DofX\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/access/extensions/IAccessControlEnumerable.sol\":{\"keccak256\":\"0xca774fbe0568762efdc1a7cba31f09549c7fa96dbe97410f4843fa2f0bc000a3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0187ffdbf3d61b6d86cba4fcd9826e53d876987d620533ee84c681bdaf0f3ba3\",\"dweb:/ipfs/QmVJDqdJv6uzHY7ifncfv2QJep8XTzS3bGb4s5Exhuv86m\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC1155/IERC1155.sol\":{\"keccak256\":\"0x68d6fdbeb467192c3627a46aa7bf5cbb73267363b740abc511f521a5a41a446e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7ce608c19d5e917c60f9c8aa3e5f0eb05b326280ac0a235e8bb9a848a3a64a91\",\"dweb:/ipfs/QmdLPsWQJj7JvRae8MM13GEo4PBXaEFmD4b4heqcyMJNPG\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol\":{\"keccak256\":\"0x35d120c427299af1525aaf07955314d9e36a62f14408eb93dec71a2e001f74d3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://743e38acf441eece428c008be399c40a3ca5b2d595d58faf656cbdbac1a45374\",\"dweb:/ipfs/QmcWDuWkndox3dxa5P7ZgpKy3iuQKkxBq1cR9hPV1ZzAfa\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/utils/Address.sol\":{\"keccak256\":\"0x9d8da059267bac779a2dbbb9a26c2acf00ca83085e105d62d5d4ef96054a47f5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c78e2aa4313323cecd1ef12a8d6265b96beee1a199923abf55d9a2a9e291ad23\",\"dweb:/ipfs/QmUTs2KStXucZezzFo3EYeqYu47utu56qrF7jj1Gue65vb\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/utils/Errors.sol\":{\"keccak256\":\"0x6afa713bfd42cf0f7656efa91201007ac465e42049d7de1d50753a373648c123\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ba1d02f4847670a1b83dec9f7d37f0b0418d6043447b69f3a29a5f9efc547fcf\",\"dweb:/ipfs/QmQ7iH2keLNUKgq2xSWcRmuBE5eZ3F5whYAkAGzCNNoEWB\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/utils/introspection/IERC165.sol\":{\"keccak256\":\"0x79796192ec90263f21b464d5bc90b777a525971d3de8232be80d9c4f9fb353b8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f6fda447a62815e8064f47eff0dd1cf58d9207ad69b5d32280f8d7ed1d1e4621\",\"dweb:/ipfs/QmfDRc7pxfaXB2Dh9np5Uf29Na3pQ7tafRS684wd3GLjVL\"]},\"src/abstract/SelfOnly.sol\":{\"keccak256\":\"0xfa2f2c3c4eb5c92c648f7e91f1d09b19b1e52b7bfc860a69cab49d21119a3a46\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7af3b369483b1122eccf1561c110fbd0d34e2fc4a1b227f4eb65a0893e4aa9b4\",\"dweb:/ipfs/QmbFq2d5v5ZbcHuyHcJ7e2qb2UHVuKfGyVCgaYbUcqNsGc\"]},\"src/facets/ClientsFacet.sol\":{\"keccak256\":\"0xb88dea142d71919aa7b1121cad6c11691d5f66438ce354655518fbad7f5e5d84\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f83f8747fdea489b2019bb55a699747341b12fbf2c7de8e2b632b56cfe1cad7b\",\"dweb:/ipfs/QmdZxx3WZD3Ptu8d52PS52ChADT8cvEzzcrcCQbxEHiPDk\"]},\"src/interfaces/IAccessFacet.sol\":{\"keccak256\":\"0x0bbe7d07f8c7fb90a2821d8c681839e8c969c2cc7303ddb7a6d01a007136cdc8\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://9036af62a3be31c5f9668464f24fe9edbf8ce4db026f50f1915abe4b3d38bef4\",\"dweb:/ipfs/QmVqDTnnV9gZaMqy34P9QP6s3LVDfDEG4fRCxQBHKhyCRC\"]},\"src/interfaces/IClientsFacet.sol\":{\"keccak256\":\"0xa8c49f6b6584d7241b55b5101f9104080d9ffb76dd698d81e30a66867017070b\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://24bf8ab6967a76c0a12054b5b7c1586037bbe92aec659512f1185379e199f9d3\",\"dweb:/ipfs/QmNzT9worAgvFMpdK2sWxZ5d7bFNp2dkQGfxnGPpWJRppk\"]},\"src/interfaces/IFundsFacet.sol\":{\"keccak256\":\"0x84d0c5bb779d2f71771fb15cc2d87424aa35854a58070375fe109fefa1cc955a\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://d9ea8622bc61d0b1b35ccb581e354249643e1d2811a0b6d4d2c7b1b587af0dca\",\"dweb:/ipfs/QmXwUxEZ4mNT7arBF76TAQvdYFyfHGuigfv8hjCbxnjY3D\"]},\"src/interfaces/IManagementFacet.sol\":{\"keccak256\":\"0x0ef6472511fa874f009ed35a447c707d8c630abc93a4a47a70ec53f82ec9a4c3\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://137ed36e0e6be8d97a06e65da1a7ee76be0d53b60847f2a24fcd57be7df5d01e\",\"dweb:/ipfs/QmSwT4ckdSMsrT5JBL59CQYSDCc1KjnyYBEgWS4ainxof9\"]},\"src/interfaces/IMulticall.sol\":{\"keccak256\":\"0xc9996587e4618204feb8b8dc87f8576bb54c418ad7890e7b21e0b20779e918bf\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://804413be7e8af8a910a221c6c649c791929d411c199757388a6ca0cb7568d0f9\",\"dweb:/ipfs/Qmd3SbVrTtkqy63DvTUDWR3vbt6jv1aRzEVwouRb6BH72r\"]},\"src/interfaces/IOwnerFacet.sol\":{\"keccak256\":\"0xf5192afe84a9110da703a43b5dc051ad479fd96ff503aba41b48f65aab71ab76\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://e58aa256fbf10ef311481f4ef7220b62652d249410acf67f6dfc31b8a9d1f7bb\",\"dweb:/ipfs/QmccpfB1ZbPjpLpETbvxpuJLTwT8SJnHK82X8Uzn5EkisZ\"]},\"src/interfaces/IStrategyBase.sol\":{\"keccak256\":\"0xa46ffa6e8127934cd21a52566c92d430673d5dae61f4c2849ed08dcc2ffdd8a5\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://8b2b7d6687f85d872cc56da1cec0c3f5f3a4562ba9ba92b9bd126ad3b1788654\",\"dweb:/ipfs/Qmey1g2j6Rm7kHjim4AAJSyU2i8bybZQhuWRReNfz3737a\"]},\"src/interfaces/ISwapper.sol\":{\"keccak256\":\"0xf972da10d6996fea545b8b83ba55d66d5b751a0a6dff6dcb21e963da9f355472\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://d01b38893bf700e32c0aae00dd754b7de40985ac3ea0ecdfd0b37470302247f9\",\"dweb:/ipfs/QmZ6oZzPM5SemjQBJzj3CPPtC8XHsS2gkVGMSQhnCpP925\"]},\"src/interfaces/ITokenFacet.sol\":{\"keccak256\":\"0xac43c0b95a56192a3367a0d9b70913d171e664d4fc3f09ea179776c377d56a9f\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://6d7fb1dbaf64367eb96a04a2b9b94b4152b4656bcd9535dbb7a3dd390f06c519\",\"dweb:/ipfs/QmX8gUGUNhAJCFRYUBSc8sMXCDn5rp3vSbGfKnoAuxPxTK\"]},\"src/interfaces/IYelayLiteVault.sol\":{\"keccak256\":\"0xff0c4a52661772b57a04478601f6ea30315dbdb662987c8b466959640832bf13\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://ddd202f6e1963f630668866233d2d3dbaad9f2010b6c6ae2bbe3a0d9caee7e32\",\"dweb:/ipfs/QmZjE78EQ6d5KNymq2KUXP3hqSGcXcNM7kgfvJSAtKzWXN\"]},\"src/interfaces/IYelayLiteVaultInit.sol\":{\"keccak256\":\"0x36fea67785f3e6e491a13a0d94bebd6ba651dbb617c13498f67d6e1891c145a9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b6debebf25c5acdb1a6954c42843904528de1c093b9f5937342888fff9f3533a\",\"dweb:/ipfs/QmPtnxAD6y62q2cXKV2SUb1h493BR9Hkb2WaH73HjeTUEM\"]},\"src/libraries/LibClients.sol\":{\"keccak256\":\"0xb2730eb250a01c97b93445b671f42afa47c414b941721b13f292e3b8f2145441\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://07b848a2e77ceef296b4f9bc6495d2a070ca00c44cc6b0f82c5033c7d2d85f5b\",\"dweb:/ipfs/QmXwo3TUwmRQ2tNojA1qkRduF1CNXVBzikFUu4MuygKSvr\"]},\"src/libraries/LibErrors.sol\":{\"keccak256\":\"0x0c6c2f86b899a165400477d75ce34eaa912f66be17c0faabb8ccd5d8d18c5539\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://403a7f1072303e5c60e6aead8c34df70709bd6d7d846d95bf4a54bb4ca4894bf\",\"dweb:/ipfs/QmUi14jnvwuLir7Nn6rCaBH856rqj6u1xCHBupr8bK2yAk\"]},\"src/libraries/LibEvents.sol\":{\"keccak256\":\"0x2a75190fb135b4b95c321088902b9f29670de1089fb2dc2f7108a2ebb18f5caa\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2f7f23019802f8ffdbd6d24c6bfcd94e1f57f2b5b2eee6dbdcd393499c369ee1\",\"dweb:/ipfs/QmXcgwkLBToaeEPbW7NunXPogVWqsiz4AaTWcMkYGTYyTP\"]},\"src/libraries/LibOwner.sol\":{\"keccak256\":\"0x8f6006e5622b6bc7b7d8bbc376edaee6f651e9f136a5705d1efc605d83e5b3ab\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://283b51e282f16b564b2aad704335623aff4534f9d719569f06e8901be6ab7298\",\"dweb:/ipfs/QmSZ4itWWw7Nu24zWgXjZiF3XEYTYdRX2WVNQi7TVdpKH1\"]}},\"version\":1}",
+	"metadata": {
+		"compiler": { "version": "0.8.28+commit.7893614a" },
+		"language": "Solidity",
+		"output": {
+			"abi": [
+				{ "inputs": [], "type": "error", "name": "AccessControlBadConfirmation" },
+				{
+					"inputs": [
+						{ "internalType": "address", "name": "account", "type": "address" },
+						{ "internalType": "bytes32", "name": "neededRole", "type": "bytes32" }
+					],
+					"type": "error",
+					"name": "AccessControlUnauthorizedAccount"
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "address",
+							"name": "account",
+							"type": "address",
+							"indexed": true
+						},
+						{
+							"internalType": "address",
+							"name": "operator",
+							"type": "address",
+							"indexed": true
+						},
+						{
+							"internalType": "bool",
+							"name": "approved",
+							"type": "bool",
+							"indexed": false
+						}
+					],
+					"type": "event",
+					"name": "ApprovalForAll",
+					"anonymous": false
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "bytes32",
+							"name": "role",
+							"type": "bytes32",
+							"indexed": true
+						},
+						{
+							"internalType": "bytes32",
+							"name": "previousAdminRole",
+							"type": "bytes32",
+							"indexed": true
+						},
+						{
+							"internalType": "bytes32",
+							"name": "newAdminRole",
+							"type": "bytes32",
+							"indexed": true
+						}
+					],
+					"type": "event",
+					"name": "RoleAdminChanged",
+					"anonymous": false
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "bytes32",
+							"name": "role",
+							"type": "bytes32",
+							"indexed": true
+						},
+						{
+							"internalType": "address",
+							"name": "account",
+							"type": "address",
+							"indexed": true
+						},
+						{
+							"internalType": "address",
+							"name": "sender",
+							"type": "address",
+							"indexed": true
+						}
+					],
+					"type": "event",
+					"name": "RoleGranted",
+					"anonymous": false
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "bytes32",
+							"name": "role",
+							"type": "bytes32",
+							"indexed": true
+						},
+						{
+							"internalType": "address",
+							"name": "account",
+							"type": "address",
+							"indexed": true
+						},
+						{
+							"internalType": "address",
+							"name": "sender",
+							"type": "address",
+							"indexed": true
+						}
+					],
+					"type": "event",
+					"name": "RoleRevoked",
+					"anonymous": false
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "address",
+							"name": "operator",
+							"type": "address",
+							"indexed": true
+						},
+						{
+							"internalType": "address",
+							"name": "from",
+							"type": "address",
+							"indexed": true
+						},
+						{
+							"internalType": "address",
+							"name": "to",
+							"type": "address",
+							"indexed": true
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "ids",
+							"type": "uint256[]",
+							"indexed": false
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "values",
+							"type": "uint256[]",
+							"indexed": false
+						}
+					],
+					"type": "event",
+					"name": "TransferBatch",
+					"anonymous": false
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "address",
+							"name": "operator",
+							"type": "address",
+							"indexed": true
+						},
+						{
+							"internalType": "address",
+							"name": "from",
+							"type": "address",
+							"indexed": true
+						},
+						{
+							"internalType": "address",
+							"name": "to",
+							"type": "address",
+							"indexed": true
+						},
+						{
+							"internalType": "uint256",
+							"name": "id",
+							"type": "uint256",
+							"indexed": false
+						},
+						{
+							"internalType": "uint256",
+							"name": "value",
+							"type": "uint256",
+							"indexed": false
+						}
+					],
+					"type": "event",
+					"name": "TransferSingle",
+					"anonymous": false
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "string",
+							"name": "value",
+							"type": "string",
+							"indexed": false
+						},
+						{
+							"internalType": "uint256",
+							"name": "id",
+							"type": "uint256",
+							"indexed": true
+						}
+					],
+					"type": "event",
+					"name": "URI",
+					"anonymous": false
+				},
+				{
+					"inputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "acceptOwnership"
+				},
+				{
+					"inputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "accrueFee"
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "projectId", "type": "uint256" }],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "activateProject"
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "struct StrategyData",
+							"name": "strategy",
+							"type": "tuple",
+							"components": [
+								{ "internalType": "address", "name": "adapter", "type": "address" },
+								{ "internalType": "bytes", "name": "supplement", "type": "bytes" }
+							]
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "addStrategy"
+				},
+				{
+					"inputs": [
+						{ "internalType": "address", "name": "account", "type": "address" },
+						{ "internalType": "uint256", "name": "id", "type": "uint256" }
+					],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "balanceOf",
+					"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }]
+				},
+				{
+					"inputs": [
+						{ "internalType": "address[]", "name": "accounts", "type": "address[]" },
+						{ "internalType": "uint256[]", "name": "ids", "type": "uint256[]" }
+					],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "balanceOfBatch",
+					"outputs": [{ "internalType": "uint256[]", "name": "", "type": "uint256[]" }]
+				},
+				{
+					"inputs": [{ "internalType": "bytes32", "name": "role", "type": "bytes32" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "checkRole"
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "index", "type": "uint256" }],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "claimStrategyRewards"
+				},
+				{
+					"inputs": [{ "internalType": "bytes32", "name": "clientName", "type": "bytes32" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "clientNameTaken",
+					"outputs": [{ "internalType": "bool", "name": "", "type": "bool" }]
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "struct SwapArgs[]",
+							"name": "swapArgs",
+							"type": "tuple[]",
+							"components": [
+								{ "internalType": "address", "name": "tokenIn", "type": "address" },
+								{
+									"internalType": "address",
+									"name": "swapTarget",
+									"type": "address"
+								},
+								{ "internalType": "bytes", "name": "swapCallData", "type": "bytes" }
+							]
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "compound",
+					"outputs": [{ "internalType": "uint256", "name": "compounded", "type": "uint256" }]
+				},
+				{
+					"inputs": [
+						{ "internalType": "address", "name": "projectOwner", "type": "address" },
+						{ "internalType": "uint128", "name": "minProjectId", "type": "uint128" },
+						{ "internalType": "uint128", "name": "maxProjectId", "type": "uint128" },
+						{ "internalType": "bytes32", "name": "clientName", "type": "bytes32" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "createClient"
+				},
+				{
+					"inputs": [
+						{ "internalType": "uint256", "name": "assets", "type": "uint256" },
+						{ "internalType": "uint256", "name": "projectId", "type": "uint256" },
+						{ "internalType": "address", "name": "receiver", "type": "address" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "deposit",
+					"outputs": [{ "internalType": "uint256", "name": "shares", "type": "uint256" }]
+				},
+				{
+					"inputs": [
+						{ "internalType": "uint256", "name": "projectId", "type": "uint256" },
+						{ "internalType": "address", "name": "depositor", "type": "address" },
+						{ "internalType": "address", "name": "receiver", "type": "address" },
+						{ "internalType": "uint256", "name": "assets", "type": "uint256" },
+						{ "internalType": "uint256", "name": "shares", "type": "uint256" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "depositHook"
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "getDepositQueue",
+					"outputs": [{ "internalType": "uint256[]", "name": "", "type": "uint256[]" }]
+				},
+				{
+					"inputs": [{ "internalType": "bytes32", "name": "role", "type": "bytes32" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "getRoleAdmin",
+					"outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }]
+				},
+				{
+					"inputs": [
+						{ "internalType": "bytes32", "name": "role", "type": "bytes32" },
+						{ "internalType": "uint256", "name": "index", "type": "uint256" }
+					],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "getRoleMember",
+					"outputs": [{ "internalType": "address", "name": "", "type": "address" }]
+				},
+				{
+					"inputs": [{ "internalType": "bytes32", "name": "role", "type": "bytes32" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "getRoleMemberCount",
+					"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "getStrategies",
+					"outputs": [
+						{
+							"internalType": "struct StrategyData[]",
+							"name": "",
+							"type": "tuple[]",
+							"components": [
+								{ "internalType": "address", "name": "adapter", "type": "address" },
+								{ "internalType": "bytes", "name": "supplement", "type": "bytes" }
+							]
+						}
+					]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "getWithdrawQueue",
+					"outputs": [{ "internalType": "uint256[]", "name": "", "type": "uint256[]" }]
+				},
+				{
+					"inputs": [
+						{ "internalType": "bytes32", "name": "role", "type": "bytes32" },
+						{ "internalType": "address", "name": "account", "type": "address" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "grantRole"
+				},
+				{
+					"inputs": [
+						{ "internalType": "bytes32", "name": "role", "type": "bytes32" },
+						{ "internalType": "address", "name": "account", "type": "address" }
+					],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "hasRole",
+					"outputs": [{ "internalType": "bool", "name": "", "type": "bool" }]
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "contract ISwapper",
+							"name": "swapper",
+							"type": "address"
+						},
+						{ "internalType": "address", "name": "underlyingAsset", "type": "address" },
+						{ "internalType": "address", "name": "yieldExtractor", "type": "address" },
+						{ "internalType": "string", "name": "uri", "type": "string" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "init"
+				},
+				{
+					"inputs": [
+						{ "internalType": "address", "name": "account", "type": "address" },
+						{ "internalType": "address", "name": "operator", "type": "address" }
+					],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "isApprovedForAll",
+					"outputs": [{ "internalType": "bool", "name": "", "type": "bool" }]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "lastProjectId",
+					"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "lastTotalAssets",
+					"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }]
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "struct StrategyArgs",
+							"name": "strategyArgs",
+							"type": "tuple",
+							"components": [
+								{ "internalType": "uint256", "name": "index", "type": "uint256" },
+								{ "internalType": "uint256", "name": "amount", "type": "uint256" }
+							]
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "managedDeposit"
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "struct StrategyArgs",
+							"name": "strategyArgs",
+							"type": "tuple",
+							"components": [
+								{ "internalType": "uint256", "name": "index", "type": "uint256" },
+								{ "internalType": "uint256", "name": "amount", "type": "uint256" }
+							]
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "managedWithdraw"
+				},
+				{
+					"inputs": [
+						{ "internalType": "uint256", "name": "fromProjectId", "type": "uint256" },
+						{ "internalType": "uint256", "name": "toProjectId", "type": "uint256" },
+						{ "internalType": "uint256", "name": "amount", "type": "uint256" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "migratePosition"
+				},
+				{
+					"inputs": [{ "internalType": "bytes[]", "name": "data", "type": "bytes[]" }],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "multicall",
+					"outputs": [{ "internalType": "bytes[]", "name": "results", "type": "bytes[]" }]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "owner",
+					"outputs": [{ "internalType": "address", "name": "", "type": "address" }]
+				},
+				{
+					"inputs": [{ "internalType": "address", "name": "owner", "type": "address" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "ownerToClientData",
+					"outputs": [
+						{
+							"internalType": "struct ClientData",
+							"name": "",
+							"type": "tuple",
+							"components": [
+								{
+									"internalType": "uint128",
+									"name": "minProjectId",
+									"type": "uint128"
+								},
+								{
+									"internalType": "uint128",
+									"name": "maxProjectId",
+									"type": "uint128"
+								},
+								{
+									"internalType": "bytes32",
+									"name": "clientName",
+									"type": "bytes32"
+								}
+							]
+						}
+					]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "pendingOwner",
+					"outputs": [{ "internalType": "address", "name": "", "type": "address" }]
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "projectId", "type": "uint256" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "projectIdActive",
+					"outputs": [{ "internalType": "bool", "name": "", "type": "bool" }]
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "projectId", "type": "uint256" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "projectIdToClientName",
+					"outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }]
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "projectId", "type": "uint256" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "projectIdToLockConfig",
+					"outputs": [
+						{
+							"internalType": "struct LockConfig",
+							"name": "",
+							"type": "tuple",
+							"components": [{ "internalType": "uint256", "name": "duration", "type": "uint256" }]
+						}
+					]
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "projectId", "type": "uint256" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "projectIdToProjectInterceptor",
+					"outputs": [{ "internalType": "enum ProjectInterceptor", "name": "", "type": "uint8" }]
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "struct StrategyArgs[]",
+							"name": "withdrawals",
+							"type": "tuple[]",
+							"components": [
+								{ "internalType": "uint256", "name": "index", "type": "uint256" },
+								{ "internalType": "uint256", "name": "amount", "type": "uint256" }
+							]
+						},
+						{
+							"internalType": "struct StrategyArgs[]",
+							"name": "deposits",
+							"type": "tuple[]",
+							"components": [
+								{ "internalType": "uint256", "name": "index", "type": "uint256" },
+								{ "internalType": "uint256", "name": "amount", "type": "uint256" }
+							]
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "reallocate"
+				},
+				{
+					"inputs": [
+						{ "internalType": "uint256", "name": "shares", "type": "uint256" },
+						{ "internalType": "uint256", "name": "projectId", "type": "uint256" },
+						{ "internalType": "address", "name": "receiver", "type": "address" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "redeem",
+					"outputs": [{ "internalType": "uint256", "name": "assets", "type": "uint256" }]
+				},
+				{
+					"inputs": [
+						{ "internalType": "uint256", "name": "projectId", "type": "uint256" },
+						{ "internalType": "address", "name": "redeemer", "type": "address" },
+						{ "internalType": "address", "name": "receiver", "type": "address" },
+						{ "internalType": "uint256", "name": "assets", "type": "uint256" },
+						{ "internalType": "uint256", "name": "shares", "type": "uint256" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "redeemHook"
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "index", "type": "uint256" }],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "removeStrategy"
+				},
+				{
+					"inputs": [
+						{ "internalType": "bytes32", "name": "role", "type": "bytes32" },
+						{
+							"internalType": "address",
+							"name": "callerConfirmation",
+							"type": "address"
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "renounceRole"
+				},
+				{
+					"inputs": [
+						{ "internalType": "bytes32", "name": "role", "type": "bytes32" },
+						{ "internalType": "address", "name": "account", "type": "address" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "revokeRole"
+				},
+				{
+					"inputs": [
+						{ "internalType": "address", "name": "from", "type": "address" },
+						{ "internalType": "address", "name": "to", "type": "address" },
+						{ "internalType": "uint256[]", "name": "ids", "type": "uint256[]" },
+						{ "internalType": "uint256[]", "name": "values", "type": "uint256[]" },
+						{ "internalType": "bytes", "name": "data", "type": "bytes" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "safeBatchTransferFrom"
+				},
+				{
+					"inputs": [
+						{ "internalType": "address", "name": "from", "type": "address" },
+						{ "internalType": "address", "name": "to", "type": "address" },
+						{ "internalType": "uint256", "name": "id", "type": "uint256" },
+						{ "internalType": "uint256", "name": "value", "type": "uint256" },
+						{ "internalType": "bytes", "name": "data", "type": "bytes" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "safeTransferFrom"
+				},
+				{
+					"inputs": [{ "internalType": "bytes4", "name": "selector", "type": "bytes4" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "selectorToFacet",
+					"outputs": [{ "internalType": "address", "name": "", "type": "address" }]
+				},
+				{
+					"inputs": [
+						{ "internalType": "address", "name": "operator", "type": "address" },
+						{ "internalType": "bool", "name": "approved", "type": "bool" }
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "setApprovalForAll"
+				},
+				{
+					"inputs": [
+						{ "internalType": "uint256", "name": "projectId", "type": "uint256" },
+						{
+							"internalType": "struct LockConfig",
+							"name": "lockConfig",
+							"type": "tuple",
+							"components": [{ "internalType": "uint256", "name": "duration", "type": "uint256" }]
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "setLockConfig"
+				},
+				{
+					"inputs": [
+						{ "internalType": "uint256", "name": "projectId", "type": "uint256" },
+						{
+							"internalType": "enum ProjectInterceptor",
+							"name": "projectInterceptor",
+							"type": "uint8"
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "setProjectInterceptor"
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "struct SelectorsToFacet[]",
+							"name": "arr",
+							"type": "tuple[]",
+							"components": [
+								{ "internalType": "address", "name": "facet", "type": "address" },
+								{
+									"internalType": "bytes4[]",
+									"name": "selectors",
+									"type": "bytes4[]"
+								}
+							]
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "setSelectorToFacets"
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "index", "type": "uint256" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "strategyAssets",
+					"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }]
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "index", "type": "uint256" }],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "strategyRewards",
+					"outputs": [
+						{
+							"internalType": "struct Reward[]",
+							"name": "rewards",
+							"type": "tuple[]",
+							"components": [
+								{ "internalType": "address", "name": "token", "type": "address" },
+								{ "internalType": "uint256", "name": "amount", "type": "uint256" }
+							]
+						}
+					]
+				},
+				{
+					"inputs": [{ "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "supportsInterface",
+					"outputs": [{ "internalType": "bool", "name": "", "type": "bool" }]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "swapper",
+					"outputs": [{ "internalType": "address", "name": "", "type": "address" }]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "totalAssets",
+					"outputs": [{ "internalType": "uint256", "name": "assets", "type": "uint256" }]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "totalSupply",
+					"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }]
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "id", "type": "uint256" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "totalSupply",
+					"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }]
+				},
+				{
+					"inputs": [{ "internalType": "address", "name": "newClientOwner", "type": "address" }],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "transferClientOwnership"
+				},
+				{
+					"inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "transferOwnership"
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "underlyingAsset",
+					"outputs": [{ "internalType": "address", "name": "", "type": "address" }]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "underlyingBalance",
+					"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }]
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "uint256[]",
+							"name": "depositQueue_",
+							"type": "uint256[]"
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "updateDepositQueue"
+				},
+				{
+					"inputs": [
+						{
+							"internalType": "uint256[]",
+							"name": "withdrawQueue_",
+							"type": "uint256[]"
+						}
+					],
+					"stateMutability": "nonpayable",
+					"type": "function",
+					"name": "updateWithdrawQueue"
+				},
+				{
+					"inputs": [{ "internalType": "uint256", "name": "id", "type": "uint256" }],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "uri",
+					"outputs": [{ "internalType": "string", "name": "", "type": "string" }]
+				},
+				{
+					"inputs": [
+						{ "internalType": "address", "name": "user", "type": "address" },
+						{ "internalType": "uint256", "name": "projectId", "type": "uint256" }
+					],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "userToProjectIdToUserLock",
+					"outputs": [
+						{
+							"internalType": "struct UserLockData",
+							"name": "",
+							"type": "tuple",
+							"components": [
+								{ "internalType": "uint256", "name": "pointer", "type": "uint256" },
+								{
+									"internalType": "struct UserLock[]",
+									"name": "locks",
+									"type": "tuple[]",
+									"components": [
+										{
+											"internalType": "uint64",
+											"name": "timestamp",
+											"type": "uint64"
+										},
+										{
+											"internalType": "uint192",
+											"name": "shares",
+											"type": "uint192"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"inputs": [],
+					"stateMutability": "view",
+					"type": "function",
+					"name": "yieldExtractor",
+					"outputs": [{ "internalType": "address", "name": "", "type": "address" }]
+				}
+			],
+			"devdoc": {
+				"kind": "dev",
+				"methods": {
+					"balanceOf(address,uint256)": {
+						"details": "Returns the value of tokens of token type `id` owned by `account`."
+					},
+					"balanceOfBatch(address[],uint256[])": {
+						"details": "xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {balanceOf}. Requirements: - `accounts` and `ids` must have the same length."
+					},
+					"getRoleAdmin(bytes32)": {
+						"details": "Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {AccessControl-_setRoleAdmin}."
+					},
+					"getRoleMember(bytes32,uint256)": {
+						"details": "Returns one of the accounts that have `role`. `index` must be a value between 0 and {getRoleMemberCount}, non-inclusive. Role bearers are not sorted in any particular way, and their ordering may change at any point. WARNING: When using {getRoleMember} and {getRoleMemberCount}, make sure you perform all queries on the same block. See the following https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post] for more information."
+					},
+					"getRoleMemberCount(bytes32)": {
+						"details": "Returns the number of accounts that have `role`. Can be used together with {getRoleMember} to enumerate all bearers of a role."
+					},
+					"grantRole(bytes32,address)": {
+						"details": "Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role."
+					},
+					"hasRole(bytes32,address)": {
+						"details": "Returns `true` if `account` has been granted `role`."
+					},
+					"isApprovedForAll(address,address)": {
+						"details": "Returns true if `operator` is approved to transfer ``account``'s tokens. See {setApprovalForAll}."
+					},
+					"renounceRole(bytes32,address)": {
+						"details": "Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `callerConfirmation`."
+					},
+					"revokeRole(bytes32,address)": {
+						"details": "Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role."
+					},
+					"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
+						"details": "xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {safeTransferFrom}. WARNING: This function can potentially allow a reentrancy attack when transferring tokens to an untrusted contract, when invoking {onERC1155BatchReceived} on the receiver. Ensure to follow the checks-effects-interactions pattern and consider employing reentrancy guards when interacting with untrusted contracts. Emits either a {TransferSingle} or a {TransferBatch} event, depending on the length of the array arguments. Requirements: - `ids` and `values` must have the same length. - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the acceptance magic value."
+					},
+					"safeTransferFrom(address,address,uint256,uint256,bytes)": {
+						"details": "Transfers a `value` amount of tokens of type `id` from `from` to `to`. WARNING: This function can potentially allow a reentrancy attack when transferring tokens to an untrusted contract, when invoking {onERC1155Received} on the receiver. Ensure to follow the checks-effects-interactions pattern and consider employing reentrancy guards when interacting with untrusted contracts. Emits a {TransferSingle} event. Requirements: - `to` cannot be the zero address. - If the caller is not `from`, it must have been approved to spend ``from``'s tokens via {setApprovalForAll}. - `from` must have a balance of tokens of type `id` of at least `value` amount. - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the acceptance magic value."
+					},
+					"setApprovalForAll(address,bool)": {
+						"details": "Grants or revokes permission to `operator` to transfer the caller's tokens, according to `approved`, Emits an {ApprovalForAll} event. Requirements: - `operator` cannot be the zero address."
+					},
+					"supportsInterface(bytes4)": {
+						"details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[ERC section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
+					},
+					"uri(uint256)": {
+						"details": "Returns the URI for token type `id`. If the `\\{id\\}` substring is present in the URI, it must be replaced by clients with the actual token type ID."
+					}
+				},
+				"version": 1
+			},
+			"userdoc": { "kind": "user", "methods": {}, "version": 1 }
+		},
+		"settings": {
+			"remappings": [
+				"@aave-v3-core/=dependencies/aave-v3-core-1.19.4/contracts/",
+				"@morpho-blue/=dependencies/morpho-blue-1.0.0/src/",
+				"@openzeppelin-upgradeable/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/",
+				"@openzeppelin/=dependencies/openzeppelin-contracts-5.1.0/",
+				"@openzeppelin/contracts-upgradeable/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/",
+				"@openzeppelin/contracts/=dependencies/openzeppelin-contracts-5.1.0/contracts/",
+				"@solady/=dependencies/solady-0.0.268/src/",
+				"@solmate/=dependencies/solmate-6.8.0/src/",
+				"aave-v3-core-1.19.4/=dependencies/aave-v3-core-1.19.4/",
+				"ds-test/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/lib/forge-std/lib/ds-test/src/",
+				"erc4626-tests/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/lib/erc4626-tests/",
+				"forge-std-1.9.4/=dependencies/forge-std-1.9.4/src/",
+				"forge-std/=dependencies/forge-std-1.9.4/src/",
+				"halmos-cheatcodes/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/lib/halmos-cheatcodes/src/",
+				"morpho-blue-1.0.0/=dependencies/morpho-blue-1.0.0/",
+				"openzeppelin-contracts-5.1.0/=dependencies/openzeppelin-contracts-5.1.0/",
+				"openzeppelin-contracts-upgradeable-5.1.0/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/",
+				"openzeppelin-contracts/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/lib/openzeppelin-contracts/",
+				"solady-0.0.268/=dependencies/solady-0.0.268/src/",
+				"solmate-6.8.0/=dependencies/solmate-6.8.0/src/"
+			],
+			"optimizer": { "enabled": true, "runs": 200 },
+			"metadata": { "bytecodeHash": "ipfs" },
+			"compilationTarget": { "src/interfaces/IYelayLiteVault.sol": "IYelayLiteVault" },
+			"evmVersion": "cancun",
+			"libraries": {}
+		},
+		"sources": {
+			"dependencies/forge-std-1.9.4/src/console.sol": {
+				"keccak256": "0x4bbf47eb762cef93729d6ef15e78789957147039b113e5d4df48e3d3fd16d0f5",
+				"urls": [
+					"bzz-raw://af9e3a7c3d82fb5b10b57ca4d1a82f2acbef80c077f6f6ef0cc0187c7bfd9f57",
+					"dweb:/ipfs/QmR9VzmnBDJpgiDP6CHT6truehukF9HpYvuP6kRiJbDwPP"
+				],
+				"license": "MIT"
+			},
+			"dependencies/openzeppelin-contracts-5.1.0/contracts/access/IAccessControl.sol": {
+				"keccak256": "0xc1c2a7f1563b77050dc6d507db9f4ada5d042c1f6a9ddbffdc49c77cdc0a1606",
+				"urls": [
+					"bzz-raw://fd54abb96a6156d9a761f6fdad1d3004bc48d2d4fce47f40a3f91a7ae83fc3a1",
+					"dweb:/ipfs/QmUrFSGkTDJ7WaZ6qPVVe3Gn5uN2viPb7x7QQ35UX4DofX"
+				],
+				"license": "MIT"
+			},
+			"dependencies/openzeppelin-contracts-5.1.0/contracts/access/extensions/IAccessControlEnumerable.sol": {
+				"keccak256": "0xca774fbe0568762efdc1a7cba31f09549c7fa96dbe97410f4843fa2f0bc000a3",
+				"urls": [
+					"bzz-raw://0187ffdbf3d61b6d86cba4fcd9826e53d876987d620533ee84c681bdaf0f3ba3",
+					"dweb:/ipfs/QmVJDqdJv6uzHY7ifncfv2QJep8XTzS3bGb4s5Exhuv86m"
+				],
+				"license": "MIT"
+			},
+			"dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC1155/IERC1155.sol": {
+				"keccak256": "0x68d6fdbeb467192c3627a46aa7bf5cbb73267363b740abc511f521a5a41a446e",
+				"urls": [
+					"bzz-raw://7ce608c19d5e917c60f9c8aa3e5f0eb05b326280ac0a235e8bb9a848a3a64a91",
+					"dweb:/ipfs/QmdLPsWQJj7JvRae8MM13GEo4PBXaEFmD4b4heqcyMJNPG"
+				],
+				"license": "MIT"
+			},
+			"dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
+				"keccak256": "0x35d120c427299af1525aaf07955314d9e36a62f14408eb93dec71a2e001f74d3",
+				"urls": [
+					"bzz-raw://743e38acf441eece428c008be399c40a3ca5b2d595d58faf656cbdbac1a45374",
+					"dweb:/ipfs/QmcWDuWkndox3dxa5P7ZgpKy3iuQKkxBq1cR9hPV1ZzAfa"
+				],
+				"license": "MIT"
+			},
+			"dependencies/openzeppelin-contracts-5.1.0/contracts/utils/Address.sol": {
+				"keccak256": "0x9d8da059267bac779a2dbbb9a26c2acf00ca83085e105d62d5d4ef96054a47f5",
+				"urls": [
+					"bzz-raw://c78e2aa4313323cecd1ef12a8d6265b96beee1a199923abf55d9a2a9e291ad23",
+					"dweb:/ipfs/QmUTs2KStXucZezzFo3EYeqYu47utu56qrF7jj1Gue65vb"
+				],
+				"license": "MIT"
+			},
+			"dependencies/openzeppelin-contracts-5.1.0/contracts/utils/Errors.sol": {
+				"keccak256": "0x6afa713bfd42cf0f7656efa91201007ac465e42049d7de1d50753a373648c123",
+				"urls": [
+					"bzz-raw://ba1d02f4847670a1b83dec9f7d37f0b0418d6043447b69f3a29a5f9efc547fcf",
+					"dweb:/ipfs/QmQ7iH2keLNUKgq2xSWcRmuBE5eZ3F5whYAkAGzCNNoEWB"
+				],
+				"license": "MIT"
+			},
+			"dependencies/openzeppelin-contracts-5.1.0/contracts/utils/introspection/IERC165.sol": {
+				"keccak256": "0x79796192ec90263f21b464d5bc90b777a525971d3de8232be80d9c4f9fb353b8",
+				"urls": [
+					"bzz-raw://f6fda447a62815e8064f47eff0dd1cf58d9207ad69b5d32280f8d7ed1d1e4621",
+					"dweb:/ipfs/QmfDRc7pxfaXB2Dh9np5Uf29Na3pQ7tafRS684wd3GLjVL"
+				],
+				"license": "MIT"
+			},
+			"src/abstract/SelfOnly.sol": {
+				"keccak256": "0xfa2f2c3c4eb5c92c648f7e91f1d09b19b1e52b7bfc860a69cab49d21119a3a46",
+				"urls": [
+					"bzz-raw://7af3b369483b1122eccf1561c110fbd0d34e2fc4a1b227f4eb65a0893e4aa9b4",
+					"dweb:/ipfs/QmbFq2d5v5ZbcHuyHcJ7e2qb2UHVuKfGyVCgaYbUcqNsGc"
+				],
+				"license": "MIT"
+			},
+			"src/facets/ClientsFacet.sol": {
+				"keccak256": "0xb88dea142d71919aa7b1121cad6c11691d5f66438ce354655518fbad7f5e5d84",
+				"urls": [
+					"bzz-raw://f83f8747fdea489b2019bb55a699747341b12fbf2c7de8e2b632b56cfe1cad7b",
+					"dweb:/ipfs/QmdZxx3WZD3Ptu8d52PS52ChADT8cvEzzcrcCQbxEHiPDk"
+				],
+				"license": "MIT"
+			},
+			"src/interfaces/IAccessFacet.sol": {
+				"keccak256": "0x0bbe7d07f8c7fb90a2821d8c681839e8c969c2cc7303ddb7a6d01a007136cdc8",
+				"urls": [
+					"bzz-raw://9036af62a3be31c5f9668464f24fe9edbf8ce4db026f50f1915abe4b3d38bef4",
+					"dweb:/ipfs/QmVqDTnnV9gZaMqy34P9QP6s3LVDfDEG4fRCxQBHKhyCRC"
+				],
+				"license": "UNLICENSED"
+			},
+			"src/interfaces/IClientsFacet.sol": {
+				"keccak256": "0xa8c49f6b6584d7241b55b5101f9104080d9ffb76dd698d81e30a66867017070b",
+				"urls": [
+					"bzz-raw://24bf8ab6967a76c0a12054b5b7c1586037bbe92aec659512f1185379e199f9d3",
+					"dweb:/ipfs/QmNzT9worAgvFMpdK2sWxZ5d7bFNp2dkQGfxnGPpWJRppk"
+				],
+				"license": "UNLICENSED"
+			},
+			"src/interfaces/IFundsFacet.sol": {
+				"keccak256": "0x84d0c5bb779d2f71771fb15cc2d87424aa35854a58070375fe109fefa1cc955a",
+				"urls": [
+					"bzz-raw://d9ea8622bc61d0b1b35ccb581e354249643e1d2811a0b6d4d2c7b1b587af0dca",
+					"dweb:/ipfs/QmXwUxEZ4mNT7arBF76TAQvdYFyfHGuigfv8hjCbxnjY3D"
+				],
+				"license": "UNLICENSED"
+			},
+			"src/interfaces/IManagementFacet.sol": {
+				"keccak256": "0x0ef6472511fa874f009ed35a447c707d8c630abc93a4a47a70ec53f82ec9a4c3",
+				"urls": [
+					"bzz-raw://137ed36e0e6be8d97a06e65da1a7ee76be0d53b60847f2a24fcd57be7df5d01e",
+					"dweb:/ipfs/QmSwT4ckdSMsrT5JBL59CQYSDCc1KjnyYBEgWS4ainxof9"
+				],
+				"license": "UNLICENSED"
+			},
+			"src/interfaces/IMulticall.sol": {
+				"keccak256": "0xc9996587e4618204feb8b8dc87f8576bb54c418ad7890e7b21e0b20779e918bf",
+				"urls": [
+					"bzz-raw://804413be7e8af8a910a221c6c649c791929d411c199757388a6ca0cb7568d0f9",
+					"dweb:/ipfs/Qmd3SbVrTtkqy63DvTUDWR3vbt6jv1aRzEVwouRb6BH72r"
+				],
+				"license": "UNLICENSED"
+			},
+			"src/interfaces/IOwnerFacet.sol": {
+				"keccak256": "0xf5192afe84a9110da703a43b5dc051ad479fd96ff503aba41b48f65aab71ab76",
+				"urls": [
+					"bzz-raw://e58aa256fbf10ef311481f4ef7220b62652d249410acf67f6dfc31b8a9d1f7bb",
+					"dweb:/ipfs/QmccpfB1ZbPjpLpETbvxpuJLTwT8SJnHK82X8Uzn5EkisZ"
+				],
+				"license": "GPL-3.0-or-later"
+			},
+			"src/interfaces/IStrategyBase.sol": {
+				"keccak256": "0xa46ffa6e8127934cd21a52566c92d430673d5dae61f4c2849ed08dcc2ffdd8a5",
+				"urls": [
+					"bzz-raw://8b2b7d6687f85d872cc56da1cec0c3f5f3a4562ba9ba92b9bd126ad3b1788654",
+					"dweb:/ipfs/Qmey1g2j6Rm7kHjim4AAJSyU2i8bybZQhuWRReNfz3737a"
+				],
+				"license": "UNLICENSED"
+			},
+			"src/interfaces/ISwapper.sol": {
+				"keccak256": "0xf972da10d6996fea545b8b83ba55d66d5b751a0a6dff6dcb21e963da9f355472",
+				"urls": [
+					"bzz-raw://d01b38893bf700e32c0aae00dd754b7de40985ac3ea0ecdfd0b37470302247f9",
+					"dweb:/ipfs/QmZ6oZzPM5SemjQBJzj3CPPtC8XHsS2gkVGMSQhnCpP925"
+				],
+				"license": "UNLICENSED"
+			},
+			"src/interfaces/ITokenFacet.sol": {
+				"keccak256": "0xac43c0b95a56192a3367a0d9b70913d171e664d4fc3f09ea179776c377d56a9f",
+				"urls": [
+					"bzz-raw://6d7fb1dbaf64367eb96a04a2b9b94b4152b4656bcd9535dbb7a3dd390f06c519",
+					"dweb:/ipfs/QmX8gUGUNhAJCFRYUBSc8sMXCDn5rp3vSbGfKnoAuxPxTK"
+				],
+				"license": "UNLICENSED"
+			},
+			"src/interfaces/IYelayLiteVault.sol": {
+				"keccak256": "0xff0c4a52661772b57a04478601f6ea30315dbdb662987c8b466959640832bf13",
+				"urls": [
+					"bzz-raw://ddd202f6e1963f630668866233d2d3dbaad9f2010b6c6ae2bbe3a0d9caee7e32",
+					"dweb:/ipfs/QmZjE78EQ6d5KNymq2KUXP3hqSGcXcNM7kgfvJSAtKzWXN"
+				],
+				"license": "UNLICENSED"
+			},
+			"src/interfaces/IYelayLiteVaultInit.sol": {
+				"keccak256": "0x36fea67785f3e6e491a13a0d94bebd6ba651dbb617c13498f67d6e1891c145a9",
+				"urls": [
+					"bzz-raw://b6debebf25c5acdb1a6954c42843904528de1c093b9f5937342888fff9f3533a",
+					"dweb:/ipfs/QmPtnxAD6y62q2cXKV2SUb1h493BR9Hkb2WaH73HjeTUEM"
+				],
+				"license": "MIT"
+			},
+			"src/libraries/LibClients.sol": {
+				"keccak256": "0xb2730eb250a01c97b93445b671f42afa47c414b941721b13f292e3b8f2145441",
+				"urls": [
+					"bzz-raw://07b848a2e77ceef296b4f9bc6495d2a070ca00c44cc6b0f82c5033c7d2d85f5b",
+					"dweb:/ipfs/QmXwo3TUwmRQ2tNojA1qkRduF1CNXVBzikFUu4MuygKSvr"
+				],
+				"license": "MIT"
+			},
+			"src/libraries/LibErrors.sol": {
+				"keccak256": "0x0c6c2f86b899a165400477d75ce34eaa912f66be17c0faabb8ccd5d8d18c5539",
+				"urls": [
+					"bzz-raw://403a7f1072303e5c60e6aead8c34df70709bd6d7d846d95bf4a54bb4ca4894bf",
+					"dweb:/ipfs/QmUi14jnvwuLir7Nn6rCaBH856rqj6u1xCHBupr8bK2yAk"
+				],
+				"license": "MIT"
+			},
+			"src/libraries/LibEvents.sol": {
+				"keccak256": "0x2a75190fb135b4b95c321088902b9f29670de1089fb2dc2f7108a2ebb18f5caa",
+				"urls": [
+					"bzz-raw://2f7f23019802f8ffdbd6d24c6bfcd94e1f57f2b5b2eee6dbdcd393499c369ee1",
+					"dweb:/ipfs/QmXcgwkLBToaeEPbW7NunXPogVWqsiz4AaTWcMkYGTYyTP"
+				],
+				"license": "MIT"
+			},
+			"src/libraries/LibOwner.sol": {
+				"keccak256": "0x8f6006e5622b6bc7b7d8bbc376edaee6f651e9f136a5705d1efc605d83e5b3ab",
+				"urls": [
+					"bzz-raw://283b51e282f16b564b2aad704335623aff4534f9d719569f06e8901be6ab7298",
+					"dweb:/ipfs/QmSZ4itWWw7Nu24zWgXjZiF3XEYTYdRX2WVNQi7TVdpKH1"
+				],
+				"license": "MIT"
+			}
+		},
+		"version": 1
+	},
+	"id": 102
+}

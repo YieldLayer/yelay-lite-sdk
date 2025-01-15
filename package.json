@@ -1,0 +1,42 @@
+{
+	"name": "yelay-lite-sdk",
+	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"version": "0.0.1",
+	"description": "Yelay Lite SDK",
+	"main": "build/index.js",
+	"types": "build/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/YieldLayer/yelay-lite-sdk.git"
+	},
+	"files": [
+		"build/**/*",
+		"src/**/*"
+	],
+	"scripts": {
+		"gen-types": "typechain --target=ethers-v6 --out-dir=typechain/generated abis/*.json",
+		"build": "pnpm run gen-types && rm -rf ./build && tsc"
+	},
+	"keywords": [
+		"yelay",
+		"wallet",
+		"yield",
+		"blockchain",
+		"ethereum"
+	],
+	"license": "ISC",
+	"dependencies": {
+		"ethers": "6.13.5"
+	},
+	"devDependencies": {
+		"@typechain/ethers-v6": "0.5.1",
+		"@types/node": "22.10.1",
+		"@typescript-eslint/eslint-plugin": "8.17.0",
+		"@typescript-eslint/parser": "8.17.0",
+		"typechain": "8.3.2",
+		"typescript": "5.6.2"
+	}
+}
