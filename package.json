@@ -1,5 +1,5 @@
 {
-	"name": "yelay-lite-sdk",
+	"name": "@yield-layer/yelay-lite-sdk",
 	"private": false,
 	"publishConfig": {
 		"access": "public"
