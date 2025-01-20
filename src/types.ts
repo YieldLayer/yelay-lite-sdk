@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 
 export type YelayLiteSdkConfig = {
+	backendUrl: string;
 	signer: ethers.Signer;
 };
 

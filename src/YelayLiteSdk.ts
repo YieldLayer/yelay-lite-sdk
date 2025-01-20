@@ -6,12 +6,11 @@ import { CallResult, ProjectYield, TimeFrame, UserYield, Vault, VaultYield, Yela
 
 export class YelayLiteSdk {
 	private signer: ethers.Signer;
-
-	// TODO:
-	private backendUrl = 'http://localhost:3000';
+	private backendUrl: string;
 
 	constructor(private readonly config: YelayLiteSdkConfig) {
 		this.signer = config.signer;
+		this.backendUrl = config.backendUrl;
 	}
 
 	async getVaults(): Promise<Vault[]> {
