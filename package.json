@@ -1,13 +1,13 @@
 {
-	"name": "@yield-layer/yelay-lite-sdk",
+	"name": "@yelay-lite/sdk",
 	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},
 	"version": "0.0.1",
 	"description": "Yelay Lite SDK",
-	"main": "build/index.js",
-	"types": "build/index.d.ts",
+	"main": "build/src/index.js",
+	"types": "build/src/index.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/YieldLayer/yelay-lite-sdk.git"
