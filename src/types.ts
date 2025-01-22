@@ -45,3 +45,9 @@ export type CallResult = {
 	success: boolean;
 	hash?: string;
 };
+
+export type ClientData = {
+	minProjectId: number;
+	maxProjectId: number;
+	clientName: string;
+};

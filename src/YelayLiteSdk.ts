@@ -2,7 +2,16 @@ import { ethers } from 'ethers';
 import { ERC20__factory } from './../typechain/generated/factories/ERC20__factory';
 import { IYelayLiteVault__factory } from './../typechain/generated/factories/IYelayLiteVault__factory';
 import { LibErrors__factory } from './../typechain/generated/factories/LibErrors__factory';
-import { CallResult, ProjectYield, TimeFrame, UserYield, Vault, VaultYield, YelayLiteSdkConfig } from './types';
+import {
+	CallResult,
+	ClientData,
+	ProjectYield,
+	TimeFrame,
+	UserYield,
+	Vault,
+	VaultYield,
+	YelayLiteSdkConfig,
+} from './types';
 
 export class YelayLiteSdk {
 	private backendUrl: string;
@@ -143,6 +152,36 @@ export class YelayLiteSdk {
 	 */
 	async activateProject(client: ethers.Signer, vault: string, projectId: number): Promise<CallResult> {
 		return this.#tryCall(IYelayLiteVault__factory.connect(vault, client).activateProject(projectId));
+	}
+
+	/**
+	 * Checks if a given project ID is active in the specified vault.
+	 *
+	 * @param vault - The address of the vault contract.
+	 * @param projectId - The project ID to check.
+	 * @returns A promise that resolves to a boolean indicating whether the project ID is active.
+	 */
+	async projectIdActive(vault: string, projectId: number): Promise<boolean> {
+		return IYelayLiteVault__factory.connect(vault, this.provider).projectIdActive(projectId);
+	}
+
+	/**
+	 * Retrieves data about a specific client in the specified vault.
+	 *
+	 * @param client - The address of the client.
+	 * @param vault - The address of the vault contract.
+	 * @returns A promise that resolves to a `ClientData` object containing:
+	 *   - `minProjectId`: The minimum project ID associated with the client (as a number).
+	 *   - `maxProjectId`: The maximum project ID associated with the client (as a number).
+	 *   - `clientName`: The name of the client decoded from a bytes32 string.
+	 */
+	async clientData(client: string, vault: string): Promise<ClientData> {
+		const result = await IYelayLiteVault__factory.connect(vault, this.provider).ownerToClientData(client);
+		return {
+			minProjectId: Number(result.minProjectId),
+			maxProjectId: Number(result.maxProjectId),
+			clientName: ethers.decodeBytes32String(result.clientName),
+		};
 	}
 
 	/**
