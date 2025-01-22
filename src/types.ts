@@ -17,20 +17,28 @@ export type TimeFrame = {
 	toTimestamp?: number;
 };
 
-export type VaultYield = {
+export type EventsRange = {
+	startBlock: number;
+	finishBlock: number;
+	startTimestamp: number;
+	finishTimestamp: number;
+};
+
+export type VaultYield = EventsRange & {
 	vault: string;
 	yield: string;
 	apy: string;
 };
 
-export type ProjectYield = {
-	projectId: number;
-	yield: string;
+export type ProjectYield = EventsRange & {
+	data: {
+		projectId: number;
+		yield: string;
+	}[];
 };
 
-export type UserYield = {
-	user: string;
-	yield: string;
+export type UserYield = EventsRange & {
+	data: { user: string; yield: string }[];
 };
 
 export type CallResult = {
