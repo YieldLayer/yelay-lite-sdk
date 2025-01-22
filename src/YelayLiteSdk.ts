@@ -69,7 +69,7 @@ export class YelayLiteSdk {
 		signer: ethers.Signer,
 		vault: string,
 		fromProjectId: number,
-		toProjectId: bigint,
+		toProjectId: number,
 		amount: bigint,
 	): Promise<CallResult> {
 		return this.#tryCall(
