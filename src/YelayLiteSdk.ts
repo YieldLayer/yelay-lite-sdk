@@ -5,12 +5,12 @@ import { LibErrors__factory } from './../typechain/generated/factories/LibErrors
 import { CallResult, ProjectYield, TimeFrame, UserYield, Vault, VaultYield, YelayLiteSdkConfig } from './types';
 
 export class YelayLiteSdk {
-	private signer: ethers.Signer;
 	private backendUrl: string;
+	private provider: ethers.JsonRpcProvider;
 
 	constructor(private readonly config: YelayLiteSdkConfig) {
-		this.signer = config.signer;
 		this.backendUrl = config.backendUrl;
+		this.provider = new ethers.JsonRpcProvider(config.rpcUrl, undefined, { staticNetwork: true });
 	}
 
 	async getVaults(): Promise<Vault[]> {
@@ -49,34 +49,40 @@ export class YelayLiteSdk {
 		return await res.json();
 	}
 
-	async deposit(vault: string, projectId: number, amount: bigint): Promise<CallResult> {
-		const userAddress = await this.signer.getAddress();
-		const yelayLiteVault = IYelayLiteVault__factory.connect(vault, this.signer);
+	async approve(signer: ethers.Signer, vault: string, amount: bigint): Promise<CallResult> {
+		const yelayLiteVault = IYelayLiteVault__factory.connect(vault, signer);
 		const underlyingAsset = await yelayLiteVault.underlyingAsset();
-		const token = ERC20__factory.connect(underlyingAsset, this.signer.provider);
-		const allowance = await token.allowance(userAddress, vault);
-		if (allowance === 0n) {
-			const r = await this.#tryCall(token.approve(vault, ethers.MaxUint256));
-			if (!r.success) {
-				console.log('Approve failed');
-				return r;
-			}
-		}
+		return this.#tryCall(ERC20__factory.connect(underlyingAsset, signer).approve(vault, amount));
+	}
+
+	async deposit(signer: ethers.Signer, vault: string, projectId: number, amount: bigint): Promise<CallResult> {
+		const userAddress = await signer.getAddress();
+		return this.#tryCall(IYelayLiteVault__factory.connect(vault, signer).deposit(amount, projectId, userAddress));
+	}
+
+	async redeem(signer: ethers.Signer, vault: string, projectId: number, amount: bigint): Promise<CallResult> {
+		const userAddress = await signer.getAddress();
+		return this.#tryCall(IYelayLiteVault__factory.connect(vault, signer).redeem(amount, projectId, userAddress));
+	}
+
+	async migrate(
+		signer: ethers.Signer,
+		vault: string,
+		fromProjectId: number,
+		toProjectId: bigint,
+		amount: bigint,
+	): Promise<CallResult> {
 		return this.#tryCall(
-			IYelayLiteVault__factory.connect(vault, this.signer).deposit(amount, projectId, userAddress),
+			IYelayLiteVault__factory.connect(vault, signer).migratePosition(fromProjectId, toProjectId, amount),
 		);
 	}
 
-	async redeem(vault: string, projectId: number, amount: bigint): Promise<CallResult> {
-		const userAddress = await this.signer.getAddress();
-		return this.#tryCall(
-			IYelayLiteVault__factory.connect(vault, this.signer).redeem(amount, projectId, userAddress),
-		);
+	async activateProject(client: ethers.Signer, vault: string, projectId: number): Promise<CallResult> {
+		return this.#tryCall(IYelayLiteVault__factory.connect(vault, client).activateProject(projectId));
 	}
 
-	async balanceOf(vault: string, projectId: number): Promise<bigint> {
-		const userAddress = await this.signer.getAddress();
-		return IYelayLiteVault__factory.connect(vault, this.signer.provider).balanceOf(userAddress, projectId);
+	async balanceOf(vault: string, projectId: number, user: string): Promise<bigint> {
+		return IYelayLiteVault__factory.connect(vault, this.provider).balanceOf(user, projectId);
 	}
 
 	#appendTimeFrameQuery(q: URLSearchParams, timeframe?: TimeFrame) {
