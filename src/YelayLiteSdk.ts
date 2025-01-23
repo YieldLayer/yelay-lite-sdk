@@ -35,6 +35,27 @@ export class YelayLiteSdk {
 	}
 
 	/**
+	 * Retrieves the underlying asset address of a specified vault.
+	 * @param {string} vault - The address of the vault contract.
+	 * @returns {Promise<string>} A promise that resolves to the address of the underlying asset.
+	 */
+	async getVaultUnderlying(vault: string): Promise<string> {
+		return IYelayLiteVault__factory.connect(vault, this.provider).underlyingAsset();
+	}
+
+	/**
+	 * Retrieves the allowance of the vault to spend the user's underlying asset.
+	 * @param {ethers.Signer} signer - The signer object for the user.
+	 * @param {string} vault - The address of the vault contract.
+	 * @returns {Promise<bigint>} A promise that resolves to the allowance amount as a bigint.
+	 */
+	async allowance(signer: ethers.Signer, vault: string): Promise<bigint> {
+		const underlying = await this.getVaultUnderlying(vault);
+		const userAddress = await signer.getAddress();
+		return ERC20__factory.connect(underlying, this.provider).allowance(userAddress, vault);
+	}
+
+	/**
 	 * Retrieves the yield of a specific vault.
 	 * @param {string} vault - The address of the vault.
 	 * @param {TimeFrame} [timeFrame] - Optional timeframe for filtering yield data.
