@@ -4,7 +4,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"description": "Yelay Lite SDK",
 	"main": "build/src/index.js",
 	"types": "build/src/index.d.ts",

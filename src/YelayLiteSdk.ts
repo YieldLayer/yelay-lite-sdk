@@ -10,6 +10,7 @@ import {
 	ProjectYield,
 	TimeFrame,
 	UserYield,
+	UserYieldAggregatedData,
 	Vault,
 	VaultYield,
 	YelayLiteSdkConfig,
@@ -82,6 +83,30 @@ export class YelayLiteSdk {
 		const res = await fetch(
 			`${this.backendUrl}/interest/vault/${vault}/project/${projectId}/users?${q.toString()}`,
 		);
+		return await res.json();
+	}
+
+	/**
+	 * Retrieves the aggregated yield data for a specific user across multiple projects and vaults.
+	 *
+	 * @param {string} user - The address of the user whose yield data is being queried.
+	 * @param {string[]} [vaults] - Optional array of vault addresses to filter the query.
+	 * @param {number[]} [projectIds] - Optional array of projectIds to filter the query.
+	 * @param {TimeFrame} [timeFrame] - Optional timeframe to filter the yield data by specific dates or blocks.
+	 * @returns {Promise<UserYieldAggregatedData[]>} A promise that resolves to an array of aggregated yield data,
+	 * each containing vault address and a mapping of project IDs to yield values.
+	 */
+	async getUserYield(
+		user: string,
+		vaults?: string[],
+		projectIds?: number[],
+		timeFrame?: TimeFrame,
+	): Promise<UserYieldAggregatedData[]> {
+		const q = new URLSearchParams();
+		vaults?.forEach(v => q.append('v', v.toLowerCase()));
+		projectIds?.forEach(p => q.append('v', p.toString()));
+		this.#appendTimeFrameQuery(q, timeFrame);
+		const res = await fetch(`${this.backendUrl}/interest/user/${user}?${q.toString()}`);
 		return await res.json();
 	}
 

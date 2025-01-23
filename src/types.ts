@@ -42,6 +42,13 @@ export type UserYield = EventsRange & {
 	data: { user: string; yield: string }[];
 };
 
+export type UserYieldAggregatedData = EventsRange & {
+	vault: string;
+	projects: {
+		[id: number]: string;
+	};
+};
+
 export type CallResult = {
 	success: boolean;
 	hash?: string;
