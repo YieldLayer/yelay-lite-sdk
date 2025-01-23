@@ -2,6 +2,8 @@ import { ethers } from 'ethers';
 import { ERC20__factory } from './../typechain/generated/factories/ERC20__factory';
 import { IYelayLiteVault__factory } from './../typechain/generated/factories/IYelayLiteVault__factory';
 import { LibErrors__factory } from './../typechain/generated/factories/LibErrors__factory';
+import { VaultWrapper__factory } from './../typechain/generated/factories/VaultWrapper__factory';
+import { contracts } from './constants';
 import {
 	CallResult,
 	ClientData,
@@ -107,6 +109,23 @@ export class YelayLiteSdk {
 	async deposit(signer: ethers.Signer, vault: string, projectId: number, amount: bigint): Promise<CallResult> {
 		const userAddress = await signer.getAddress();
 		return this.#tryCall(IYelayLiteVault__factory.connect(vault, signer).deposit(amount, projectId, userAddress));
+	}
+
+	/**
+	 * Deposits a specified amount of ETH into a project in the vault.
+	 * @param {ethers.Signer} signer - The signer object for the user.
+	 * @param {string} vault - The address of the vault.
+	 * @param {number} projectId - The project ID.
+	 * @param {bigint} amount - The amount of ETH to deposit (in wei).
+	 * @returns {Promise<CallResult>} A promise that resolves to the result of the deposit transaction.
+	 *
+	 * This method wraps the specified ETH amount and deposits it into the target vault for the given project.
+	 * It uses the VaultWrapper contract to handle ETH wrapping and depositing in a single transaction.
+	 */
+	async depositEth(signer: ethers.Signer, vault: string, projectId: number, amount: bigint): Promise<CallResult> {
+		const chainId = (await signer.provider!.getNetwork()).chainId;
+		const vaultWrapper = VaultWrapper__factory.connect(contracts[Number(chainId)].vaultWrapper, signer);
+		return this.#tryCall(vaultWrapper.wrapEthAndDeposit(vault, projectId, { value: amount }));
 	}
 
 	/**
