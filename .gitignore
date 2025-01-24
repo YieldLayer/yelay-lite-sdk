@@ -2,4 +2,5 @@ build/*
 node_modules/*
 typechain/*
 pnpm-lock.yaml
+package-lock.json
 src/debug.ts

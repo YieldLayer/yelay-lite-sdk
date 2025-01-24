@@ -18,11 +18,11 @@ import {
 
 export class YelayLiteSdk {
 	private backendUrl: string;
-	private provider: ethers.JsonRpcProvider;
+	private provider: ethers.providers.JsonRpcProvider;
 
 	constructor(private readonly config: YelayLiteSdkConfig) {
 		this.backendUrl = config.backendUrl;
-		this.provider = new ethers.JsonRpcProvider(config.rpcUrl, undefined, { staticNetwork: true });
+		this.provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);
 	}
 
 	/**
@@ -116,7 +116,7 @@ export class YelayLiteSdk {
 	 * @param {string} vault - The address of the vault contract.
 	 * @returns {Promise<bigint>} A promise that resolves to the allowance amount as a bigint.
 	 */
-	async allowance(signer: ethers.Signer, vault: string): Promise<bigint> {
+	async allowance(signer: ethers.Signer, vault: string): Promise<ethers.BigNumber> {
 		const underlying = await IYelayLiteVault__factory.connect(vault, this.provider).underlyingAsset();
 		const userAddress = await signer.getAddress();
 		return ERC20__factory.connect(underlying, this.provider).allowance(userAddress, vault);
@@ -236,7 +236,7 @@ export class YelayLiteSdk {
 		return {
 			minProjectId: Number(result.minProjectId),
 			maxProjectId: Number(result.maxProjectId),
-			clientName: ethers.decodeBytes32String(result.clientName),
+			clientName: ethers.utils.parseBytes32String(result.clientName),
 		};
 	}
 
@@ -247,7 +247,7 @@ export class YelayLiteSdk {
 	 * @param {string} user - The address of the user.
 	 * @returns {Promise<bigint>} A promise that resolves to the balance of the user in the specified project.
 	 */
-	async balanceOf(vault: string, projectId: number, user: string): Promise<bigint> {
+	async balanceOf(vault: string, projectId: number, user: string): Promise<ethers.BigNumber> {
 		return IYelayLiteVault__factory.connect(vault, this.provider).balanceOf(user, projectId);
 	}
 
@@ -266,7 +266,7 @@ export class YelayLiteSdk {
 		}
 	}
 
-	async #tryCall(call: Promise<ethers.ContractTransactionResponse>): Promise<CallResult> {
+	async #tryCall(call: Promise<ethers.ContractTransaction>): Promise<CallResult> {
 		const result = { success: false, hash: '' };
 		try {
 			const tx = await call;

@@ -4,7 +4,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"description": "Yelay Lite SDK",
 	"main": "build/src/index.js",
 	"types": "build/src/index.d.ts",
@@ -17,7 +17,7 @@
 		"src/**/*"
 	],
 	"scripts": {
-		"gen-types": "typechain --target=ethers-v6 --out-dir=typechain/generated abis/*.json",
+		"gen-types": "typechain --target=ethers-v5 --out-dir=typechain/generated abis/*.json",
 		"build": "pnpm run gen-types && rm -rf ./build && tsc"
 	},
 	"keywords": [
@@ -29,10 +29,10 @@
 	],
 	"license": "ISC",
 	"dependencies": {
-		"ethers": "6.13.5"
+		"ethers": "5.7.2"
 	},
 	"devDependencies": {
-		"@typechain/ethers-v6": "0.5.1",
+		"@typechain/ethers-v5": "11.1.2",
 		"@types/node": "22.10.1",
 		"@typescript-eslint/eslint-plugin": "8.17.0",
 		"@typescript-eslint/parser": "8.17.0",
