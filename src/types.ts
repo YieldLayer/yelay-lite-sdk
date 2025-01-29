@@ -9,6 +9,7 @@ export type Vault = {
 	createBlocknumber: string;
 	createTimestamp: string;
 	underlying: string;
+	chainId: number;
 };
 
 export type TimeFrame = {

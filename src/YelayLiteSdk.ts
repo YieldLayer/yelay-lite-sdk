@@ -19,10 +19,18 @@ import {
 export class YelayLiteSdk {
 	private backendUrl: string;
 	private provider: ethers.providers.JsonRpcProvider;
+	private _chainId: number | undefined;
 
 	constructor(private readonly config: YelayLiteSdkConfig) {
 		this.backendUrl = config.backendUrl;
 		this.provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);
+	}
+
+	async #chainId() {
+		if (!this._chainId) {
+			this._chainId = (await this.provider.getNetwork()).chainId;
+		}
+		return this._chainId;
 	}
 
 	/**
@@ -30,7 +38,9 @@ export class YelayLiteSdk {
 	 * @returns {Promise<Vault[]>} A promise that resolves to an array of vault objects.
 	 */
 	async getVaults(): Promise<Vault[]> {
-		const res = await fetch(`${this.backendUrl}/vaults`);
+		const chainId = await this.#chainId();
+		const q = new URLSearchParams({ chainId: chainId.toString() }).toString();
+		const res = await fetch(`${this.backendUrl}/vaults?${q}`);
 		const vaults = await res.json();
 		return vaults;
 	}
