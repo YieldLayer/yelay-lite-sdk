@@ -46,13 +46,14 @@ export class YelayLiteSdk {
 	}
 
 	/**
-	 * Retrieves the yield of a specific vault.
-	 * @param {string} vault - The address of the vault.
+	 * Retrieves the yield of the vaults.
+	 * @param {string[]} vaults - The addresses of the vaults.
 	 * @param {TimeFrame} [timeFrame] - Optional timeframe for filtering yield data.
-	 * @returns {Promise<VaultYield>} A promise that resolves to the yield data for the vault.
+	 * @returns {Promise<VaultYield[]>} A promise that resolves to the yield data for the vaults.
 	 */
-	async getVaultYield(vault: string, timeFrame?: TimeFrame): Promise<VaultYield[]> {
-		const q = new URLSearchParams({ address: vault });
+	async getVaultsYield(vaults: string[], timeFrame?: TimeFrame): Promise<VaultYield[]> {
+		const q = new URLSearchParams();
+		vaults.forEach(v => q.append('address', v.toString()));
 		this.#appendTimeFrameQuery(q, timeFrame);
 		const res = await fetch(`${this.backendUrl}/interest/vaults?${q.toString()}`);
 		return await res.json();
