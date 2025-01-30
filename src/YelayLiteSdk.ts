@@ -51,7 +51,7 @@ export class YelayLiteSdk {
 	 * @param {TimeFrame} [timeFrame] - Optional timeframe for filtering yield data.
 	 * @returns {Promise<VaultYield>} A promise that resolves to the yield data for the vault.
 	 */
-	async getVaultYield(vault: string, timeFrame?: TimeFrame): Promise<VaultYield> {
+	async getVaultYield(vault: string, timeFrame?: TimeFrame): Promise<VaultYield[]> {
 		const q = new URLSearchParams({ address: vault });
 		this.#appendTimeFrameQuery(q, timeFrame);
 		const res = await fetch(`${this.backendUrl}/interest/vaults?${q.toString()}`);
