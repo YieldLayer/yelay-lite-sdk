@@ -23,7 +23,7 @@ export class YelayLiteSdk {
 
 	constructor(private readonly config: YelayLiteSdkConfig) {
 		this.backendUrl = config.backendUrl;
-		this.provider = new ethers.providers.JsonRpcProvider(config.rpcUrl);
+		this.provider = config.provider;
 	}
 
 	async #chainId() {
@@ -72,6 +72,22 @@ export class YelayLiteSdk {
 		this.#appendTimeFrameQuery(q, timeFrame);
 		const res = await fetch(`${this.backendUrl}/interest/vault/${vault}/projects?${q.toString()}`);
 		return await res.json();
+	}
+
+	/**
+	 * Retrieves the total value locked (TVL) for specific projects within a vault.
+	 * @param {string} vault - The address of the vault.
+	 * @param {number[]} projectIds - Array of project IDs to query.
+	 * @returns {Promise<ethers.BigNumber[]>} A promise that resolves to an array of TVL values for each project.
+	 */
+	async getProjectsTvl(vault: string, projectIds: number[]): Promise<ethers.BigNumber[]> {
+		const yelayLiteVault = IYelayLiteVault__factory.connect(vault, this.provider);
+		const [totalAssets, totalSupply, ...projectsSupply] = await Promise.all([
+			yelayLiteVault.totalAssets(),
+			yelayLiteVault['totalSupply()'](),
+			...projectIds.map(p => yelayLiteVault['totalSupply(uint256)'](p)),
+		]);
+		return projectsSupply.map(s => totalAssets.mul(s).div(totalSupply));
 	}
 
 	/**

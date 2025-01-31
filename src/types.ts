@@ -1,6 +1,8 @@
+import { ethers } from 'ethers';
+
 export type YelayLiteSdkConfig = {
 	backendUrl: string;
-	rpcUrl: string;
+	provider: ethers.providers.JsonRpcProvider;
 };
 
 export type Vault = {
