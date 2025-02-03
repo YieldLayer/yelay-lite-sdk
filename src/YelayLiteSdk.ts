@@ -14,6 +14,7 @@ import {
 	Vault,
 	VaultYield,
 	YelayLiteSdkConfig,
+	YieldAggregated,
 } from './types';
 
 export class YelayLiteSdk {
@@ -131,9 +132,32 @@ export class YelayLiteSdk {
 	): Promise<UserYieldAggregatedData[]> {
 		const q = new URLSearchParams();
 		vaults?.forEach(v => q.append('v', v.toLowerCase()));
-		projectIds?.forEach(p => q.append('v', p.toString()));
+		projectIds?.forEach(p => q.append('p', p.toString()));
 		this.#appendTimeFrameQuery(q, timeFrame);
 		const res = await fetch(`${this.backendUrl}/interest/user/${user}?${q.toString()}`);
+		return await res.json();
+	}
+
+	/**
+	 * Retrieves the aggregated yield data for specified vaults, projects, and users within a given timeframe.
+	 * @param {string[]} [vaults] - Optional array of vault addresses to filter results.
+	 * @param {number[]} [projectIds] - Optional array of project IDs to filter results.
+	 * @param {string[]} [users] - Optional array of user addresses to filter results.
+	 * @param {TimeFrame} [timeFrame] - Optional timeframe to limit results within a specific period.
+	 * @returns {Promise<YieldAggregated[]>} A promise that resolves to an array of aggregated yield data.
+	 */
+	async getYields(
+		vaults?: string[],
+		projectIds?: number[],
+		users?: string[],
+		timeFrame?: TimeFrame,
+	): Promise<YieldAggregated[]> {
+		const q = new URLSearchParams();
+		vaults?.forEach(v => q.append('v', v.toLowerCase()));
+		projectIds?.forEach(p => q.append('p', p.toString()));
+		users?.forEach(u => q.append('u', u.toString()));
+		this.#appendTimeFrameQuery(q, timeFrame);
+		const res = await fetch(`${this.backendUrl}/interest/users?${q.toString()}`);
 		return await res.json();
 	}
 
