@@ -52,7 +52,7 @@ export type UserYieldAggregatedData = EventsRange & {
 	};
 };
 
-export type YieldAggregated = {
+export type YieldAggregated = EventsRange & {
 	vault: string;
 	user: string;
 	projects: {
