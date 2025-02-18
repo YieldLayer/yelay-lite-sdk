@@ -1,5 +1,22 @@
-export const contracts: Record<number, { vaultWrapper: string }> = {
+import { ContractAddresses, SDKConfig } from './types';
+
+export const contracts: Record<number, ContractAddresses> = {
 	8453: {
-		vaultWrapper: '0x977E50cc0D9fbEFDac05B4842D1795Dfa4cA1afd',
+		VaultWrapper: '0x977E50cc0D9fbEFDac05B4842D1795Dfa4cA1afd',
+		YelayLiteVault: '',
+	},
+};
+
+export const sdkConfig: Record<number, SDKConfig> = {
+	8453: {
+		backendUrl: 'https://lite.dev.yelay.io/',
+		contractAddresses: contracts[8453],
+	},
+};
+
+export const devSdkConfig: Record<number, SDKConfig> = {
+	8453: {
+		backendUrl: 'https://lite.dev.yelay.io/',
+		contractAddresses: contracts[8453],
 	},
 };
