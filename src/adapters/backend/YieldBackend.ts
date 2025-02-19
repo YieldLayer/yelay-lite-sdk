@@ -13,10 +13,7 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		const searchParams = new URLSearchParams();
 		vaults.forEach(vault => searchParams.append('address', vault.toString()));
 		const appendedSearchParams = appendTimeFrameQuery(searchParams, timeFrame);
-		console.log(
-			'`/interest/vaults?${appendedSearchParams.toString()}`',
-			`/interest/vaults?${appendedSearchParams.toString()}`,
-		);
+
 		const res: { data: VaultYield } = await this.axios.get(`/interest/vaults?${appendedSearchParams.toString()}`);
 
 		return await res.data;
