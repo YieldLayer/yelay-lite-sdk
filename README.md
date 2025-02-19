@@ -44,6 +44,13 @@ const chainId = 8453; // Supported chain ID
 const sdk = new YelayLiteSdk(signerOrProvider, sdkConfig[chainId]);
 ```
 
+## Testing
+- `npm i`
+- Run `npm run build`
+- `cp .env.sample .env`
+- Fill in the required environment variables in the `.env` file
+- Run `npm run test`
+
 ## Features
 The SDK provides access to the following services:
 
