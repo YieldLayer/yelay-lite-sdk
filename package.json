@@ -29,7 +29,8 @@
 	],
 	"license": "ISC",
 	"dependencies": {
-		"ethers": "5.7.2"
+		"ethers": "5.7.2",
+		"pnpm": "^10.4.1"
 	},
 	"devDependencies": {
 		"@typechain/ethers-v5": "11.1.2",
