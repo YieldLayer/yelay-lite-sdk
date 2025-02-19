@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import { sdkConfig, YelayLiteSdk } from '../src';
+import { sdkConfig, YelayLiteSdk } from '../../src';
 
 describe('Yield', () => {
 	let sdk: YelayLiteSdk;
@@ -7,7 +7,7 @@ describe('Yield', () => {
 	beforeAll(() => {
 		const provider = new ethers.providers.JsonRpcProvider('https://base.llamarpc.com');
 
-		const privateKey = '2f3242e28d3f87c79aa73ca4f3f9c7712afd80e2e3ed991c3b0379d32b2fb3b1';
+		const privateKey = process.env.PRIVATE_KEY ?? '';
 
 		const signer = new ethers.Wallet(privateKey, provider);
 
@@ -33,20 +33,22 @@ describe('Yield', () => {
 	});
 
 	it.skip('Get User Yields', async () => {
-		const userYield = await sdk.yields.getUserYield('0x1de03a3d77641b60fc7b0e605db1926f23a2b588');
-
-		console.log('userYield', userYield);
-	});
-
-	it.skip('Get Users Yields', async () => {
-		const userYield = await sdk.yields.getUsersYield('0x16db68c86edfdb60ba733563326ed392b319eb2b', 1, [
-			'0x1de03a3d77641b60fc7b0e605db1926f23a2b588',
+		const userYield = await sdk.yields.getUserYield('0xe2816865b58a79523c16cb80092cf5591241b16d', [
+			'0x98feddfdf4cb0b1813a7969fdbac5aecda8c6992',
 		]);
 
 		console.log('userYield', userYield);
 	});
 
-	it('Get Yields', async () => {
+	it('Get Users Yields', async () => {
+		const userYield = await sdk.yields.getUsersYield('0x98feddfdf4cb0b1813a7969fdbac5aecda8c6992', 100, [
+			'0xe2816865b58a79523c16cb80092cf5591241b16d',
+		]);
+
+		console.log('userYield', userYield);
+	});
+
+	it.skip('Get Yields', async () => {
 		const yields = await sdk.yields.getYields();
 
 		console.log('userYield', yields);

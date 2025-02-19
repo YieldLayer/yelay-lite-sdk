@@ -7,7 +7,7 @@ describe('Projects', () => {
 	beforeAll(() => {
 		const provider = new ethers.providers.JsonRpcProvider('https://base.llamarpc.com');
 
-		const privateKey = '2f3242e28d3f87c79aa73ca4f3f9c7712afd80e2e3ed991c3b0379d32b2fb3b1';
+		const privateKey = process.env.PRIVATE_KEY ?? '';
 
 		const signer = new ethers.Wallet(privateKey, provider);
 

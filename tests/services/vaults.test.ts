@@ -1,5 +1,8 @@
 import { ethers } from 'ethers';
 import { sdkConfig, YelayLiteSdk } from '../../src';
+import { parseEther, parseUnits } from 'ethers/lib/utils';
+
+jest.setTimeout(10000);
 
 describe('Vaults', () => {
 	let sdk: YelayLiteSdk;
@@ -7,7 +10,7 @@ describe('Vaults', () => {
 	beforeAll(() => {
 		const provider = new ethers.providers.JsonRpcProvider('https://base.llamarpc.com');
 
-		const privateKey = '2f3242e28d3f87c79aa73ca4f3f9c7712afd80e2e3ed991c3b0379d32b2fb3b1';
+		const privateKey = process.env.PRIVATE_KEY ?? '';
 
 		const signer = new ethers.Wallet(privateKey, provider);
 
@@ -20,9 +23,29 @@ describe('Vaults', () => {
 		console.log('vaults', vaults);
 	});
 
-	it('get allowance', async () => {
-		const allowance = await sdk.vaults.allowance('0x16db68c86edfdb60ba733563326ed392b319eb2b');
+	it.skip('get allowance', async () => {
+		const allowance = await sdk.vaults.allowance(
+			'c7e3e7bdb15013f74979f81884849eec73bb449596e3201cd7b1c6997af5ba68',
+		);
 
-		console.log('allowance', allowance);
+		console.log('allowance', allowance.toString());
+	});
+
+	it.skip('approve', async () => {
+		const approve = await sdk.vaults.approve(
+			'c7e3e7bdb15013f74979f81884849eec73bb449596e3201cd7b1c6997af5ba68',
+			BigInt(parseEther('1').toString()),
+		);
+
+		console.log('approve', approve);
+	});
+
+	it('approve', async () => {
+		const approve = await sdk.vaults.approve(
+			'c7e3e7bdb15013f74979f81884849eec73bb449596e3201cd7b1c6997af5ba68',
+			BigInt(parseEther('1').toString()),
+		);
+
+		console.log('approve', approve);
 	});
 });
