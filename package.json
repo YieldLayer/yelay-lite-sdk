@@ -6,15 +6,14 @@
 	},
 	"version": "0.0.17",
 	"description": "Yelay Lite SDK",
-	"main": "build/src/index.js",
-	"types": "build/src/index.d.ts",
+	"main": "build/index.js",
+	"types": "build/index.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/YieldLayer/yelay-lite-sdk.git"
 	},
 	"files": [
-		"build/**/*",
-		"src/**/*"
+		"build"
 	],
 	"scripts": {
 		"gen-types": "typechain --target=ethers-v5 --out-dir=src/generated/typechain src/abis/*.json",
