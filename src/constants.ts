@@ -5,6 +5,7 @@ export const contracts: Record<number, ContractAddresses> = {
 		VaultWrapper: '0x977E50cc0D9fbEFDac05B4842D1795Dfa4cA1afd',
 		YelayLiteVault: '',
 		Swapper: '0xf9A42821bC7B13C47A6c934704645111eaD836A9',
+		DepositLockPlugin: '',
 	},
 };
 
