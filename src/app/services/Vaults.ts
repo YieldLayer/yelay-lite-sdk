@@ -1,4 +1,4 @@
-import { BigNumber, ContractTransaction, Signer } from 'ethers';
+import { BigNumber, CallOverrides, ContractTransaction, Signer } from 'ethers';
 import { tryCall } from '../../utils/smartContract';
 import { SmartContractAdapter } from '../../adapters/smartContract';
 import { IContractFactory } from '../ports/IContractFactory';
@@ -6,10 +6,12 @@ import { VaultsBackend } from '../../adapters/backend/VaultsBackend';
 import { Vault } from '../../types/vaults';
 import { Provider } from '@ethersproject/abstract-provider';
 import { ClientData } from '../../types/smartContract';
+import { IVaultsBackend } from '../ports/backend/IVaultsBackend';
+import { SwapArgsStruct } from '../../generated/typechain/VaultWrapper';
 
 export class Vaults {
 	private smartContractAdapter: SmartContractAdapter;
-	private vaultsBackend: VaultsBackend;
+	private vaultsBackend: IVaultsBackend;
 	private signerOrProvider: Signer | Provider;
 
 	constructor(contractFactory: IContractFactory, backendUrl: string, signerOrProvider: Signer | Provider) {
@@ -45,13 +47,14 @@ export class Vaults {
 	 * Retrieves the allowance of the vault to spend the user's underlying asset.
 	 * @param {ethers.Signer} signer - The signer object for the user.
 	 * @param {string} vault - The address of the vault contract.
+	 * @param {string} [tokenAddress] - if not specified, will return allowance of the vault underlying token.
 	 * @returns {Promise<bigint>} A promise that resolves to the allowance amount as a bigint.
 	 */
-	public async allowance(vault: string): Promise<BigNumber> {
+	public async allowance(vault: string, tokenAddress?: string): Promise<BigNumber> {
 		if (!Signer.isSigner(this.signerOrProvider)) {
 			throw new Error('Signer is not instantiated in SDK');
 		}
-		return this.smartContractAdapter.yelayLiteVault.allowance(this.signerOrProvider, vault);
+		return this.smartContractAdapter.yelayLiteVault.allowance(this.signerOrProvider, vault, tokenAddress);
 	}
 
 	/**
@@ -94,10 +97,33 @@ export class Vaults {
 	 * Approves the vault to spend a specified amount of tokens on behalf of the user.
 	 * @param {string} vault - The address of the vault.
 	 * @param {bigint} amount - The amount to approve.
+	 * @param {string} [tokenAddress] - if not specified, will approve spending of vaults native token.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the approval transaction.
 	 */
-	async approve(vault: string, amount: bigint): Promise<ContractTransaction> {
-		return tryCall(this.smartContractAdapter.yelayLiteVault.approve(vault, amount));
+	async approve(vault: string, amount: bigint, tokenAddress?: string): Promise<ContractTransaction> {
+		return tryCall(this.smartContractAdapter.yelayLiteVault.approve(vault, amount, tokenAddress));
+	}
+
+	/**
+	 * Approves the vault to spend a specified amount of tokens on behalf of the user.
+	 * @param {string} tokenAddress - The address of the token.
+	 * @param {bigint} amount - The amount to approve.
+	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the approval transaction.
+	 */
+	async approveVaultWrapper(tokenAddress: string, amount: bigint): Promise<ContractTransaction> {
+		return tryCall(this.smartContractAdapter.vaultWrapper.approveVaultWrapper(tokenAddress, amount));
+	}
+
+	/**
+	 * Retrieves the allowance of the vault to spend the user's underlying asset.
+	 * @param {string} tokenAddress - Token address
+	 * @returns {Promise<bigint>} A promise that resolves to the allowance amount as a bigint.
+	 */
+	public async vaultWrapperAllowance(tokenAddress: string): Promise<BigNumber> {
+		if (!Signer.isSigner(this.signerOrProvider)) {
+			throw new Error('Signer is not instantiated in SDK');
+		}
+		return this.smartContractAdapter.vaultWrapper.vaultWrapperAllowance(this.signerOrProvider, tokenAddress);
 	}
 
 	/**
@@ -114,6 +140,26 @@ export class Vaults {
 
 		return tryCall(
 			this.smartContractAdapter.yelayLiteVault.deposit(this.signerOrProvider, vault, projectId, amount),
+		);
+	}
+
+	/**
+	 * Deposits a specified amount into a project in the vault.
+	 * @param {string} vault - The address of the vault.
+	 * @param {number} projectId - The project ID.
+	 * @param {bigint} amount - The amount to deposit.
+	 * @param {SwapArgsStruct} swapData - Swap args from 1inch.
+	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the deposit transaction.
+	 */
+	async swapAndDeposit(
+		vault: string,
+		projectId: number,
+		amount: bigint,
+		swapData: SwapArgsStruct,
+		callOverrides?: CallOverrides,
+	): Promise<ContractTransaction> {
+		return tryCall(
+			this.smartContractAdapter.vaultWrapper.swapAndDeposit(vault, projectId, swapData, amount, callOverrides),
 		);
 	}
 
