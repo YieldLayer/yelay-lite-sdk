@@ -10,7 +10,7 @@ export const contracts: Record<number, ContractAddresses> = {
 
 export const sdkConfig: Record<number, SDKConfig> = {
 	8453: {
-		backendUrl: 'https://lite.dev.yelay.io/',
+		backendUrl: 'https://lite.dev.yelay.io/base/',
 		contractAddresses: contracts[8453],
 		chainId: 8453,
 	},
@@ -18,7 +18,7 @@ export const sdkConfig: Record<number, SDKConfig> = {
 
 export const devSdkConfig: Record<number, SDKConfig> = {
 	8453: {
-		backendUrl: 'https://lite.dev.yelay.io/',
+		backendUrl: 'https://lite.dev.yelay.io/base/',
 		contractAddresses: contracts[8453],
 		chainId: 8453,
 	},

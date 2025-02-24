@@ -6,11 +6,9 @@ import { TimeFrame } from '../../types/backend';
 import { YieldBackend } from '../../adapters/backend/YieldBackend';
 
 export class Yield {
-	private smartContractAdapter: SmartContractAdapter;
 	private yieldBackend: YieldBackend;
 
-	constructor(contractFactory: IContractFactory, backendUrl: string) {
-		this.smartContractAdapter = new SmartContractAdapter(contractFactory);
+	constructor(backendUrl: string) {
 		this.yieldBackend = new YieldBackend(backendUrl);
 	}
 
@@ -20,7 +18,7 @@ export class Yield {
 	 * @param {TimeFrame} [timeFrame] - Optional timeframe for filtering yield data.
 	 * @returns {Promise<VaultYield[]>} A promise that resolves to the yield data for the vaults.
 	 */
-	public async getVaultsYield(vaults: string[], timeFrame: TimeFrame): Promise<VaultYield> {
+	public async getVaultsYield(vaults: string[], timeFrame?: TimeFrame): Promise<VaultYield[]> {
 		return await this.yieldBackend.getVaultsYield(vaults, timeFrame);
 	}
 

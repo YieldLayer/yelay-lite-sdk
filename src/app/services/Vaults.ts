@@ -25,8 +25,8 @@ export class Vaults {
 	 * Retrieves a list of all vaults.
 	 * @returns {Promise<Vault[]>} A promise that resolves to an array of vault objects.
 	 */
-	public async getVaults(chainId: number | string): Promise<Vault[]> {
-		return this.vaultsBackend.getVaults(chainId);
+	public async getVaults(): Promise<Vault[]> {
+		return this.vaultsBackend.getVaults();
 	}
 
 	/**
