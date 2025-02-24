@@ -18,7 +18,7 @@ export class YelayLiteSdk {
 
 		this.vaults = new Vaults(this.contractFactory, sdkConfig.backendUrl, signerOrProvider);
 
-		this.yields = new Yield(this.contractFactory, sdkConfig.backendUrl);
+		this.yields = new Yield(sdkConfig.backendUrl);
 
 		this.projects = new Projects(this.contractFactory);
 	}

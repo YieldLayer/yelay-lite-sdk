@@ -7,9 +7,8 @@ export class VaultsBackend extends ApiWrapperService implements IVaultsBackend {
 		super(backendUrl);
 	}
 
-	async getVaults(chainId: number | string): Promise<Vault[]> {
-		const searchParams = new URLSearchParams({ chainId: chainId.toString() }).toString();
-		const res: { data: Vault[] } = await this.axios.get(`/vaults/?${searchParams}`);
+	async getVaults(): Promise<Vault[]> {
+		const res: { data: Vault[] } = await this.axios.get(`/vaults`);
 		return res.data;
 	}
 }
