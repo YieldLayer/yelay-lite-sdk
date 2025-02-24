@@ -33,7 +33,7 @@ export class Yield {
 	 * @param {TimeFrame} [timeFrame] - Optional timeframe for filtering yield data.
 	 * @returns {Promise<ProjectYield[]>} A promise that resolves to an array of project yield data.
 	 */
-	async getProjectsYield(vault: string, projectIds: number[], timeFrame?: TimeFrame): Promise<ProjectYield[]> {
+	async getProjectsYield(vault: string, projectIds: number[], timeFrame?: TimeFrame): Promise<ProjectYield> {
 		return await this.yieldBackend.getProjectsYield(vault, projectIds, timeFrame);
 	}
 

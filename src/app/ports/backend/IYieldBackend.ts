@@ -3,7 +3,7 @@ import { ProjectYield, UserYield, UserYieldAggregatedData, VaultYield, YieldAggr
 
 export interface IYieldBackend {
 	getVaultsYield(vaults: string[], timeFrame?: TimeFrame): Promise<VaultYield[]>;
-	getProjectsYield(vault: string, projectIds: number[], timeFrame?: TimeFrame): Promise<ProjectYield[]>;
+	getProjectsYield(vault: string, projectIds: number[], timeFrame?: TimeFrame): Promise<ProjectYield>;
 	getUsersYield(vault: string, projectId: number, users: string[], timeFrame?: TimeFrame): Promise<UserYield[]>;
 	getUserYield(
 		user: string,
