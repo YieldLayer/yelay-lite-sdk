@@ -7,11 +7,12 @@
 		"esModuleInterop": true,
 		"downlevelIteration": true,
 		"outDir": "./build",
-		"rootDir": "src",
+		"rootDir": ".",
 		"sourceMap": true,
 		"strict": true,
-		"types": ["jest", "node"]
+		"types": ["mocha"]
 	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules", "**/__tests__/*", "tests/**/*"]
+	"include": ["src/**/*", "test/**/*"],
+	"exclude": ["node_modules"],
+    "files": ["./hardhat.config.ts"]
 }
