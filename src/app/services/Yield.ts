@@ -4,6 +4,7 @@ import { VaultsBackend } from '../../adapters/backend/VaultsBackend';
 import { ProjectYield, UserYield, UserYieldAggregatedData, VaultYield, YieldAggregated } from '../../types/yield';
 import { TimeFrame } from '../../types/backend';
 import { YieldBackend } from '../../adapters/backend/YieldBackend';
+import { getTimestampOneWeekAgo } from '../../utils/backend';
 
 export class Yield {
 	private yieldBackend: YieldBackend;
@@ -13,13 +14,16 @@ export class Yield {
 	}
 
 	/**
-	 * Retrieves the yield of the vaults.
+	 * Retrieves the yield of the vaults. If TimeFrame is not provided, then it will by default set the fromTimestamp to 1 week ago.
 	 * @param {string[]} vaults - The addresses of the vaults.
 	 * @param {TimeFrame} [timeFrame] - Optional timeframe for filtering yield data.
 	 * @returns {Promise<VaultYield[]>} A promise that resolves to the yield data for the vaults.
 	 */
 	public async getVaultsYield(vaults: string[], timeFrame?: TimeFrame): Promise<VaultYield[]> {
-		return await this.yieldBackend.getVaultsYield(vaults, timeFrame);
+		return await this.yieldBackend.getVaultsYield(
+			vaults,
+			timeFrame ? timeFrame : { fromTimestamp: getTimestampOneWeekAgo() },
+		);
 	}
 
 	/**
