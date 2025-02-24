@@ -1,9 +1,9 @@
-import { Signer, ContractTransaction } from 'ethers';
+import { ContractTransaction } from 'ethers';
 import { IContractFactory } from '../ports/IContractFactory';
 import { SmartContractAdapter } from '../../adapters/smartContract';
 import { tryCall } from '../../utils/smartContract';
 
-export class DepositLockPluginService {
+export class DepositLockPlugin {
 	private smartContractAdapter: SmartContractAdapter;
 
 	constructor(contractFactory: IContractFactory) {
@@ -11,16 +11,22 @@ export class DepositLockPluginService {
 	}
 
 	/**
+	 * Approves the deposit lock.
+	 */
+	async approve(vault: string, amount: bigint): Promise<ContractTransaction> {
+		return tryCall(this.smartContractAdapter.depositLockPlugin.approve(vault, amount));
+	}
+
+	/**
 	 * Deposits locked assets.
 	 */
 	async depositLocked(
-		signer: Signer,
 		vault: string,
 		projectId: number,
 		assets: bigint
 	): Promise<ContractTransaction> {
 		return tryCall(
-			this.smartContractAdapter.depositLockPlugin.depositLocked(signer, vault, projectId, assets)
+			this.smartContractAdapter.depositLockPlugin.depositLocked(vault, projectId, assets)
 		);
 	}
 
@@ -28,13 +34,12 @@ export class DepositLockPluginService {
 	 * Redeems locked shares.
 	 */
 	async redeemLocked(
-		signer: Signer,
 		vault: string,
 		projectId: number,
 		shares: bigint
 	): Promise<ContractTransaction> {
 		return tryCall(
-			this.smartContractAdapter.depositLockPlugin.redeemLocked(signer, vault, projectId, shares)
+			this.smartContractAdapter.depositLockPlugin.redeemLocked(vault, projectId, shares)
 		);
 	}
 
@@ -42,7 +47,6 @@ export class DepositLockPluginService {
 	 * Migrates locked shares between projects.
 	 */
 	async migrateLocked(
-		signer: Signer,
 		vault: string,
 		fromProjectId: number,
 		toProjectId: number,
@@ -50,7 +54,6 @@ export class DepositLockPluginService {
 	): Promise<ContractTransaction> {
 		return tryCall(
 			this.smartContractAdapter.depositLockPlugin.migrateLocked(
-				signer,
 				vault,
 				fromProjectId,
 				toProjectId,
@@ -63,14 +66,12 @@ export class DepositLockPluginService {
 	 * Updates the lock period for a project (Vault-Project Owner only).
 	 */
 	async updateLockPeriod(
-		signer: Signer,
 		vault: string,
 		projectId: number,
 		newLockPeriod: bigint
 	): Promise<ContractTransaction> {
 		return tryCall(
 			this.smartContractAdapter.depositLockPlugin.updateLockPeriod(
-				signer,
 				vault,
 				projectId,
 				newLockPeriod,
@@ -82,13 +83,12 @@ export class DepositLockPluginService {
 	 * Updates the global unlock time for a project (Vault-Project Owner only).
 	 */
 	async updateGlobalUnlockTime(
-		signer: Signer,
 		vault: string,
 		projectId: number,
 		newUnlockTime: bigint
 	): Promise<ContractTransaction> {
 		return tryCall(
-			this.smartContractAdapter.depositLockPlugin.updateGlobalUnlockTime(signer, vault, projectId, newUnlockTime)
+			this.smartContractAdapter.depositLockPlugin.updateGlobalUnlockTime(vault, projectId, newUnlockTime)
 		);
 	}
 

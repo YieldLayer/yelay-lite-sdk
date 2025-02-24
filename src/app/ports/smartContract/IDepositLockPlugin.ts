@@ -2,10 +2,14 @@ import { BigNumber, ContractTransaction, Signer } from 'ethers';
 
 export interface IDepositLockPlugin {
   /**
+   * Approves the deposit lock.
+   */
+  approve(vault: string, amount: bigint): Promise<ContractTransaction>;
+
+  /**
    * Deposits locked assets into a vault for a project.
    */
   depositLocked(
-    signer: Signer,
     vault: string,
     projectId: number,
     assets: bigint,
@@ -15,7 +19,6 @@ export interface IDepositLockPlugin {
    * Redeems locked shares from a vault.
    */
   redeemLocked(
-    signer: Signer,
     vault: string,
     projectId: number,
     shares: bigint,
@@ -25,7 +28,6 @@ export interface IDepositLockPlugin {
    * Migrates locked shares between projects.
    */
   migrateLocked(
-    signer: Signer,
     vault: string,
     fromProjectId: number,
     toProjectId: number,
@@ -36,7 +38,6 @@ export interface IDepositLockPlugin {
    * Updates the lock period for a project (Vault-Project Owner only).
    */
   updateLockPeriod(
-    signer: Signer,
     vault: string,
     projectId: number,
     newLockPeriod: bigint,
@@ -46,7 +47,6 @@ export interface IDepositLockPlugin {
    * Updates the global unlock time for a project (Vault-Project Owner only).
    */
   updateGlobalUnlockTime(
-    signer: Signer,
     vault: string,
     projectId: number,
     newUnlockTime: bigint,

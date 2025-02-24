@@ -1,4 +1,4 @@
-import { Signer, ContractTransaction, BigNumber } from 'ethers';
+import { ContractTransaction, BigNumber } from 'ethers';
 import { IContractFactory } from '../../app/ports/IContractFactory';
 import { IDepositLockPlugin } from '../../app/ports/smartContract/IDepositLockPlugin';
 import { getIncreasedGasLimit } from '../../utils/smartContract';
@@ -6,12 +6,23 @@ import { getIncreasedGasLimit } from '../../utils/smartContract';
 export class DepositLockPlugin implements IDepositLockPlugin {
 	constructor(private contractFactory: IContractFactory) {}
 
+	async approve(vault: string, amount: bigint): Promise<ContractTransaction> {
+		const depositLock = this.contractFactory.getDepositLockPlugin().address;
+		const yelayLiteVault = this.contractFactory.getYelayLiteVault(vault);
+		const underlyingAsset = await yelayLiteVault.underlyingAsset();
+		const estimatedGas = await this.contractFactory.getErc20(underlyingAsset).estimateGas.approve(depositLock, amount);
+
+		return this.contractFactory
+			.getErc20(underlyingAsset)
+			.approve(depositLock, amount, { gasLimit: getIncreasedGasLimit(estimatedGas) });
+	}
+
 	async depositLocked(
-		signer: Signer,
 		vault: string,
 		projectId: number,
 		assets: bigint
 	): Promise<ContractTransaction> {
+
 		const contract = this.contractFactory.getDepositLockPlugin();
 		const estimatedGas = await contract.estimateGas.depositLocked(vault, projectId, assets);
 		return contract.depositLocked(vault, projectId, assets, {
@@ -20,7 +31,6 @@ export class DepositLockPlugin implements IDepositLockPlugin {
 	}
 
 	async redeemLocked(
-		signer: Signer,
 		vault: string,
 		projectId: number,
 		shares: bigint
@@ -33,7 +43,6 @@ export class DepositLockPlugin implements IDepositLockPlugin {
 	}
 
 	async migrateLocked(
-		signer: Signer,
 		vault: string,
 		fromProjectId: number,
 		toProjectId: number,
@@ -52,7 +61,6 @@ export class DepositLockPlugin implements IDepositLockPlugin {
 	}
 
 	async updateLockPeriod(
-		signer: Signer,
 		vault: string,
 		projectId: number,
 		newLockPeriod: bigint
@@ -65,7 +73,6 @@ export class DepositLockPlugin implements IDepositLockPlugin {
 	}
 
 	async updateGlobalUnlockTime(
-		signer: Signer,
 		vault: string,
         projectId: number,
 		newUnlockTime: bigint
