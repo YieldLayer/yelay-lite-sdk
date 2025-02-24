@@ -19,11 +19,11 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		return await res.data;
 	}
 
-	async getProjectsYield(vault: string, projectIds: number[], timeFrame?: TimeFrame): Promise<ProjectYield[]> {
+	async getProjectsYield(vault: string, projectIds: number[], timeFrame?: TimeFrame): Promise<ProjectYield> {
 		const searchParams = new URLSearchParams();
 		projectIds.forEach(project => searchParams.append('id', project.toString()));
 		const appendedSearchParams = appendTimeFrameQuery(searchParams, timeFrame);
-		const res: { data: ProjectYield[] } = await this.axios.get(
+		const res: { data: ProjectYield } = await this.axios.get(
 			`/interest/vault/${vault}/projects?${appendedSearchParams.toString()}`,
 		);
 		return await res.data;
