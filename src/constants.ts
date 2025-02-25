@@ -2,9 +2,9 @@ import { ContractAddresses, SDKConfig } from './types';
 
 export const contracts: Record<number, ContractAddresses> = {
 	8453: {
-		VaultWrapper: '0x977E50cc0D9fbEFDac05B4842D1795Dfa4cA1afd',
+		VaultWrapper: '0xE252b5c05a18140F15E1941dD2Df8a95bDa8A20b',
 		YelayLiteVault: '',
-		Swapper: '0xf9A42821bC7B13C47A6c934704645111eaD836A9',
+		Swapper: '0x769F5bc628CF538E1D64F2e8ED235A8831312249',
 	},
 };
 
