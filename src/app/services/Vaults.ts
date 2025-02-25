@@ -1,4 +1,4 @@
-import { BigNumber, CallOverrides, ContractTransaction, Signer } from 'ethers';
+import { BigNumber, CallOverrides, ContractTransaction, Overrides, Signer } from 'ethers';
 import { tryCall } from '../../utils/smartContract';
 import { SmartContractAdapter } from '../../adapters/smartContract';
 import { IContractFactory } from '../ports/IContractFactory';
@@ -35,13 +35,19 @@ export class Vaults {
 	 * @param {string} vault - The address of the vault.
 	 * @param {number} projectId - The project ID.
 	 * @param {bigint} amount - The amount of ETH to deposit (in wei).
+	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<CallResult>} A promise that resolves to the result of the deposit transaction.
 	 *
 	 * This method wraps the specified ETH amount and deposits it into the target vault for the given project.
 	 * It uses the VaultWrapper contract to handle ETH wrapping and depositing in a single transaction.
 	 */
-	public async depositEth(vault: string, projectId: number, amount: bigint): Promise<ContractTransaction> {
-		return tryCall(this.smartContractAdapter.vaultWrapper.depositEth(vault, projectId, amount));
+	public async depositEth(
+		vault: string,
+		projectId: number,
+		amount: bigint,
+		overrides?: Overrides,
+	): Promise<ContractTransaction> {
+		return tryCall(this.smartContractAdapter.vaultWrapper.depositEth(vault, projectId, amount, overrides));
 	}
 
 	/**
@@ -97,20 +103,26 @@ export class Vaults {
 	 * Approves the vault to spend a specified amount of tokens on behalf of the user.
 	 * @param {string} vault - The address of the vault.
 	 * @param {bigint} amount - The amount to approve.
+	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the approval transaction.
 	 */
-	async approve(vault: string, amount: bigint, tokenAddress?: string): Promise<ContractTransaction> {
-		return tryCall(this.smartContractAdapter.yelayLiteVault.approve(vault, amount));
+	async approve(vault: string, amount: bigint, overrides?: Overrides): Promise<ContractTransaction> {
+		return tryCall(this.smartContractAdapter.yelayLiteVault.approve(vault, amount, overrides));
 	}
 
 	/**
 	 * Approves the vault to spend a specified amount of tokens on behalf of the user.
 	 * @param {string} tokenAddress - The address of the token.
 	 * @param {bigint} amount - The amount to approve.
+	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the approval transaction.
 	 */
-	async approveVaultWrapper(tokenAddress: string, amount: bigint): Promise<ContractTransaction> {
-		return tryCall(this.smartContractAdapter.vaultWrapper.approveVaultWrapper(tokenAddress, amount));
+	async approveVaultWrapper(
+		tokenAddress: string,
+		amount: bigint,
+		overrides?: Overrides,
+	): Promise<ContractTransaction> {
+		return tryCall(this.smartContractAdapter.vaultWrapper.approveVaultWrapper(tokenAddress, amount, overrides));
 	}
 
 	/**
@@ -130,15 +142,27 @@ export class Vaults {
 	 * @param {string} vault - The address of the vault.
 	 * @param {number} projectId - The project ID.
 	 * @param {bigint} amount - The amount to deposit.
+	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the deposit transaction.
 	 */
-	async deposit(vault: string, projectId: number, amount: bigint): Promise<ContractTransaction> {
+	async deposit(
+		vault: string,
+		projectId: number,
+		amount: bigint,
+		overrides?: Overrides,
+	): Promise<ContractTransaction> {
 		if (!Signer.isSigner(this.signerOrProvider)) {
 			throw new Error('Signer is not instantiated in SDK');
 		}
 
 		return tryCall(
-			this.smartContractAdapter.yelayLiteVault.deposit(this.signerOrProvider, vault, projectId, amount),
+			this.smartContractAdapter.yelayLiteVault.deposit(
+				this.signerOrProvider,
+				vault,
+				projectId,
+				amount,
+				overrides,
+			),
 		);
 	}
 
@@ -148,6 +172,7 @@ export class Vaults {
 	 * @param {number} projectId - The project ID.
 	 * @param {bigint} amount - The amount to deposit.
 	 * @param {SwapArgsStruct} swapData - Swap args from 1inch.
+	 * @param {CallOverrides} CallOverrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the deposit transaction.
 	 */
 	async swapAndDeposit(
@@ -166,15 +191,21 @@ export class Vaults {
 	 * Withdraws a specified amount from a project in the vault.
 	 * @param {string} vault - The address of the vault.
 	 * @param {number} projectId - The project ID.
-	 * @param {bigint} amount - The amount to withdraw.
+	 * @param {bigint} amount - The amount to withdraw.\
+	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the withdrawal transaction.
 	 */
-	async redeem(vault: string, projectId: number, amount: bigint): Promise<ContractTransaction> {
+	async redeem(
+		vault: string,
+		projectId: number,
+		amount: bigint,
+		overrides?: Overrides,
+	): Promise<ContractTransaction> {
 		if (!Signer.isSigner(this.signerOrProvider)) {
 			throw new Error('Signer is not instantiated in SDK');
 		}
 		return tryCall(
-			this.smartContractAdapter.yelayLiteVault.redeem(this.signerOrProvider, vault, projectId, amount),
+			this.smartContractAdapter.yelayLiteVault.redeem(this.signerOrProvider, vault, projectId, amount, overrides),
 		);
 	}
 
@@ -182,10 +213,11 @@ export class Vaults {
 	 * Activates a specific project within the vault.
 	 * @param {string} vault - The address of the vault.
 	 * @param {number} projectId - The ID of the project to activate.
+	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the activation transaction.
 	 */
-	async activateProject(vault: string, projectId: number): Promise<ContractTransaction> {
-		return tryCall(this.smartContractAdapter.yelayLiteVault.activateProject(vault, projectId));
+	async activateProject(vault: string, projectId: number, overrides?: Overrides): Promise<ContractTransaction> {
+		return tryCall(this.smartContractAdapter.yelayLiteVault.activateProject(vault, projectId, overrides));
 	}
 
 	/**
@@ -194,6 +226,7 @@ export class Vaults {
 	 * @param {number} fromProjectId - The ID of the project to migrate from.
 	 * @param {number} toProjectId - The ID of the project to migrate to.
 	 * @param {bigint} amount - The amount to migrate.
+	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the migration transaction.
 	 */
 	async migrate(
@@ -201,7 +234,8 @@ export class Vaults {
 		fromProjectId: number,
 		toProjectId: number,
 		amount: bigint,
+		overrides?: Overrides,
 	): Promise<ContractTransaction> {
-		return this.smartContractAdapter.yelayLiteVault.migrate(vault, fromProjectId, toProjectId, amount);
+		return this.smartContractAdapter.yelayLiteVault.migrate(vault, fromProjectId, toProjectId, amount, overrides);
 	}
 }

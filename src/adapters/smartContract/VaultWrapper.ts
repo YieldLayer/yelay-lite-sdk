@@ -1,4 +1,4 @@
-import { BigNumber, ContractTransaction, PayableOverrides, Signer } from 'ethers';
+import { BigNumber, ContractTransaction, Overrides, PayableOverrides, Signer } from 'ethers';
 import { IContractFactory } from '../../app/ports/IContractFactory';
 import { IVaultWrapper } from '../../app/ports/smartContract/IVaultWrapper';
 import { SwapArgsStruct } from '../../generated/typechain/VaultWrapper';
@@ -31,7 +31,11 @@ export class VaultWrapper implements IVaultWrapper {
 		return await this.contractFactory.getErc20(tokenAddress).allowance(userAddress, vaultWrapper.address);
 	}
 
-	public async approveVaultWrapper(tokenAddress: string, amount: bigint): Promise<ContractTransaction> {
+	public async approveVaultWrapper(
+		tokenAddress: string,
+		amount: bigint,
+		overrides?: Overrides,
+	): Promise<ContractTransaction> {
 		const vaultWrapper = this.contractFactory.getVaultWrapper();
 		const estimatedGas = await this.contractFactory
 			.getErc20(tokenAddress)
@@ -39,7 +43,7 @@ export class VaultWrapper implements IVaultWrapper {
 
 		return this.contractFactory
 			.getErc20(tokenAddress)
-			.approve(vaultWrapper.address, amount, { gasLimit: getIncreasedGasLimit(estimatedGas) });
+			.approve(vaultWrapper.address, amount, { gasLimit: getIncreasedGasLimit(estimatedGas), ...overrides });
 	}
 
 	public async swapAndDeposit(
