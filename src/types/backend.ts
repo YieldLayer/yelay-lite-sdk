@@ -11,3 +11,8 @@ export type EventsRange = {
 	startTimestamp: number;
 	finishTimestamp: number;
 };
+
+export enum SortOrder {
+	ASC = 'ASC',
+	DESC = 'DESC',
+}
