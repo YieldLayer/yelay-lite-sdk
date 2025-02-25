@@ -15,6 +15,7 @@ export class UsersBackend extends ApiWrapperService implements IUsersBackend {
 		sortOrder: SortOrder,
 		page: number,
 		pageSize: number,
+		vaults?: string[],
 		users?: string[],
 		projectIds?: string | string[],
 	): Promise<UserTransactionRes> {
@@ -27,6 +28,10 @@ export class UsersBackend extends ApiWrapperService implements IUsersBackend {
 
 		if (users) {
 			users.forEach(user => searchParams.append('users', user));
+		}
+
+		if (vaults) {
+			vaults.forEach(user => searchParams.append('vaults', user));
 		}
 
 		if (projectIds) {

@@ -23,8 +23,9 @@ describe('Vaults', () => {
 		const vaults = await sdk.users.getUsersTransactions(
 			UserTransactionSortBy.TIMESTAMP,
 			SortOrder.DESC,
-			0,
+			1,
 			10,
+			['0x16db68c86edfdb60ba733563326ed392b319eb2b'],
 			['0xba11671927693627002275ddd478ba8fd45ea608'],
 			['1', '2', '123'],
 		);

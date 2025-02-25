@@ -2,7 +2,10 @@ export type UserTransaction = {
 	txhash: string;
 	type: string;
 	timestamp: number;
-	projectId: number;
+	project: {
+		id: number;
+		vaultAddress: string;
+	};
 	transactionassetamount: string;
 	transactionshareammount: string;
 	userassetbalance: string;

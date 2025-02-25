@@ -16,6 +16,7 @@ export class Users {
 	 * @param {SortOrder} sortOrder - Sort order, either by ASC or DESC.
 	 * @param {number} page - Page, for pagination purposes.
 	 * @param {number} pageSize - Page size, for pagination purposes.
+	 * @param {string[]} users - Array of vault addresses.
 	 * @param {string[]} users - Array of user address(es).
 	 * @param {string[]} projectIds - Array of projectIds.
 	 * @returns {Promise<ethers.BigNumber[]>} A promise that resolves to an array of TVL values for each project.
@@ -25,6 +26,7 @@ export class Users {
 		sortOrder: SortOrder,
 		page: number,
 		pageSize: number,
+		vaults?: string[],
 		users?: string[],
 		projectIds?: string | string[],
 	): Promise<UserTransactionWithPagination> {
@@ -33,6 +35,7 @@ export class Users {
 			sortOrder,
 			page,
 			pageSize,
+			vaults?.map(vault => vault.toLowerCase()),
 			users?.map(user => user.toLowerCase()),
 			projectIds,
 		);

@@ -14,6 +14,7 @@ export interface IUsersBackend {
 		sortOrder: SortOrder,
 		page: number,
 		pageSize: number,
+		vaults?: string[],
 		users?: string[],
 		projectIds?: string | string[],
 	): Promise<UserTransactionRes>;
