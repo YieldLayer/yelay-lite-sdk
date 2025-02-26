@@ -1,4 +1,4 @@
-type UserTransaction = {
+export type UserTransaction = {
 	id: string;
 	project: {
 		id: number;
