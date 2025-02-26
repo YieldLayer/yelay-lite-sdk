@@ -55,8 +55,10 @@ export class VaultWrapper implements IVaultWrapper {
 	): Promise<ContractTransaction> {
 		const vaultWrapper = this.contractFactory.getVaultWrapper();
 
+		const estimatedGas = await vaultWrapper.estimateGas.swapAndDeposit(vault, projectId, swapData, amount);
+
 		return await vaultWrapper.swapAndDeposit(vault, projectId, swapData, amount, {
-			gasLimit: 1000000,
+			gasLimit: getIncreasedGasLimit(estimatedGas),
 			...overrides,
 		});
 	}
