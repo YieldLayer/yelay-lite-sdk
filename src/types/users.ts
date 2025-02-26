@@ -1,15 +1,18 @@
-export type UserTransaction = {
-	txhash: string;
-	type: string;
-	timestamp: number;
+type UserTransaction = {
+	id: string;
 	project: {
 		id: number;
 		vaultAddress: string;
 	};
-	transactionassetamount: string;
-	transactionshareammount: string;
-	userassetbalance: string;
-	usersharebalance: string;
+	createBlocknumber: number;
+	timestamp: number;
+	userShareBalance: string;
+	userAssetBalance: string;
+	txHash: string;
+	txType: string;
+	transactionAssetAmount: string;
+	transactionShareAmount: string;
+	user: string;
 };
 
 export type UserTransactionWithPagination = {
