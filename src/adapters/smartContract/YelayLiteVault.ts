@@ -36,9 +36,7 @@ export class YelayLiteVault implements IYelayLiteVault {
 	async approve(vault: string, amount: bigint, overrides?: Overrides): Promise<ContractTransaction> {
 		const yelayLiteVault = this.contractFactory.getYelayLiteVault(vault);
 		const underlyingAsset = await yelayLiteVault.underlyingAsset();
-		const estimatedGas = await this.contractFactory
-			.getErc20(underlyingAsset)
-			.estimateGas.approve(vault, amount, overrides);
+		const estimatedGas = await this.contractFactory.getErc20(underlyingAsset).estimateGas.approve(vault, amount);
 
 		return this.contractFactory
 			.getErc20(underlyingAsset)
@@ -55,7 +53,7 @@ export class YelayLiteVault implements IYelayLiteVault {
 		const userAddress = await signer.getAddress();
 		const estimatedGas = await this.contractFactory
 			.getYelayLiteVault(vault)
-			.estimateGas.deposit(amount, projectId, userAddress, overrides);
+			.estimateGas.deposit(amount, projectId, userAddress);
 
 		return this.contractFactory
 			.getYelayLiteVault(vault)
@@ -73,7 +71,7 @@ export class YelayLiteVault implements IYelayLiteVault {
 
 		const estimatedGas = await this.contractFactory
 			.getYelayLiteVault(vault)
-			.estimateGas.redeem(amount, projectId, userAddress, overrides);
+			.estimateGas.redeem(amount, projectId, userAddress);
 
 		return this.contractFactory
 			.getYelayLiteVault(vault)
@@ -98,9 +96,7 @@ export class YelayLiteVault implements IYelayLiteVault {
 	}
 
 	async activateProject(vault: string, projectId: number, overrides?: Overrides): Promise<ContractTransaction> {
-		const estimatedGas = await this.contractFactory
-			.getYelayLiteVault(vault)
-			.estimateGas.activateProject(projectId, overrides);
+		const estimatedGas = await this.contractFactory.getYelayLiteVault(vault).estimateGas.activateProject(projectId);
 
 		return this.contractFactory
 			.getYelayLiteVault(vault)
