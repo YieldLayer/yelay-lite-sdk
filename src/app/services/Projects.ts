@@ -1,6 +1,5 @@
 import { SmartContractAdapter } from '../../adapters/smartContract';
 import { IContractFactory } from '../ports/IContractFactory';
-import { TimeFrame } from '../../types/backend';
 import { ProjectsTVL } from '../../types/projects';
 
 export class Projects {

@@ -6,11 +6,13 @@ import { ContractFactory } from './adapters/smartContract/ContractFactory';
 import { Vaults } from './app/services/Vaults';
 import { Yield } from './app/services/Yield';
 import { Projects } from './app/services/Projects';
+import { Users } from './app/services/Users';
 
 export class YelayLiteSdk {
 	public vaults: Vaults;
 	public yields: Yield;
 	public projects: Projects;
+	public users: Users;
 	public contractFactory: IContractFactory;
 
 	constructor(signerOrProvider: Signer | Provider, sdkConfig: SDKConfig) {
@@ -21,5 +23,7 @@ export class YelayLiteSdk {
 		this.yields = new Yield(sdkConfig.backendUrl);
 
 		this.projects = new Projects(this.contractFactory);
+
+		this.users = new Users(sdkConfig.backendUrl);
 	}
 }
