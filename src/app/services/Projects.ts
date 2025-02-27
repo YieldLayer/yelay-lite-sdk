@@ -10,7 +10,7 @@ export class Projects {
 	}
 
 	/**
-	 * Retrieves the total value locked (TVL) for specific projects within a vault.
+	 * Retrieves the total assets, total supply, projects supply, as well as projects TVL.
 	 * @param {string} vault - The address of the vault.
 	 * @param {number[]} projectIds - Array of project IDs to query.
 	 * @returns {Promise<ethers.BigNumber[]>} A promise that resolves to an array of TVL values for each project.
@@ -26,6 +26,12 @@ export class Projects {
 				return {
 					id: projectIds[index],
 					supply: projectSupply,
+				};
+			}),
+			projectsTVL: projectsSupply.map((projectSupply, index) => {
+				return {
+					id: projectIds[index],
+					tvl: totalAssets.mul(projectSupply).div(totalSupply),
 				};
 			}),
 		};
