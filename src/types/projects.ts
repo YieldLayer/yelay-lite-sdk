@@ -1,5 +1,4 @@
 import { BigNumber } from 'ethers';
-import { EventsRange } from './backend';
 
 export type ProjectsTVL = {
 	totalAssets: BigNumber;
@@ -7,5 +6,9 @@ export type ProjectsTVL = {
 	projectsSupply: {
 		id: number;
 		supply: BigNumber;
+	}[];
+	projectsTVL: {
+		id: number;
+		tvl: BigNumber;
 	}[];
 };
