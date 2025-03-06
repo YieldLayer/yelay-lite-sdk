@@ -69,8 +69,6 @@ export class UsersBackend extends ApiWrapperService implements IUsersBackend {
 			searchParams.append('vault', vault);
 		}
 
-		console.log(`/users?${searchParams.toString()}`);
-
 		const res: { data: VaultProjectUsersRes } = await this.axios.get(`/users?${searchParams.toString()}`);
 
 		return res.data;
