@@ -1,8 +1,6 @@
 import ApiWrapperService from '../../services/ApiWrapperService';
-import { IVaultsBackend } from '../../app/ports/backend/IVaultsBackend';
-import { Vault } from '../../types/vaults';
-import { IUsersBackend, UserTransactionRes } from '../../app/ports/backend/IUsersBackend';
-import { UserTransaction, UserTransactionSortBy } from '../../types/users';
+import { IUsersBackend, UserTransactionRes, VaultProjectUsersRes } from '../../app/ports/backend/IUsersBackend';
+import { UserTransactionSortBy, VaultProjectUsersSortBy } from '../../types/users';
 import { SortOrder } from '../../types';
 
 export class UsersBackend extends ApiWrapperService implements IUsersBackend {
@@ -45,6 +43,36 @@ export class UsersBackend extends ApiWrapperService implements IUsersBackend {
 		const res: { data: UserTransactionRes } = await this.axios.get(
 			`/transactions/users?${searchParams.toString()}`,
 		);
+		return res.data;
+	}
+
+	async getVaultProjectUsers(
+		sortBy: VaultProjectUsersSortBy,
+		sortOrder: SortOrder,
+		page: number,
+		pageSize: number,
+		vault?: string,
+		projectId?: string,
+	): Promise<VaultProjectUsersRes> {
+		const searchParams = new URLSearchParams();
+
+		searchParams.append('sortBy', sortBy);
+		searchParams.append('sortOrder', sortOrder);
+		searchParams.append('page', page.toString());
+		searchParams.append('pageSize', pageSize.toString());
+
+		if (projectId) {
+			searchParams.append('projectId', projectId);
+		}
+
+		if (vault) {
+			searchParams.append('vault', vault);
+		}
+
+		console.log(`/users?${searchParams.toString()}`);
+
+		const res: { data: VaultProjectUsersRes } = await this.axios.get(`/users?${searchParams.toString()}`);
+
 		return res.data;
 	}
 }
