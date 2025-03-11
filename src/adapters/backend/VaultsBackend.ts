@@ -8,7 +8,7 @@ export class VaultsBackend extends ApiWrapperService implements IVaultsBackend {
 	}
 
 	async getVaults(): Promise<Vault[]> {
-		const res: { data: Vault[] } = await this.axios.get(`/vaults`);
+		const res: { data: Vault[] } = await this.axios.get(`/v2/vaults`);
 		return res.data;
 	}
 }
