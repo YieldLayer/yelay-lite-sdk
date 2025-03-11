@@ -30,24 +30,24 @@ export class Vaults {
 	}
 
 	/**
-	 * Deposits a specified amount of ETH into a project in the vault.
+	 * Deposits a specified amount of ETH into a pool in the vault.
 	 * @param {ethers.Signer} signer - The signer object for the user.
 	 * @param {string} vault - The address of the vault.
-	 * @param {number} projectId - The project ID.
+	 * @param {number} pool - The pool ID.
 	 * @param {bigint} amount - The amount of ETH to deposit (in wei).
 	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<CallResult>} A promise that resolves to the result of the deposit transaction.
 	 *
-	 * This method wraps the specified ETH amount and deposits it into the target vault for the given project.
+	 * This method wraps the specified ETH amount and deposits it into the target vault for the given pool.
 	 * It uses the VaultWrapper contract to handle ETH wrapping and depositing in a single transaction.
 	 */
 	public async depositEth(
 		vault: string,
-		projectId: number,
+		pool: number,
 		amount: bigint,
 		overrides?: Overrides,
 	): Promise<ContractTransaction> {
-		return tryCall(this.smartContractAdapter.vaultWrapper.depositEth(vault, projectId, amount, overrides));
+		return tryCall(this.smartContractAdapter.vaultWrapper.depositEth(vault, pool, amount, overrides));
 	}
 
 	/**
@@ -64,14 +64,14 @@ export class Vaults {
 	}
 
 	/**
-	 * Checks if a given project ID is active in the specified vault.
+	 * Checks if a given pool ID is active in the specified vault.
 	 *
 	 * @param vault - The address of the vault contract.
-	 * @param projectId - The project ID to check.
-	 * @returns A promise that resolves to a boolean indicating whether the project ID is active.
+	 * @param pool - The pool ID to check.
+	 * @returns A promise that resolves to a boolean indicating whether the pool ID is active.
 	 */
-	async projectIdActive(vault: string, projectId: number): Promise<boolean> {
-		return this.smartContractAdapter.yelayLiteVault.projectIdActive(vault, projectId);
+	async poolActive(vault: string, pool: number): Promise<boolean> {
+		return this.smartContractAdapter.yelayLiteVault.poolActive(vault, pool);
 	}
 
 	/**
@@ -80,8 +80,8 @@ export class Vaults {
 	 * @param client - The address of the client.
 	 * @param vault - The address of the vault contract.
 	 * @returns A promise that resolves to a `ClientData` object containing:
-	 *   - `minProjectId`: The minimum project ID associated with the client (as a number).
-	 *   - `maxProjectId`: The maximum project ID associated with the client (as a number).
+	 *   - `minPool`: The minimum pool ID associated with the client (as a number).
+	 *   - `maxPool`: The maximum pool ID associated with the client (as a number).
 	 *   - `clientName`: The name of the client decoded from a bytes32 string.
 	 */
 	async clientData(client: string, vault: string): Promise<ClientData> {
@@ -89,14 +89,14 @@ export class Vaults {
 	}
 
 	/**
-	 * Retrieves the balance of a user for a specific project within a vault.
+	 * Retrieves the balance of a user for a specific pool within a vault.
 	 * @param {string} vault - The address of the vault.
-	 * @param {number} projectId - The ID of the project.
+	 * @param {number} pool - The ID of the pool.
 	 * @param {string} user - The address of the user.
-	 * @returns {Promise<bigint>} A promise that resolves to the balance of the user in the specified project.
+	 * @returns {Promise<bigint>} A promise that resolves to the balance of the user in the specified pool.
 	 */
-	async balanceOf(vault: string, projectId: number, user: string): Promise<BigNumber> {
-		return this.smartContractAdapter.yelayLiteVault.balanceOf(vault, projectId, user);
+	async balanceOf(vault: string, pool: number, user: string): Promise<BigNumber> {
+		return this.smartContractAdapter.yelayLiteVault.balanceOf(vault, pool, user);
 	}
 
 	/**
@@ -138,38 +138,27 @@ export class Vaults {
 	}
 
 	/**
-	 * Deposits a specified amount into a project in the vault.
+	 * Deposits a specified amount into a pool in the vault.
 	 * @param {string} vault - The address of the vault.
-	 * @param {number} projectId - The project ID.
+	 * @param {number} pool - The pool ID.
 	 * @param {bigint} amount - The amount to deposit.
 	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the deposit transaction.
 	 */
-	async deposit(
-		vault: string,
-		projectId: number,
-		amount: bigint,
-		overrides?: Overrides,
-	): Promise<ContractTransaction> {
+	async deposit(vault: string, pool: number, amount: bigint, overrides?: Overrides): Promise<ContractTransaction> {
 		if (!Signer.isSigner(this.signerOrProvider)) {
 			throw new Error('Signer is not instantiated in SDK');
 		}
 
 		return tryCall(
-			this.smartContractAdapter.yelayLiteVault.deposit(
-				this.signerOrProvider,
-				vault,
-				projectId,
-				amount,
-				overrides,
-			),
+			this.smartContractAdapter.yelayLiteVault.deposit(this.signerOrProvider, vault, pool, amount, overrides),
 		);
 	}
 
 	/**
-	 * Deposits a specified amount into a project in the vault.
+	 * Deposits a specified amount into a pool in the vault.
 	 * @param {string} vault - The address of the vault.
-	 * @param {number} projectId - The project ID.
+	 * @param {number} pool - The pool ID.
 	 * @param {bigint} amount - The amount to deposit.
 	 * @param {SwapArgsStruct} swapData - Swap args from 1inch.
 	 * @param {CallOverrides} CallOverrides - Ethers overrides.
@@ -177,65 +166,60 @@ export class Vaults {
 	 */
 	async swapAndDeposit(
 		vault: string,
-		projectId: number,
+		pool: number,
 		amount: bigint,
 		swapData: SwapArgsStruct,
 		callOverrides?: CallOverrides,
 	): Promise<ContractTransaction> {
 		return tryCall(
-			this.smartContractAdapter.vaultWrapper.swapAndDeposit(vault, projectId, swapData, amount, callOverrides),
+			this.smartContractAdapter.vaultWrapper.swapAndDeposit(vault, pool, swapData, amount, callOverrides),
 		);
 	}
 
 	/**
-	 * Withdraws a specified amount from a project in the vault.
+	 * Withdraws a specified amount from a pool in the vault.
 	 * @param {string} vault - The address of the vault.
-	 * @param {number} projectId - The project ID.
+	 * @param {number} pool - The pool ID.
 	 * @param {bigint} amount - The amount to withdraw.\
 	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the withdrawal transaction.
 	 */
-	async redeem(
-		vault: string,
-		projectId: number,
-		amount: bigint,
-		overrides?: Overrides,
-	): Promise<ContractTransaction> {
+	async redeem(vault: string, pool: number, amount: bigint, overrides?: Overrides): Promise<ContractTransaction> {
 		if (!Signer.isSigner(this.signerOrProvider)) {
 			throw new Error('Signer is not instantiated in SDK');
 		}
 		return tryCall(
-			this.smartContractAdapter.yelayLiteVault.redeem(this.signerOrProvider, vault, projectId, amount, overrides),
+			this.smartContractAdapter.yelayLiteVault.redeem(this.signerOrProvider, vault, pool, amount, overrides),
 		);
 	}
 
 	/**
-	 * Activates a specific project within the vault.
+	 * Activates a specific pool within the vault.
 	 * @param {string} vault - The address of the vault.
-	 * @param {number} projectId - The ID of the project to activate.
+	 * @param {number} pool - The ID of the pool to activate.
 	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the activation transaction.
 	 */
-	async activateProject(vault: string, projectId: number, overrides?: Overrides): Promise<ContractTransaction> {
-		return tryCall(this.smartContractAdapter.yelayLiteVault.activateProject(vault, projectId, overrides));
+	async activatePool(vault: string, pool: number, overrides?: Overrides): Promise<ContractTransaction> {
+		return tryCall(this.smartContractAdapter.yelayLiteVault.activatePool(vault, pool, overrides));
 	}
 
 	/**
-	 * Migrates a position from one project to another within the same vault.
+	 * Migrates a position from one pool to another within the same vault.
 	 * @param {string} vault - The address of the vault.
-	 * @param {number} fromProjectId - The ID of the project to migrate from.
-	 * @param {number} toProjectId - The ID of the project to migrate to.
+	 * @param {number} fromPool - The ID of the pool to migrate from.
+	 * @param {number} toPool - The ID of the pool to migrate to.
 	 * @param {bigint} amount - The amount to migrate.
 	 * @param {Overrides} overrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the migration transaction.
 	 */
 	async migrate(
 		vault: string,
-		fromProjectId: number,
-		toProjectId: number,
+		fromPool: number,
+		toPool: number,
 		amount: bigint,
 		overrides?: Overrides,
 	): Promise<ContractTransaction> {
-		return this.smartContractAdapter.yelayLiteVault.migrate(vault, fromProjectId, toProjectId, amount, overrides);
+		return this.smartContractAdapter.yelayLiteVault.migrate(vault, fromPool, toPool, amount, overrides);
 	}
 }

@@ -1,5 +1,4 @@
 export type ContractAddresses = {
-	YelayLiteVault: string;
 	VaultWrapper: string;
 	Swapper: string;
 };

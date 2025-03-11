@@ -1,18 +1,16 @@
-import { Signer } from 'ethers';
 import { Provider } from '@ethersproject/abstract-provider';
-import { SDKConfig } from './types/config';
-import { IContractFactory } from './app/ports/IContractFactory';
+import { Signer } from 'ethers';
 import { ContractFactory } from './adapters/smartContract/ContractFactory';
+import { IContractFactory } from './app/ports/IContractFactory';
+import { Pools } from './app/services/Pools';
 import { Vaults } from './app/services/Vaults';
 import { Yield } from './app/services/Yield';
-import { Projects } from './app/services/Projects';
-import { Users } from './app/services/Users';
+import { SDKConfig } from './types/config';
 
 export class YelayLiteSdk {
 	public vaults: Vaults;
 	public yields: Yield;
-	public projects: Projects;
-	public users: Users;
+	public pools: Pools;
 	public contractFactory: IContractFactory;
 
 	constructor(signerOrProvider: Signer | Provider, sdkConfig: SDKConfig) {
@@ -22,8 +20,6 @@ export class YelayLiteSdk {
 
 		this.yields = new Yield(sdkConfig.backendUrl);
 
-		this.projects = new Projects(this.contractFactory);
-
-		this.users = new Users(sdkConfig.backendUrl);
+		this.pools = new Pools(this.contractFactory);
 	}
 }

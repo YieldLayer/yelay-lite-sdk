@@ -2,17 +2,12 @@ import { BigNumber, ContractTransaction, Overrides, PayableOverrides, Signer } f
 import { SwapArgsStruct } from '../../../generated/typechain/VaultWrapper';
 
 export interface IVaultWrapper {
-	depositEth(
-		vault: string,
-		projectId: number,
-		amount: bigint,
-		overrides?: PayableOverrides,
-	): Promise<ContractTransaction>;
+	depositEth(vault: string, pool: number, amount: bigint, overrides?: PayableOverrides): Promise<ContractTransaction>;
 	vaultWrapperAllowance(signer: Signer, tokenAddress: string): Promise<BigNumber>;
 	approveVaultWrapper(tokenAddress: string, amount: bigint, overrides?: Overrides): Promise<ContractTransaction>;
 	swapAndDeposit(
 		vault: string,
-		projectId: number,
+		pool: number,
 		swapData: SwapArgsStruct,
 		amount: bigint,
 		overrides?: PayableOverrides,

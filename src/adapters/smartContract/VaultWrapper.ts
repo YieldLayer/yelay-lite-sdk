@@ -9,15 +9,15 @@ export class VaultWrapper implements IVaultWrapper {
 
 	public async depositEth(
 		vault: string,
-		projectId: number,
+		pool: number,
 		amount: bigint,
 		overrides?: PayableOverrides,
 	): Promise<ContractTransaction> {
 		const vaultWrapper = this.contractFactory.getVaultWrapper();
 
-		const estimatedGas = await vaultWrapper.estimateGas.wrapEthAndDeposit(vault, projectId, { value: amount });
+		const estimatedGas = await vaultWrapper.estimateGas.wrapEthAndDeposit(vault, pool, { value: amount });
 
-		return await vaultWrapper.wrapEthAndDeposit(vault, projectId, {
+		return await vaultWrapper.wrapEthAndDeposit(vault, pool, {
 			...overrides,
 			value: amount,
 			gasLimit: getIncreasedGasLimit(estimatedGas),
@@ -48,16 +48,16 @@ export class VaultWrapper implements IVaultWrapper {
 
 	public async swapAndDeposit(
 		vault: string,
-		projectId: number,
+		pool: number,
 		swapData: SwapArgsStruct,
 		amount: bigint,
 		overrides?: PayableOverrides,
 	): Promise<ContractTransaction> {
 		const vaultWrapper = this.contractFactory.getVaultWrapper();
 
-		const estimatedGas = await vaultWrapper.estimateGas.swapAndDeposit(vault, projectId, swapData, amount);
+		const estimatedGas = await vaultWrapper.estimateGas.swapAndDeposit(vault, pool, swapData, amount);
 
-		return await vaultWrapper.swapAndDeposit(vault, projectId, swapData, amount, {
+		return await vaultWrapper.swapAndDeposit(vault, pool, swapData, amount, {
 			gasLimit: getIncreasedGasLimit(estimatedGas),
 			...overrides,
 		});
