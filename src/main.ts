@@ -12,16 +12,15 @@ export class YelayLiteSdk {
 	public vaults: Vaults;
 	public yields: Yield;
 	public pools: Pools;
-	public contractFactory: IContractFactory;
 
 	constructor(signerOrProvider: Signer | Provider, environment: Environment) {
 		const config = getEnvironment(environment);
-		this.contractFactory = new ContractFactory(signerOrProvider, config.contracts);
+		const contractFactory = new ContractFactory(signerOrProvider, config.contracts);
 
-		this.vaults = new Vaults(this.contractFactory, config.backendUrl, config.chainId, signerOrProvider);
+		this.vaults = new Vaults(contractFactory, config.backendUrl, config.chainId, signerOrProvider);
 
 		this.yields = new Yield(config.backendUrl, config.chainId);
 
-		this.pools = new Pools(this.contractFactory);
+		this.pools = new Pools(contractFactory);
 	}
 }
