@@ -6,8 +6,8 @@ import { getTimestampOneWeekAgo } from '../../utils/backend';
 export class Yield {
 	private yieldBackend: YieldBackend;
 
-	constructor(backendUrl: string) {
-		this.yieldBackend = new YieldBackend(backendUrl);
+	constructor(backendUrl: string, chainId: number) {
+		this.yieldBackend = new YieldBackend(backendUrl, chainId);
 	}
 
 	/**

@@ -1,4 +1,4 @@
-import { BigNumber, ContractTransaction, Overrides, Signer } from 'ethers';
+import { BigNumber, ContractTransaction, ethers, Overrides, Signer } from 'ethers';
 import { parseBytes32String } from 'ethers/lib/utils';
 import { IContractFactory } from '../../app/ports/IContractFactory';
 import { IYelayLiteVault, PoolsSupply } from '../../app/ports/smartContract/IYelayLiteVault';
@@ -33,7 +33,7 @@ export class YelayLiteVault implements IYelayLiteVault {
 		return this.contractFactory.getErc20(tokenAddress ? tokenAddress : underlying).allowance(userAddress, vault);
 	}
 
-	async approve(vault: string, amount: bigint, overrides?: Overrides): Promise<ContractTransaction> {
+	async approve(vault: string, amount: ethers.BigNumberish, overrides?: Overrides): Promise<ContractTransaction> {
 		const yelayLiteVault = this.contractFactory.getYelayLiteVault(vault);
 		const underlyingAsset = await yelayLiteVault.underlyingAsset();
 		const estimatedGas = await this.contractFactory.getErc20(underlyingAsset).estimateGas.approve(vault, amount);
@@ -47,7 +47,7 @@ export class YelayLiteVault implements IYelayLiteVault {
 		signer: Signer,
 		vault: string,
 		pool: number,
-		amount: bigint,
+		amount: ethers.BigNumberish,
 		overrides?: Overrides,
 	): Promise<ContractTransaction> {
 		const userAddress = await signer.getAddress();
@@ -64,7 +64,7 @@ export class YelayLiteVault implements IYelayLiteVault {
 		signer: Signer,
 		vault: string,
 		pool: number,
-		amount: bigint,
+		amount: ethers.BigNumberish,
 		overrides?: Overrides,
 	): Promise<ContractTransaction> {
 		const userAddress = await signer.getAddress();
@@ -82,7 +82,7 @@ export class YelayLiteVault implements IYelayLiteVault {
 		vault: string,
 		fromPool: number,
 		toPool: number,
-		amount: bigint,
+		amount: ethers.BigNumberish,
 		overrides?: Overrides,
 	): Promise<ContractTransaction> {
 		const estimatedGas = await this.contractFactory

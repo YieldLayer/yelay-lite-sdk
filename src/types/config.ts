@@ -1,3 +1,5 @@
+export type Environment = 'base' | 'base-testing';
+
 export type ContractAddresses = {
 	VaultWrapper: string;
 	Swapper: string;
@@ -5,6 +7,6 @@ export type ContractAddresses = {
 
 export type SDKConfig = {
 	backendUrl: string;
-	contractAddresses: ContractAddresses;
+	contracts: ContractAddresses;
 	chainId: number;
 };
