@@ -126,7 +126,3 @@ const aggregatedYieldData = await sdk.yields.getYields();
 ## License
 
 This SDK is licensed under the **ISC License**.
-
-```
-
-```
