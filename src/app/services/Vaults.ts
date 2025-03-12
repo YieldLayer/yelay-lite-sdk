@@ -80,8 +80,8 @@ export class Vaults {
 	/**
 	 * Retrieves data about a specific client in the specified vault.
 	 *
-	 * @param client - The address of the client.
-	 * @param vault - The address of the vault contract.
+	 * @param {string} client - The address of the client.
+	 * @param {string} vault - The address of the vault contract.
 	 * @returns A promise that resolves to a `ClientData` object containing:
 	 *   - `minPool`: The minimum pool ID associated with the client (as a number).
 	 *   - `maxPool`: The maximum pool ID associated with the client (as a number).
@@ -169,7 +169,7 @@ export class Vaults {
 	 * @param {number} pool - The pool ID.
 	 * @param {ethers.BigNumberish} amount - The amount to deposit.
 	 * @param {SwapArgsStruct} swapData - Swap args from 1inch.
-	 * @param {CallOverrides} CallOverrides - Ethers overrides.
+	 * @param {CallOverrides} callOverrides - Ethers overrides.
 	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the deposit transaction.
 	 */
 	async swapAndDeposit(

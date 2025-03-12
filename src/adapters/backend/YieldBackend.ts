@@ -12,10 +12,12 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		this.chainId = chainId.toString();
 	}
 
-	async getVaultsYield(vaults: string[], timeFrame?: TimeFrame): Promise<VaultYield[]> {
+	async getVaultsYield(vaults?: string[], timeFrame?: TimeFrame): Promise<VaultYield[]> {
 		const searchParams = new URLSearchParams();
 		searchParams.append('chainId', this.chainId);
-		vaults.forEach(vault => searchParams.append('address', vault));
+		if (vaults) {
+			vaults.forEach(vault => searchParams.append('address', vault));
+		}
 		appendTimeFrameQuery(searchParams, timeFrame);
 
 		const res: { data: VaultYield[] } = await this.axios.get(`/interest/vaults?${searchParams.toString()}`);

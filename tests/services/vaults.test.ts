@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { ethers } from 'ethers';
 import { parseEther } from 'ethers/lib/utils';
-import { sdkConfig, YelayLiteSdk } from '../../src';
+import { YelayLiteSdk } from '../../src';
 
 dotenv.config();
 jest.setTimeout(200000);
@@ -12,7 +12,7 @@ describe('Vaults', () => {
 	beforeAll(() => {
 		const provider = new ethers.providers.JsonRpcProvider('https://base.meowrpc.com');
 
-		sdk = new YelayLiteSdk(provider, sdkConfig[8453]);
+		sdk = new YelayLiteSdk(provider, 'base-testing');
 	});
 
 	it.skip('getVaults', async () => {

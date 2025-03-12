@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { ethers } from 'ethers';
-import { sdkConfig, YelayLiteSdk } from '../../src';
+import { YelayLiteSdk } from '../../src';
 
 dotenv.config();
 
@@ -10,7 +10,7 @@ describe('Pools', () => {
 	beforeAll(() => {
 		const provider = new ethers.providers.JsonRpcProvider('https://base.llamarpc.com');
 
-		sdk = new YelayLiteSdk(provider, sdkConfig[8453]);
+		sdk = new YelayLiteSdk(provider, 'base-testing');
 	});
 
 	it('get projectsTVL', async () => {

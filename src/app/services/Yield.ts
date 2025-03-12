@@ -12,11 +12,11 @@ export class Yield {
 
 	/**
 	 * Retrieves the yield of the vaults. If TimeFrame is not provided, then it will by default set the fromTimestamp to 1 week ago.
-	 * @param {string[]} vaults - The addresses of the vaults.
+	 * @param {string[]} vaults - Optional array of vault addresses to filter results.
 	 * @param {TimeFrame} [timeFrame] - Optional timeframe for filtering yield data.
 	 * @returns {Promise<VaultYield[]>} A promise that resolves to the yield data for the vaults.
 	 */
-	public async getVaultsYield(vaults: string[], timeFrame?: TimeFrame): Promise<VaultYield[]> {
+	public async getVaultsYield(vaults?: string[], timeFrame?: TimeFrame): Promise<VaultYield[]> {
 		return await this.yieldBackend.getVaultsYield(
 			vaults,
 			timeFrame ? timeFrame : { fromTimestamp: getTimestampOneWeekAgo() },
