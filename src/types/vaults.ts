@@ -5,5 +5,5 @@ export type Vault = {
 	createTimestamp: string;
 	underlying: string;
 	chainId: number;
-	projectIds: number[];
+	pools: number[];
 };

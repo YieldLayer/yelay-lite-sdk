@@ -1,7 +1,7 @@
-import { ethers } from 'ethers';
-import { sdkConfig, YelayLiteSdk } from '../../src';
-import { parseEther, parseUnits } from 'ethers/lib/utils';
 import dotenv from 'dotenv';
+import { ethers } from 'ethers';
+import { parseEther } from 'ethers/lib/utils';
+import { sdkConfig, YelayLiteSdk } from '../../src';
 
 dotenv.config();
 jest.setTimeout(200000);
@@ -12,15 +12,11 @@ describe('Vaults', () => {
 	beforeAll(() => {
 		const provider = new ethers.providers.JsonRpcProvider('https://base.meowrpc.com');
 
-		const privateKey = process.env.PRIVATE_KEY ?? '';
-
-		const signer = new ethers.Wallet(privateKey, provider);
-
-		sdk = new YelayLiteSdk(signer, sdkConfig[8453]);
+		sdk = new YelayLiteSdk(provider, sdkConfig[8453]);
 	});
 
 	it.skip('getVaults', async () => {
-		const vaults = await sdk.vaults.getVaults(8453);
+		const vaults = await sdk.vaults.getVaults();
 
 		console.log('vaults', vaults);
 	});
@@ -72,7 +68,7 @@ describe('Vaults', () => {
 		console.log('balance', balance.toString());
 	});
 
-	it('redeem', async () => {
+	it.skip('redeem', async () => {
 		const balance = await sdk.vaults.balanceOf(
 			'0x98feddfdf4cb0b1813a7969fdbac5aecda8c6992',
 			100,

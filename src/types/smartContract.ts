@@ -1,5 +1,5 @@
 export type ClientData = {
-	minProjectId: number;
-	maxProjectId: number;
+	minPool: number;
+	maxPool: number;
 	clientName: string;
 };

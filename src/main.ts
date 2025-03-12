@@ -1,29 +1,27 @@
-import { Signer } from 'ethers';
 import { Provider } from '@ethersproject/abstract-provider';
-import { SDKConfig } from './types/config';
-import { IContractFactory } from './app/ports/IContractFactory';
+import { Signer } from 'ethers';
 import { ContractFactory } from './adapters/smartContract/ContractFactory';
+import { IContractFactory } from './app/ports/IContractFactory';
+import { Pools } from './app/services/Pools';
 import { Vaults } from './app/services/Vaults';
 import { Yield } from './app/services/Yield';
-import { Projects } from './app/services/Projects';
-import { Users } from './app/services/Users';
+import { getEnvironment } from './environment';
+import { Environment } from './types/config';
 
 export class YelayLiteSdk {
 	public vaults: Vaults;
 	public yields: Yield;
-	public projects: Projects;
-	public users: Users;
+	public pools: Pools;
 	public contractFactory: IContractFactory;
 
-	constructor(signerOrProvider: Signer | Provider, sdkConfig: SDKConfig) {
-		this.contractFactory = new ContractFactory(signerOrProvider, sdkConfig.contractAddresses);
+	constructor(signerOrProvider: Signer | Provider, environment: Environment) {
+		const config = getEnvironment(environment);
+		this.contractFactory = new ContractFactory(signerOrProvider, config.contracts);
 
-		this.vaults = new Vaults(this.contractFactory, sdkConfig.backendUrl, signerOrProvider);
+		this.vaults = new Vaults(this.contractFactory, config.backendUrl, config.chainId, signerOrProvider);
 
-		this.yields = new Yield(sdkConfig.backendUrl);
+		this.yields = new Yield(config.backendUrl, config.chainId);
 
-		this.projects = new Projects(this.contractFactory);
-
-		this.users = new Users(sdkConfig.backendUrl);
+		this.pools = new Pools(this.contractFactory);
 	}
 }
