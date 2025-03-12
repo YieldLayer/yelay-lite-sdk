@@ -24,7 +24,7 @@ pnpm add @yelay-lite/sdk
 
 ## Initialization
 
-To start using the SDK, initialize it with an **Ethereum signer or provider** and a **network environment**:
+To start using the SDK, initialize it with an **Ethereum signer or provider** and a **network chainId**:
 
 ```ts
 import { YelayLiteSdk } from '@yelay-lite/sdk';
@@ -32,8 +32,8 @@ import { Signer } from 'ethers';
 import { Provider } from '@ethersproject/abstract-provider';
 
 const signerOrProvider: Signer | Provider = /* Your signer or provider */;
-
-const sdk = new YelayLiteSdk(signerOrProvider, 'base-testing');
+const chainId = 8453;
+const sdk = new YelayLiteSdk(signerOrProvider, chainId);
 
 ```
 

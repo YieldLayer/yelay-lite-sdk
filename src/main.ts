@@ -1,25 +1,34 @@
 import { Provider } from '@ethersproject/abstract-provider';
 import { Signer } from 'ethers';
 import { ContractFactory } from './adapters/smartContract/ContractFactory';
-import { IContractFactory } from './app/ports/IContractFactory';
 import { Pools } from './app/services/Pools';
 import { Vaults } from './app/services/Vaults';
 import { Yield } from './app/services/Yield';
 import { getEnvironment } from './environment';
-import { Environment } from './types/config';
+import { ChainId } from './types/config';
 
 export class YelayLiteSdk {
 	public vaults: Vaults;
 	public yields: Yield;
 	public pools: Pools;
 
-	constructor(signerOrProvider: Signer | Provider, environment: Environment) {
-		const config = getEnvironment(environment);
+	/**
+	 * Creates a new instance of YelayLiteSdk.
+	 *
+	 * For chainId 8453, the Base testing environment is supported when the testing parameter is set to true.
+	 * For all other chainIds, only the production environment is available regardless of the testing flag.
+	 *
+	 * @param {Signer | Provider} signerOrProvider - A signer or provider instance for interacting with contracts.
+	 * @param {ChainId} chainId - The network chainId.
+	 * @param {boolean} [testing=false] - If true and chainId is 8453, uses the testing environment; otherwise, production is used.
+	 */
+	constructor(signerOrProvider: Signer | Provider, chainId: ChainId, testing = false) {
+		const config = getEnvironment(chainId, testing);
 		const contractFactory = new ContractFactory(signerOrProvider, config.contracts);
 
-		this.vaults = new Vaults(contractFactory, config.backendUrl, config.chainId, signerOrProvider);
+		this.vaults = new Vaults(contractFactory, config.backendUrl, chainId, signerOrProvider);
 
-		this.yields = new Yield(config.backendUrl, config.chainId);
+		this.yields = new Yield(config.backendUrl, chainId);
 
 		this.pools = new Pools(contractFactory);
 	}
