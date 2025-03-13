@@ -11,6 +11,8 @@ export class YelayLiteSdk {
 	public vaults: Vaults;
 	public yields: Yield;
 	public pools: Pools;
+	// TODO: remove after integrating gathering swapCalldata into the flow
+	public swapperAddress: string;
 
 	/**
 	 * Creates a new instance of YelayLiteSdk.
@@ -31,5 +33,7 @@ export class YelayLiteSdk {
 		this.yields = new Yield(config.backendUrl, chainId);
 
 		this.pools = new Pools(contractFactory);
+
+		this.swapperAddress = config.contracts.Swapper;
 	}
 }
