@@ -83,6 +83,32 @@ const tx = await sdk.vaults.depositEth(vault, pool, amount);
 await tx.wait();
 ```
 
+## Swap token and deposit into vault in one transaction
+
+```ts
+const vault = '0x123';
+const pool = 1234;
+const amount = '1000000';
+const tokenToSwap = '0x456';
+// only 1inch Aggregation Router v6 is supported
+const swapTarget = '1inch Aggregation Router v6 address';
+const swapCallData = '0x9...1';
+
+const allowance = await sdk.vaults.vaultWrapperAllowance(tokenToSwap);
+
+if (allowance.isZero()) {
+	const approveTx = await sdk.vaults.approveVaultWrapper(tokenToSwap, amount);
+	await approveTx.wait();
+}
+
+const swapAndDepositTX = await sdk.vaults.swapAndDeposit(vault, pool, amount, {
+	swapCallData,
+	swapTarget,
+	tokenIn: tokenToSwap,
+});
+await swapAndDepositTX.wait();
+```
+
 ## Redeem from the vault
 
 ```ts
