@@ -23,5 +23,14 @@ export const getEnvironment = (chainId: ChainId, testing: boolean): SDKConfig =>
 			};
 		}
 	}
+	if (chainId === 1) {
+		return {
+			contracts: {
+				VaultWrapper: '0xf65d02700915259602D9105b66401513D1CB61ff',
+				Swapper: '0xD49Dc240CE448BE0513803AB82B85F8484748871',
+			},
+			backendUrl: 'https://lite.api.yelay.io/v2',
+		};
+	}
 	throw new Error(`Chain ${chainId} is not supported`);
 };

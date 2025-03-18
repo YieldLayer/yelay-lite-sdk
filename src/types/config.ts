@@ -1,4 +1,4 @@
-export type ChainId = 8453;
+export type ChainId = 1 | 8453;
 
 export type ContractAddresses = {
 	VaultWrapper: string;
