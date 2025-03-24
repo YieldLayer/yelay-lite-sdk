@@ -1,4 +1,4 @@
-import { BigNumber, ContractTransaction, PayableOverrides, Signer } from 'ethers';
+import { BigNumber, ContractTransaction, ethers, Overrides, PayableOverrides, Signer } from 'ethers';
 import { IContractFactory } from '../../app/ports/IContractFactory';
 import { IVaultWrapper } from '../../app/ports/smartContract/IVaultWrapper';
 import { SwapArgsStruct } from '../../generated/typechain/VaultWrapper';
@@ -9,15 +9,15 @@ export class VaultWrapper implements IVaultWrapper {
 
 	public async depositEth(
 		vault: string,
-		projectId: number,
-		amount: bigint,
+		pool: number,
+		amount: ethers.BigNumberish,
 		overrides?: PayableOverrides,
 	): Promise<ContractTransaction> {
 		const vaultWrapper = this.contractFactory.getVaultWrapper();
 
-		const estimatedGas = await vaultWrapper.estimateGas.wrapEthAndDeposit(vault, projectId, { value: amount });
+		const estimatedGas = await vaultWrapper.estimateGas.wrapEthAndDeposit(vault, pool, { value: amount });
 
-		return await vaultWrapper.wrapEthAndDeposit(vault, projectId, {
+		return await vaultWrapper.wrapEthAndDeposit(vault, pool, {
 			...overrides,
 			value: amount,
 			gasLimit: getIncreasedGasLimit(estimatedGas),
@@ -31,7 +31,11 @@ export class VaultWrapper implements IVaultWrapper {
 		return await this.contractFactory.getErc20(tokenAddress).allowance(userAddress, vaultWrapper.address);
 	}
 
-	public async approveVaultWrapper(tokenAddress: string, amount: bigint): Promise<ContractTransaction> {
+	public async approveVaultWrapper(
+		tokenAddress: string,
+		amount: ethers.BigNumberish,
+		overrides?: Overrides,
+	): Promise<ContractTransaction> {
 		const vaultWrapper = this.contractFactory.getVaultWrapper();
 		const estimatedGas = await this.contractFactory
 			.getErc20(tokenAddress)
@@ -39,20 +43,22 @@ export class VaultWrapper implements IVaultWrapper {
 
 		return this.contractFactory
 			.getErc20(tokenAddress)
-			.approve(vaultWrapper.address, amount, { gasLimit: getIncreasedGasLimit(estimatedGas) });
+			.approve(vaultWrapper.address, amount, { gasLimit: getIncreasedGasLimit(estimatedGas), ...overrides });
 	}
 
 	public async swapAndDeposit(
 		vault: string,
-		projectId: number,
+		pool: number,
 		swapData: SwapArgsStruct,
-		amount: bigint,
+		amount: ethers.BigNumberish,
 		overrides?: PayableOverrides,
 	): Promise<ContractTransaction> {
 		const vaultWrapper = this.contractFactory.getVaultWrapper();
 
-		return await vaultWrapper.swapAndDeposit(vault, projectId, swapData, amount, {
-			gasLimit: 1000000,
+		const estimatedGas = await vaultWrapper.estimateGas.swapAndDeposit(vault, pool, swapData, amount);
+
+		return await vaultWrapper.swapAndDeposit(vault, pool, swapData, amount, {
+			gasLimit: getIncreasedGasLimit(estimatedGas),
 			...overrides,
 		});
 	}

@@ -1,5 +1,6 @@
+export type ChainId = 1 | 8453;
+
 export type ContractAddresses = {
-	YelayLiteVault: string;
 	VaultWrapper: string;
 	Swapper: string;
 	DepositLockPlugin: string;
@@ -7,6 +8,5 @@ export type ContractAddresses = {
 
 export type SDKConfig = {
 	backendUrl: string;
-	contractAddresses: ContractAddresses;
-	chainId: number;
+	contracts: ContractAddresses;
 };

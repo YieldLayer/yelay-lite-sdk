@@ -6,28 +6,10 @@ export type VaultYield = EventsRange & {
 	apy: string;
 };
 
-export type ProjectYield = EventsRange & {
-	data: {
-		projectId: number;
-		yield: string;
-	}[];
-};
-
-export type UserYield = EventsRange & {
-	data: { user: string; yield: string }[];
-};
-
-export type UserYieldAggregatedData = EventsRange & {
-	vault: string;
-	projects: {
-		[id: number]: string;
-	};
-};
-
 export type YieldAggregated = EventsRange & {
 	vault: string;
 	user: string;
-	projects: {
+	pools: {
 		[id: number]: string;
 	};
 };

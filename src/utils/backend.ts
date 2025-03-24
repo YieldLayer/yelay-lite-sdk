@@ -16,3 +16,18 @@ export const appendTimeFrameQuery = (searchParams: URLSearchParams, timeframe?: 
 
 	return searchParams;
 };
+
+export const getTimestampOneWeekAgo = () => {
+	const nowMs = Date.now();
+	const nowSec = Math.floor(nowMs / 1000);
+	const secondsInAMinute = 60;
+	const minutesInAnHour = 60;
+	const hoursInADay = 24;
+	const daysInAWeek = 7;
+	const secondsInAnHour = minutesInAnHour * secondsInAMinute;
+	const secondsInADay = hoursInADay * secondsInAnHour;
+	const secondsInAWeek = daysInAWeek * secondsInADay;
+	const pastTimestamp = nowSec - secondsInAWeek;
+
+	return pastTimestamp;
+};

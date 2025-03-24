@@ -1,54 +1,49 @@
-name: Workflow-spool-sdk-deploy
+# name: Workflow-spool-sdk-deploy
 
-on:
-  push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
-      - 'v[0-9]+.[0-9]+.[0-9]+-dev.[0-9]+'
+# on:
+#     push:
+#         tags:
+#             - 'v[0-9]+.[0-9]+.[0-9]+-?[a-zA-Z0-9]*'
 
+# jobs:
+#     publish:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - uses: actions/checkout@v3
+#             - name: Get the version
+#               id: get_version
+#               run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
+#             - name: Get Tag
+#               id: tag
+#               env:
+#                   IMAGE_TAG: ${{ steps.get-version.outputs.VERSION }}
+#               run: if [[ $IMAGE_TAG == *'dev'* ]]; then echo ::set-output name=TAG::"dev"; else echo ::set-output name=TAG::"latest"; fi
 
-jobs:
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-        
-        
-      - name: Get Tag
-        id: tag
-        env:
-          IMAGE_TAG: ${{ steps.get-version.outputs.VERSION }}
-        run: if [[ $IMAGE_TAG == *'dev'* ]]; then echo ::set-output name=TAG::"dev"; else echo ::set-output name=TAG::"latest"; fi
+#             - name: Replace version string
+#               id: replaced_version
+#               env:
+#                   IMAGE_TAG: ${{ steps.get_version.outputs.VERSION }}
+#               run: |
+#                   string=$IMAGE_TAG
+#                   replaced=${string/v/}
+#                   echo ::set-output name=VERSION::$replaced
 
-      - name: Replace version string
-        id: replaced_version
-        env:
-          IMAGE_TAG: ${{ steps.get_version.outputs.VERSION }}
-        run: |
-          string=$IMAGE_TAG
-          replaced=${string/v/}
-          echo ::set-output name=VERSION::$replaced
+#             - name: Replace version inside package.json
+#               env:
+#                   VERSION: ${{ steps.replaced_version.outputs.VERSION }}
+#               run: bash ./deployment-scripts/versioner.sh $VERSION
 
-      - name: Replace version inside package.json
-        env:
-          VERSION: ${{ steps.replaced_version.outputs.VERSION }}
-        run: bash ./deployment-scripts/versioner.sh $VERSION
-        
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - run: npm install -g @microsoft/api-extractor
-      - run: npm cache clean --force
-      - run: npm install
-      - run: npm run build
-      
+#             - uses: actions/setup-node@v3
+#               with:
+#                   node-version: 18
+#             - run: npm install -g @microsoft/api-extractor
+#             - run: npm cache clean --force
+#             - run: npm install
+#             - run: npm run build
 
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          tag: ${{ steps.tag.outputs.TAG }}
-          token: ${{ secrets.NPM_KEY }}
-          access: public
+#             - uses: JS-DevTools/npm-publish@v1
+#               with:
+#                   tag: ${{ steps.tag.outputs.TAG }}
+#                   token: ${{ secrets.NPM_KEY }}
+#                   access: public

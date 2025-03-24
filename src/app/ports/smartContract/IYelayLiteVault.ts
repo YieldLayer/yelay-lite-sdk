@@ -1,21 +1,39 @@
-import { BigNumber, ContractTransaction, PayableOverrides, Signer } from 'ethers';
+import { BigNumber, ContractTransaction, ethers, Overrides, Signer } from 'ethers';
 import { ClientData } from '../../../types/smartContract';
 
-export type ProjectSupply = {
+export type PoolsSupply = {
 	totalAssets: BigNumber;
 	totalSupply: BigNumber;
-	projectsSupply: BigNumber[];
+	poolsSupply: BigNumber[];
 };
 
 export interface IYelayLiteVault {
-	getProjectsSupplies(vault: string, projectIds: number[]): Promise<ProjectSupply>;
+	getPoolsSupplies(vault: string, pools: number[]): Promise<PoolsSupply>;
 	allowance(signer: Signer, vault: string): Promise<BigNumber>;
-	approve(vault: string, amount: bigint): Promise<ContractTransaction>;
-	deposit(signer: Signer, vault: string, projectId: number, amount: bigint): Promise<ContractTransaction>;
-	redeem(signer: Signer, vault: string, projectId: number, amount: bigint): Promise<ContractTransaction>;
-	migrate(vault: string, fromProjectId: number, toProjectId: number, amount: bigint): Promise<ContractTransaction>;
-	activateProject(vault: string, projectId: number): Promise<ContractTransaction>;
-	projectIdActive(vault: string, projectId: number): Promise<boolean>;
+	approve(vault: string, amount: ethers.BigNumberish, overrides?: Overrides): Promise<ContractTransaction>;
+	deposit(
+		signer: Signer,
+		vault: string,
+		pool: number,
+		amount: ethers.BigNumberish,
+		overrides?: Overrides,
+	): Promise<ContractTransaction>;
+	redeem(
+		signer: Signer,
+		vault: string,
+		pool: number,
+		amount: ethers.BigNumberish,
+		overrides?: Overrides,
+	): Promise<ContractTransaction>;
+	migrate(
+		vault: string,
+		fromPool: number,
+		toPool: number,
+		amount: ethers.BigNumberish,
+		overrides?: Overrides,
+	): Promise<ContractTransaction>;
+	activatePool(vault: string, pool: number, overrides?: Overrides): Promise<ContractTransaction>;
+	poolActive(vault: string, pool: number): Promise<boolean>;
 	clientData(client: string, vault: string): Promise<ClientData>;
-	balanceOf(vault: string, projectId: number, user: string): Promise<BigNumber>;
+	balanceOf(vault: string, pool: number, user: string): Promise<BigNumber>;
 }
