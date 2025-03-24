@@ -10,19 +10,16 @@ export class DepositLockPlugin implements IDepositLockPlugin {
 		const depositLock = this.contractFactory.getDepositLockPlugin().address;
 		const yelayLiteVault = this.contractFactory.getYelayLiteVault(vault);
 		const underlyingAsset = await yelayLiteVault.underlyingAsset();
-		const estimatedGas = await this.contractFactory.getErc20(underlyingAsset).estimateGas.approve(depositLock, amount);
+		const estimatedGas = await this.contractFactory
+			.getErc20(underlyingAsset)
+			.estimateGas.approve(depositLock, amount);
 
 		return this.contractFactory
 			.getErc20(underlyingAsset)
 			.approve(depositLock, amount, { gasLimit: getIncreasedGasLimit(estimatedGas) });
 	}
 
-	async depositLocked(
-		vault: string,
-		projectId: number,
-		assets: bigint
-	): Promise<ContractTransaction> {
-
+	async depositLocked(vault: string, projectId: number, assets: bigint): Promise<ContractTransaction> {
 		const contract = this.contractFactory.getDepositLockPlugin();
 		const estimatedGas = await contract.estimateGas.depositLocked(vault, projectId, assets);
 		return contract.depositLocked(vault, projectId, assets, {
@@ -30,11 +27,7 @@ export class DepositLockPlugin implements IDepositLockPlugin {
 		});
 	}
 
-	async redeemLocked(
-		vault: string,
-		projectId: number,
-		shares: bigint
-	): Promise<ContractTransaction> {
+	async redeemLocked(vault: string, projectId: number, shares: bigint): Promise<ContractTransaction> {
 		const contract = this.contractFactory.getDepositLockPlugin();
 		const estimatedGas = await contract.estimateGas.redeemLocked(vault, projectId, shares);
 		return contract.redeemLocked(vault, projectId, shares, {
@@ -46,25 +39,16 @@ export class DepositLockPlugin implements IDepositLockPlugin {
 		vault: string,
 		fromProjectId: number,
 		toProjectId: number,
-		shares: bigint
+		shares: bigint,
 	): Promise<ContractTransaction> {
 		const contract = this.contractFactory.getDepositLockPlugin();
-		const estimatedGas = await contract.estimateGas.migrateLocked(
-			vault,
-			fromProjectId,
-			toProjectId,
-			shares,
-		);
+		const estimatedGas = await contract.estimateGas.migrateLocked(vault, fromProjectId, toProjectId, shares);
 		return contract.migrateLocked(vault, fromProjectId, toProjectId, shares, {
 			gasLimit: getIncreasedGasLimit(estimatedGas),
 		});
 	}
 
-	async updateLockPeriod(
-		vault: string,
-		projectId: number,
-		newLockPeriod: bigint
-	): Promise<ContractTransaction> {
+	async updateLockPeriod(vault: string, projectId: number, newLockPeriod: bigint): Promise<ContractTransaction> {
 		const contract = this.contractFactory.getDepositLockPlugin();
 		const estimatedGas = await contract.estimateGas.updateLockPeriod(vault, projectId, newLockPeriod);
 		return contract.updateLockPeriod(vault, projectId, newLockPeriod, {
@@ -74,8 +58,8 @@ export class DepositLockPlugin implements IDepositLockPlugin {
 
 	async updateGlobalUnlockTime(
 		vault: string,
-        projectId: number,
-		newUnlockTime: bigint
+		projectId: number,
+		newUnlockTime: bigint,
 	): Promise<ContractTransaction> {
 		const contract = this.contractFactory.getDepositLockPlugin();
 		const estimatedGas = await contract.estimateGas.updateGlobalUnlockTime(vault, projectId, newUnlockTime);
@@ -84,12 +68,8 @@ export class DepositLockPlugin implements IDepositLockPlugin {
 		});
 	}
 
-	async getMaturedShares(
-		vault: string,
-		projectId: number,
-		user: string
-	): Promise<BigNumber> {
+	async getMaturedShares(vault: string, projectId: number, user: string): Promise<BigNumber> {
 		const contract = this.contractFactory.getDepositLockPlugin();
 		return contract.getMaturedShares(vault, projectId, user);
 	}
-} 
+}
