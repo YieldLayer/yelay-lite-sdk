@@ -17,12 +17,12 @@ describe('Vaults Extended Tests', function () {
 	before(async function () {
 		// Get the impersonated signer (auto-impersonated via _setup.ts)
 		impersonatedSigner = await ethers.getSigner(impersonatedAddress);
-		sdk = new YelayLiteSdk(impersonatedSigner, 8453);
+		sdk = new YelayLiteSdk(impersonatedSigner, 8453, true);
 	});
 
 	it('should get vault balance for the impersonated user', async function () {
-		const projectId = 100; // example project id
-		const balance = await sdk.vaults.balanceOf(vaultAddress, projectId, impersonatedAddress);
+		const pool = 100; // example project id
+		const balance = await sdk.vaults.balanceOf(vaultAddress, pool, impersonatedAddress);
 		expect(balance).to.be.instanceOf(BigNumber);
 	});
 
@@ -35,31 +35,31 @@ describe('Vaults Extended Tests', function () {
 	});
 
 	it('should deposit ERC20 (WETH) successfully', async function () {
-		const projectId = 100;
+		const pool = 100;
 		const depositAmount = BigInt(500);
-		const tx = await sdk.vaults.deposit(vaultAddress, projectId, depositAmount);
+		const tx = await sdk.vaults.deposit(vaultAddress, pool, depositAmount);
 		const receipt = await tx.wait();
 		expect(receipt.status).to.equal(1);
 	});
 
 	it('should deposit ETH successfully', async function () {
-		const projectId = 100;
+		const pool = 100;
 		const depositEthAmount = BigInt(ethers.utils.parseEther('0.0000001').toString());
-		const tx = await sdk.vaults.depositEth(vaultAddress, projectId, depositEthAmount);
+		const tx = await sdk.vaults.depositEth(vaultAddress, pool, depositEthAmount);
 		const receipt = await tx.wait();
 		expect(receipt.status).to.equal(1);
 	});
 
 	it('should verify balance', async function () {
-		const projectId = 100;
-		const balance = await sdk.vaults.balanceOf(vaultAddress, projectId, impersonatedAddress);
+		const pool = 100;
+		const balance = await sdk.vaults.balanceOf(vaultAddress, pool, impersonatedAddress);
 		expect(balance.toString()).to.be.equal('200050013002');
 	});
 
 	it('should redeem tokens successfully', async function () {
-		const projectId = 100;
-		const balance = await sdk.vaults.balanceOf(vaultAddress, projectId, impersonatedAddress);
-		const tx = await sdk.vaults.redeem(vaultAddress, projectId, balance.toBigInt());
+		const pool = 100;
+		const balance = await sdk.vaults.balanceOf(vaultAddress, pool, impersonatedAddress);
+		const tx = await sdk.vaults.redeem(vaultAddress, pool, balance.toBigInt());
 		const receipt = await tx.wait();
 		expect(receipt.status).to.equal(1);
 	});

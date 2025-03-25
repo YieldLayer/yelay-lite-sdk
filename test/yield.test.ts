@@ -6,7 +6,7 @@ describe('Yield', function () {
 
 	before(async function () {
 		const [signer] = await ethers.getSigners();
-		sdk = new YelayLiteSdk(signer, 8453);
+		sdk = new YelayLiteSdk(signer, 8453, true);
 	});
 
 	it('getVaultsYield', async () => {

@@ -8,13 +8,13 @@ describe('Pools', function () {
 
 	before(async function () {
 		const [signer] = await ethers.getSigners();
-		sdk = new YelayLiteSdk(signer, 8453);
+		sdk = new YelayLiteSdk(signer, 8453, true);
 	});
 
 	it('should retrieve project TVL', async function () {
-		const projectIds = [1, 2];
+		const pools = [1, 2];
 
-		const poolsTvl = await sdk.pools.getPoolsTvl(vaultAddress, projectIds);
+		const poolsTvl = await sdk.pools.getPoolsTvl(vaultAddress, pools);
 		expect(poolsTvl[0].tvl.gt(0)).to.be.true;
 	});
 });
