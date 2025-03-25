@@ -20,8 +20,8 @@ describe('DepositLockPlugin Tests', function () {
 		// Get the impersonated signer (auto-impersonated via _setup.ts)
 		impersonatedSigner = await ethers.getSigner(impersonatedAddress);
 		impersonatedDepositLockOwner = await ethers.getSigner(depositLockOwner);
-		sdk = new YelayLiteSdk(impersonatedSigner, 8453);
-		sdkOwner = new YelayLiteSdk(impersonatedDepositLockOwner, 8453);
+		sdk = new YelayLiteSdk(impersonatedSigner, 8453, true);
+		sdkOwner = new YelayLiteSdk(impersonatedDepositLockOwner, 8453, true);
 	});
 
 	it('should approve depositLock successfully', async function () {

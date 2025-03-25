@@ -1,1775 +1,494 @@
-{
-    "abi": [{
-        "type": "constructor",
-        "inputs": [],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "MAX_LOCK_PERIOD",
-        "inputs": [],
-        "outputs": [{
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "UPGRADE_INTERFACE_VERSION",
-        "inputs": [],
-        "outputs": [{
-            "name": "",
-            "type": "string",
-            "internalType": "string"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "checkLocks",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "user",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "indices",
-            "type": "uint256[]",
-            "internalType": "uint256[]"
-        }],
-        "outputs": [{
-            "name": "statuses",
-            "type": "bool[]",
-            "internalType": "bool[]"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "depositLocked",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "assets",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "outputs": [{
-            "name": "shares",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "getMaturedShares",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "user",
-            "type": "address",
-            "internalType": "address"
-        }],
-        "outputs": [{
-            "name": "totalMatured",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "globalLockedShares",
-        "inputs": [{
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }],
-        "outputs": [{
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "initialize",
-        "inputs": [{
-            "name": "owner",
-            "type": "address",
-            "internalType": "address"
-        }],
-        "outputs": [],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "lockedDeposits",
-        "inputs": [{
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "outputs": [{
-            "name": "shares",
-            "type": "uint192",
-            "internalType": "uint192"
-        }, {
-            "name": "lockTime",
-            "type": "uint64",
-            "internalType": "uint64"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "migrateLocked",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "fromProjectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "toProjectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "shares",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "outputs": [],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "onERC1155BatchReceived",
-        "inputs": [{
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "",
-            "type": "uint256[]",
-            "internalType": "uint256[]"
-        }, {
-            "name": "",
-            "type": "uint256[]",
-            "internalType": "uint256[]"
-        }, {
-            "name": "",
-            "type": "bytes",
-            "internalType": "bytes"
-        }],
-        "outputs": [{
-            "name": "",
-            "type": "bytes4",
-            "internalType": "bytes4"
-        }],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "onERC1155Received",
-        "inputs": [{
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "",
-            "type": "bytes",
-            "internalType": "bytes"
-        }],
-        "outputs": [{
-            "name": "",
-            "type": "bytes4",
-            "internalType": "bytes4"
-        }],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "owner",
-        "inputs": [],
-        "outputs": [{
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "projectGlobalUnlockTime",
-        "inputs": [{
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "outputs": [{
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "projectLockModes",
-        "inputs": [{
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "outputs": [{
-            "name": "",
-            "type": "uint8",
-            "internalType": "enum DepositLockPlugin.LockMode"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "projectLockPeriods",
-        "inputs": [{
-            "name": "",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "outputs": [{
-            "name": "",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "proxiableUUID",
-        "inputs": [],
-        "outputs": [{
-            "name": "",
-            "type": "bytes32",
-            "internalType": "bytes32"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "redeemLocked",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "shares",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "outputs": [{
-            "name": "assets",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "renounceOwnership",
-        "inputs": [],
-        "outputs": [],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "supportsInterface",
-        "inputs": [{
-            "name": "interfaceId",
-            "type": "bytes4",
-            "internalType": "bytes4"
-        }],
-        "outputs": [{
-            "name": "",
-            "type": "bool",
-            "internalType": "bool"
-        }],
-        "stateMutability": "view"
-    }, {
-        "type": "function",
-        "name": "transferOwnership",
-        "inputs": [{
-            "name": "newOwner",
-            "type": "address",
-            "internalType": "address"
-        }],
-        "outputs": [],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "updateGlobalUnlockTime",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "unlockTime",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "outputs": [],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "updateLockPeriod",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "lockPeriod",
-            "type": "uint256",
-            "internalType": "uint256"
-        }],
-        "outputs": [],
-        "stateMutability": "nonpayable"
-    }, {
-        "type": "function",
-        "name": "upgradeToAndCall",
-        "inputs": [{
-            "name": "newImplementation",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "data",
-            "type": "bytes",
-            "internalType": "bytes"
-        }],
-        "outputs": [],
-        "stateMutability": "payable"
-    }, {
-        "type": "event",
-        "name": "DepositLocked",
-        "inputs": [{
-            "name": "user",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }, {
-            "name": "vault",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "indexed": true,
-            "internalType": "uint256"
-        }, {
-            "name": "shares",
-            "type": "uint256",
-            "indexed": false,
-            "internalType": "uint256"
-        }, {
-            "name": "assets",
-            "type": "uint256",
-            "indexed": false,
-            "internalType": "uint256"
-        }],
-        "anonymous": false
-    }, {
-        "type": "event",
-        "name": "GlobalUnlockTimeUpdated",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "indexed": true,
-            "internalType": "uint256"
-        }, {
-            "name": "unlockTime",
-            "type": "uint256",
-            "indexed": false,
-            "internalType": "uint256"
-        }],
-        "anonymous": false
-    }, {
-        "type": "event",
-        "name": "Initialized",
-        "inputs": [{
-            "name": "version",
-            "type": "uint64",
-            "indexed": false,
-            "internalType": "uint64"
-        }],
-        "anonymous": false
-    }, {
-        "type": "event",
-        "name": "LockPeriodUpdated",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "indexed": true,
-            "internalType": "uint256"
-        }, {
-            "name": "lockPeriod",
-            "type": "uint256",
-            "indexed": false,
-            "internalType": "uint256"
-        }],
-        "anonymous": false
-    }, {
-        "type": "event",
-        "name": "MigrateLocked",
-        "inputs": [{
-            "name": "user",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }, {
-            "name": "vault",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }, {
-            "name": "fromProjectId",
-            "type": "uint256",
-            "indexed": false,
-            "internalType": "uint256"
-        }, {
-            "name": "toProjectId",
-            "type": "uint256",
-            "indexed": false,
-            "internalType": "uint256"
-        }, {
-            "name": "shares",
-            "type": "uint256",
-            "indexed": false,
-            "internalType": "uint256"
-        }],
-        "anonymous": false
-    }, {
-        "type": "event",
-        "name": "OwnershipTransferred",
-        "inputs": [{
-            "name": "previousOwner",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }, {
-            "name": "newOwner",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }],
-        "anonymous": false
-    }, {
-        "type": "event",
-        "name": "RedeemLocked",
-        "inputs": [{
-            "name": "user",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }, {
-            "name": "vault",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "indexed": true,
-            "internalType": "uint256"
-        }, {
-            "name": "shares",
-            "type": "uint256",
-            "indexed": false,
-            "internalType": "uint256"
-        }, {
-            "name": "assets",
-            "type": "uint256",
-            "indexed": false,
-            "internalType": "uint256"
-        }],
-        "anonymous": false
-    }, {
-        "type": "event",
-        "name": "Upgraded",
-        "inputs": [{
-            "name": "implementation",
-            "type": "address",
-            "indexed": true,
-            "internalType": "address"
-        }],
-        "anonymous": false
-    }, {
-        "type": "error",
-        "name": "AddressEmptyCode",
-        "inputs": [{
-            "name": "target",
-            "type": "address",
-            "internalType": "address"
-        }]
-    }, {
-        "type": "error",
-        "name": "ERC1967InvalidImplementation",
-        "inputs": [{
-            "name": "implementation",
-            "type": "address",
-            "internalType": "address"
-        }]
-    }, {
-        "type": "error",
-        "name": "ERC1967NonPayable",
-        "inputs": []
-    }, {
-        "type": "error",
-        "name": "FailedCall",
-        "inputs": []
-    }, {
-        "type": "error",
-        "name": "GlobalUnlockTimeNotReached",
-        "inputs": [{
-            "name": "unlockTime",
-            "type": "uint256",
-            "internalType": "uint256"
-        }]
-    }, {
-        "type": "error",
-        "name": "InvalidInitialization",
-        "inputs": []
-    }, {
-        "type": "error",
-        "name": "LockModeAlreadySet",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "lockMode",
-            "type": "uint256",
-            "internalType": "uint256"
-        }]
-    }, {
-        "type": "error",
-        "name": "LockModeNotSetForProject",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }]
-    }, {
-        "type": "error",
-        "name": "LockPeriodExceedsMaximum",
-        "inputs": [{
-            "name": "lockPeriod",
-            "type": "uint256",
-            "internalType": "uint256"
-        }]
-    }, {
-        "type": "error",
-        "name": "NotEnoughShares",
-        "inputs": [{
-            "name": "requested",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "remaining",
-            "type": "uint256",
-            "internalType": "uint256"
-        }]
-    }, {
-        "type": "error",
-        "name": "NotInitializing",
-        "inputs": []
-    }, {
-        "type": "error",
-        "name": "NotProjectOwner",
-        "inputs": [{
-            "name": "vault",
-            "type": "address",
-            "internalType": "address"
-        }, {
-            "name": "projectId",
-            "type": "uint256",
-            "internalType": "uint256"
-        }, {
-            "name": "caller",
-            "type": "address",
-            "internalType": "address"
-        }]
-    }, {
-        "type": "error",
-        "name": "OwnableInvalidOwner",
-        "inputs": [{
-            "name": "owner",
-            "type": "address",
-            "internalType": "address"
-        }]
-    }, {
-        "type": "error",
-        "name": "OwnableUnauthorizedAccount",
-        "inputs": [{
-            "name": "account",
-            "type": "address",
-            "internalType": "address"
-        }]
-    }, {
-        "type": "error",
-        "name": "UUPSUnauthorizedCallContext",
-        "inputs": []
-    }, {
-        "type": "error",
-        "name": "UUPSUnsupportedProxiableUUID",
-        "inputs": [{
-            "name": "slot",
-            "type": "bytes32",
-            "internalType": "bytes32"
-        }]
-    }],
-    "bytecode": {
-        "object": "0x",
-        "sourceMap": "",
-        "linkReferences": {}
-    },
-    "deployedBytecode": {
-        "object": "0x",
-        "sourceMap": "",
-        "linkReferences": {}
-    },
-    "methodIdentifiers": {
-        "MAX_LOCK_PERIOD()": "f5540162",
-        "UPGRADE_INTERFACE_VERSION()": "ad3cb1cc",
-        "checkLocks(address,uint256,address,uint256[])": "79bf482b",
-        "depositLocked(address,uint256,uint256)": "e5fcd32e",
-        "getMaturedShares(address,uint256,address)": "dad1bda2",
-        "globalLockedShares(address,uint256,address)": "1e068772",
-        "initialize(address)": "c4d66de8",
-        "lockedDeposits(address,uint256,address,uint256)": "43774f6e",
-        "migrateLocked(address,uint256,uint256,uint256)": "ecd80329",
-        "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": "bc197c81",
-        "onERC1155Received(address,address,uint256,uint256,bytes)": "f23a6e61",
-        "owner()": "8da5cb5b",
-        "projectGlobalUnlockTime(address,uint256)": "b8713208",
-        "projectLockModes(address,uint256)": "1ef61ec0",
-        "projectLockPeriods(address,uint256)": "1f1c3e8d",
-        "proxiableUUID()": "52d1902d",
-        "redeemLocked(address,uint256,uint256)": "59e7e80c",
-        "renounceOwnership()": "715018a6",
-        "supportsInterface(bytes4)": "01ffc9a7",
-        "transferOwnership(address)": "f2fde38b",
-        "updateGlobalUnlockTime(address,uint256,uint256)": "eaa1714c",
-        "updateLockPeriod(address,uint256,uint256)": "c0e46409",
-        "upgradeToAndCall(address,bytes)": "4f1ef286"
-    },
-    "rawMetadata": "{\"compiler\":{\"version\":\"0.8.28+commit.7893614a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"target\",\"type\":\"address\"}],\"name\":\"AddressEmptyCode\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"ERC1967InvalidImplementation\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1967NonPayable\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"FailedCall\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"unlockTime\",\"type\":\"uint256\"}],\"name\":\"GlobalUnlockTimeNotReached\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidInitialization\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lockMode\",\"type\":\"uint256\"}],\"name\":\"LockModeAlreadySet\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"}],\"name\":\"LockModeNotSetForProject\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"lockPeriod\",\"type\":\"uint256\"}],\"name\":\"LockPeriodExceedsMaximum\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"requested\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"remaining\",\"type\":\"uint256\"}],\"name\":\"NotEnoughShares\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NotInitializing\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"caller\",\"type\":\"address\"}],\"name\":\"NotProjectOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnableInvalidOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"OwnableUnauthorizedAccount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"UUPSUnauthorizedCallContext\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"slot\",\"type\":\"bytes32\"}],\"name\":\"UUPSUnsupportedProxiableUUID\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"assets\",\"type\":\"uint256\"}],\"name\":\"DepositLocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"unlockTime\",\"type\":\"uint256\"}],\"name\":\"GlobalUnlockTimeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"version\",\"type\":\"uint64\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"lockPeriod\",\"type\":\"uint256\"}],\"name\":\"LockPeriodUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fromProjectId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"toProjectId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"MigrateLocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"assets\",\"type\":\"uint256\"}],\"name\":\"RedeemLocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"Upgraded\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_LOCK_PERIOD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UPGRADE_INTERFACE_VERSION\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"indices\",\"type\":\"uint256[]\"}],\"name\":\"checkLocks\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"statuses\",\"type\":\"bool[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"assets\",\"type\":\"uint256\"}],\"name\":\"depositLocked\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"getMaturedShares\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalMatured\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"globalLockedShares\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"lockedDeposits\",\"outputs\":[{\"internalType\":\"uint192\",\"name\":\"shares\",\"type\":\"uint192\"},{\"internalType\":\"uint64\",\"name\":\"lockTime\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"fromProjectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toProjectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"migrateLocked\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"onERC1155BatchReceived\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"onERC1155Received\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"projectGlobalUnlockTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"projectLockModes\",\"outputs\":[{\"internalType\":\"enum DepositLockPlugin.LockMode\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"projectLockPeriods\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proxiableUUID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"redeemLocked\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"assets\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"unlockTime\",\"type\":\"uint256\"}],\"name\":\"updateGlobalUnlockTime\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lockPeriod\",\"type\":\"uint256\"}],\"name\":\"updateLockPeriod\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"upgradeToAndCall\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Allows locking of deposits so that funds sent to a vault via this plugin remain locked until some lock period expires. The project owner (as given by the vault's ClientsFacet) may update the project's lock period. In Variable mode, each deposit is recorded with a timestamp. In Global mode, all deposits share the same unlock time so we optimize by simply tracking a single aggregated shares value per (vault, project, user). There are two available active lock modes (See LockMode). Every vault\\u2013projectId is assigned a LockMode (Unset, Variable, Global) on the first admin update. Subsequently, the owner may update the value for the chosen mode, but cannot switch between active modes.\",\"errors\":{\"AddressEmptyCode(address)\":[{\"details\":\"There's no code at `target` (it is not a contract).\"}],\"ERC1967InvalidImplementation(address)\":[{\"details\":\"The `implementation` of the proxy is invalid.\"}],\"ERC1967NonPayable()\":[{\"details\":\"An upgrade function sees `msg.value > 0` that may be lost.\"}],\"FailedCall()\":[{\"details\":\"A call to an address target failed. The target may have reverted.\"}],\"GlobalUnlockTimeNotReached(uint256)\":[{\"details\":\"The unlock time exceeds the current block timestamp.\",\"params\":{\"unlockTime\":\"The unlock time.\"}}],\"InvalidInitialization()\":[{\"details\":\"The contract is already initialized.\"}],\"LockModeAlreadySet(address,uint256,uint256)\":[{\"details\":\"The lock mode is already set for the project.\",\"params\":{\"lockMode\":\"The lock mode.\",\"projectId\":\"The ID of the project.\",\"vault\":\"The address of the vault.\"}}],\"LockModeNotSetForProject(address,uint256)\":[{\"details\":\"Lock Mode is unset for the project.\",\"params\":{\"projectId\":\"The ID of the project.\",\"vault\":\"The address of the vault.\"}}],\"LockPeriodExceedsMaximum(uint256)\":[{\"details\":\"The lock period exceeds the maximum allowable period.\",\"params\":{\"lockPeriod\":\"The lock period.\"}}],\"NotEnoughShares(uint256,uint256)\":[{\"details\":\"The requested shares to remove is not available.\",\"params\":{\"remaining\":\"Remaining shares from requested amount.\",\"requested\":\"The requested shares to remove.\"}}],\"NotInitializing()\":[{\"details\":\"The contract is not initializing.\"}],\"NotProjectOwner(address,uint256,address)\":[{\"details\":\"The caller is not the project owner.\",\"params\":{\"caller\":\"The address of the caller.\",\"projectId\":\"The ID of the project.\",\"vault\":\"The address of the vault.\"}}],\"OwnableInvalidOwner(address)\":[{\"details\":\"The owner is not a valid owner account. (eg. `address(0)`)\"}],\"OwnableUnauthorizedAccount(address)\":[{\"details\":\"The caller account is not authorized to perform an operation.\"}],\"UUPSUnauthorizedCallContext()\":[{\"details\":\"The call is from an unauthorized context.\"}],\"UUPSUnsupportedProxiableUUID(bytes32)\":[{\"details\":\"The storage `slot` is unsupported as a UUID.\"}]},\"events\":{\"DepositLocked(address,address,uint256,uint256,uint256)\":{\"params\":{\"assets\":\"The amount of underlying assets deposited.\",\"projectId\":\"The project identifier.\",\"shares\":\"The amount of shares locked.\",\"user\":\"The address of the user.\",\"vault\":\"The address of the vault.\"}},\"GlobalUnlockTimeUpdated(address,uint256,uint256)\":{\"params\":{\"projectId\":\"The project identifier.\",\"unlockTime\":\"The new global unlock time.\",\"vault\":\"The address of the vault.\"}},\"Initialized(uint64)\":{\"details\":\"Triggered when the contract has been initialized or reinitialized.\"},\"LockPeriodUpdated(address,uint256,uint256)\":{\"params\":{\"lockPeriod\":\"The new lock period.\",\"projectId\":\"The project identifier.\",\"vault\":\"The address of the vault.\"}},\"MigrateLocked(address,address,uint256,uint256,uint256)\":{\"params\":{\"fromProjectId\":\"The project identifier from which the position is migrated.\",\"shares\":\"The amount of shares migrated.\",\"toProjectId\":\"The project identifier to which the position is migrated.\",\"user\":\"The address of the user.\",\"vault\":\"The address of the vault.\"}},\"RedeemLocked(address,address,uint256,uint256,uint256)\":{\"params\":{\"assets\":\"The amount of underlying assets redeemed.\",\"projectId\":\"The project identifier.\",\"shares\":\"The amount of shares redeemed.\",\"user\":\"The address of the user.\",\"vault\":\"The address of the vault.\"}},\"Upgraded(address)\":{\"details\":\"Emitted when the implementation is upgraded.\"}},\"kind\":\"dev\",\"methods\":{\"checkLocks(address,uint256,address,uint256[])\":{\"params\":{\"indices\":\"Array of deposit indices to check.\",\"projectId\":\"The project identifier.\",\"user\":\"The address of the user.\",\"vault\":\"The vault address.\"},\"returns\":{\"statuses\":\"A boolean array indicating if the corresponding deposit is matured.\"}},\"constructor\":{\"custom:oz-upgrades-unsafe-allow\":\"constructor\"},\"depositLocked(address,uint256,uint256)\":{\"params\":{\"assets\":\"The amount of underlying assets to deposit.\",\"projectId\":\"The project identifier.\",\"vault\":\"The vault address.\"},\"returns\":{\"shares\":\"The amount of vault shares received.\"}},\"getMaturedShares(address,uint256,address)\":{\"params\":{\"projectId\":\"The project identifier.\",\"user\":\"The address of the user.\",\"vault\":\"The vault address.\"},\"returns\":{\"totalMatured\":\"The total matured vault shares for the user.\"}},\"initialize(address)\":{\"details\":\"Initializes the contract with the given owner.\",\"params\":{\"owner\":\"The address of the owner.\"}},\"migrateLocked(address,uint256,uint256,uint256)\":{\"params\":{\"fromProjectId\":\"The source project ID.\",\"shares\":\"The amount of locked shares to migrate.\",\"toProjectId\":\"The destination project ID.\",\"vault\":\"The vault address.\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"proxiableUUID()\":{\"details\":\"Implementation of the ERC-1822 {proxiableUUID} function. This returns the storage slot used by the implementation. It is used to validate the implementation's compatibility when performing an upgrade. IMPORTANT: A proxy pointing at a proxiable contract should not be considered proxiable itself, because this risks bricking a proxy that upgrades to it, by delegating to itself until out of gas. Thus it is critical that this function revert if invoked through a proxy. This is guaranteed by the `notDelegated` modifier.\"},\"redeemLocked(address,uint256,uint256)\":{\"params\":{\"projectId\":\"The project identifier.\",\"shares\":\"The amount of shares the user wishes to redeem.\",\"vault\":\"The vault address.\"},\"returns\":{\"assets\":\"The amount of underlying assets redeemed.\"}},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"supportsInterface(bytes4)\":{\"details\":\"See {IERC165-supportsInterface}.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"updateGlobalUnlockTime(address,uint256,uint256)\":{\"details\":\"- If a global unlock time is set, it takes precedence over per-deposit lock periods.         - Once a mode is set, it cannot be changed.\",\"params\":{\"projectId\":\"The project identifier.\",\"unlockTime\":\"The new global unlock time. Must be non-zero.\",\"vault\":\"The address of the vault.\"}},\"updateLockPeriod(address,uint256,uint256)\":{\"params\":{\"lockPeriod\":\"New lock period (in seconds). Must be <= MAX_LOCK_PERIOD.\",\"projectId\":\"The project identifier.\",\"vault\":\"The address of the vault.\"}},\"upgradeToAndCall(address,bytes)\":{\"custom:oz-upgrades-unsafe-allow-reachable\":\"delegatecall\",\"details\":\"Upgrade the implementation of the proxy to `newImplementation`, and subsequently execute the function call encoded in `data`. Calls {_authorizeUpgrade}. Emits an {Upgraded} event.\"}},\"stateVariables\":{\"depositPointers\":{\"details\":\"Mapping to track the pointer for each user's deposits (for Variable mode) so that redeemed deposits need not be shuffled.\"},\"globalLockedShares\":{\"details\":\"Mapping for Global mode: vault => projectId => user => total locked shares.\"},\"lockedDeposits\":{\"details\":\"Mapping for Variable mode: vault => projectId => user => array of deposits. Each deposit record includes the locked share amount and the timestamp when it was recorded.\"},\"projectGlobalUnlockTime\":{\"details\":\"Mapping for the global unlock time set for a project in a vault. Used when the project is in Global mode.\"},\"projectLockModes\":{\"details\":\"Mapping for the lock mode assigned to a project in a vault. Once set, the mode cannot be changed.\"},\"projectLockPeriods\":{\"details\":\"Mapping for the current lock period set for a project in a vault. Used when the project is in Variable mode.\"}},\"title\":\"DepositLockPlugin\",\"version\":1},\"userdoc\":{\"events\":{\"DepositLocked(address,address,uint256,uint256,uint256)\":{\"notice\":\"Event emitted when a deposit is locked in a vault.\"},\"GlobalUnlockTimeUpdated(address,uint256,uint256)\":{\"notice\":\"Event emitted when the global unlock time for a vault is updated.\"},\"LockPeriodUpdated(address,uint256,uint256)\":{\"notice\":\"Event emitted when the lock period for a project in a vault is updated.\"},\"MigrateLocked(address,address,uint256,uint256,uint256)\":{\"notice\":\"Event emitted when a user's shares are migrated from one project to another.\"},\"RedeemLocked(address,address,uint256,uint256,uint256)\":{\"notice\":\"Event emitted when a user redeems locked shares in a vault.\"}},\"kind\":\"user\",\"methods\":{\"MAX_LOCK_PERIOD()\":{\"notice\":\"Maximum allowable lock period \\u2013 365 days.\"},\"checkLocks(address,uint256,address,uint256[])\":{\"notice\":\"Checks specific deposit record indices for whether the lock has expired. Applicable for Variable mode.\"},\"depositLocked(address,uint256,uint256)\":{\"notice\":\"Deposits assets into the vault via this plugin and locks the resulting vault shares.\"},\"getMaturedShares(address,uint256,address)\":{\"notice\":\"Returns the total matured vault shares for a user in a given vault and project.\"},\"migrateLocked(address,uint256,uint256,uint256)\":{\"notice\":\"Migrates locked shares from one project to another. Removes the specified amount of locked shares from the \\\"from\\\" project and creates a new deposit record in the \\\"to\\\" project with a fresh lock time. Requirements: - The destination project must have a lock configuration set. - The user must have at least `shares` matured.\"},\"redeemLocked(address,uint256,uint256)\":{\"notice\":\"Redeems vault shares that have matured (i.e. whose lock period has expired) for the user. Uses pointer-style logic for Variable mode, and direct subtraction for Global mode.\"},\"updateGlobalUnlockTime(address,uint256,uint256)\":{\"notice\":\"Updates the global unlock time for a given project in a vault.\"},\"updateLockPeriod(address,uint256,uint256)\":{\"notice\":\"Updates the deposit lock period for a given project in a vault.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/plugins/DepositLockPlugin.sol\":\"DepositLockPlugin\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[\":@aave-v3-core/=dependencies/aave-v3-core-1.19.4/contracts/\",\":@morpho-blue/=dependencies/morpho-blue-1.0.0/src/\",\":@openzeppelin-upgradeable/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/\",\":@openzeppelin/=dependencies/openzeppelin-contracts-5.1.0/\",\":@openzeppelin/contracts-upgradeable/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/\",\":@openzeppelin/contracts/=dependencies/openzeppelin-contracts-5.1.0/contracts/\",\":@solady/=dependencies/solady-0.0.268/src/\",\":@solmate/=dependencies/solmate-6.8.0/src/\",\":aave-v3-core-1.19.4/=dependencies/aave-v3-core-1.19.4/\",\":ds-test/=dependencies/openzeppelin-contracts-5.1.0/lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=dependencies/openzeppelin-contracts-5.1.0/lib/erc4626-tests/\",\":forge-std-1.9.4/=dependencies/forge-std-1.9.4/src/\",\":forge-std/=dependencies/forge-std-1.9.4/src/\",\":halmos-cheatcodes/=dependencies/openzeppelin-contracts-5.1.0/lib/halmos-cheatcodes/src/\",\":morpho-blue-1.0.0/=dependencies/morpho-blue-1.0.0/\",\":openzeppelin-contracts-5.1.0/=dependencies/openzeppelin-contracts-5.1.0/\",\":openzeppelin-contracts-upgradeable-5.1.0/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/\",\":openzeppelin-contracts/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/lib/openzeppelin-contracts/\",\":solady-0.0.268/=dependencies/solady-0.0.268/src/\",\":solmate-6.8.0/=dependencies/solmate-6.8.0/src/\"]},\"sources\":{\"dependencies/openzeppelin-contracts-5.1.0/contracts/access/IAccessControl.sol\":{\"keccak256\":\"0xc1c2a7f1563b77050dc6d507db9f4ada5d042c1f6a9ddbffdc49c77cdc0a1606\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fd54abb96a6156d9a761f6fdad1d3004bc48d2d4fce47f40a3f91a7ae83fc3a1\",\"dweb:/ipfs/QmUrFSGkTDJ7WaZ6qPVVe3Gn5uN2viPb7x7QQ35UX4DofX\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/access/extensions/IAccessControlEnumerable.sol\":{\"keccak256\":\"0xca774fbe0568762efdc1a7cba31f09549c7fa96dbe97410f4843fa2f0bc000a3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0187ffdbf3d61b6d86cba4fcd9826e53d876987d620533ee84c681bdaf0f3ba3\",\"dweb:/ipfs/QmVJDqdJv6uzHY7ifncfv2QJep8XTzS3bGb4s5Exhuv86m\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/interfaces/IERC1967.sol\":{\"keccak256\":\"0xb25a4f11fa80c702bf5cd85adec90e6f6f507f32f4a8e6f5dbc31e8c10029486\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6917f8a323e7811f041aecd4d9fd6e92455a6fba38a797ac6f6e208c7912b79d\",\"dweb:/ipfs/QmShuYv55wYHGi4EFkDB8QfF7ZCHoKk2efyz3AWY1ExSq7\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/interfaces/draft-IERC1822.sol\":{\"keccak256\":\"0xc42facb5094f2f35f066a7155bda23545e39a3156faef3ddc00185544443ba7d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d3b36282ab029b46bd082619a308a2ea11c309967b9425b7b7a6eb0b0c1c3196\",\"dweb:/ipfs/QmP2YVfDB2FoREax3vJu7QhDnyYRMw52WPrCD4vdT2kuDA\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/proxy/ERC1967/ERC1967Utils.sol\":{\"keccak256\":\"0x911c3346ee26afe188f3b9dc267ef62a7ccf940aba1afa963e3922f0ca3d8a06\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://04539f4419e44a831807d7203375d2bc6a733da256efd02e51290f5d5015218c\",\"dweb:/ipfs/QmPZ97gsAAgaMRPiE2WJfkzRsudQnW5tPAvMgGj1jcTJtR\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/proxy/beacon/IBeacon.sol\":{\"keccak256\":\"0xc59a78b07b44b2cf2e8ab4175fca91e8eca1eee2df7357b8d2a8833e5ea1f64c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5aa4f07e65444784c29cd7bfcc2341b34381e4e5b5da9f0c5bd00d7f430e66fa\",\"dweb:/ipfs/QmWRMh4Q9DpaU9GvsiXmDdoNYMyyece9if7hnfLz7uqzWM\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC1155/IERC1155.sol\":{\"keccak256\":\"0x68d6fdbeb467192c3627a46aa7bf5cbb73267363b740abc511f521a5a41a446e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7ce608c19d5e917c60f9c8aa3e5f0eb05b326280ac0a235e8bb9a848a3a64a91\",\"dweb:/ipfs/QmdLPsWQJj7JvRae8MM13GEo4PBXaEFmD4b4heqcyMJNPG\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC1155/IERC1155Receiver.sol\":{\"keccak256\":\"0x61a23d601c2ab69dd726ac55058604cbda98e1d728ba31a51c379a3f9eeea715\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d8cbb06152d82ebdd5ba1d33454e5759492040f309a82637c7e99c948a04fa20\",\"dweb:/ipfs/QmQQuLr6WSfLu97pMEh6XLefk99TSj9k5Qu1zXGPepwGiK\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol\":{\"keccak256\":\"0x35d120c427299af1525aaf07955314d9e36a62f14408eb93dec71a2e001f74d3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://743e38acf441eece428c008be399c40a3ca5b2d595d58faf656cbdbac1a45374\",\"dweb:/ipfs/QmcWDuWkndox3dxa5P7ZgpKy3iuQKkxBq1cR9hPV1ZzAfa\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe06a3f08a987af6ad2e1c1e774405d4fe08f1694b67517438b467cecf0da0ef7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://df6f0c459663c9858b6cba2cda1d14a7d05a985bed6d2de72bd8e78c25ee79db\",\"dweb:/ipfs/QmeTTxZ7qVk9rjEv2R4CpCwdf8UMCcRqDNMvzNxHc3Fnn9\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/utils/Address.sol\":{\"keccak256\":\"0x9d8da059267bac779a2dbbb9a26c2acf00ca83085e105d62d5d4ef96054a47f5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c78e2aa4313323cecd1ef12a8d6265b96beee1a199923abf55d9a2a9e291ad23\",\"dweb:/ipfs/QmUTs2KStXucZezzFo3EYeqYu47utu56qrF7jj1Gue65vb\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/utils/Errors.sol\":{\"keccak256\":\"0x6afa713bfd42cf0f7656efa91201007ac465e42049d7de1d50753a373648c123\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ba1d02f4847670a1b83dec9f7d37f0b0418d6043447b69f3a29a5f9efc547fcf\",\"dweb:/ipfs/QmQ7iH2keLNUKgq2xSWcRmuBE5eZ3F5whYAkAGzCNNoEWB\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/utils/StorageSlot.sol\":{\"keccak256\":\"0xcf74f855663ce2ae00ed8352666b7935f6cddea2932fdf2c3ecd30a9b1cd0e97\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9f660b1f351b757dfe01438e59888f31f33ded3afcf5cb5b0d9bf9aa6f320a8b\",\"dweb:/ipfs/QmarDJ5hZEgBtCmmrVzEZWjub9769eD686jmzb2XpSU1cM\"]},\"dependencies/openzeppelin-contracts-5.1.0/contracts/utils/introspection/IERC165.sol\":{\"keccak256\":\"0x79796192ec90263f21b464d5bc90b777a525971d3de8232be80d9c4f9fb353b8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f6fda447a62815e8064f47eff0dd1cf58d9207ad69b5d32280f8d7ed1d1e4621\",\"dweb:/ipfs/QmfDRc7pxfaXB2Dh9np5Uf29Na3pQ7tafRS684wd3GLjVL\"]},\"dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/access/OwnableUpgradeable.sol\":{\"keccak256\":\"0xc163fcf9bb10138631a9ba5564df1fa25db9adff73bd9ee868a8ae1858fe093a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9706d43a0124053d9880f6e31a59f31bc0a6a3dc1acd66ce0a16e1111658c5f6\",\"dweb:/ipfs/QmUFmfowzkRwGtDu36cXV9SPTBHJ3n7dG9xQiK5B28jTf2\"]},\"dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/proxy/utils/Initializable.sol\":{\"keccak256\":\"0x631188737069917d2f909d29ce62c4d48611d326686ba6683e26b72a23bfac0b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7a61054ae84cd6c4d04c0c4450ba1d6de41e27e0a2c4f1bcdf58f796b401c609\",\"dweb:/ipfs/QmUvtdp7X1mRVyC3CsHrtPbgoqWaXHp3S1ZR24tpAQYJWM\"]},\"dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/proxy/utils/UUPSUpgradeable.sol\":{\"keccak256\":\"0xf72d3b11f41fccbbdcacd121f994daab8267ccfceb1fb4f247e4ba274c169d27\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1e46ee40ddc9e2009176ce5d76aa2c046fd68f2ed52d02d77db191365b7c5b2e\",\"dweb:/ipfs/QmZnxgPmCCHosdvbh4J65uTaFYeGtZGzQ1sXRdeh1y68Zr\"]},\"dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/token/ERC1155/utils/ERC1155HolderUpgradeable.sol\":{\"keccak256\":\"0x64c8658be9360779b99ef60db78d3172be7056e1d078fc1cabf6b693862c831c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8d84defeb7d80a2aedd79b6989001c374f622ae1042eb5b846cfb38926d7aef7\",\"dweb:/ipfs/QmTiJg72NoQkG75g8rzoz1hehqRXetwhodQkqzvKYuhexL\"]},\"dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/utils/ContextUpgradeable.sol\":{\"keccak256\":\"0xdbef5f0c787055227243a7318ef74c8a5a1108ca3a07f2b3a00ef67769e1e397\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://08e39f23d5b4692f9a40803e53a8156b72b4c1f9902a88cd65ba964db103dab9\",\"dweb:/ipfs/QmPKn6EYDgpga7KtpkA8wV2yJCYGMtc9K4LkJfhKX2RVSV\"]},\"dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/utils/introspection/ERC165Upgradeable.sol\":{\"keccak256\":\"0xc8ed8d2056934b7675b695dec032f2920c2f5c6cf33a17ca85650940675323ab\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3c8ccc75d1cd792d192aa09e54dd49ea35fe85baa9fcd17486f29227d9f29b89\",\"dweb:/ipfs/QmbboSbFUEiM9tdEgBwuTRb7bykFoJXZ7dsSr1PSREJXMr\"]},\"src/interfaces/IAccessFacet.sol\":{\"keccak256\":\"0x27f38694d09e0406f3ffc70181eb7a1f1983e92e2731b9ad6267cd6028ece4a5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ba76224cd95b994ffa912edf8e7772fb460bc22db878f1ac159e29a95fb9ac0c\",\"dweb:/ipfs/QmbrRyM8Lm8VKcFRvsf67qxhRAR1pVTTz8ZDP1fh2LqHhu\"]},\"src/interfaces/IClientsFacet.sol\":{\"keccak256\":\"0xb7a98a771e3ad244bf6b02af41eff2c4e078bf3e5a45dd058cbdcbdad5679360\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8d7f1b5fc0d8337ac237d48cc2ed0f137ac824f83bafb18d741e0e718d3a8735\",\"dweb:/ipfs/Qma9njV3ccxNd8nfHPmyQCYKT2grpYwRjcChefs7jSAiyG\"]},\"src/interfaces/IFundsFacet.sol\":{\"keccak256\":\"0xca6d93b9b2d10a76219bce80fabf3ee9cc6e9ae57271e454b6b4acf94c69a18c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://08bf6ff202496d7d639ec35dc30750577a3375fa774ff6bc40a54a9213f019f1\",\"dweb:/ipfs/Qmbb67kJk7rQY2M9d4gWcLWB8e8q9uNPbbKUiiMXnBvycn\"]},\"src/interfaces/IManagementFacet.sol\":{\"keccak256\":\"0x230382232a1a2b328515eaba7b8087d88c5cee0d0e26c39d3dfe34e895c782f8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://298374cac57659166e85bb25388e927a40302473aa4864d8b40249a250c06b06\",\"dweb:/ipfs/Qmb1e7pURuXZ7fMECmMhYFkJH84aNJptM8NKySPcrSAE3y\"]},\"src/interfaces/IMulticall.sol\":{\"keccak256\":\"0x26757f059459a0dc426b1b60ba593323836efcbfcb1089840105e0c2fdbae3a4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3d1976dc796fe575f8e3bea10e18c332f15231197c0a9055d06b439dd5920b7a\",\"dweb:/ipfs/Qmcb2p92oXmJ37YUqvdcM5EeEToE6YZv1h8Tfcr9xEmAqm\"]},\"src/interfaces/IOwnerFacet.sol\":{\"keccak256\":\"0x18797394e922bc840e796c43c06fb9f0a05545a697a28feb0a7a0cfbaae085a0\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://71ffeae445db0cc7997e21f847985e3c65a249fd47c14be68b0bbbc6b893dfee\",\"dweb:/ipfs/QmezktoBsqwYi1tzAryoBceEwpXBZURV7sXy3bZcGU5SsP\"]},\"src/interfaces/IStrategyBase.sol\":{\"keccak256\":\"0x856054079ef1a6c79990f544cccd4255ef07298f33be10b3d940b30045782b0b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://732ec2321ac64ba2d8ac65f57d4334c127c9b96f8f8aa081fe1edb6cb1ceed01\",\"dweb:/ipfs/QmS7DJjbdkJVuZA2YvGu6PfkKbvJj9ggaAJYJCxCWcW4KM\"]},\"src/interfaces/ISwapper.sol\":{\"keccak256\":\"0xaa0ad419c5b348f2f60d6e5f7d152396e7c530c35ee86e9933b3f9acea0a9b7a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://43f444de2169581c9e988bd389c6f9b7099f43de20e06b14f0786dcae872d033\",\"dweb:/ipfs/QmVj7g4DR86etLFPymVe5wqMZfs4Ud8HXWX94RT6NynMh5\"]},\"src/interfaces/IYelayLiteVault.sol\":{\"keccak256\":\"0x5dc5297e0516e2a1bbca20495794a8eeaf4af99736edea3c5ecaccf30d0db043\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8b65ee4e8bc17a53b77af3503132443b1ac18a924bb7b781d93330e09884e148\",\"dweb:/ipfs/QmUJbnd4dwbQQ1ib1J4VU6rM7ndpTrPgwPo3BhZz177KWD\"]},\"src/libraries/LibClients.sol\":{\"keccak256\":\"0x69e232177c7df25c06fa71adec318c6827abde507212b5b40aa70e3fe4dbf1c3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a43caf1918a0a346f5d9573dd340ca37f21d1ef9e8bcdc45cee6fbac184e437c\",\"dweb:/ipfs/QmNnHYKab8j6iXvnzV67nw4RMpQD3LH2K2by8zq2waf8b8\"]},\"src/libraries/LibErrors.sol\":{\"keccak256\":\"0x2844a0e489a7003bbe4906e88ef8fdc23b6d7118386edee462b180e673b91aa5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f854de90a635c3f6f429af92b95f43068526d5c32a1df308f65e1782734950d4\",\"dweb:/ipfs/QmcHV1mNVxFeDbdWzEJgpcY4xVTPuJ84trwKNMtvc5YKxJ\"]},\"src/libraries/LibEvents.sol\":{\"keccak256\":\"0x5776af2bf741057e29d218270934a4ca0728ebd8fcc788904d520e2676e5d793\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://747a05d3a1cf91c1fa1c717e81d37d53e44db83a507bb126cf3f63f179cea919\",\"dweb:/ipfs/Qmd1TvfKVDsdfEQjyrzGXDKLjkLYwvXgCGZtce2qgKvwsq\"]},\"src/plugins/DepositLockPlugin.sol\":{\"keccak256\":\"0xb3d83b6dcbece694df58d3e26ff8d44bdf0af66e6511e56d0828c4be382cf5ac\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9215299282092be77d1944e3ae71850a7d42cd83634886690c1a93577809ae74\",\"dweb:/ipfs/QmdFBcxdo6jH5UzTD2YrYD1FhejgR3sMnKKGrbfHXAgDWU\"]}},\"version\":1}",
-    "metadata": {
-        "compiler": {
-            "version": "0.8.28+commit.7893614a"
-        },
-        "language": "Solidity",
-        "output": {
-            "abi": [{
-                "inputs": [],
-                "stateMutability": "nonpayable",
-                "type": "constructor"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "target",
-                    "type": "address"
-                }],
-                "type": "error",
-                "name": "AddressEmptyCode"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "implementation",
-                    "type": "address"
-                }],
-                "type": "error",
-                "name": "ERC1967InvalidImplementation"
-            }, {
-                "inputs": [],
-                "type": "error",
-                "name": "ERC1967NonPayable"
-            }, {
-                "inputs": [],
-                "type": "error",
-                "name": "FailedCall"
-            }, {
-                "inputs": [{
-                    "internalType": "uint256",
-                    "name": "unlockTime",
-                    "type": "uint256"
-                }],
-                "type": "error",
-                "name": "GlobalUnlockTimeNotReached"
-            }, {
-                "inputs": [],
-                "type": "error",
-                "name": "InvalidInitialization"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256"
-                }, {
-                    "internalType": "uint256",
-                    "name": "lockMode",
-                    "type": "uint256"
-                }],
-                "type": "error",
-                "name": "LockModeAlreadySet"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256"
-                }],
-                "type": "error",
-                "name": "LockModeNotSetForProject"
-            }, {
-                "inputs": [{
-                    "internalType": "uint256",
-                    "name": "lockPeriod",
-                    "type": "uint256"
-                }],
-                "type": "error",
-                "name": "LockPeriodExceedsMaximum"
-            }, {
-                "inputs": [{
-                    "internalType": "uint256",
-                    "name": "requested",
-                    "type": "uint256"
-                }, {
-                    "internalType": "uint256",
-                    "name": "remaining",
-                    "type": "uint256"
-                }],
-                "type": "error",
-                "name": "NotEnoughShares"
-            }, {
-                "inputs": [],
-                "type": "error",
-                "name": "NotInitializing"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256"
-                }, {
-                    "internalType": "address",
-                    "name": "caller",
-                    "type": "address"
-                }],
-                "type": "error",
-                "name": "NotProjectOwner"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "owner",
-                    "type": "address"
-                }],
-                "type": "error",
-                "name": "OwnableInvalidOwner"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "account",
-                    "type": "address"
-                }],
-                "type": "error",
-                "name": "OwnableUnauthorizedAccount"
-            }, {
-                "inputs": [],
-                "type": "error",
-                "name": "UUPSUnauthorizedCallContext"
-            }, {
-                "inputs": [{
-                    "internalType": "bytes32",
-                    "name": "slot",
-                    "type": "bytes32"
-                }],
-                "type": "error",
-                "name": "UUPSUnsupportedProxiableUUID"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "user",
-                    "type": "address",
-                    "indexed": true
-                }, {
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address",
-                    "indexed": true
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256",
-                    "indexed": true
-                }, {
-                    "internalType": "uint256",
-                    "name": "shares",
-                    "type": "uint256",
-                    "indexed": false
-                }, {
-                    "internalType": "uint256",
-                    "name": "assets",
-                    "type": "uint256",
-                    "indexed": false
-                }],
-                "type": "event",
-                "name": "DepositLocked",
-                "anonymous": false
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address",
-                    "indexed": true
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256",
-                    "indexed": true
-                }, {
-                    "internalType": "uint256",
-                    "name": "unlockTime",
-                    "type": "uint256",
-                    "indexed": false
-                }],
-                "type": "event",
-                "name": "GlobalUnlockTimeUpdated",
-                "anonymous": false
-            }, {
-                "inputs": [{
-                    "internalType": "uint64",
-                    "name": "version",
-                    "type": "uint64",
-                    "indexed": false
-                }],
-                "type": "event",
-                "name": "Initialized",
-                "anonymous": false
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address",
-                    "indexed": true
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256",
-                    "indexed": true
-                }, {
-                    "internalType": "uint256",
-                    "name": "lockPeriod",
-                    "type": "uint256",
-                    "indexed": false
-                }],
-                "type": "event",
-                "name": "LockPeriodUpdated",
-                "anonymous": false
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "user",
-                    "type": "address",
-                    "indexed": true
-                }, {
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address",
-                    "indexed": true
-                }, {
-                    "internalType": "uint256",
-                    "name": "fromProjectId",
-                    "type": "uint256",
-                    "indexed": false
-                }, {
-                    "internalType": "uint256",
-                    "name": "toProjectId",
-                    "type": "uint256",
-                    "indexed": false
-                }, {
-                    "internalType": "uint256",
-                    "name": "shares",
-                    "type": "uint256",
-                    "indexed": false
-                }],
-                "type": "event",
-                "name": "MigrateLocked",
-                "anonymous": false
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "previousOwner",
-                    "type": "address",
-                    "indexed": true
-                }, {
-                    "internalType": "address",
-                    "name": "newOwner",
-                    "type": "address",
-                    "indexed": true
-                }],
-                "type": "event",
-                "name": "OwnershipTransferred",
-                "anonymous": false
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "user",
-                    "type": "address",
-                    "indexed": true
-                }, {
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address",
-                    "indexed": true
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256",
-                    "indexed": true
-                }, {
-                    "internalType": "uint256",
-                    "name": "shares",
-                    "type": "uint256",
-                    "indexed": false
-                }, {
-                    "internalType": "uint256",
-                    "name": "assets",
-                    "type": "uint256",
-                    "indexed": false
-                }],
-                "type": "event",
-                "name": "RedeemLocked",
-                "anonymous": false
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "implementation",
-                    "type": "address",
-                    "indexed": true
-                }],
-                "type": "event",
-                "name": "Upgraded",
-                "anonymous": false
-            }, {
-                "inputs": [],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "MAX_LOCK_PERIOD",
-                "outputs": [{
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }]
-            }, {
-                "inputs": [],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "UPGRADE_INTERFACE_VERSION",
-                "outputs": [{
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256"
-                }, {
-                    "internalType": "address",
-                    "name": "user",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256[]",
-                    "name": "indices",
-                    "type": "uint256[]"
-                }],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "checkLocks",
-                "outputs": [{
-                    "internalType": "bool[]",
-                    "name": "statuses",
-                    "type": "bool[]"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256"
-                }, {
-                    "internalType": "uint256",
-                    "name": "assets",
-                    "type": "uint256"
-                }],
-                "stateMutability": "nonpayable",
-                "type": "function",
-                "name": "depositLocked",
-                "outputs": [{
-                    "internalType": "uint256",
-                    "name": "shares",
-                    "type": "uint256"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256"
-                }, {
-                    "internalType": "address",
-                    "name": "user",
-                    "type": "address"
-                }],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "getMaturedShares",
-                "outputs": [{
-                    "internalType": "uint256",
-                    "name": "totalMatured",
-                    "type": "uint256"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }, {
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "globalLockedShares",
-                "outputs": [{
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "owner",
-                    "type": "address"
-                }],
-                "stateMutability": "nonpayable",
-                "type": "function",
-                "name": "initialize"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }, {
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "lockedDeposits",
-                "outputs": [{
-                    "internalType": "uint192",
-                    "name": "shares",
-                    "type": "uint192"
-                }, {
-                    "internalType": "uint64",
-                    "name": "lockTime",
-                    "type": "uint64"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "fromProjectId",
-                    "type": "uint256"
-                }, {
-                    "internalType": "uint256",
-                    "name": "toProjectId",
-                    "type": "uint256"
-                }, {
-                    "internalType": "uint256",
-                    "name": "shares",
-                    "type": "uint256"
-                }],
-                "stateMutability": "nonpayable",
-                "type": "function",
-                "name": "migrateLocked"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }, {
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256[]",
-                    "name": "",
-                    "type": "uint256[]"
-                }, {
-                    "internalType": "uint256[]",
-                    "name": "",
-                    "type": "uint256[]"
-                }, {
-                    "internalType": "bytes",
-                    "name": "",
-                    "type": "bytes"
-                }],
-                "stateMutability": "nonpayable",
-                "type": "function",
-                "name": "onERC1155BatchReceived",
-                "outputs": [{
-                    "internalType": "bytes4",
-                    "name": "",
-                    "type": "bytes4"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }, {
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }, {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }, {
-                    "internalType": "bytes",
-                    "name": "",
-                    "type": "bytes"
-                }],
-                "stateMutability": "nonpayable",
-                "type": "function",
-                "name": "onERC1155Received",
-                "outputs": [{
-                    "internalType": "bytes4",
-                    "name": "",
-                    "type": "bytes4"
-                }]
-            }, {
-                "inputs": [],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "owner",
-                "outputs": [{
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "projectGlobalUnlockTime",
-                "outputs": [{
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "projectLockModes",
-                "outputs": [{
-                    "internalType": "enum DepositLockPlugin.LockMode",
-                    "name": "",
-                    "type": "uint8"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "projectLockPeriods",
-                "outputs": [{
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }]
-            }, {
-                "inputs": [],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "proxiableUUID",
-                "outputs": [{
-                    "internalType": "bytes32",
-                    "name": "",
-                    "type": "bytes32"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256"
-                }, {
-                    "internalType": "uint256",
-                    "name": "shares",
-                    "type": "uint256"
-                }],
-                "stateMutability": "nonpayable",
-                "type": "function",
-                "name": "redeemLocked",
-                "outputs": [{
-                    "internalType": "uint256",
-                    "name": "assets",
-                    "type": "uint256"
-                }]
-            }, {
-                "inputs": [],
-                "stateMutability": "nonpayable",
-                "type": "function",
-                "name": "renounceOwnership"
-            }, {
-                "inputs": [{
-                    "internalType": "bytes4",
-                    "name": "interfaceId",
-                    "type": "bytes4"
-                }],
-                "stateMutability": "view",
-                "type": "function",
-                "name": "supportsInterface",
-                "outputs": [{
-                    "internalType": "bool",
-                    "name": "",
-                    "type": "bool"
-                }]
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "newOwner",
-                    "type": "address"
-                }],
-                "stateMutability": "nonpayable",
-                "type": "function",
-                "name": "transferOwnership"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256"
-                }, {
-                    "internalType": "uint256",
-                    "name": "unlockTime",
-                    "type": "uint256"
-                }],
-                "stateMutability": "nonpayable",
-                "type": "function",
-                "name": "updateGlobalUnlockTime"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "vault",
-                    "type": "address"
-                }, {
-                    "internalType": "uint256",
-                    "name": "projectId",
-                    "type": "uint256"
-                }, {
-                    "internalType": "uint256",
-                    "name": "lockPeriod",
-                    "type": "uint256"
-                }],
-                "stateMutability": "nonpayable",
-                "type": "function",
-                "name": "updateLockPeriod"
-            }, {
-                "inputs": [{
-                    "internalType": "address",
-                    "name": "newImplementation",
-                    "type": "address"
-                }, {
-                    "internalType": "bytes",
-                    "name": "data",
-                    "type": "bytes"
-                }],
-                "stateMutability": "payable",
-                "type": "function",
-                "name": "upgradeToAndCall"
-            }],
-            "devdoc": {
-                "kind": "dev",
-                "methods": {
-                    "checkLocks(address,uint256,address,uint256[])": {
-                        "params": {
-                            "indices": "Array of deposit indices to check.",
-                            "projectId": "The project identifier.",
-                            "user": "The address of the user.",
-                            "vault": "The vault address."
-                        },
-                        "returns": {
-                            "statuses": "A boolean array indicating if the corresponding deposit is matured."
-                        }
-                    },
-                    "constructor": {
-                        "custom:oz-upgrades-unsafe-allow": "constructor"
-                    },
-                    "depositLocked(address,uint256,uint256)": {
-                        "params": {
-                            "assets": "The amount of underlying assets to deposit.",
-                            "projectId": "The project identifier.",
-                            "vault": "The vault address."
-                        },
-                        "returns": {
-                            "shares": "The amount of vault shares received."
-                        }
-                    },
-                    "getMaturedShares(address,uint256,address)": {
-                        "params": {
-                            "projectId": "The project identifier.",
-                            "user": "The address of the user.",
-                            "vault": "The vault address."
-                        },
-                        "returns": {
-                            "totalMatured": "The total matured vault shares for the user."
-                        }
-                    },
-                    "initialize(address)": {
-                        "details": "Initializes the contract with the given owner.",
-                        "params": {
-                            "owner": "The address of the owner."
-                        }
-                    },
-                    "migrateLocked(address,uint256,uint256,uint256)": {
-                        "params": {
-                            "fromProjectId": "The source project ID.",
-                            "shares": "The amount of locked shares to migrate.",
-                            "toProjectId": "The destination project ID.",
-                            "vault": "The vault address."
-                        }
-                    },
-                    "owner()": {
-                        "details": "Returns the address of the current owner."
-                    },
-                    "proxiableUUID()": {
-                        "details": "Implementation of the ERC-1822 {proxiableUUID} function. This returns the storage slot used by the implementation. It is used to validate the implementation's compatibility when performing an upgrade. IMPORTANT: A proxy pointing at a proxiable contract should not be considered proxiable itself, because this risks bricking a proxy that upgrades to it, by delegating to itself until out of gas. Thus it is critical that this function revert if invoked through a proxy. This is guaranteed by the `notDelegated` modifier."
-                    },
-                    "redeemLocked(address,uint256,uint256)": {
-                        "params": {
-                            "projectId": "The project identifier.",
-                            "shares": "The amount of shares the user wishes to redeem.",
-                            "vault": "The vault address."
-                        },
-                        "returns": {
-                            "assets": "The amount of underlying assets redeemed."
-                        }
-                    },
-                    "renounceOwnership()": {
-                        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
-                    },
-                    "supportsInterface(bytes4)": {
-                        "details": "See {IERC165-supportsInterface}."
-                    },
-                    "transferOwnership(address)": {
-                        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
-                    },
-                    "updateGlobalUnlockTime(address,uint256,uint256)": {
-                        "details": "- If a global unlock time is set, it takes precedence over per-deposit lock periods.         - Once a mode is set, it cannot be changed.",
-                        "params": {
-                            "projectId": "The project identifier.",
-                            "unlockTime": "The new global unlock time. Must be non-zero.",
-                            "vault": "The address of the vault."
-                        }
-                    },
-                    "updateLockPeriod(address,uint256,uint256)": {
-                        "params": {
-                            "lockPeriod": "New lock period (in seconds). Must be <= MAX_LOCK_PERIOD.",
-                            "projectId": "The project identifier.",
-                            "vault": "The address of the vault."
-                        }
-                    },
-                    "upgradeToAndCall(address,bytes)": {
-                        "custom:oz-upgrades-unsafe-allow-reachable": "delegatecall",
-                        "details": "Upgrade the implementation of the proxy to `newImplementation`, and subsequently execute the function call encoded in `data`. Calls {_authorizeUpgrade}. Emits an {Upgraded} event."
-                    }
-                },
-                "version": 1
-            },
-            "userdoc": {
-                "kind": "user",
-                "methods": {
-                    "MAX_LOCK_PERIOD()": {
-                        "notice": "Maximum allowable lock period – 365 days."
-                    },
-                    "checkLocks(address,uint256,address,uint256[])": {
-                        "notice": "Checks specific deposit record indices for whether the lock has expired. Applicable for Variable mode."
-                    },
-                    "depositLocked(address,uint256,uint256)": {
-                        "notice": "Deposits assets into the vault via this plugin and locks the resulting vault shares."
-                    },
-                    "getMaturedShares(address,uint256,address)": {
-                        "notice": "Returns the total matured vault shares for a user in a given vault and project."
-                    },
-                    "migrateLocked(address,uint256,uint256,uint256)": {
-                        "notice": "Migrates locked shares from one project to another. Removes the specified amount of locked shares from the \"from\" project and creates a new deposit record in the \"to\" project with a fresh lock time. Requirements: - The destination project must have a lock configuration set. - The user must have at least `shares` matured."
-                    },
-                    "redeemLocked(address,uint256,uint256)": {
-                        "notice": "Redeems vault shares that have matured (i.e. whose lock period has expired) for the user. Uses pointer-style logic for Variable mode, and direct subtraction for Global mode."
-                    },
-                    "updateGlobalUnlockTime(address,uint256,uint256)": {
-                        "notice": "Updates the global unlock time for a given project in a vault."
-                    },
-                    "updateLockPeriod(address,uint256,uint256)": {
-                        "notice": "Updates the deposit lock period for a given project in a vault."
-                    }
-                },
-                "version": 1
-            }
-        },
-        "settings": {
-            "remappings": ["@aave-v3-core/=dependencies/aave-v3-core-1.19.4/contracts/", "@morpho-blue/=dependencies/morpho-blue-1.0.0/src/", "@openzeppelin-upgradeable/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/", "@openzeppelin/=dependencies/openzeppelin-contracts-5.1.0/", "@openzeppelin/contracts-upgradeable/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/", "@openzeppelin/contracts/=dependencies/openzeppelin-contracts-5.1.0/contracts/", "@solady/=dependencies/solady-0.0.268/src/", "@solmate/=dependencies/solmate-6.8.0/src/", "aave-v3-core-1.19.4/=dependencies/aave-v3-core-1.19.4/", "ds-test/=dependencies/openzeppelin-contracts-5.1.0/lib/forge-std/lib/ds-test/src/", "erc4626-tests/=dependencies/openzeppelin-contracts-5.1.0/lib/erc4626-tests/", "forge-std-1.9.4/=dependencies/forge-std-1.9.4/src/", "forge-std/=dependencies/forge-std-1.9.4/src/", "halmos-cheatcodes/=dependencies/openzeppelin-contracts-5.1.0/lib/halmos-cheatcodes/src/", "morpho-blue-1.0.0/=dependencies/morpho-blue-1.0.0/", "openzeppelin-contracts-5.1.0/=dependencies/openzeppelin-contracts-5.1.0/", "openzeppelin-contracts-upgradeable-5.1.0/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/", "openzeppelin-contracts/=dependencies/openzeppelin-contracts-upgradeable-5.1.0/lib/openzeppelin-contracts/", "solady-0.0.268/=dependencies/solady-0.0.268/src/", "solmate-6.8.0/=dependencies/solmate-6.8.0/src/"],
-            "optimizer": {
-                "enabled": false,
-                "runs": 200
-            },
-            "metadata": {
-                "bytecodeHash": "ipfs"
-            },
-            "compilationTarget": {
-                "src/plugins/DepositLockPlugin.sol": "DepositLockPlugin"
-            },
-            "evmVersion": "cancun",
-            "libraries": {}
-        },
-        "sources": {
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/access/IAccessControl.sol": {
-                "keccak256": "0xc1c2a7f1563b77050dc6d507db9f4ada5d042c1f6a9ddbffdc49c77cdc0a1606",
-                "urls": ["bzz-raw://fd54abb96a6156d9a761f6fdad1d3004bc48d2d4fce47f40a3f91a7ae83fc3a1", "dweb:/ipfs/QmUrFSGkTDJ7WaZ6qPVVe3Gn5uN2viPb7x7QQ35UX4DofX"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/access/extensions/IAccessControlEnumerable.sol": {
-                "keccak256": "0xca774fbe0568762efdc1a7cba31f09549c7fa96dbe97410f4843fa2f0bc000a3",
-                "urls": ["bzz-raw://0187ffdbf3d61b6d86cba4fcd9826e53d876987d620533ee84c681bdaf0f3ba3", "dweb:/ipfs/QmVJDqdJv6uzHY7ifncfv2QJep8XTzS3bGb4s5Exhuv86m"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/interfaces/IERC1967.sol": {
-                "keccak256": "0xb25a4f11fa80c702bf5cd85adec90e6f6f507f32f4a8e6f5dbc31e8c10029486",
-                "urls": ["bzz-raw://6917f8a323e7811f041aecd4d9fd6e92455a6fba38a797ac6f6e208c7912b79d", "dweb:/ipfs/QmShuYv55wYHGi4EFkDB8QfF7ZCHoKk2efyz3AWY1ExSq7"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/interfaces/draft-IERC1822.sol": {
-                "keccak256": "0xc42facb5094f2f35f066a7155bda23545e39a3156faef3ddc00185544443ba7d",
-                "urls": ["bzz-raw://d3b36282ab029b46bd082619a308a2ea11c309967b9425b7b7a6eb0b0c1c3196", "dweb:/ipfs/QmP2YVfDB2FoREax3vJu7QhDnyYRMw52WPrCD4vdT2kuDA"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/proxy/ERC1967/ERC1967Utils.sol": {
-                "keccak256": "0x911c3346ee26afe188f3b9dc267ef62a7ccf940aba1afa963e3922f0ca3d8a06",
-                "urls": ["bzz-raw://04539f4419e44a831807d7203375d2bc6a733da256efd02e51290f5d5015218c", "dweb:/ipfs/QmPZ97gsAAgaMRPiE2WJfkzRsudQnW5tPAvMgGj1jcTJtR"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/proxy/beacon/IBeacon.sol": {
-                "keccak256": "0xc59a78b07b44b2cf2e8ab4175fca91e8eca1eee2df7357b8d2a8833e5ea1f64c",
-                "urls": ["bzz-raw://5aa4f07e65444784c29cd7bfcc2341b34381e4e5b5da9f0c5bd00d7f430e66fa", "dweb:/ipfs/QmWRMh4Q9DpaU9GvsiXmDdoNYMyyece9if7hnfLz7uqzWM"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC1155/IERC1155.sol": {
-                "keccak256": "0x68d6fdbeb467192c3627a46aa7bf5cbb73267363b740abc511f521a5a41a446e",
-                "urls": ["bzz-raw://7ce608c19d5e917c60f9c8aa3e5f0eb05b326280ac0a235e8bb9a848a3a64a91", "dweb:/ipfs/QmdLPsWQJj7JvRae8MM13GEo4PBXaEFmD4b4heqcyMJNPG"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC1155/IERC1155Receiver.sol": {
-                "keccak256": "0x61a23d601c2ab69dd726ac55058604cbda98e1d728ba31a51c379a3f9eeea715",
-                "urls": ["bzz-raw://d8cbb06152d82ebdd5ba1d33454e5759492040f309a82637c7e99c948a04fa20", "dweb:/ipfs/QmQQuLr6WSfLu97pMEh6XLefk99TSj9k5Qu1zXGPepwGiK"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
-                "keccak256": "0x35d120c427299af1525aaf07955314d9e36a62f14408eb93dec71a2e001f74d3",
-                "urls": ["bzz-raw://743e38acf441eece428c008be399c40a3ca5b2d595d58faf656cbdbac1a45374", "dweb:/ipfs/QmcWDuWkndox3dxa5P7ZgpKy3iuQKkxBq1cR9hPV1ZzAfa"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/token/ERC20/IERC20.sol": {
-                "keccak256": "0xe06a3f08a987af6ad2e1c1e774405d4fe08f1694b67517438b467cecf0da0ef7",
-                "urls": ["bzz-raw://df6f0c459663c9858b6cba2cda1d14a7d05a985bed6d2de72bd8e78c25ee79db", "dweb:/ipfs/QmeTTxZ7qVk9rjEv2R4CpCwdf8UMCcRqDNMvzNxHc3Fnn9"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/utils/Address.sol": {
-                "keccak256": "0x9d8da059267bac779a2dbbb9a26c2acf00ca83085e105d62d5d4ef96054a47f5",
-                "urls": ["bzz-raw://c78e2aa4313323cecd1ef12a8d6265b96beee1a199923abf55d9a2a9e291ad23", "dweb:/ipfs/QmUTs2KStXucZezzFo3EYeqYu47utu56qrF7jj1Gue65vb"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/utils/Errors.sol": {
-                "keccak256": "0x6afa713bfd42cf0f7656efa91201007ac465e42049d7de1d50753a373648c123",
-                "urls": ["bzz-raw://ba1d02f4847670a1b83dec9f7d37f0b0418d6043447b69f3a29a5f9efc547fcf", "dweb:/ipfs/QmQ7iH2keLNUKgq2xSWcRmuBE5eZ3F5whYAkAGzCNNoEWB"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/utils/StorageSlot.sol": {
-                "keccak256": "0xcf74f855663ce2ae00ed8352666b7935f6cddea2932fdf2c3ecd30a9b1cd0e97",
-                "urls": ["bzz-raw://9f660b1f351b757dfe01438e59888f31f33ded3afcf5cb5b0d9bf9aa6f320a8b", "dweb:/ipfs/QmarDJ5hZEgBtCmmrVzEZWjub9769eD686jmzb2XpSU1cM"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-5.1.0/contracts/utils/introspection/IERC165.sol": {
-                "keccak256": "0x79796192ec90263f21b464d5bc90b777a525971d3de8232be80d9c4f9fb353b8",
-                "urls": ["bzz-raw://f6fda447a62815e8064f47eff0dd1cf58d9207ad69b5d32280f8d7ed1d1e4621", "dweb:/ipfs/QmfDRc7pxfaXB2Dh9np5Uf29Na3pQ7tafRS684wd3GLjVL"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/access/OwnableUpgradeable.sol": {
-                "keccak256": "0xc163fcf9bb10138631a9ba5564df1fa25db9adff73bd9ee868a8ae1858fe093a",
-                "urls": ["bzz-raw://9706d43a0124053d9880f6e31a59f31bc0a6a3dc1acd66ce0a16e1111658c5f6", "dweb:/ipfs/QmUFmfowzkRwGtDu36cXV9SPTBHJ3n7dG9xQiK5B28jTf2"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/proxy/utils/Initializable.sol": {
-                "keccak256": "0x631188737069917d2f909d29ce62c4d48611d326686ba6683e26b72a23bfac0b",
-                "urls": ["bzz-raw://7a61054ae84cd6c4d04c0c4450ba1d6de41e27e0a2c4f1bcdf58f796b401c609", "dweb:/ipfs/QmUvtdp7X1mRVyC3CsHrtPbgoqWaXHp3S1ZR24tpAQYJWM"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/proxy/utils/UUPSUpgradeable.sol": {
-                "keccak256": "0xf72d3b11f41fccbbdcacd121f994daab8267ccfceb1fb4f247e4ba274c169d27",
-                "urls": ["bzz-raw://1e46ee40ddc9e2009176ce5d76aa2c046fd68f2ed52d02d77db191365b7c5b2e", "dweb:/ipfs/QmZnxgPmCCHosdvbh4J65uTaFYeGtZGzQ1sXRdeh1y68Zr"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/token/ERC1155/utils/ERC1155HolderUpgradeable.sol": {
-                "keccak256": "0x64c8658be9360779b99ef60db78d3172be7056e1d078fc1cabf6b693862c831c",
-                "urls": ["bzz-raw://8d84defeb7d80a2aedd79b6989001c374f622ae1042eb5b846cfb38926d7aef7", "dweb:/ipfs/QmTiJg72NoQkG75g8rzoz1hehqRXetwhodQkqzvKYuhexL"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/utils/ContextUpgradeable.sol": {
-                "keccak256": "0xdbef5f0c787055227243a7318ef74c8a5a1108ca3a07f2b3a00ef67769e1e397",
-                "urls": ["bzz-raw://08e39f23d5b4692f9a40803e53a8156b72b4c1f9902a88cd65ba964db103dab9", "dweb:/ipfs/QmPKn6EYDgpga7KtpkA8wV2yJCYGMtc9K4LkJfhKX2RVSV"],
-                "license": "MIT"
-            },
-            "dependencies/openzeppelin-contracts-upgradeable-5.1.0/contracts/utils/introspection/ERC165Upgradeable.sol": {
-                "keccak256": "0xc8ed8d2056934b7675b695dec032f2920c2f5c6cf33a17ca85650940675323ab",
-                "urls": ["bzz-raw://3c8ccc75d1cd792d192aa09e54dd49ea35fe85baa9fcd17486f29227d9f29b89", "dweb:/ipfs/QmbboSbFUEiM9tdEgBwuTRb7bykFoJXZ7dsSr1PSREJXMr"],
-                "license": "MIT"
-            },
-            "src/interfaces/IAccessFacet.sol": {
-                "keccak256": "0x27f38694d09e0406f3ffc70181eb7a1f1983e92e2731b9ad6267cd6028ece4a5",
-                "urls": ["bzz-raw://ba76224cd95b994ffa912edf8e7772fb460bc22db878f1ac159e29a95fb9ac0c", "dweb:/ipfs/QmbrRyM8Lm8VKcFRvsf67qxhRAR1pVTTz8ZDP1fh2LqHhu"],
-                "license": "MIT"
-            },
-            "src/interfaces/IClientsFacet.sol": {
-                "keccak256": "0xb7a98a771e3ad244bf6b02af41eff2c4e078bf3e5a45dd058cbdcbdad5679360",
-                "urls": ["bzz-raw://8d7f1b5fc0d8337ac237d48cc2ed0f137ac824f83bafb18d741e0e718d3a8735", "dweb:/ipfs/Qma9njV3ccxNd8nfHPmyQCYKT2grpYwRjcChefs7jSAiyG"],
-                "license": "MIT"
-            },
-            "src/interfaces/IFundsFacet.sol": {
-                "keccak256": "0xca6d93b9b2d10a76219bce80fabf3ee9cc6e9ae57271e454b6b4acf94c69a18c",
-                "urls": ["bzz-raw://08bf6ff202496d7d639ec35dc30750577a3375fa774ff6bc40a54a9213f019f1", "dweb:/ipfs/Qmbb67kJk7rQY2M9d4gWcLWB8e8q9uNPbbKUiiMXnBvycn"],
-                "license": "MIT"
-            },
-            "src/interfaces/IManagementFacet.sol": {
-                "keccak256": "0x230382232a1a2b328515eaba7b8087d88c5cee0d0e26c39d3dfe34e895c782f8",
-                "urls": ["bzz-raw://298374cac57659166e85bb25388e927a40302473aa4864d8b40249a250c06b06", "dweb:/ipfs/Qmb1e7pURuXZ7fMECmMhYFkJH84aNJptM8NKySPcrSAE3y"],
-                "license": "MIT"
-            },
-            "src/interfaces/IMulticall.sol": {
-                "keccak256": "0x26757f059459a0dc426b1b60ba593323836efcbfcb1089840105e0c2fdbae3a4",
-                "urls": ["bzz-raw://3d1976dc796fe575f8e3bea10e18c332f15231197c0a9055d06b439dd5920b7a", "dweb:/ipfs/Qmcb2p92oXmJ37YUqvdcM5EeEToE6YZv1h8Tfcr9xEmAqm"],
-                "license": "MIT"
-            },
-            "src/interfaces/IOwnerFacet.sol": {
-                "keccak256": "0x18797394e922bc840e796c43c06fb9f0a05545a697a28feb0a7a0cfbaae085a0",
-                "urls": ["bzz-raw://71ffeae445db0cc7997e21f847985e3c65a249fd47c14be68b0bbbc6b893dfee", "dweb:/ipfs/QmezktoBsqwYi1tzAryoBceEwpXBZURV7sXy3bZcGU5SsP"],
-                "license": "GPL-3.0-or-later"
-            },
-            "src/interfaces/IStrategyBase.sol": {
-                "keccak256": "0x856054079ef1a6c79990f544cccd4255ef07298f33be10b3d940b30045782b0b",
-                "urls": ["bzz-raw://732ec2321ac64ba2d8ac65f57d4334c127c9b96f8f8aa081fe1edb6cb1ceed01", "dweb:/ipfs/QmS7DJjbdkJVuZA2YvGu6PfkKbvJj9ggaAJYJCxCWcW4KM"],
-                "license": "MIT"
-            },
-            "src/interfaces/ISwapper.sol": {
-                "keccak256": "0xaa0ad419c5b348f2f60d6e5f7d152396e7c530c35ee86e9933b3f9acea0a9b7a",
-                "urls": ["bzz-raw://43f444de2169581c9e988bd389c6f9b7099f43de20e06b14f0786dcae872d033", "dweb:/ipfs/QmVj7g4DR86etLFPymVe5wqMZfs4Ud8HXWX94RT6NynMh5"],
-                "license": "MIT"
-            },
-            "src/interfaces/IYelayLiteVault.sol": {
-                "keccak256": "0x5dc5297e0516e2a1bbca20495794a8eeaf4af99736edea3c5ecaccf30d0db043",
-                "urls": ["bzz-raw://8b65ee4e8bc17a53b77af3503132443b1ac18a924bb7b781d93330e09884e148", "dweb:/ipfs/QmUJbnd4dwbQQ1ib1J4VU6rM7ndpTrPgwPo3BhZz177KWD"],
-                "license": "MIT"
-            },
-            "src/libraries/LibClients.sol": {
-                "keccak256": "0x69e232177c7df25c06fa71adec318c6827abde507212b5b40aa70e3fe4dbf1c3",
-                "urls": ["bzz-raw://a43caf1918a0a346f5d9573dd340ca37f21d1ef9e8bcdc45cee6fbac184e437c", "dweb:/ipfs/QmNnHYKab8j6iXvnzV67nw4RMpQD3LH2K2by8zq2waf8b8"],
-                "license": "MIT"
-            },
-            "src/libraries/LibErrors.sol": {
-                "keccak256": "0x2844a0e489a7003bbe4906e88ef8fdc23b6d7118386edee462b180e673b91aa5",
-                "urls": ["bzz-raw://f854de90a635c3f6f429af92b95f43068526d5c32a1df308f65e1782734950d4", "dweb:/ipfs/QmcHV1mNVxFeDbdWzEJgpcY4xVTPuJ84trwKNMtvc5YKxJ"],
-                "license": "MIT"
-            },
-            "src/libraries/LibEvents.sol": {
-                "keccak256": "0x5776af2bf741057e29d218270934a4ca0728ebd8fcc788904d520e2676e5d793",
-                "urls": ["bzz-raw://747a05d3a1cf91c1fa1c717e81d37d53e44db83a507bb126cf3f63f179cea919", "dweb:/ipfs/Qmd1TvfKVDsdfEQjyrzGXDKLjkLYwvXgCGZtce2qgKvwsq"],
-                "license": "MIT"
-            },
-            "src/plugins/DepositLockPlugin.sol": {
-                "keccak256": "0xb3d83b6dcbece694df58d3e26ff8d44bdf0af66e6511e56d0828c4be382cf5ac",
-                "urls": ["bzz-raw://9215299282092be77d1944e3ae71850a7d42cd83634886690c1a93577809ae74", "dweb:/ipfs/QmdFBcxdo6jH5UzTD2YrYD1FhejgR3sMnKKGrbfHXAgDWU"],
-                "license": "MIT"
-            }
-        },
-        "version": 1
-    },
-    "id": 112
-}
+[
+	{ "type": "constructor", "inputs": [], "stateMutability": "nonpayable" },
+	{
+		"type": "function",
+		"name": "MAX_LOCK_PERIOD",
+		"inputs": [],
+		"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "UPGRADE_INTERFACE_VERSION",
+		"inputs": [],
+		"outputs": [{ "name": "", "type": "string", "internalType": "string" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "checkLocks",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "user", "type": "address", "internalType": "address" },
+			{ "name": "indices", "type": "uint256[]", "internalType": "uint256[]" }
+		],
+		"outputs": [{ "name": "statuses", "type": "bool[]", "internalType": "bool[]" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "depositLocked",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "assets", "type": "uint256", "internalType": "uint256" }
+		],
+		"outputs": [{ "name": "shares", "type": "uint256", "internalType": "uint256" }],
+		"stateMutability": "nonpayable"
+	},
+	{
+		"type": "function",
+		"name": "depositPointers",
+		"inputs": [
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "uint256", "internalType": "uint256" },
+			{ "name": "", "type": "address", "internalType": "address" }
+		],
+		"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "getLockedDeposits",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "user", "type": "address", "internalType": "address" }
+		],
+		"outputs": [
+			{
+				"name": "",
+				"type": "tuple[]",
+				"internalType": "struct DepositLockPlugin.Deposit[]",
+				"components": [
+					{ "name": "shares", "type": "uint192", "internalType": "uint192" },
+					{ "name": "lockTime", "type": "uint64", "internalType": "uint64" }
+				]
+			}
+		],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "getMaturedShares",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "user", "type": "address", "internalType": "address" }
+		],
+		"outputs": [{ "name": "totalMatured", "type": "uint256", "internalType": "uint256" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "globalLockedShares",
+		"inputs": [
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "uint256", "internalType": "uint256" },
+			{ "name": "", "type": "address", "internalType": "address" }
+		],
+		"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "initialize",
+		"inputs": [{ "name": "owner", "type": "address", "internalType": "address" }],
+		"outputs": [],
+		"stateMutability": "nonpayable"
+	},
+	{
+		"type": "function",
+		"name": "lockedDeposits",
+		"inputs": [
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "uint256", "internalType": "uint256" },
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "uint256", "internalType": "uint256" }
+		],
+		"outputs": [
+			{ "name": "shares", "type": "uint192", "internalType": "uint192" },
+			{ "name": "lockTime", "type": "uint64", "internalType": "uint64" }
+		],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "migrateLocked",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "fromProjectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "toProjectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "shares", "type": "uint256", "internalType": "uint256" }
+		],
+		"outputs": [],
+		"stateMutability": "nonpayable"
+	},
+	{
+		"type": "function",
+		"name": "onERC1155BatchReceived",
+		"inputs": [
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "uint256[]", "internalType": "uint256[]" },
+			{ "name": "", "type": "uint256[]", "internalType": "uint256[]" },
+			{ "name": "", "type": "bytes", "internalType": "bytes" }
+		],
+		"outputs": [{ "name": "", "type": "bytes4", "internalType": "bytes4" }],
+		"stateMutability": "nonpayable"
+	},
+	{
+		"type": "function",
+		"name": "onERC1155Received",
+		"inputs": [
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "uint256", "internalType": "uint256" },
+			{ "name": "", "type": "uint256", "internalType": "uint256" },
+			{ "name": "", "type": "bytes", "internalType": "bytes" }
+		],
+		"outputs": [{ "name": "", "type": "bytes4", "internalType": "bytes4" }],
+		"stateMutability": "nonpayable"
+	},
+	{
+		"type": "function",
+		"name": "owner",
+		"inputs": [],
+		"outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "projectGlobalUnlockTime",
+		"inputs": [
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "uint256", "internalType": "uint256" }
+		],
+		"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "projectLockModes",
+		"inputs": [
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "uint256", "internalType": "uint256" }
+		],
+		"outputs": [{ "name": "", "type": "uint8", "internalType": "enum DepositLockPlugin.LockMode" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "projectLockPeriods",
+		"inputs": [
+			{ "name": "", "type": "address", "internalType": "address" },
+			{ "name": "", "type": "uint256", "internalType": "uint256" }
+		],
+		"outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "proxiableUUID",
+		"inputs": [],
+		"outputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "redeemLocked",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "shares", "type": "uint256", "internalType": "uint256" }
+		],
+		"outputs": [{ "name": "assets", "type": "uint256", "internalType": "uint256" }],
+		"stateMutability": "nonpayable"
+	},
+	{
+		"type": "function",
+		"name": "renounceOwnership",
+		"inputs": [],
+		"outputs": [],
+		"stateMutability": "nonpayable"
+	},
+	{
+		"type": "function",
+		"name": "supportsInterface",
+		"inputs": [{ "name": "interfaceId", "type": "bytes4", "internalType": "bytes4" }],
+		"outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+		"stateMutability": "view"
+	},
+	{
+		"type": "function",
+		"name": "transferOwnership",
+		"inputs": [{ "name": "newOwner", "type": "address", "internalType": "address" }],
+		"outputs": [],
+		"stateMutability": "nonpayable"
+	},
+	{
+		"type": "function",
+		"name": "updateGlobalUnlockTime",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "unlockTime", "type": "uint256", "internalType": "uint256" }
+		],
+		"outputs": [],
+		"stateMutability": "nonpayable"
+	},
+	{
+		"type": "function",
+		"name": "updateLockPeriod",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "lockPeriod", "type": "uint256", "internalType": "uint256" }
+		],
+		"outputs": [],
+		"stateMutability": "nonpayable"
+	},
+	{
+		"type": "function",
+		"name": "upgradeToAndCall",
+		"inputs": [
+			{ "name": "newImplementation", "type": "address", "internalType": "address" },
+			{ "name": "data", "type": "bytes", "internalType": "bytes" }
+		],
+		"outputs": [],
+		"stateMutability": "payable"
+	},
+	{
+		"type": "event",
+		"name": "DepositLocked",
+		"inputs": [
+			{ "name": "user", "type": "address", "indexed": true, "internalType": "address" },
+			{ "name": "vault", "type": "address", "indexed": true, "internalType": "address" },
+			{
+				"name": "projectId",
+				"type": "uint256",
+				"indexed": true,
+				"internalType": "uint256"
+			},
+			{
+				"name": "shares",
+				"type": "uint256",
+				"indexed": false,
+				"internalType": "uint256"
+			},
+			{ "name": "assets", "type": "uint256", "indexed": false, "internalType": "uint256" }
+		],
+		"anonymous": false
+	},
+	{
+		"type": "event",
+		"name": "GlobalUnlockTimeUpdated",
+		"inputs": [
+			{ "name": "vault", "type": "address", "indexed": true, "internalType": "address" },
+			{
+				"name": "projectId",
+				"type": "uint256",
+				"indexed": true,
+				"internalType": "uint256"
+			},
+			{
+				"name": "unlockTime",
+				"type": "uint256",
+				"indexed": false,
+				"internalType": "uint256"
+			}
+		],
+		"anonymous": false
+	},
+	{
+		"type": "event",
+		"name": "Initialized",
+		"inputs": [{ "name": "version", "type": "uint64", "indexed": false, "internalType": "uint64" }],
+		"anonymous": false
+	},
+	{
+		"type": "event",
+		"name": "LockPeriodUpdated",
+		"inputs": [
+			{ "name": "vault", "type": "address", "indexed": true, "internalType": "address" },
+			{
+				"name": "projectId",
+				"type": "uint256",
+				"indexed": true,
+				"internalType": "uint256"
+			},
+			{
+				"name": "lockPeriod",
+				"type": "uint256",
+				"indexed": false,
+				"internalType": "uint256"
+			}
+		],
+		"anonymous": false
+	},
+	{
+		"type": "event",
+		"name": "MigrateLocked",
+		"inputs": [
+			{ "name": "user", "type": "address", "indexed": true, "internalType": "address" },
+			{ "name": "vault", "type": "address", "indexed": true, "internalType": "address" },
+			{
+				"name": "fromProjectId",
+				"type": "uint256",
+				"indexed": false,
+				"internalType": "uint256"
+			},
+			{
+				"name": "toProjectId",
+				"type": "uint256",
+				"indexed": false,
+				"internalType": "uint256"
+			},
+			{ "name": "shares", "type": "uint256", "indexed": false, "internalType": "uint256" }
+		],
+		"anonymous": false
+	},
+	{
+		"type": "event",
+		"name": "OwnershipTransferred",
+		"inputs": [
+			{
+				"name": "previousOwner",
+				"type": "address",
+				"indexed": true,
+				"internalType": "address"
+			},
+			{
+				"name": "newOwner",
+				"type": "address",
+				"indexed": true,
+				"internalType": "address"
+			}
+		],
+		"anonymous": false
+	},
+	{
+		"type": "event",
+		"name": "RedeemLocked",
+		"inputs": [
+			{ "name": "user", "type": "address", "indexed": true, "internalType": "address" },
+			{ "name": "vault", "type": "address", "indexed": true, "internalType": "address" },
+			{
+				"name": "projectId",
+				"type": "uint256",
+				"indexed": true,
+				"internalType": "uint256"
+			},
+			{
+				"name": "shares",
+				"type": "uint256",
+				"indexed": false,
+				"internalType": "uint256"
+			},
+			{ "name": "assets", "type": "uint256", "indexed": false, "internalType": "uint256" }
+		],
+		"anonymous": false
+	},
+	{
+		"type": "event",
+		"name": "Upgraded",
+		"inputs": [
+			{
+				"name": "implementation",
+				"type": "address",
+				"indexed": true,
+				"internalType": "address"
+			}
+		],
+		"anonymous": false
+	},
+	{
+		"type": "error",
+		"name": "AddressEmptyCode",
+		"inputs": [{ "name": "target", "type": "address", "internalType": "address" }]
+	},
+	{
+		"type": "error",
+		"name": "ERC1967InvalidImplementation",
+		"inputs": [{ "name": "implementation", "type": "address", "internalType": "address" }]
+	},
+	{ "type": "error", "name": "ERC1967NonPayable", "inputs": [] },
+	{ "type": "error", "name": "FailedCall", "inputs": [] },
+	{
+		"type": "error",
+		"name": "GlobalUnlockTimeNotReached",
+		"inputs": [{ "name": "unlockTime", "type": "uint256", "internalType": "uint256" }]
+	},
+	{
+		"type": "error",
+		"name": "GlobalUnlockTimeReached",
+		"inputs": [{ "name": "unlockTime", "type": "uint256", "internalType": "uint256" }]
+	},
+	{ "type": "error", "name": "InvalidInitialization", "inputs": [] },
+	{
+		"type": "error",
+		"name": "LockModeAlreadySet",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "lockMode", "type": "uint256", "internalType": "uint256" }
+		]
+	},
+	{
+		"type": "error",
+		"name": "LockModeMismatch",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "lockMode", "type": "uint256", "internalType": "uint256" }
+		]
+	},
+	{
+		"type": "error",
+		"name": "LockModeNotSetForProject",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" }
+		]
+	},
+	{
+		"type": "error",
+		"name": "LockPeriodExceedsMaximum",
+		"inputs": [{ "name": "lockPeriod", "type": "uint256", "internalType": "uint256" }]
+	},
+	{
+		"type": "error",
+		"name": "NotEnoughShares",
+		"inputs": [
+			{ "name": "requested", "type": "uint256", "internalType": "uint256" },
+			{ "name": "available", "type": "uint256", "internalType": "uint256" }
+		]
+	},
+	{ "type": "error", "name": "NotInitializing", "inputs": [] },
+	{
+		"type": "error",
+		"name": "NotProjectOwner",
+		"inputs": [
+			{ "name": "vault", "type": "address", "internalType": "address" },
+			{ "name": "projectId", "type": "uint256", "internalType": "uint256" },
+			{ "name": "caller", "type": "address", "internalType": "address" }
+		]
+	},
+	{
+		"type": "error",
+		"name": "OwnableInvalidOwner",
+		"inputs": [{ "name": "owner", "type": "address", "internalType": "address" }]
+	},
+	{
+		"type": "error",
+		"name": "OwnableUnauthorizedAccount",
+		"inputs": [{ "name": "account", "type": "address", "internalType": "address" }]
+	},
+	{ "type": "error", "name": "UUPSUnauthorizedCallContext", "inputs": [] },
+	{
+		"type": "error",
+		"name": "UUPSUnsupportedProxiableUUID",
+		"inputs": [{ "name": "slot", "type": "bytes32", "internalType": "bytes32" }]
+	}
+]

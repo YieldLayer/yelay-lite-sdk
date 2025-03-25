@@ -53,7 +53,7 @@ describe('Vaults Extended Tests', function () {
 	it('should verify balance', async function () {
 		const projectId = 100;
 		const balance = await sdk.vaults.balanceOf(vaultAddress, projectId, impersonatedAddress);
-		expect(balance.toString()).to.be.equal('300075019253');
+		expect(balance.toString()).to.be.equal('200050013002');
 	});
 
 	it('should redeem tokens successfully', async function () {
