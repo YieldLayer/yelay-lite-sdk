@@ -1,7 +1,7 @@
 import { IYieldBackend } from '../../app/ports/backend/IYieldBackend';
 import ApiWrapperService from '../../services/ApiWrapperService';
 import { TimeFrame } from '../../types/backend';
-import { VaultYield, YieldAggregated } from '../../types/yield';
+import { PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
 import { appendTimeFrameQuery } from '../../utils/backend';
 
 export class YieldBackend extends ApiWrapperService implements IYieldBackend {
@@ -16,11 +16,27 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		const searchParams = new URLSearchParams();
 		searchParams.append('chainId', this.chainId);
 		if (vaults) {
-			vaults.forEach(vault => searchParams.append('address', vault));
+			vaults.forEach(vault => searchParams.append('v', vault));
 		}
 		appendTimeFrameQuery(searchParams, timeFrame);
 
 		const res: { data: VaultYield[] } = await this.axios.get(`/interest/vaults?${searchParams.toString()}`);
+
+		return res.data;
+	}
+
+	async getPoolsYield(vaults?: string[], pools?: number[], timeFrame?: TimeFrame): Promise<PoolYield[]> {
+		const searchParams = new URLSearchParams();
+		searchParams.append('chainId', this.chainId);
+		if (vaults) {
+			vaults.forEach(vault => searchParams.append('v', vault));
+		}
+		if (pools) {
+			pools.forEach(pool => searchParams.append('p', pool.toString()));
+		}
+		appendTimeFrameQuery(searchParams, timeFrame);
+
+		const res: { data: PoolYield[] } = await this.axios.get(`/interest/pools?${searchParams.toString()}`);
 
 		return res.data;
 	}

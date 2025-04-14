@@ -1,6 +1,6 @@
 import { YieldBackend } from '../../adapters/backend/YieldBackend';
 import { TimeFrame } from '../../types/backend';
-import { VaultYield, YieldAggregated } from '../../types/yield';
+import { PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
 import { getTimestampOneWeekAgo } from '../../utils/backend';
 
 export class Yield {
@@ -21,6 +21,17 @@ export class Yield {
 			vaults,
 			timeFrame ? timeFrame : { fromTimestamp: getTimestampOneWeekAgo() },
 		);
+	}
+
+	/**
+	 * Retrieves the yield of the pools within a given timeframe.
+	 * @param {string[]} vaults - Optional array of vault addresses to filter results.
+	 * @param {number[]} [pools] - Optional array of pool IDs to filter results.
+	 * @param {TimeFrame} [timeFrame] - Optional timeframe for filtering yield data.
+	 * @returns {Promise<PoolYield[]>} A promise that resolves to the yield data for the pools.
+	 */
+	public async getPoolsYield(vaults?: string[], pools?: number[], timeFrame?: TimeFrame): Promise<PoolYield[]> {
+		return await this.yieldBackend.getPoolsYield(vaults, pools, timeFrame);
 	}
 
 	/**

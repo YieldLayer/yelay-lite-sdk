@@ -6,6 +6,13 @@ export type VaultYield = EventsRange & {
 	apy: string;
 };
 
+export type PoolYield = EventsRange & {
+	vault: string;
+	pools: {
+		[id: number]: string;
+	};
+};
+
 export type YieldAggregated = EventsRange & {
 	vault: string;
 	user: string;
