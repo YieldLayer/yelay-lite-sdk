@@ -11,6 +11,7 @@ export const getEnvironment = (chainId: ChainId, testing: boolean): SDKConfig =>
 				contracts: {
 					VaultWrapper: '0xE252b5c05a18140F15E1941dD2Df8a95bDa8A20b',
 					Swapper: '0x769F5bc628CF538E1D64F2e8ED235A8831312249',
+					DepositLockPlugin: '0x92f4Ad3cBA90Bc8f7DD88C899B0d4b42263969F5',
 				},
 				backendUrl: 'https://lite.dev.yelay.io/v2',
 			};
@@ -19,6 +20,7 @@ export const getEnvironment = (chainId: ChainId, testing: boolean): SDKConfig =>
 				contracts: {
 					VaultWrapper: '0xdccf337ea77b687a4daca5586351b08f8927c825',
 					Swapper: '0xbbc6e62f23f714405d7e0b4d3dde079e22748a58',
+					DepositLockPlugin: '0xa3f36Bc04E3E592259b51781fA151bb7342781C4',
 				},
 				backendUrl,
 			};
@@ -29,6 +31,7 @@ export const getEnvironment = (chainId: ChainId, testing: boolean): SDKConfig =>
 			contracts: {
 				VaultWrapper: '0xf65d02700915259602D9105b66401513D1CB61ff',
 				Swapper: '0xD49Dc240CE448BE0513803AB82B85F8484748871',
+				DepositLockPlugin: '0xACa04A50519c831f58E5Aa1C5D8aE942402FB8e1',
 			},
 			backendUrl,
 		};

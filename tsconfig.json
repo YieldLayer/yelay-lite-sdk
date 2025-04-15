@@ -1,17 +1,8 @@
 {
+	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
-		"target": "ES2021",
-		"module": "commonjs",
-		"declaration": true,
-		"strictNullChecks": true,
-		"esModuleInterop": true,
-		"downlevelIteration": true,
-		"outDir": "./build",
-		"rootDir": "src",
-		"sourceMap": true,
-		"strict": true,
-		"types": ["jest", "node"]
+		"rootDir": ".",
+		"types": ["mocha"]
 	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules", "**/__tests__/*", "tests/**/*"]
+	"include": ["src/**/*", "test/**/*", "hardhat.config.ts"]
 }

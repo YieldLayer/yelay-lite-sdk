@@ -1,6 +1,7 @@
 import { Provider } from '@ethersproject/abstract-provider';
 import { Signer } from 'ethers';
 import { ContractFactory } from './adapters/smartContract/ContractFactory';
+import { DepositLockPlugin } from './app/services/DepositLockPlugin';
 import { Pools } from './app/services/Pools';
 import { Vaults } from './app/services/Vaults';
 import { Yield } from './app/services/Yield';
@@ -10,6 +11,7 @@ import { ChainId } from './types/config';
 export class YelayLiteSdk {
 	public vaults: Vaults;
 	public yields: Yield;
+	public depositLock: DepositLockPlugin;
 	public pools: Pools;
 	// TODO: remove after integrating gathering swapCalldata into the flow
 	public swapperAddress: string;
@@ -31,6 +33,8 @@ export class YelayLiteSdk {
 		this.vaults = new Vaults(contractFactory, config.backendUrl, chainId, signerOrProvider);
 
 		this.yields = new Yield(config.backendUrl, chainId);
+
+		this.depositLock = new DepositLockPlugin(contractFactory);
 
 		this.pools = new Pools(contractFactory);
 

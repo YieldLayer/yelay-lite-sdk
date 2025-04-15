@@ -1,14 +1,14 @@
 import { IYieldBackend } from '../../app/ports/backend/IYieldBackend';
-import ApiWrapperService from '../../services/ApiWrapperService';
 import { TimeFrame } from '../../types/backend';
 import { PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
 import { appendTimeFrameQuery } from '../../utils/backend';
 
-export class YieldBackend extends ApiWrapperService implements IYieldBackend {
+export class YieldBackend implements IYieldBackend {
 	private chainId: string;
+	private backendUrl: string;
 
 	constructor(backendUrl: string, chainId: number) {
-		super(backendUrl);
+		this.backendUrl = backendUrl;
 		this.chainId = chainId.toString();
 	}
 
@@ -20,9 +20,11 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		}
 		appendTimeFrameQuery(searchParams, timeFrame);
 
-		const res: { data: VaultYield[] } = await this.axios.get(`/interest/vaults?${searchParams.toString()}`);
+		const result = (await fetch(`${this.backendUrl}/interest/vaults?${searchParams.toString()}`).then(r =>
+			r.json(),
+		)) as VaultYield[];
 
-		return res.data;
+		return result;
 	}
 
 	async getPoolsYield(vaults?: string[], pools?: number[], timeFrame?: TimeFrame): Promise<PoolYield[]> {
@@ -53,7 +55,9 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		pools?.forEach(pool => searchParams.append('p', pool.toString()));
 		users?.forEach(user => searchParams.append('u', user.toString()));
 		appendTimeFrameQuery(searchParams, timeFrame);
-		const res: { data: YieldAggregated[] } = await this.axios.get(`/interest/users?${searchParams.toString()}`);
-		return res.data;
+		const result = (await fetch(`${this.backendUrl}/interest/users?${searchParams.toString()}`).then(r =>
+			r.json(),
+		)) as YieldAggregated[];
+		return result;
 	}
 }

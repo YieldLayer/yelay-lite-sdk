@@ -37,6 +37,10 @@ const sdk = new YelayLiteSdk(signerOrProvider, chainId);
 
 ```
 
+## Features
+
+The SDK provides access to the following services:
+
 ## Get vaults
 
 Get all vaults managed on network.
@@ -148,6 +152,14 @@ const vaultsYield = await sdk.yields.getVaultsYield();
 ```ts
 const aggregatedYieldData = await sdk.yields.getYields();
 ```
+
+## Testing
+
+-   `npm i`
+-   Run `npm run build`
+-   `cp .env.sample .env`
+-   Fill in the required environment variables in the `.env` file
+-   Run `npm run test`
 
 ## License
 

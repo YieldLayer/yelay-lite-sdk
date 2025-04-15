@@ -10,6 +10,8 @@ import {
 	IYelayLiteVault__factory,
 	VaultWrapper,
 	VaultWrapper__factory,
+	DepositLockPlugin,
+	DepositLockPlugin__factory,
 } from '../../generated/typechain';
 
 export class ContractFactory implements IContractFactory {
@@ -25,5 +27,9 @@ export class ContractFactory implements IContractFactory {
 
 	getErc20(address: string): ERC20 {
 		return ERC20__factory.connect(address, this.signerOrProvider);
+	}
+
+	getDepositLockPlugin(): DepositLockPlugin {
+		return DepositLockPlugin__factory.connect(this.contractAddresses.DepositLockPlugin, this.signerOrProvider);
 	}
 }
