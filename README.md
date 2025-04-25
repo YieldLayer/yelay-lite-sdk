@@ -137,6 +137,26 @@ const userPoolBalance = await sdk.vaults.balanceOf(vault, pool, await signer.get
 const poolsTvl = await sdk.pools.getPoolsTvl(vault, [pool]);
 ```
 
+## Get historical TVL data for a vault and pool
+
+```ts
+// Fetch historical TVL data with various filter options
+const historicalTVL = await sdk.pools.historicalTVL({
+  vaultAddress: "0x1234...5678", // Required: The vault address to get TVL for
+  poolId: 1,                     // Required: The specific pool ID to query
+  fromTimestamp: 1641034800,     // Optional: Start time in seconds (Jan 1, 2022)
+  toTimestamp: 1672570800,       // Optional: End time in seconds (Jan 1, 2023)
+  page: 1,                       // Optional: Page number for pagination (starts at 1)
+  pageSize: 30                   // Optional: Number of records per page (max 100)
+});
+
+// Example with just the required parameters
+const currentTVL = await sdk.pools.historicalTVL({
+  vaultAddress: "0x1234...5678", 
+  poolId: 1
+});
+```
+
 ## Get yield data on vaults (filtering on vaults/timeframe)
 
 ```ts

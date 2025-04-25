@@ -32,7 +32,7 @@ export class YelayLiteSdk {
 
 		this.yields = new Yield(config.backendUrl, chainId);
 
-		this.pools = new Pools(contractFactory);
+		this.pools = new Pools(contractFactory, config.backendUrl, chainId);
 
 		this.swapperAddress = config.contracts.Swapper;
 	}
