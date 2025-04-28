@@ -166,8 +166,8 @@ The historicalTVL method returns a paginated response with the following structu
 {
   data: [
     {
-      vaultAddress: "0x1f463353fea78e38568499cf117437493d334ecf",
-      poolId: 121,
+      vaultAddress: "0x1234...5678",
+      poolId: 1,
       createTimestamp: 1745820000,
       assets: "31000000000000"
     },
