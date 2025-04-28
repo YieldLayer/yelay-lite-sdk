@@ -1,5 +1,6 @@
 import { IPoolsBackend } from '../../app/ports/backend/IPoolsBackend';
 import ApiWrapperService from '../../services/ApiWrapperService';
+import { PaginatedResponse } from '../../types/backend';
 import { HistoricalTVL, HistoricalTVLParams } from '../../types/pools';
 
 export class PoolsBackend extends ApiWrapperService implements IPoolsBackend {
@@ -14,9 +15,9 @@ export class PoolsBackend extends ApiWrapperService implements IPoolsBackend {
 	 * Retrieves historical TVL (Total Value Locked) data for a specific vault address and optional pool IDs.
 	 *
 	 * @param params - Object containing parameters for the historical TVL query
-	 * @returns A promise that resolves to an array of historical TVL data objects.
+	 * @returns A promise that resolves to a paginated response containing historical TVL data objects.
 	 */
-	async historicalTVL(params: HistoricalTVLParams): Promise<HistoricalTVL[]> {
+	async historicalTVL(params: HistoricalTVLParams): Promise<PaginatedResponse<HistoricalTVL>> {
 		const searchParams = new URLSearchParams();
 
 		searchParams.append('chainId', this.chainId.toString());
@@ -37,7 +38,7 @@ export class PoolsBackend extends ApiWrapperService implements IPoolsBackend {
 			searchParams.append('pageSize', params.pageSize.toString());
 		}
 
-		const res: { data: HistoricalTVL[] } = await this.axios.get(`/v2/tvl?${searchParams.toString()}`);
+		const res = await this.axios.get<PaginatedResponse<HistoricalTVL>>(`/tvl?${searchParams.toString()}`);
 		return res.data;
 	}
 }

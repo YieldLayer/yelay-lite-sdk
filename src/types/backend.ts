@@ -20,6 +20,14 @@ export type PaginationParams = {
 	pageSize?: string;
 };
 
+export type PaginatedResponse<T> = {
+	data: T[];
+	totalItems: number;
+	totalPages: number;
+	currentPage: number;
+	pageSize: number;
+};
+
 export enum SortOrder {
 	ASC = 'ASC',
 	DESC = 'DESC',

@@ -1,6 +1,7 @@
 import { SmartContractAdapter } from '../../adapters/smartContract';
 import { PoolsBackend } from '../../adapters/backend/PoolsBackend';
 import { IContractFactory } from '../ports/IContractFactory';
+import { PaginatedResponse } from '../../types/backend';
 import { PoolsTvl, HistoricalTVL, HistoricalTVLParams } from '../../types/pools';
 
 export class Pools {
@@ -39,9 +40,9 @@ export class Pools {
 	 *   - `page` *(optional)*: Page number for pagination (starts at 1).
 	 *   - `pageSize` *(optional)*: Number of records per page (max 100).
 	 *
-	 * @returns {Promise<HistoricalTVL[]>} Resolves with an array of historical TVL entries.
+	 * @returns {Promise<PaginatedResponse<HistoricalTVL>>} Resolves with a paginated response of historical TVL entries.
 	 */
-	public async historicalTVL(params: HistoricalTVLParams): Promise<HistoricalTVL[]> {
+	public async historicalTVL(params: HistoricalTVLParams): Promise<PaginatedResponse<HistoricalTVL>> {
 		return await this.poolsBackend.historicalTVL(params);
 	}
 }
