@@ -157,6 +157,29 @@ const currentTVL = await sdk.pools.historicalTVL({
 });
 ```
 
+### Response Format
+
+The historicalTVL method returns a paginated response with the following structure:
+
+```ts
+// Example response from historicalTVL
+{
+  data: [
+    {
+      vaultAddress: "0x1f463353fea78e38568499cf117437493d334ecf",
+      poolId: 121,
+      createTimestamp: 1745820000,
+      assets: "31000000000000"
+    },
+    // ... more data items
+  ],
+  totalItems: 11,    // Total number of items matching the query
+  totalPages: 1,     // Total number of pages
+  currentPage: 1,    // Current page number
+  pageSize: 30       // Number of items per page
+}
+```
+
 ## Get yield data on vaults (filtering on vaults/timeframe)
 
 ```ts
