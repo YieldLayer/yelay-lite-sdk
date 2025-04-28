@@ -21,9 +21,11 @@ describe('Pools', () => {
 	});
 
 	it('get historical TVL', async () => {
+		const vaultAddress = '0x1f463353fea78e38568499cf117437493d334ecf';
+		const poolId = 121;
 		const paginatedResponse = await sdk.pools.historicalTVL({
-			vaultAddress: '0x1f463353fea78e38568499cf117437493d334ecf',
-			poolId: 121,
+			vaultAddress,
+			poolId,
 		});
 
 		// Check if we got a paginated response with the expected format
@@ -33,17 +35,10 @@ describe('Pools', () => {
 		expect(paginatedResponse.currentPage).toBeDefined();
 		expect(paginatedResponse.pageSize).toBeDefined();
 
-		console.log('Paginated Historical TVL Response:', {
-			totalItems: paginatedResponse.totalItems,
-			totalPages: paginatedResponse.totalPages,
-			currentPage: paginatedResponse.currentPage,
-			pageSize: paginatedResponse.pageSize,
-			dataLength: paginatedResponse.data.length,
-		});
-
-		// Log a few items if available
-		if (paginatedResponse.data.length > 0) {
-			console.log('Sample TVL data:', paginatedResponse.data[0]);
-		}
+		const firstTVL = paginatedResponse.data[0];
+		expect(firstTVL.vaultAddress).toEqual(vaultAddress);
+		expect(firstTVL.poolId).toEqual(poolId);
+		expect(firstTVL.createTimestamp).toBeDefined();
+		expect(firstTVL.assets).toBeDefined();
 	});
 });
