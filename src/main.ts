@@ -30,7 +30,7 @@ export class YelayLiteSdk {
 
 		this.vaults = new Vaults(contractFactory, config.backendUrl, chainId, signerOrProvider);
 
-		this.yields = new Yield(config.backendUrl, chainId);
+		this.yields = new Yield(contractFactory, config.backendUrl, chainId, signerOrProvider);
 
 		this.pools = new Pools(contractFactory, config.backendUrl, chainId);
 

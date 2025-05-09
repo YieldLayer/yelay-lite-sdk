@@ -38,7 +38,6 @@ export class PoolsBackend extends ApiWrapperService implements IPoolsBackend {
 			searchParams.append('pageSize', params.pageSize.toString());
 		}
 
-		const res = await this.axios.get<PaginatedResponse<HistoricalTVL>>(`/tvl?${searchParams.toString()}`);
-		return res.data;
+		return this.get<PaginatedResponse<HistoricalTVL>>(`/tvl?${searchParams.toString()}`);
 	}
 }

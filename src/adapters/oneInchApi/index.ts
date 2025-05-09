@@ -15,16 +15,16 @@ export class OneInchApi extends ApiWrapperService implements IOneInchApi {
 		network: number,
 		slippage = 0.1,
 	): Promise<OneInchSwapRes> {
-		console.log(
-			`/swap/v6.0/${network.toString()}/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${amountInDecimals.toString()}&fromAddress=${fromAddress}&slippage=${slippage}&disableEstimate=true&allowPartialFill=false&includeTokensInfo=true`,
-		);
+		throw new Error('Not implemented');
 
-		const res: { data: OneInchSwapRes } = await this.axios.get('', {
-			params: {
-				getRequest: `/swap/v6.0/${network.toString()}/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${amountInDecimals.toString()}&fromAddress=${fromAddress}&slippage=${slippage}&disableEstimate=true&allowPartialFill=false&includeTokensInfo=true`,
-			},
-		});
-
-		return res.data;
+		// console.log(
+		// 	`/swap/v6.0/${network.toString()}/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${amountInDecimals.toString()}&fromAddress=${fromAddress}&slippage=${slippage}&disableEstimate=true&allowPartialFill=false&includeTokensInfo=true`,
+		// );
+		// const res: { data: OneInchSwapRes } = await this.axios.get('', {
+		// 	params: {
+		// 		getRequest: `/swap/v6.0/${network.toString()}/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${amountInDecimals.toString()}&fromAddress=${fromAddress}&slippage=${slippage}&disableEstimate=true&allowPartialFill=false&includeTokensInfo=true`,
+		// 	},
+		// });
+		// return res.data;
 	}
 }

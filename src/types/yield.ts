@@ -20,3 +20,16 @@ export type YieldAggregated = EventsRange & {
 		[id: number]: string;
 	};
 };
+
+export type ClaimRequest = {
+	yelayLiteVault: string;
+	projectId: number;
+	cycle: number;
+	yieldSharesTotal: string;
+	proof: string[];
+};
+
+export type ClaimableYield = {
+	claimable: string;
+	claimRequest: ClaimRequest;
+};

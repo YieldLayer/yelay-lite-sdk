@@ -1,14 +1,12 @@
-import axios, { AxiosInstance } from 'axios';
-
-// this class makes it easy to swap out axios for any other GraphQL request library
 abstract class ApiWrapperService {
-	public axios: AxiosInstance;
+	private apiUrl: string;
 
 	constructor(API_URL: string) {
-		this.axios = axios.create({
-			baseURL: API_URL,
-			headers: { 'Content-Type': 'application/json' },
-		});
+		this.apiUrl = API_URL;
+	}
+
+	async get<T>(path: string): Promise<T> {
+		return fetch(`${this.apiUrl}${path}`).then(r => r.json());
 	}
 }
 
