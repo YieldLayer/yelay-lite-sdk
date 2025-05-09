@@ -1,4 +1,3 @@
-import { BigNumber } from 'ethers';
 import { EventsRange } from './backend';
 
 export type VaultYield = EventsRange & {
