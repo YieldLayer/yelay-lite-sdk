@@ -1,7 +1,7 @@
 import { IYieldBackend } from '../../app/ports/backend/IYieldBackend';
 import ApiWrapperService from '../../services/ApiWrapperService';
 import { TimeFrame } from '../../types/backend';
-import { PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
+import { ClaimRequest, PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
 import { appendTimeFrameQuery } from '../../utils/backend';
 
 export class YieldBackend extends ApiWrapperService implements IYieldBackend {
@@ -20,9 +20,7 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		}
 		appendTimeFrameQuery(searchParams, timeFrame);
 
-		const res: { data: VaultYield[] } = await this.axios.get(`/interest/vaults?${searchParams.toString()}`);
-
-		return res.data;
+		return this.get<VaultYield[]>(`/interest/vaults?${searchParams.toString()}`);
 	}
 
 	async getPoolsYield(vaults?: string[], pools?: number[], timeFrame?: TimeFrame): Promise<PoolYield[]> {
@@ -36,9 +34,7 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		}
 		appendTimeFrameQuery(searchParams, timeFrame);
 
-		const res: { data: PoolYield[] } = await this.axios.get(`/interest/pools?${searchParams.toString()}`);
-
-		return res.data;
+		return this.get<PoolYield[]>(`/interest/pools?${searchParams.toString()}`);
 	}
 
 	async getYields(
@@ -53,7 +49,13 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		pools?.forEach(pool => searchParams.append('p', pool.toString()));
 		users?.forEach(user => searchParams.append('u', user.toString()));
 		appendTimeFrameQuery(searchParams, timeFrame);
-		const res: { data: YieldAggregated[] } = await this.axios.get(`/interest/users?${searchParams.toString()}`);
-		return res.data;
+		return this.get<YieldAggregated[]>(`/interest/users?${searchParams.toString()}`);
+	}
+
+	async getClaimRequests(user: string): Promise<ClaimRequest[]> {
+		const searchParams = new URLSearchParams();
+		searchParams.append('chainId', this.chainId);
+		searchParams.append('u', user.toString());
+		return this.get<ClaimRequest[]>(`/interest/claim-proof?${searchParams.toString()}`);
 	}
 }

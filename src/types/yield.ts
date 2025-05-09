@@ -1,3 +1,4 @@
+import { BigNumber } from 'ethers';
 import { EventsRange } from './backend';
 
 export type VaultYield = EventsRange & {
@@ -19,4 +20,17 @@ export type YieldAggregated = EventsRange & {
 	pools: {
 		[id: number]: string;
 	};
+};
+
+export type ClaimRequest = {
+	yelayLiteVault: string;
+	projectId: number;
+	cycle: number;
+	yieldSharesTotal: string;
+	proof: string[];
+};
+
+export type ClaimableYield = {
+	claimable: string;
+	claimRequest: ClaimRequest;
 };
