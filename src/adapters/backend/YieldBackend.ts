@@ -56,6 +56,6 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		const searchParams = new URLSearchParams();
 		searchParams.append('chainId', this.chainId);
 		searchParams.append('u', user.toString());
-		return this.get<ClaimRequest[]>(`/interest/claim-proof?${searchParams.toString()}`);
+		return this.get<ClaimRequest[]>(`/claim-proof?${searchParams.toString()}`);
 	}
 }
