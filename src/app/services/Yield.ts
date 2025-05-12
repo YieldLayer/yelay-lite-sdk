@@ -71,7 +71,7 @@ export class Yield {
 
 		const claimedShares = await Promise.all(
 			claimRequests.map(c =>
-				this.smartContractAdapter.yieldExtractor.getClaimedShares(user, c.yelayLiteVault, c.projectId),
+				this.smartContractAdapter.yieldExtractor.getClaimedShares(user, c.yelayLiteVault, c.pool),
 			),
 		);
 

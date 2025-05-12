@@ -16,9 +16,17 @@ export class YieldExtractor implements IYieldExtractor {
 	public async claim(claimRequests: ClaimRequest[], overrides?: Overrides): Promise<ContractTransaction> {
 		const yieldExtractor = this.contractFactory.getYieldExtractor();
 
-		const estimatedGas = await yieldExtractor.estimateGas.claim(claimRequests);
+		const args = claimRequests.map(c => ({
+			yelayLiteVault: c.yelayLiteVault,
+			projectId: c.pool,
+			cycle: c.cycle,
+			yieldSharesTotal: c.yieldSharesTotal,
+			proof: c.proof,
+		}));
 
-		return yieldExtractor.claim(claimRequests, {
+		const estimatedGas = await yieldExtractor.estimateGas.claim(args);
+
+		return yieldExtractor.claim(args, {
 			gasLimit: getIncreasedGasLimit(estimatedGas),
 			...overrides,
 		});
