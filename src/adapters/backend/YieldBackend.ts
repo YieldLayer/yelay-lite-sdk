@@ -1,7 +1,7 @@
 import { IYieldBackend } from '../../app/ports/backend/IYieldBackend';
 import ApiWrapperService from '../../services/ApiWrapperService';
 import { TimeFrame } from '../../types/backend';
-import { ClaimRequest, PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
+import { ClaimRequest, ClaimRequestRaw, PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
 import { appendTimeFrameQuery } from '../../utils/backend';
 
 export class YieldBackend extends ApiWrapperService implements IYieldBackend {
@@ -61,6 +61,13 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 				searchParams.append('p', poolId.toString());
 			}
 		}
-		return this.get<ClaimRequest[]>(`/claim-proof?${searchParams.toString()}`);
+		const result = await this.get<ClaimRequestRaw[]>(`/claim-proof?${searchParams.toString()}`);
+		return result.map(c => ({
+			yelayLiteVault: c.yelayLiteVault,
+			pool: c.projectId,
+			cycle: c.cycle,
+			yieldSharesTotal: c.yieldSharesTotal,
+			proof: c.proof,
+		}));
 	}
 }
