@@ -16,15 +16,5 @@ export class OneInchApi extends ApiWrapperService implements IOneInchApi {
 		slippage = 0.1,
 	): Promise<OneInchSwapRes> {
 		throw new Error('Not implemented');
-
-		// console.log(
-		// 	`/swap/v6.0/${network.toString()}/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${amountInDecimals.toString()}&fromAddress=${fromAddress}&slippage=${slippage}&disableEstimate=true&allowPartialFill=false&includeTokensInfo=true`,
-		// );
-		// const res: { data: OneInchSwapRes } = await this.axios.get('', {
-		// 	params: {
-		// 		getRequest: `/swap/v6.0/${network.toString()}/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${amountInDecimals.toString()}&fromAddress=${fromAddress}&slippage=${slippage}&disableEstimate=true&allowPartialFill=false&includeTokensInfo=true`,
-		// 	},
-		// });
-		// return res.data;
 	}
 }
