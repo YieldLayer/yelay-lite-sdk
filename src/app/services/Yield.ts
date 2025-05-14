@@ -75,10 +75,15 @@ export class Yield {
 			),
 		);
 
-		return claimRequests.map((c, i) => ({
-			claimable: BigNumber.from(c.yieldSharesTotal).sub(claimedShares[i]).toString(),
-			claimRequest: c,
-		}));
+		return claimRequests.map((c, i) => {
+			const claimable = BigNumber.from(c.yieldSharesTotal).sub(claimedShares[i]);
+			const claimed = BigNumber.from(c.yieldSharesTotal).sub(claimable);
+			return {
+				claimable: claimable.toString(),
+				claimed: claimed.toString(),
+				claimRequest: c,
+			};
+		});
 	}
 
 	async claimYield(claimRequests: ClaimRequest[]): Promise<ContractTransaction> {

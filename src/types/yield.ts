@@ -31,5 +31,6 @@ export type ClaimRequest = {
 
 export type ClaimableYield = {
 	claimable: string;
+	claimed: string;
 	claimRequest: ClaimRequest;
 };
