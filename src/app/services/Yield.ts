@@ -66,8 +66,8 @@ export class Yield {
 		return await this.yieldBackend.getYields(vaults, pools, users, timeFrame);
 	}
 
-	async getClaimableYield(user: string): Promise<ClaimableYield[]> {
-		const claimRequests = await this.yieldBackend.getClaimRequests(user);
+	async getClaimableYield(user: string, p?: number[]): Promise<ClaimableYield[]> {
+		const claimRequests = await this.yieldBackend.getClaimRequests(user, p);
 
 		const claimedShares = await Promise.all(
 			claimRequests.map(c =>
