@@ -1,4 +1,4 @@
-import { Provider } from '@ethersproject/abstract-provider';
+import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 import { ContractFactory } from './adapters/smartContract/ContractFactory';
 import { Pools } from './app/services/Pools';

@@ -1,4 +1,4 @@
-import { Provider } from '@ethersproject/abstract-provider';
+import { Provider } from '@ethersproject/providers';
 import { BigNumber, CallOverrides, ContractTransaction, ethers, Overrides, Signer } from 'ethers';
 import { VaultsBackend } from '../../adapters/backend/VaultsBackend';
 import { SmartContractAdapter } from '../../adapters/smartContract';
