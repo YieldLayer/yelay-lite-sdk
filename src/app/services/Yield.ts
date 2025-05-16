@@ -3,7 +3,7 @@ import { BigNumber, ContractTransaction, Signer } from 'ethers';
 import { YieldBackend } from '../../adapters/backend/YieldBackend';
 import { SmartContractAdapter } from '../../adapters/smartContract';
 import { TimeFrame } from '../../types/backend';
-import { ClaimableYield, ClaimRequest, PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
+import { ClaimRequest, ClaimRequestParams, ClaimableYield, PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
 import { getTimestampOneWeekAgo } from '../../utils/backend';
 import { tryCall } from '../../utils/smartContract';
 import { IYieldBackend } from '../ports/backend/IYieldBackend';
@@ -66,12 +66,12 @@ export class Yield {
 		return await this.yieldBackend.getYields(vaults, pools, users, timeFrame);
 	}
 
-	async getClaimableYield(user: string, p?: number[]): Promise<ClaimableYield[]> {
-		const claimRequests = await this.yieldBackend.getClaimRequests(user, p);
+	async getClaimableYield(params: ClaimRequestParams): Promise<ClaimableYield[]> {
+		const claimRequests = await this.yieldBackend.getClaimRequests(params);
 
 		const claimedShares = await Promise.all(
 			claimRequests.map(c =>
-				this.smartContractAdapter.yieldExtractor.getClaimedShares(user, c.yelayLiteVault, c.pool),
+				this.smartContractAdapter.yieldExtractor.getClaimedShares(params.user, c.yelayLiteVault, c.pool),
 			),
 		);
 

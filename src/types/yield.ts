@@ -42,3 +42,9 @@ export type ClaimableYield = {
 	claimed: string;
 	claimRequest: ClaimRequest;
 };
+
+export type ClaimRequestParams = {
+	user: string;
+	poolIds?: number[];
+	vaultAddresses?: string[];
+};

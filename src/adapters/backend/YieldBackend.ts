@@ -1,7 +1,7 @@
 import { IYieldBackend } from '../../app/ports/backend/IYieldBackend';
 import ApiWrapperService from '../../services/ApiWrapperService';
 import { TimeFrame } from '../../types/backend';
-import { ClaimRequest, ClaimRequestRaw, PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
+import { ClaimRequest, ClaimRequestParams, ClaimRequestRaw, PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
 import { appendTimeFrameQuery } from '../../utils/backend';
 
 export class YieldBackend extends ApiWrapperService implements IYieldBackend {
@@ -52,13 +52,20 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		return this.get<YieldAggregated[]>(`/interest/users?${searchParams.toString()}`);
 	}
 
-	async getClaimRequests(user: string, p?: number[]): Promise<ClaimRequest[]> {
+	async getClaimRequests(params: ClaimRequestParams): Promise<ClaimRequest[]> {
 		const searchParams = new URLSearchParams();
 		searchParams.append('chainId', this.chainId);
-		searchParams.append('u', user.toString());
-		if (p && p.length) {
-			for (const poolId of p) {
+		searchParams.append('u', params.user.toString());
+		
+		if (params.poolIds && params.poolIds.length) {
+			for (const poolId of params.poolIds) {
 				searchParams.append('p', poolId.toString());
+			}
+		}
+		
+		if (params.vaultAddresses && params.vaultAddresses.length) {
+			for (const vaultAddress of params.vaultAddresses) {
+				searchParams.append('v', vaultAddress);
 			}
 		}
 		const result = await this.get<ClaimRequestRaw[]>(`/claim-proof?${searchParams.toString()}`);
