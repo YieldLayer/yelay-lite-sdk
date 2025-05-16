@@ -78,6 +78,11 @@ await depositTx.wait();
 
 ## Deposit ETH into the vault
 
+```ts
+const tx = await sdk.vaults.depositEth(vault, pool, amount);
+await tx.wait();
+```
+
 ## Get claimable yield
 
 You can retrieve the claimable yield for a user, optionally filtering by specific pool IDs and vault addresses:
@@ -85,34 +90,17 @@ You can retrieve the claimable yield for a user, optionally filtering by specifi
 ```ts
 // Get all claimable yield for the user
 const claimable = await sdk.yields.getClaimableYield({
-  user: '0xUSER_ADDRESS'
+	user: '0xUSER_ADDRESS',
 });
 
-// Get claimable yield only for specific pools
-const claimableFiltered = await sdk.yields.getClaimableYield({
-  user: '0xUSER_ADDRESS',
-  poolIds: [1, 2, 3]
-});
-
-// Get claimable yield filtered by vault addresses
-const claimableByVault = await sdk.yields.getClaimableYield({
-  user: '0xUSER_ADDRESS',
-  vaultAddresses: ['0xVAULT_ADDRESS1', '0xVAULT_ADDRESS2']
-});
-
-// Filter by both pools and vaults
+// Filter by pools and vaults
 const claimableFullyFiltered = await sdk.yields.getClaimableYield({
-  user: '0xUSER_ADDRESS',
-  poolIds: [1, 2, 3],
-  vaultAddresses: ['0xVAULT_ADDRESS1']
+	user: '0xUSER_ADDRESS',
+	poolIds: [1, 2, 3],
+	vaultAddresses: ['0xVAULT_ADDRESS1'],
 });
 
 console.log(claimable);
-```
-
-```ts
-const tx = await sdk.vaults.depositEth(vault, pool, amount);
-await tx.wait();
 ```
 
 ## Swap token and deposit into vault in one transaction
@@ -174,18 +162,18 @@ const poolsTvl = await sdk.pools.getPoolsTvl(vault, [pool]);
 ```ts
 // Fetch historical TVL data with various filter options
 const historicalTVL = await sdk.pools.historicalTVL({
-  vaultAddress: "0x1234...5678", // Required: The vault address to get TVL for
-  poolId: 1,                     // Required: The specific pool ID to query
-  fromTimestamp: 1641034800,     // Optional: Start time in seconds (Jan 1, 2022)
-  toTimestamp: 1672570800,       // Optional: End time in seconds (Jan 1, 2023)
-  page: 1,                       // Optional: Page number for pagination (starts at 1)
-  pageSize: 30                   // Optional: Number of records per page (max 100)
+	vaultAddress: '0x1234...5678', // Required: The vault address to get TVL for
+	poolId: 1, // Required: The specific pool ID to query
+	fromTimestamp: 1641034800, // Optional: Start time in seconds (Jan 1, 2022)
+	toTimestamp: 1672570800, // Optional: End time in seconds (Jan 1, 2023)
+	page: 1, // Optional: Page number for pagination (starts at 1)
+	pageSize: 30, // Optional: Number of records per page (max 100)
 });
 
 // Example with just the required parameters
 const currentTVL = await sdk.pools.historicalTVL({
-  vaultAddress: "0x1234...5678", 
-  poolId: 1
+	vaultAddress: '0x1234...5678',
+	poolId: 1,
 });
 ```
 
