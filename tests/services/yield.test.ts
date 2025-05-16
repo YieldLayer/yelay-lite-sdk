@@ -27,9 +27,9 @@ describe('Yield', () => {
 
 	it('Get Claimable Yield', async () => {
 		const claimableYield = await sdk.yields.getClaimableYield({
-			user: '0xb20d9258b8f171989915De8Cd5d0ff228B1CA194'
+			user: '0x1892e547F4E1bA76F82a09C16C9F774744De1ff3',
 		});
 
-		console.log('claimableYield for user 0xb20d9258b8f171989915De8Cd5d0ff228B1CA194', claimableYield);
+		console.log('claimableYield for user 0x1892e547F4E1bA76F82a09C16C9F774744De1ff3', claimableYield);
 	}, 15000);
 });
