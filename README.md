@@ -103,6 +103,28 @@ const claimableFullyFiltered = await sdk.yields.getClaimableYield({
 console.log(claimable);
 ```
 
+## Claim yield
+
+Once you have retrieved claimable yield using `getClaimableYield`, you can claim it using the `claimYield` method:
+
+```ts
+// First, get the claimable yield to obtain claim requests
+const claimableYield = await sdk.yields.getClaimableYield({
+	user: '0xUSER_ADDRESS',
+});
+
+// Extract the claim requests from the claimable yield
+const claimRequests = claimableYield.map(item => item.claimRequest);
+
+// Submit the transaction to claim the yield
+const claimTx = await sdk.yields.claimYield(claimRequests);
+
+// Wait for the transaction to be mined
+await claimTx.wait();
+```
+
+The `claimYield` method sends a transaction to the blockchain to claim yield based on the provided claim requests. It requires a valid signer with sufficient gas to execute the transaction.
+
 ## Swap token and deposit into vault in one transaction
 
 ```ts
