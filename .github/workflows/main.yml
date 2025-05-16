@@ -38,10 +38,17 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: 18
-            - run: npm install -g @microsoft/api-extractor
-            - run: npm cache clean --force
-            - run: npm install
-            - run: npm run build
+                  
+            - name: Install pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+                  run_install: false
+                  
+            - run: pnpm install -g @microsoft/api-extractor
+            - run: pnpm store prune
+            - run: pnpm install
+            - run: pnpm run build
 
             - uses: JS-DevTools/npm-publish@v1
               with:
