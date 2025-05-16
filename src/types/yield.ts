@@ -20,3 +20,31 @@ export type YieldAggregated = EventsRange & {
 		[id: number]: string;
 	};
 };
+
+export type ClaimRequestRaw = {
+	yelayLiteVault: string;
+	projectId: number;
+	cycle: number;
+	yieldSharesTotal: string;
+	proof: string[];
+};
+
+export type ClaimRequest = {
+	yelayLiteVault: string;
+	pool: number;
+	cycle: number;
+	yieldSharesTotal: string;
+	proof: string[];
+};
+
+export type ClaimableYield = {
+	claimable: string;
+	claimed: string;
+	claimRequest: ClaimRequest;
+};
+
+export type ClaimRequestParams = {
+	user: string;
+	poolIds?: number[];
+	vaultAddresses?: string[];
+};

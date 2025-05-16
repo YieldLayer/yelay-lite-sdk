@@ -78,6 +78,38 @@ await depositTx.wait();
 
 ## Deposit ETH into the vault
 
+## Get claimable yield
+
+You can retrieve the claimable yield for a user, optionally filtering by specific pool IDs and vault addresses:
+
+```ts
+// Get all claimable yield for the user
+const claimable = await sdk.yields.getClaimableYield({
+  user: '0xUSER_ADDRESS'
+});
+
+// Get claimable yield only for specific pools
+const claimableFiltered = await sdk.yields.getClaimableYield({
+  user: '0xUSER_ADDRESS',
+  poolIds: [1, 2, 3]
+});
+
+// Get claimable yield filtered by vault addresses
+const claimableByVault = await sdk.yields.getClaimableYield({
+  user: '0xUSER_ADDRESS',
+  vaultAddresses: ['0xVAULT_ADDRESS1', '0xVAULT_ADDRESS2']
+});
+
+// Filter by both pools and vaults
+const claimableFullyFiltered = await sdk.yields.getClaimableYield({
+  user: '0xUSER_ADDRESS',
+  poolIds: [1, 2, 3],
+  vaultAddresses: ['0xVAULT_ADDRESS1']
+});
+
+console.log(claimable);
+```
+
 ```ts
 const tx = await sdk.vaults.depositEth(vault, pool, amount);
 await tx.wait();

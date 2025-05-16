@@ -1,13 +1,28 @@
+import { Provider } from '@ethersproject/providers';
+import { BigNumber, ContractTransaction, Signer } from 'ethers';
 import { YieldBackend } from '../../adapters/backend/YieldBackend';
+import { SmartContractAdapter } from '../../adapters/smartContract';
 import { TimeFrame } from '../../types/backend';
-import { PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
+import { ClaimRequest, ClaimRequestParams, ClaimableYield, PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
 import { getTimestampOneWeekAgo } from '../../utils/backend';
+import { tryCall } from '../../utils/smartContract';
+import { IYieldBackend } from '../ports/backend/IYieldBackend';
+import { IContractFactory } from '../ports/IContractFactory';
 
 export class Yield {
-	private yieldBackend: YieldBackend;
+	private smartContractAdapter: SmartContractAdapter;
+	private yieldBackend: IYieldBackend;
+	private signerOrProvider: Signer | Provider;
 
-	constructor(backendUrl: string, chainId: number) {
+	constructor(
+		contractFactory: IContractFactory,
+		backendUrl: string,
+		chainId: number,
+		signerOrProvider: Signer | Provider,
+	) {
+		this.smartContractAdapter = new SmartContractAdapter(contractFactory);
 		this.yieldBackend = new YieldBackend(backendUrl, chainId);
+		this.signerOrProvider = signerOrProvider;
 	}
 
 	/**
@@ -49,5 +64,29 @@ export class Yield {
 		timeFrame?: TimeFrame,
 	): Promise<YieldAggregated[]> {
 		return await this.yieldBackend.getYields(vaults, pools, users, timeFrame);
+	}
+
+	async getClaimableYield(params: ClaimRequestParams): Promise<ClaimableYield[]> {
+		const claimRequests = await this.yieldBackend.getClaimRequests(params);
+
+		const claimedShares = await Promise.all(
+			claimRequests.map(c =>
+				this.smartContractAdapter.yieldExtractor.getClaimedShares(params.user, c.yelayLiteVault, c.pool),
+			),
+		);
+
+		return claimRequests.map((c, i) => {
+			const claimable = BigNumber.from(c.yieldSharesTotal).sub(claimedShares[i]);
+			const claimed = BigNumber.from(c.yieldSharesTotal).sub(claimable);
+			return {
+				claimable: claimable.toString(),
+				claimed: claimed.toString(),
+				claimRequest: c,
+			};
+		});
+	}
+
+	async claimYield(claimRequests: ClaimRequest[]): Promise<ContractTransaction> {
+		return tryCall(this.smartContractAdapter.yieldExtractor.claim(claimRequests));
 	}
 }

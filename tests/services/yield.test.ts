@@ -7,7 +7,7 @@ describe('Yield', () => {
 	beforeAll(() => {
 		const provider = new ethers.providers.JsonRpcProvider('https://base.llamarpc.com');
 
-		sdk = new YelayLiteSdk(provider, 'base-testing');
+		sdk = new YelayLiteSdk(provider, 8453);
 	});
 
 	it.skip('Get Yields', async () => {
@@ -24,4 +24,12 @@ describe('Yield', () => {
 
 		console.log('userYield', yields);
 	});
+
+	it('Get Claimable Yield', async () => {
+		const claimableYield = await sdk.yields.getClaimableYield({
+			user: '0x1892e547F4E1bA76F82a09C16C9F774744De1ff3',
+		});
+
+		console.log('claimableYield for user 0x1892e547F4E1bA76F82a09C16C9F774744De1ff3', claimableYield);
+	}, 15000);
 });

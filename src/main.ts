@@ -1,4 +1,4 @@
-import { Provider } from '@ethersproject/abstract-provider';
+import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 import { ContractFactory } from './adapters/smartContract/ContractFactory';
 import { Pools } from './app/services/Pools';
@@ -30,7 +30,7 @@ export class YelayLiteSdk {
 
 		this.vaults = new Vaults(contractFactory, config.backendUrl, chainId, signerOrProvider);
 
-		this.yields = new Yield(config.backendUrl, chainId);
+		this.yields = new Yield(contractFactory, config.backendUrl, chainId, signerOrProvider);
 
 		this.pools = new Pools(contractFactory, config.backendUrl, chainId);
 
