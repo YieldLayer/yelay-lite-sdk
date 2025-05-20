@@ -8,7 +8,7 @@ export class YieldExtractor implements IYieldExtractor {
 	constructor(private contractFactory: IContractFactory) {}
 
 	public async getClaimedShares(user: string, vault: string, pool: number): Promise<BigNumber> {
-		const yieldExtractor = this.contractFactory.getYieldExtractor();
+		const yieldExtractor = this.contractFactory.getYieldExtractor(true);
 
 		return yieldExtractor.yieldSharesClaimed(user, vault, pool);
 	}
