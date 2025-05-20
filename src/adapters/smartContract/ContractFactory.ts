@@ -16,15 +16,17 @@ import {
 import { ContractAddresses } from '../../types/config';
 
 export class ContractFactory implements IContractFactory {
+	private provider: Provider;
+
 	constructor(private signerOrProvider: Signer | Provider, private contractAddresses: ContractAddresses) {
 		if (Signer.isSigner(signerOrProvider)) {
 			if (signerOrProvider.provider) {
-				this.signerOrProvider = signerOrProvider.connect(MulticallWrapper.wrap(signerOrProvider.provider));
+				this.provider = MulticallWrapper.wrap(signerOrProvider.provider);
 			} else {
 				throw new Error('Signer has no provider');
 			}
 		} else {
-			this.signerOrProvider = MulticallWrapper.wrap(signerOrProvider);
+			this.provider = MulticallWrapper.wrap(signerOrProvider);
 		}
 	}
 
@@ -40,7 +42,10 @@ export class ContractFactory implements IContractFactory {
 		return ERC20__factory.connect(address, this.signerOrProvider);
 	}
 
-	getYieldExtractor(): YieldExtractor {
-		return YieldExtractor__factory.connect(this.contractAddresses.YieldExtractor, this.signerOrProvider);
+	getYieldExtractor(multicall = false): YieldExtractor {
+		return YieldExtractor__factory.connect(
+			this.contractAddresses.YieldExtractor,
+			multicall ? this.provider : this.signerOrProvider,
+		);
 	}
 }
