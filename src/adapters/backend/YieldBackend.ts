@@ -1,7 +1,14 @@
 import { IYieldBackend } from '../../app/ports/backend/IYieldBackend';
 import ApiWrapperService from '../../services/ApiWrapperService';
 import { TimeFrame } from '../../types/backend';
-import { ClaimRequest, ClaimRequestParams, ClaimRequestRaw, PoolYield, VaultYield, YieldAggregated } from '../../types/yield';
+import {
+	ClaimRequest,
+	ClaimRequestParams,
+	ClaimRequestRaw,
+	PoolYield,
+	VaultYield,
+	YieldAggregated,
+} from '../../types/yield';
 import { appendTimeFrameQuery } from '../../utils/backend';
 
 export class YieldBackend extends ApiWrapperService implements IYieldBackend {
@@ -56,13 +63,13 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 		const searchParams = new URLSearchParams();
 		searchParams.append('chainId', this.chainId);
 		searchParams.append('u', params.user.toString());
-		
+
 		if (params.poolIds && params.poolIds.length) {
 			for (const poolId of params.poolIds) {
 				searchParams.append('p', poolId.toString());
 			}
 		}
-		
+
 		if (params.vaultAddresses && params.vaultAddresses.length) {
 			for (const vaultAddress of params.vaultAddresses) {
 				searchParams.append('v', vaultAddress);
@@ -74,6 +81,7 @@ export class YieldBackend extends ApiWrapperService implements IYieldBackend {
 			pool: c.projectId,
 			cycle: c.cycle,
 			yieldSharesTotal: c.yieldSharesTotal,
+			blockNumber: c.blockNumber,
 			proof: c.proof,
 		}));
 	}
