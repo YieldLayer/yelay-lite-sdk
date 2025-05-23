@@ -26,6 +26,7 @@ export type ClaimRequestRaw = {
 	projectId: number;
 	cycle: number;
 	yieldSharesTotal: string;
+	blockNumber: number;
 	proof: string[];
 };
 
@@ -34,6 +35,7 @@ export type ClaimRequest = {
 	pool: number;
 	cycle: number;
 	yieldSharesTotal: string;
+	blockNumber: number;
 	proof: string[];
 };
 
