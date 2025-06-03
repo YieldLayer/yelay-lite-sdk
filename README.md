@@ -123,7 +123,7 @@ const claimTx = await sdk.yields.claimYield(claimRequests);
 await claimTx.wait();
 ```
 
-The `claimYield` method sends a transaction to the blockchain to claim yield based on the provided claim requests. It requires a valid signer with sufficient gas to execute the transaction.
+The `claimYield` method sends a transaction to the blockchain to claim yield based on the provided claim requests. It requires a valid signer with sufficient gas to execute the transaction. You can optionally provide gas overrides to customize the transaction parameters.
 
 ## Swap token and deposit into vault in one transaction
 
