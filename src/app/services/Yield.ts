@@ -1,5 +1,5 @@
 import { Provider } from '@ethersproject/providers';
-import { BigNumber, ContractTransaction, Signer } from 'ethers';
+import { BigNumber, ContractTransaction, Overrides, Signer } from 'ethers';
 import { YieldBackend } from '../../adapters/backend/YieldBackend';
 import { SmartContractAdapter } from '../../adapters/smartContract';
 import { TimeFrame } from '../../types/backend';
@@ -86,7 +86,7 @@ export class Yield {
 		});
 	}
 
-	async claimYield(claimRequests: ClaimRequest[]): Promise<ContractTransaction> {
-		return tryCall(this.smartContractAdapter.yieldExtractor.claim(claimRequests));
+	async claimYield(claimRequests: ClaimRequest[], overrides?: Overrides): Promise<ContractTransaction> {
+		return tryCall(this.smartContractAdapter.yieldExtractor.claim(claimRequests, overrides));
 	}
 }
