@@ -1,8 +1,8 @@
-import { BigNumber, ContractTransaction, Overrides, Signer } from 'ethers';
+import { BigNumber, ContractTransaction, Overrides } from 'ethers';
 import { IContractFactory } from '../../app/ports/IContractFactory';
 import { IYieldExtractor } from '../../app/ports/smartContract/IYieldExtractor';
 import { ClaimRequest } from '../../types';
-import { getIncreasedGasLimit } from '../../utils/smartContract';
+import { populateGasLimit } from '../../utils/smartContract';
 
 export class YieldExtractor implements IYieldExtractor {
 	constructor(private contractFactory: IContractFactory) {}
@@ -13,7 +13,7 @@ export class YieldExtractor implements IYieldExtractor {
 		return yieldExtractor.yieldSharesClaimed(user, vault, pool);
 	}
 
-	public async claim(claimRequests: ClaimRequest[], overrides?: Overrides): Promise<ContractTransaction> {
+	public async claim(claimRequests: ClaimRequest[], overrides: Overrides = {}): Promise<ContractTransaction> {
 		const yieldExtractor = this.contractFactory.getYieldExtractor();
 
 		const args = claimRequests.map(c => ({
@@ -24,11 +24,8 @@ export class YieldExtractor implements IYieldExtractor {
 			proof: c.proof,
 		}));
 
-		const estimatedGas = await yieldExtractor.estimateGas.claim(args);
+		await populateGasLimit(yieldExtractor.estimateGas.claim, [args], overrides);
 
-		return yieldExtractor.claim(args, {
-			gasLimit: getIncreasedGasLimit(estimatedGas),
-			...overrides,
-		});
+		return yieldExtractor.claim(args, overrides);
 	}
 }
