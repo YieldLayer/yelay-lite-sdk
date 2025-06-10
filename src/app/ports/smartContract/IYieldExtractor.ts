@@ -12,5 +12,5 @@ export interface IYieldExtractor {
 		blockRange: number,
 		latestBlock: number,
 		maxDepth?: number,
-	): Promise<YieldClaimedEvent | null>;
+	): Promise<YieldClaimedEvent | undefined>;
 }

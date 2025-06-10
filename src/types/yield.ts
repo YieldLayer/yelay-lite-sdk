@@ -42,7 +42,7 @@ export type ClaimRequest = {
 export type ClaimableYield = {
 	claimable: string;
 	claimed: string;
-	lastClaimBlockNumber: number | null;
+	lastClaimBlockNumber?: number;
 	claimRequest: ClaimRequest;
 };
 
@@ -50,4 +50,5 @@ export type ClaimRequestParams = {
 	user: string;
 	poolIds?: number[];
 	vaultAddresses?: string[];
+	fetchLastClaimBlockNumber?: boolean;
 };

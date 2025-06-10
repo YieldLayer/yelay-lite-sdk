@@ -2,6 +2,7 @@ import { Provider } from '@ethersproject/providers';
 import { BigNumber, ContractTransaction, Overrides, Signer } from 'ethers';
 import { YieldBackend } from '../../adapters/backend/YieldBackend';
 import { SmartContractAdapter } from '../../adapters/smartContract';
+import { YieldClaimedEvent } from '../../generated/typechain/YieldExtractor';
 import { TimeFrame } from '../../types/backend';
 import { ChainId } from '../../types/config';
 import {
@@ -13,7 +14,7 @@ import {
 	YieldAggregated,
 } from '../../types/yield';
 import { getTimestampOneWeekAgo } from '../../utils/backend';
-import { getOneMonthBlockRange, tryCall } from '../../utils/smartContract';
+import { QUERY_EVENTS_BLOCK_RANGE, tryCall } from '../../utils/smartContract';
 import { IYieldBackend } from '../ports/backend/IYieldBackend';
 import { IContractFactory } from '../ports/IContractFactory';
 
@@ -85,31 +86,35 @@ export class Yield {
 			),
 		);
 
-		let latestBlock = 0;
-		if (Signer.isSigner(this.signerOrProvider)) {
-			latestBlock = await this.signerOrProvider.provider!.getBlockNumber();
-		} else {
-			latestBlock = await this.signerOrProvider.getBlockNumber();
-		}
+		let lastClaimEvents: (YieldClaimedEvent | undefined)[] = [];
 
-		const lastClaimEvents = await Promise.all(
-			claimRequests.map(c =>
-				this.smartContractAdapter.yieldExtractor.getLastClaimEvent(
-					params.user,
-					c.yelayLiteVault,
-					c.pool,
-					getOneMonthBlockRange(this.chainId),
-					latestBlock,
+		if (params.fetchLastClaimBlockNumber) {
+			let latestBlock = 0;
+			if (Signer.isSigner(this.signerOrProvider)) {
+				latestBlock = await this.signerOrProvider.provider!.getBlockNumber();
+			} else {
+				latestBlock = await this.signerOrProvider.getBlockNumber();
+			}
+
+			lastClaimEvents = await Promise.all(
+				claimRequests.map(c =>
+					this.smartContractAdapter.yieldExtractor.getLastClaimEvent(
+						params.user,
+						c.yelayLiteVault,
+						c.pool,
+						QUERY_EVENTS_BLOCK_RANGE,
+						latestBlock,
+					),
 				),
-			),
-		);
+			);
+		}
 
 		return claimRequests.map((c, i) => {
 			const claimable = BigNumber.from(c.yieldSharesTotal).sub(claimedShares[i]);
 			return {
 				claimable: claimable.toString(),
 				claimed: claimedShares[i].toString(),
-				lastClaimBlockNumber: lastClaimEvents[i]?.blockNumber || null,
+				lastClaimBlockNumber: lastClaimEvents[i]?.blockNumber,
 				claimRequest: c,
 			};
 		});

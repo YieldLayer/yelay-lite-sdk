@@ -20,8 +20,8 @@ export class YieldExtractor implements IYieldExtractor {
 		pool: number,
 		blockRange: number,
 		latestBlock: number,
-		maxDepth = 12,
-	): Promise<YieldClaimedEvent | null> {
+		maxDepth = 20,
+	): Promise<YieldClaimedEvent | undefined> {
 		const yieldExtractor = this.contractFactory.getYieldExtractor();
 
 		for (let i = 0; i < maxDepth; i++) {
@@ -37,8 +37,6 @@ export class YieldExtractor implements IYieldExtractor {
 				return events[events.length - 1];
 			}
 		}
-
-		return null;
 	}
 
 	public async claim(claimRequests: ClaimRequest[], overrides: Overrides = {}): Promise<ContractTransaction> {
