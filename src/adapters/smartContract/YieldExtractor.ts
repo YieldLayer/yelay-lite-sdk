@@ -1,6 +1,7 @@
 import { BigNumber, ContractTransaction, Overrides } from 'ethers';
 import { IContractFactory } from '../../app/ports/IContractFactory';
 import { IYieldExtractor } from '../../app/ports/smartContract/IYieldExtractor';
+import { YieldClaimedEvent } from '../../generated/typechain/YieldExtractor';
 import { ClaimRequest } from '../../types';
 import { populateGasLimit } from '../../utils/smartContract';
 
@@ -11,6 +12,33 @@ export class YieldExtractor implements IYieldExtractor {
 		const yieldExtractor = this.contractFactory.getYieldExtractor(true);
 
 		return yieldExtractor.yieldSharesClaimed(user, vault, pool);
+	}
+
+	public async getLastClaimEvent(
+		user: string,
+		vault: string,
+		pool: number,
+		blockRange: number,
+		latestBlock: number,
+		maxDepth = 12,
+	): Promise<YieldClaimedEvent | null> {
+		const yieldExtractor = this.contractFactory.getYieldExtractor();
+
+		for (let i = 0; i < maxDepth; i++) {
+			const fromBlock = latestBlock - blockRange * (i + 1);
+			const toBlock = latestBlock - blockRange * i;
+			const events = await yieldExtractor.queryFilter(
+				yieldExtractor.filters['YieldClaimed'](user, vault, pool),
+				fromBlock,
+				toBlock,
+			);
+
+			if (events.length > 0) {
+				return events[events.length - 1];
+			}
+		}
+
+		return null;
 	}
 
 	public async claim(claimRequests: ClaimRequest[], overrides: Overrides = {}): Promise<ContractTransaction> {

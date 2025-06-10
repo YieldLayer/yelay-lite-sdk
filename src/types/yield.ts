@@ -42,6 +42,7 @@ export type ClaimRequest = {
 export type ClaimableYield = {
 	claimable: string;
 	claimed: string;
+	lastClaimBlockNumber: number | null;
 	claimRequest: ClaimRequest;
 };
 

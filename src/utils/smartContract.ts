@@ -1,5 +1,6 @@
 import { BigNumber, ContractTransaction, ethers, PayableOverrides } from 'ethers';
 import { LibErrors__factory } from '../generated/typechain';
+import { ChainId } from '../types/config';
 
 export const tryCall = async (call: Promise<ethers.ContractTransaction>): Promise<ContractTransaction> => {
 	try {
@@ -36,3 +37,15 @@ export async function populateGasLimit<T extends (...args: any[]) => Promise<Big
 		throw err;
 	}
 }
+
+const BLOCKS_PER_MINUTE: Record<ChainId, number> = {
+	1: 5,
+	146: 150,
+	8453: 30,
+};
+
+const ONE_MONTH = 30 * 24 * 60;
+
+export const getOneMonthBlockRange = (chainId: ChainId): number => {
+	return BLOCKS_PER_MINUTE[chainId] * ONE_MONTH;
+};
