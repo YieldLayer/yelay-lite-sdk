@@ -2,19 +2,19 @@ import { Provider } from '@ethersproject/providers';
 import { BigNumber, ContractTransaction, Overrides, Signer } from 'ethers';
 import { YieldBackend } from '../../adapters/backend/YieldBackend';
 import { SmartContractAdapter } from '../../adapters/smartContract';
-import { YieldClaimedEvent } from '../../generated/typechain/YieldExtractor';
 import { TimeFrame } from '../../types/backend';
 import { ChainId } from '../../types/config';
 import {
 	ClaimRequest,
 	ClaimRequestParams,
 	ClaimableYield,
+	GetLastClaimEventParams,
 	PoolYield,
 	VaultYield,
 	YieldAggregated,
 } from '../../types/yield';
 import { getTimestampOneWeekAgo } from '../../utils/backend';
-import { QUERY_EVENTS_BLOCK_RANGE, tryCall } from '../../utils/smartContract';
+import { tryCall } from '../../utils/smartContract';
 import { IYieldBackend } from '../ports/backend/IYieldBackend';
 import { IContractFactory } from '../ports/IContractFactory';
 
@@ -77,6 +77,30 @@ export class Yield {
 		return await this.yieldBackend.getYields(vaults, pools, users, timeFrame);
 	}
 
+	async getLastClaimEvent(params: GetLastClaimEventParams) {
+		let latestBlock = 0;
+		if (Signer.isSigner(this.signerOrProvider)) {
+			latestBlock = await this.signerOrProvider.provider!.getBlockNumber();
+		} else {
+			latestBlock = await this.signerOrProvider.getBlockNumber();
+		}
+
+		const lastClaimEvent = await this.smartContractAdapter.yieldExtractor.getLastClaimEvent(
+			params.user,
+			params.vault.address,
+			params.poolId,
+			params.vault.createBlocknumber,
+			latestBlock,
+		);
+		if (!lastClaimEvent) {
+			return null;
+		}
+		return {
+			blockNumber: lastClaimEvent.blockNumber,
+			transactionHash: lastClaimEvent.transactionHash,
+		};
+	}
+
 	async getClaimableYield(params: ClaimRequestParams): Promise<ClaimableYield[]> {
 		const claimRequests = await this.yieldBackend.getClaimRequests(params);
 
@@ -86,35 +110,11 @@ export class Yield {
 			),
 		);
 
-		let lastClaimEvents: (YieldClaimedEvent | undefined)[] = [];
-
-		if (params.fetchLastClaimBlockNumber) {
-			let latestBlock = 0;
-			if (Signer.isSigner(this.signerOrProvider)) {
-				latestBlock = await this.signerOrProvider.provider!.getBlockNumber();
-			} else {
-				latestBlock = await this.signerOrProvider.getBlockNumber();
-			}
-
-			lastClaimEvents = await Promise.all(
-				claimRequests.map(c =>
-					this.smartContractAdapter.yieldExtractor.getLastClaimEvent(
-						params.user,
-						c.yelayLiteVault,
-						c.pool,
-						QUERY_EVENTS_BLOCK_RANGE,
-						latestBlock,
-					),
-				),
-			);
-		}
-
 		return claimRequests.map((c, i) => {
 			const claimable = BigNumber.from(c.yieldSharesTotal).sub(claimedShares[i]);
 			return {
 				claimable: claimable.toString(),
 				claimed: claimedShares[i].toString(),
-				lastClaimBlockNumber: lastClaimEvents[i]?.blockNumber,
 				claimRequest: c,
 			};
 		});

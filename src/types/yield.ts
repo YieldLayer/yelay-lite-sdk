@@ -1,4 +1,5 @@
 import { EventsRange } from './backend';
+import { Vault } from './vaults';
 
 export type VaultYield = EventsRange & {
 	vault: string;
@@ -42,7 +43,6 @@ export type ClaimRequest = {
 export type ClaimableYield = {
 	claimable: string;
 	claimed: string;
-	lastClaimBlockNumber?: number;
 	claimRequest: ClaimRequest;
 };
 
@@ -50,5 +50,10 @@ export type ClaimRequestParams = {
 	user: string;
 	poolIds?: number[];
 	vaultAddresses?: string[];
-	fetchLastClaimBlockNumber?: boolean;
+};
+
+export type GetLastClaimEventParams = {
+	vault: Vault;
+	user: string;
+	poolId: number;
 };

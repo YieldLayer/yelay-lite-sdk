@@ -9,8 +9,7 @@ export interface IYieldExtractor {
 		user: string,
 		vault: string,
 		pool: number,
-		blockRange: number,
+		stopBlock: number,
 		latestBlock: number,
-		maxDepth?: number,
-	): Promise<YieldClaimedEvent | undefined>;
+	): Promise<YieldClaimedEvent | null>;
 }

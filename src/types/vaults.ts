@@ -1,8 +1,8 @@
 export type Vault = {
 	address: string;
 	name: string;
-	createBlocknumber: string;
-	createTimestamp: string;
+	createBlocknumber: number;
+	createTimestamp: number;
 	underlying: string;
 	chainId: number;
 	pools: number[];

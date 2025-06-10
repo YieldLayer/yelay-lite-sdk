@@ -3,7 +3,7 @@ import { IContractFactory } from '../../app/ports/IContractFactory';
 import { IYieldExtractor } from '../../app/ports/smartContract/IYieldExtractor';
 import { YieldClaimedEvent } from '../../generated/typechain/YieldExtractor';
 import { ClaimRequest } from '../../types';
-import { populateGasLimit } from '../../utils/smartContract';
+import { populateGasLimit, QUERY_EVENTS_BLOCK_RANGE } from '../../utils/smartContract';
 
 export class YieldExtractor implements IYieldExtractor {
 	constructor(private contractFactory: IContractFactory) {}
@@ -18,15 +18,18 @@ export class YieldExtractor implements IYieldExtractor {
 		user: string,
 		vault: string,
 		pool: number,
-		blockRange: number,
+		stopBlock: number,
 		latestBlock: number,
-		maxDepth = 20,
-	): Promise<YieldClaimedEvent | undefined> {
+	): Promise<YieldClaimedEvent | null> {
 		const yieldExtractor = this.contractFactory.getYieldExtractor();
 
-		for (let i = 0; i < maxDepth; i++) {
-			const fromBlock = latestBlock - blockRange * (i + 1);
-			const toBlock = latestBlock - blockRange * i;
+		let i = 0;
+		while (true) {
+			const fromBlock = latestBlock - QUERY_EVENTS_BLOCK_RANGE * (i + 1);
+			const toBlock = latestBlock - QUERY_EVENTS_BLOCK_RANGE * i;
+			if (toBlock < stopBlock) {
+				return null;
+			}
 			const events = await yieldExtractor.queryFilter(
 				yieldExtractor.filters['YieldClaimed'](user, vault, pool),
 				fromBlock,
@@ -36,6 +39,7 @@ export class YieldExtractor implements IYieldExtractor {
 			if (events.length > 0) {
 				return events[events.length - 1];
 			}
+			i++;
 		}
 	}
 
