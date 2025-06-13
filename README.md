@@ -228,6 +228,12 @@ The historicalTVL method returns a paginated response with the following structu
 const vaultsYield = await sdk.yields.getVaultsYield();
 ```
 
+## Get yield data on pools (filtering on vaults/pools/timeframe)
+
+```ts
+const poolsYield = await sdk.yields.getPoolsYield();
+```
+
 ## Get aggregated yield data (filtering on vaults/pools/users/timeframe)
 
 ```ts
