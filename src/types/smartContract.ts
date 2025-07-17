@@ -3,3 +3,7 @@ export type ClientData = {
 	maxPool: number;
 	clientName: string;
 };
+
+export type StrategyData = {
+	name: string;
+};

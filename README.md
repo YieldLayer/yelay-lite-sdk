@@ -240,6 +240,27 @@ const poolsYield = await sdk.yields.getPoolsYield();
 const aggregatedYieldData = await sdk.yields.getYields();
 ```
 
+## Get protocols
+```ts
+const protocols = await sdk.strategies.getProtocols();
+```
+
+## Get active strategies
+```ts
+const activeStrategies = await sdk.strategies.getActiveStrategies(vault);
+```
+
+### Response Format
+```ts
+[
+	{
+		name: "MV-something",
+		protocolId: 'morpho',
+		allocation: 100 // Percentage allocated to the strategy
+	}
+]
+// Note: The sum of allocations for all active strategies doesn't have to be 100%; a portion of the funds can remain unallocated in the vault
+```
 ## License
 
 This SDK is licensed under the **ISC License**.

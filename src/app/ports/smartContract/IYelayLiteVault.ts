@@ -1,5 +1,5 @@
 import { BigNumber, ContractTransaction, ethers, Overrides, Signer } from 'ethers';
-import { ClientData } from '../../../types/smartContract';
+import { ClientData, StrategyData } from '../../../types/smartContract';
 
 export type PoolsSupply = {
 	totalAssets: BigNumber;
@@ -36,4 +36,7 @@ export interface IYelayLiteVault {
 	poolActive(vault: string, pool: number): Promise<boolean>;
 	clientData(client: string, vault: string): Promise<ClientData>;
 	balanceOf(vault: string, pool: number, user: string): Promise<BigNumber>;
+	activeStrategies(vault: string): Promise<StrategyData[]>;
+	strategyAssets(vault: string, index: number): Promise<BigNumber>;
+	totalAssets(vault: string): Promise<BigNumber>;
 }

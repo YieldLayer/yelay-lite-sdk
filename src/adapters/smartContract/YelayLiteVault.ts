@@ -2,7 +2,7 @@ import { BigNumber, ContractTransaction, ethers, Overrides, Signer } from 'ether
 import { parseBytes32String } from 'ethers/lib/utils';
 import { IContractFactory } from '../../app/ports/IContractFactory';
 import { IYelayLiteVault, PoolsSupply } from '../../app/ports/smartContract/IYelayLiteVault';
-import { ClientData } from '../../types/smartContract';
+import { ClientData, StrategyData } from '../../types/smartContract';
 import { populateGasLimit } from '../../utils/smartContract';
 
 export class YelayLiteVault implements IYelayLiteVault {
@@ -122,5 +122,19 @@ export class YelayLiteVault implements IYelayLiteVault {
 
 	async balanceOf(vault: string, pool: number, user: string): Promise<BigNumber> {
 		return this.contractFactory.getYelayLiteVault(vault).balanceOf(user, pool);
+	}
+
+	async activeStrategies(vault: string): Promise<StrategyData[]> {
+		return (await this.contractFactory.getYelayLiteVault(vault).getActiveStrategies()).map(s => ({
+			name: parseBytes32String(s.name),
+		}));
+	}
+
+	async strategyAssets(vault: string, index: number): Promise<BigNumber> {
+		return this.contractFactory.getYelayLiteVault(vault).strategyAssets(index);
+	}
+
+	async totalAssets(vault: string): Promise<BigNumber> {
+		return this.contractFactory.getYelayLiteVault(vault).totalAssets();
 	}
 }
