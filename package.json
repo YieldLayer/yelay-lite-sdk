@@ -4,7 +4,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"description": "Yelay Lite SDK",
 	"main": "build/index.js",
 	"types": "build/index.d.ts",
@@ -17,7 +17,7 @@
 	],
 	"scripts": {
 		"gen-types": "typechain --target=ethers-v5 --out-dir=src/generated/typechain src/abis/*.json",
-		"build": "pnpm run gen-types && rm -rf ./build && tsc",
+		"build": "pnpm run gen-types && rimraf ./build && tsc",
 		"test": "jest --config jest.config.ts"
 	},
 	"keywords": [
@@ -32,7 +32,8 @@
 		"@ethersproject/abi": "5.8.0",
 		"@ethersproject/providers": "5.8.0",
 		"ethers": "5.7.2",
-		"ethers-multicall-provider": "3.1.2"
+		"ethers-multicall-provider": "3.1.2",
+		"rimraf": "6.0.1"
 	},
 	"devDependencies": {
 		"@typechain/ethers-v5": "11.1.2",
