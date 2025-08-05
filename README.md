@@ -4,9 +4,11 @@
 
 The **Yelay Lite SDK** is a lightweight software development kit for interacting with Yelay's blockchain ecosystem. It provides streamlined access to **vaults**, **yield farming**, and **projects** via smart contract interactions as well as Backend queries.
 
-## Chains
-
-Only Base(chainId: 8453) is supported currently.
+## Chains:
+- Ethereum Mainnet (chainId: 1) 
+- Base (chainId: 8453)
+- Sonic (chainId: 146)
+- Arbitrum One (chainId: 42161)
 
 ## Installation
 
