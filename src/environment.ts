@@ -46,5 +46,15 @@ export const getEnvironment = (chainId: ChainId, testing: boolean): SDKConfig =>
 			backendUrl,
 		};
 	}
+	if (chainId === 42161) {
+		return {
+			contracts: {
+				VaultWrapper: '0xAfC182fcFbdA42F639CCD4518aEcccE5Ea777440',
+				Swapper: '0x47f9f04DB109D25aEBA42b0d45E6f0Aee852B916',
+				YieldExtractor: '0x79b7e90F1BAe837362DBD2c83Bd0715c2De5E47f',
+			},
+			backendUrl,
+		};
+	}
 	throw new Error(`Chain ${chainId} is not supported`);
 };
