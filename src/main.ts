@@ -36,7 +36,7 @@ export class YelayLiteSdk {
 
 		this.pools = new Pools(contractFactory, config.backendUrl, chainId);
 
-		this.strategies = new Strategies(contractFactory, config.backendUrl);
+		this.strategies = new Strategies(contractFactory, config.backendUrl, chainId);
 
 		this.swapperAddress = config.contracts.Swapper;
 	}

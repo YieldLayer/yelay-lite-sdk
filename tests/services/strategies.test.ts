@@ -22,6 +22,6 @@ describe('Strategies', () => {
 	it.skip('active strategies', async () => {
 		const activeStrategies = await sdk.strategies.getActiveStrategies('0x7b3D25c37c6ADf650F1f7696be2278cCFa2b638F');
 
-		console.log(activeStrategies);
+		console.log(JSON.stringify(activeStrategies, null, 2));
 	});
 });
