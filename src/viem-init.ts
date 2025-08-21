@@ -2,7 +2,7 @@ import { createDrift } from '@delvtech/drift';
 import { viemAdapter } from '@delvtech/drift-viem';
 import { createPublicClient, http } from 'viem';
 import { base } from 'viem/chains';
-import { YelayLiteSdk } from './main.js';
+import { YelayLiteSdk } from './main';
 
 async function main() {
 	const publicClient = createPublicClient({ transport: http('https://base.llamarpc.com'), chain: base });

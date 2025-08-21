@@ -1,8 +1,8 @@
 import type { Drift } from '@delvtech/drift';
-import { getEnvironment } from './environment.js';
-import { Vaults } from './services/Vaults.js';
-import { ContractFactory } from './smartContract/ContractFactory.js';
-import { ChainId } from './types/config.js';
+import { getEnvironment } from './environment';
+import { Vaults } from './services/Vaults';
+import { ContractFactory } from './smartContract/ContractFactory';
+import { ChainId } from './types/config';
 
 export class YelayLiteSdk {
 	private _vaults: Vaults | null = null;

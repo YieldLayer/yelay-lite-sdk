@@ -1,5 +1,5 @@
-import ApiWrapperService from '../services/ApiWrapperService.js';
-import { ProtocolData } from '../types/strategies.js';
+import ApiWrapperService from '../services/ApiWrapperService';
+import { ProtocolData } from '../types/strategies';
 
 export class StrategiesBackend extends ApiWrapperService {
 	constructor(backendUrl: string) {

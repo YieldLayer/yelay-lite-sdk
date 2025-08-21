@@ -1,9 +1,9 @@
 import { Address, Drift } from '@delvtech/drift';
-import { ERC20_ABI } from '../abis/ERC20.js';
-import { IYELAY_LITE_VAULT_ABI } from '../abis/IYelayLiteVault.js';
-import { VAULT_WRAPPER_ABI } from '../abis/VaultWrapper.js';
-import { YIELD_EXTRACTOR_ABI } from '../abis/YieldExtractor.js';
-import { ContractAddresses } from '../types/config.js';
+import { ERC20_ABI } from '../abis/ERC20';
+import { IYELAY_LITE_VAULT_ABI } from '../abis/IYelayLiteVault';
+import { VAULT_WRAPPER_ABI } from '../abis/VaultWrapper';
+import { YIELD_EXTRACTOR_ABI } from '../abis/YieldExtractor';
+import { ContractAddresses } from '../types/config';
 
 export class ContractFactory {
 	constructor(private drift: Drift, private contractAddresses: ContractAddresses) {}

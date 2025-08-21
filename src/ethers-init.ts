@@ -1,5 +1,5 @@
 import { createDrift } from '@delvtech/drift';
-import { YelayLiteSdk } from './main.js';
+import { YelayLiteSdk } from './main';
 import { ethers } from 'ethers';
 import { ethersAdapter } from '@delvtech/drift-ethers-v5';
 
