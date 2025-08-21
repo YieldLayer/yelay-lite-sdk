@@ -1,60 +1,83 @@
-// import { BigNumber, ContractTransaction, ethers, Overrides, PayableOverrides, Signer } from 'ethers';
-// import { ContractFactory } from './ContractFactory';
-// import { populateGasLimit } from '../utils/smartContract';
-// import { SwapArgsStruct } from '../generated/typechain/IYelayLiteVault';
+import { ContractFactory } from './ContractFactory.js';
+import { Address, HexString } from '@delvtech/drift';
 
-// export class VaultWrapper {
-// 	constructor(private contractFactory: ContractFactory) {}
+export type SwapArgsStruct = {
+	tokenIn: string;
+	swapTarget: string;
+	swapCallData: string;
+};
 
-// 	public async depositEth(
-// 		vault: string,
-// 		pool: number,
-// 		amount: ethers.BigNumberish,
-// 		overrides: PayableOverrides = {},
-// 	): Promise<ContractTransaction> {
-// 		const vaultWrapper = this.contractFactory.getVaultWrapper();
+export class VaultWrapper {
+	constructor(private contractFactory: ContractFactory) {}
 
-// 		overrides.value = amount;
+	public async depositEth(vault: string, pool: number, amount: bigint): Promise<HexString> {
+		const vaultWrapper = this.contractFactory.getVaultWrapper();
 
-// 		await populateGasLimit(vaultWrapper.estimateGas.wrapEthAndDeposit, [vault, pool], overrides);
+		if (vaultWrapper.isReadWrite()) {
+			const txHash = await vaultWrapper.write(
+				'wrapEthAndDeposit',
+				{
+					yelayLiteVault: vault as Address,
+					projectId: BigInt(pool),
+				},
+				{
+					value: amount,
+				},
+			);
+			return txHash;
+		} else {
+			throw new Error('Not read');
+		}
+	}
 
-// 		return await vaultWrapper.wrapEthAndDeposit(vault, pool, overrides);
-// 	}
+	public async vaultWrapperAllowance(tokenAddress: string): Promise<bigint> {
+		const vaultWrapper = this.contractFactory.getVaultWrapper();
+		const erc20 = this.contractFactory.getErc20(tokenAddress);
 
-// 	public async vaultWrapperAllowance(signer: Signer, tokenAddress: string): Promise<BigNumber> {
-// 		const vaultWrapper = this.contractFactory.getVaultWrapper();
-// 		const userAddress = await signer.getAddress();
+		if (erc20.isReadWrite()) {
+			const signerAddress = await erc20.getSignerAddress();
+			return await erc20.read('allowance', {
+				owner: signerAddress,
+				spender: vaultWrapper.address as Address,
+			});
+		} else {
+			throw new Error('Missing signer');
+		}
+	}
 
-// 		return await this.contractFactory.getErc20(tokenAddress).allowance(userAddress, vaultWrapper.address);
-// 	}
+	public async approveVaultWrapper(tokenAddress: string, amount: bigint): Promise<HexString> {
+		const vaultWrapper = this.contractFactory.getVaultWrapper();
+		const erc20 = this.contractFactory.getErc20(tokenAddress);
 
-// 	public async approveVaultWrapper(
-// 		tokenAddress: string,
-// 		amount: ethers.BigNumberish,
-// 		overrides: Overrides = {},
-// 	): Promise<ContractTransaction> {
-// 		const vaultWrapper = this.contractFactory.getVaultWrapper();
+		if (erc20.isReadWrite()) {
+			const txHash = await erc20.write('approve', {
+				spender: vaultWrapper.address as Address,
+				amount,
+			});
+			return txHash;
+		} else {
+			throw new Error('Not read');
+		}
+	}
 
-// 		await populateGasLimit(
-// 			this.contractFactory.getErc20(tokenAddress).estimateGas.approve,
-// 			[vaultWrapper.address, amount],
-// 			overrides,
-// 		);
+	public async swapAndDeposit(
+		vault: string,
+		pool: number,
+		swapData: SwapArgsStruct,
+		amount: bigint,
+	): Promise<HexString> {
+		const vaultWrapper = this.contractFactory.getVaultWrapper();
 
-// 		return this.contractFactory.getErc20(tokenAddress).approve(vaultWrapper.address, amount, overrides);
-// 	}
-
-// 	public async swapAndDeposit(
-// 		vault: string,
-// 		pool: number,
-// 		swapData: SwapArgsStruct,
-// 		amount: ethers.BigNumberish,
-// 		overrides: PayableOverrides = {},
-// 	): Promise<ContractTransaction> {
-// 		const vaultWrapper = this.contractFactory.getVaultWrapper();
-
-// 		await populateGasLimit(vaultWrapper.estimateGas.swapAndDeposit, [vault, pool, swapData, amount], overrides);
-
-// 		return await vaultWrapper.swapAndDeposit(vault, pool, swapData, amount, overrides);
-// 	}
-// }
+		if (vaultWrapper.isReadWrite()) {
+			const txHash = await vaultWrapper.write('swapAndDeposit', {
+				yelayLiteVault: vault as Address,
+				projectId: BigInt(pool),
+				swapArgs: swapData,
+				amount,
+			});
+			return txHash;
+		} else {
+			throw new Error('Not read');
+		}
+	}
+}

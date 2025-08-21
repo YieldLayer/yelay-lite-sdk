@@ -1,60 +1,56 @@
-// import { BigNumber, ContractTransaction, Overrides } from 'ethers';
-// import { ContractFactory } from './ContractFactory';
-// import { YieldClaimedEvent } from '../generated/typechain/YieldExtractor';
-// import { populateGasLimit, QUERY_EVENTS_BLOCK_RANGE } from '../utils/smartContract';
-// import { ClaimRequest } from '../types';
+import { Address, HexString } from '@delvtech/drift';
+import { ClaimRequest } from '../types/yield.js';
+import { ContractFactory } from './ContractFactory.js';
 
-// export class YieldExtractor {
-// 	constructor(private contractFactory: ContractFactory) {}
+export type YieldClaimedEvent = {
+	user: string;
+	yelayLiteVault: string;
+	projectId: bigint;
+	cycle: bigint;
+	amount: bigint;
+	blockNumber: number;
+	transactionHash: string;
+};
 
-// 	public async getClaimedShares(user: string, vault: string, pool: number): Promise<BigNumber> {
-// 		const yieldExtractor = this.contractFactory.getYieldExtractor(true);
+export class YieldExtractor {
+	constructor(private contractFactory: ContractFactory) {}
 
-// 		return yieldExtractor.yieldSharesClaimed(user, vault, pool);
-// 	}
+	public async getClaimedShares(user: string, vault: string, pool: number): Promise<bigint> {
+		const yieldExtractor = this.contractFactory.getYieldExtractor();
+		return yieldExtractor.read('yieldSharesClaimed', [user as Address, vault as Address, BigInt(pool)]);
+	}
 
-// 	public async getLastClaimEvent(
-// 		user: string,
-// 		vault: string,
-// 		pool: number,
-// 		stopBlock: number,
-// 		latestBlock: number,
-// 	): Promise<YieldClaimedEvent | null> {
-// 		const yieldExtractor = this.contractFactory.getYieldExtractor();
+	public async getLastClaimEvent(
+		user: string,
+		vault: string,
+		pool: number,
+		stopBlock: number,
+		latestBlock: number,
+	): Promise<YieldClaimedEvent | null> {
+		const yieldExtractor = this.contractFactory.getYieldExtractor();
 
-// 		let i = 0;
-// 		while (true) {
-// 			const fromBlock = latestBlock - QUERY_EVENTS_BLOCK_RANGE * (i + 1);
-// 			const toBlock = latestBlock - QUERY_EVENTS_BLOCK_RANGE * i;
-// 			if (toBlock < stopBlock) {
-// 				return null;
-// 			}
-// 			const events = await yieldExtractor.queryFilter(
-// 				yieldExtractor.filters['YieldClaimed'](user, vault, pool),
-// 				fromBlock,
-// 				toBlock,
-// 			);
+		// TODO: Implement event querying with viem
+		// This would need to be implemented using viem's getLogs or similar
+		// For now, returning null as placeholder
+		return null;
+	}
 
-// 			if (events.length > 0) {
-// 				return events[events.length - 1];
-// 			}
-// 			i++;
-// 		}
-// 	}
+	public async claim(claimRequests: ClaimRequest[]): Promise<HexString> {
+		const yieldExtractor = this.contractFactory.getYieldExtractor();
 
-// 	public async claim(claimRequests: ClaimRequest[], overrides: Overrides = {}): Promise<ContractTransaction> {
-// 		const yieldExtractor = this.contractFactory.getYieldExtractor();
+		if (yieldExtractor.isReadWrite()) {
+			const args = claimRequests.map(c => ({
+				yelayLiteVault: c.yelayLiteVault as Address,
+				projectId: BigInt(c.pool),
+				cycle: BigInt(c.cycle),
+				yieldSharesTotal: BigInt(c.yieldSharesTotal),
+				proof: c.proof as `0x${string}`[],
+			}));
 
-// 		const args = claimRequests.map(c => ({
-// 			yelayLiteVault: c.yelayLiteVault,
-// 			projectId: c.pool,
-// 			cycle: c.cycle,
-// 			yieldSharesTotal: c.yieldSharesTotal,
-// 			proof: c.proof,
-// 		}));
-
-// 		await populateGasLimit(yieldExtractor.estimateGas.claim, [args], overrides);
-
-// 		return yieldExtractor.claim(args, overrides);
-// 	}
-// }
+			const txHash = await yieldExtractor.write('claim', { data: args });
+			return txHash;
+		} else {
+			throw new Error('Not read');
+		}
+	}
+}

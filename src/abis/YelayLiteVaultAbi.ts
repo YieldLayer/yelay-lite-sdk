@@ -1,4 +1,4 @@
-export const IYELAY_LITE_VAULT_ABI = [
+export const YELAY_LITE_VAULT_ABI = [
 	{
 		inputs: [],
 		name: 'AccessControlBadConfirmation',

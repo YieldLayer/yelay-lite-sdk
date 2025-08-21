@@ -1,16 +1,16 @@
 import { ContractFactory } from './ContractFactory.js';
-// import { VaultWrapper } from './VaultWrapper';
+import { VaultWrapper } from './VaultWrapper.js';
 import { YelayLiteVault } from './YelayLiteVault.js';
-// import { YieldExtractor } from './YieldExtractor';
+import { YieldExtractor } from './YieldExtractor.js';
 
 export class SmartContractAdapter {
-	// public vaultWrapper: VaultWrapper;
+	public vaultWrapper: VaultWrapper;
 	public yelayLiteVault: YelayLiteVault;
-	// public yieldExtractor: YieldExtractor;
+	public yieldExtractor: YieldExtractor;
 
 	constructor(contractFactory: ContractFactory) {
-		// this.vaultWrapper = new VaultWrapper(contractFactory);
+		this.vaultWrapper = new VaultWrapper(contractFactory);
 		this.yelayLiteVault = new YelayLiteVault(contractFactory);
-		// this.yieldExtractor = new YieldExtractor(contractFactory);
+		this.yieldExtractor = new YieldExtractor(contractFactory);
 	}
 }

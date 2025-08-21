@@ -27,14 +27,18 @@ export class YelayLiteVault {
 
 	async getVaultUnderlyingAsset(vaultAddress: string): Promise<string> {
 		const vault = this.contractFactory.getYelayLiteVault(vaultAddress);
-		const underlying = await vault.read('underlyingAsset');
-		return underlying;
+		return vault.read('underlyingAsset');
 	}
 
-	async allowance(userAddress: string, vaultAddress: string, tokenAddress?: string): Promise<bigint> {
+	async allowance(vaultAddress: string, tokenAddress?: string): Promise<bigint> {
 		const underlying = await this.getVaultUnderlyingAsset(vaultAddress);
-		const erc2 = this.contractFactory.getErc20(tokenAddress ? tokenAddress : underlying);
-		return erc2.read('allowance', { owner: userAddress as Address, spender: vaultAddress as Address });
+		const erc20 = this.contractFactory.getErc20(tokenAddress ? tokenAddress : underlying);
+		if (erc20.isReadWrite()) {
+			const signerAddress = await erc20.getSignerAddress();
+			return erc20.read('allowance', { owner: signerAddress, spender: vaultAddress as Address });
+		} else {
+			throw new Error('Missing signer');
+		}
 	}
 
 	async approve(vaultAddress: string, amount: bigint): Promise<HexString> {

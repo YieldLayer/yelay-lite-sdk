@@ -10,7 +10,8 @@
 		"rootDir": "src",
 		"sourceMap": true,
 		"strict": true,
-		"lib": ["ES2022", "DOM"]
+		"lib": ["ES2022", "DOM"],
+		"skipLibCheck": true
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "**/__tests__/*", "tests/**/*"]
