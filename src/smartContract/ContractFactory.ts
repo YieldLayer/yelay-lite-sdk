@@ -1,50 +1,35 @@
-import { Provider } from '@ethersproject/providers';
-import { Signer } from 'ethers';
-
-import { MulticallWrapper } from 'ethers-multicall-provider';
-import {
-	ERC20,
-	ERC20__factory,
-	IYelayLiteVault,
-	IYelayLiteVault__factory,
-	VaultWrapper,
-	VaultWrapper__factory,
-	YieldExtractor,
-	YieldExtractor__factory,
-} from '../generated/typechain';
-import { ContractAddresses } from '../types/config';
+import { Address, Drift } from '@delvtech/drift';
+import { ERC20_ABI } from '../abis/ERC20.js';
+import { IYELAY_LITE_VAULT_ABI } from '../abis/IYelayLiteVault.js';
+import { VAULT_WRAPPER_ABI } from '../abis/VaultWrapper.js';
+import { YIELD_EXTRACTOR_ABI } from '../abis/YieldExtractor.js';
+import { ContractAddresses } from '../types/config.js';
 
 export class ContractFactory {
-	private provider: Provider;
+	constructor(private drift: Drift, private contractAddresses: ContractAddresses) {}
 
-	constructor(private signerOrProvider: Signer | Provider, private contractAddresses: ContractAddresses) {
-		if (Signer.isSigner(signerOrProvider)) {
-			if (signerOrProvider.provider) {
-				this.provider = MulticallWrapper.wrap(signerOrProvider.provider);
-			} else {
-				throw new Error('Signer has no provider');
-			}
-		} else {
-			this.provider = MulticallWrapper.wrap(signerOrProvider);
-		}
+	getYelayLiteVault(vault: string) {
+		return this.drift.contract({ abi: IYELAY_LITE_VAULT_ABI, address: vault as Address });
 	}
 
-	getYelayLiteVault(vault: string): IYelayLiteVault {
-		return IYelayLiteVault__factory.connect(vault, this.signerOrProvider);
+	getVaultWrapper() {
+		return this.drift.contract({
+			abi: VAULT_WRAPPER_ABI,
+			address: this.contractAddresses.VaultWrapper as Address,
+		});
 	}
 
-	getVaultWrapper(): VaultWrapper {
-		return VaultWrapper__factory.connect(this.contractAddresses.VaultWrapper, this.signerOrProvider);
+	getErc20(address: string) {
+		return this.drift.contract({
+			abi: ERC20_ABI,
+			address: address as Address,
+		});
 	}
 
-	getErc20(address: string): ERC20 {
-		return ERC20__factory.connect(address, this.signerOrProvider);
-	}
-
-	getYieldExtractor(multicall = false): YieldExtractor {
-		return YieldExtractor__factory.connect(
-			this.contractAddresses.YieldExtractor,
-			multicall ? this.provider : this.signerOrProvider,
-		);
+	getYieldExtractor() {
+		return this.drift.contract({
+			abi: YIELD_EXTRACTOR_ABI,
+			address: this.contractAddresses.YieldExtractor as Address,
+		});
 	}
 }
