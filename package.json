@@ -36,7 +36,10 @@
 	"license": "ISC",
 	"dependencies": {
 		"@delvtech/drift": "1.0.0",
-		"rimraf": "6.0.1"
+		"@delvtech/drift-ethers-v5": "^1.0.0",
+		"@delvtech/drift-viem": "^1.0.0",
+		"ethers": "^5.8.0",
+		"viem": "^2.34.0"
 	},
 	"devDependencies": {
 		"@types/jest": "29.5.14",
@@ -45,6 +48,7 @@
 		"@typescript-eslint/parser": "8.17.0",
 		"dotenv": "16.4.7",
 		"jest": "29.7.0",
+		"rimraf": "6.0.1",
 		"ts-jest": "29.2.5",
 		"ts-node": "10.9.2",
 		"typescript": "5.6.2"
