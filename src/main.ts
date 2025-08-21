@@ -1,34 +1,23 @@
 import type { Drift } from '@delvtech/drift';
 import { getEnvironment } from './environment.js';
+import { Vaults } from './services/Vaults.js';
+import { ContractFactory } from './smartContract/ContractFactory.js';
 import { ChainId } from './types/config.js';
 
 export class YelayLiteSdk {
-	private drift: Drift;
-	private testing: boolean;
-	// public vaults: Vaults;
-	// public yields: Yield;
-	// public pools: Pools;
-	// public strategies: Strategies;
-	// TODO: remove after integrating gathering swapCalldata into the flow
-	// public swapperAddress: string;
+	private _vaults: Vaults | null = null;
 
-	constructor(drift: Drift, testing = false) {
-		this.drift = drift;
-		this.testing = testing;
-
-		// this.vaults = new Vaults(contractFactory, config.backendUrl, chainId, signerOrProvider);
-
-		// this.yields = new Yield(contractFactory, config.backendUrl, chainId, signerOrProvider);
-
-		// this.pools = new Pools(contractFactory, config.backendUrl, chainId);
-
-		// this.strategies = new Strategies(contractFactory, config.backendUrl);
-
-		// this.swapperAddress = config.contracts.Swapper;
+	async init(drift: Drift) {
+		const chainId = (await drift.getChainId()) as ChainId;
+		const config = getEnvironment(chainId, true);
+		const contractFactory = new ContractFactory(drift, config.contracts);
+		this._vaults = new Vaults(contractFactory, config.backendUrl, chainId);
 	}
 
-	async init() {
-		const chainId = (await this.drift.getChainId()) as ChainId;
-		const config = getEnvironment(chainId, this.testing);
+	get vaults(): Vaults {
+		if (!this._vaults) {
+			throw new Error('SDK not initialized. Call init() first.');
+		}
+		return this._vaults;
 	}
 }
