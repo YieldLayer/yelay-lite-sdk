@@ -1,12 +1,17 @@
 import { BigNumber, ContractTransaction, ethers, Overrides, Signer } from 'ethers';
 import { parseBytes32String } from 'ethers/lib/utils';
-import { IContractFactory } from '../../app/ports/IContractFactory';
-import { IYelayLiteVault, PoolsSupply } from '../../app/ports/smartContract/IYelayLiteVault';
-import { ClientData, StrategyData } from '../../types/smartContract';
-import { populateGasLimit } from '../../utils/smartContract';
+import { ContractFactory } from './ContractFactory';
+import { populateGasLimit } from '../utils/smartContract';
+import { ClientData, StrategyData } from '../types';
 
-export class YelayLiteVault implements IYelayLiteVault {
-	constructor(private contractFactory: IContractFactory) {}
+export type PoolsSupply = {
+	totalAssets: BigNumber;
+	totalSupply: BigNumber;
+	poolsSupply: BigNumber[];
+};
+
+export class YelayLiteVault {
+	constructor(private contractFactory: ContractFactory) {}
 
 	public async getPoolsSupplies(vault: string, pools: number[]): Promise<PoolsSupply> {
 		const yelayLiteVault = this.contractFactory.getYelayLiteVault(vault);

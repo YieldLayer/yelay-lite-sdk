@@ -1,9 +1,7 @@
 import { Provider } from '@ethersproject/providers';
 import { BigNumber, ContractTransaction, Overrides, Signer } from 'ethers';
-import { YieldBackend } from '../../adapters/backend/YieldBackend';
-import { SmartContractAdapter } from '../../adapters/smartContract';
-import { TimeFrame } from '../../types/backend';
-import { ChainId } from '../../types/config';
+import { TimeFrame } from '../types/backend';
+import { ChainId } from '../types/config';
 import {
 	ClaimRequest,
 	ClaimRequestParams,
@@ -12,20 +10,21 @@ import {
 	PoolYield,
 	VaultYield,
 	YieldAggregated,
-} from '../../types/yield';
-import { getTimestampOneWeekAgo } from '../../utils/backend';
-import { tryCall } from '../../utils/smartContract';
-import { IYieldBackend } from '../ports/backend/IYieldBackend';
-import { IContractFactory } from '../ports/IContractFactory';
+} from '../types/yield';
+import { getTimestampOneWeekAgo } from '../utils/backend';
+import { tryCall } from '../utils/smartContract';
+import { SmartContractAdapter } from '../smartContract';
+import { YieldBackend } from '../backend/YieldBackend';
+import { ContractFactory } from '../smartContract/ContractFactory';
 
 export class Yield {
 	private smartContractAdapter: SmartContractAdapter;
-	private yieldBackend: IYieldBackend;
+	private yieldBackend: YieldBackend;
 	private signerOrProvider: Signer | Provider;
 	private chainId: ChainId;
 
 	constructor(
-		contractFactory: IContractFactory,
+		contractFactory: ContractFactory,
 		backendUrl: string,
 		chainId: ChainId,
 		signerOrProvider: Signer | Provider,

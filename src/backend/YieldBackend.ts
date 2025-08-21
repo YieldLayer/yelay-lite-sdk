@@ -1,17 +1,16 @@
-import { IYieldBackend } from '../../app/ports/backend/IYieldBackend';
-import ApiWrapperService from '../../services/ApiWrapperService';
-import { TimeFrame } from '../../types/backend';
+import ApiWrapperService from '../services/ApiWrapperService';
 import {
 	ClaimRequest,
 	ClaimRequestParams,
 	ClaimRequestRaw,
 	PoolYield,
+	TimeFrame,
 	VaultYield,
 	YieldAggregated,
-} from '../../types/yield';
-import { appendTimeFrameQuery } from '../../utils/backend';
+} from '../types';
+import { appendTimeFrameQuery } from '../utils/backend';
 
-export class YieldBackend extends ApiWrapperService implements IYieldBackend {
+export class YieldBackend extends ApiWrapperService {
 	private chainId: string;
 
 	constructor(backendUrl: string, chainId: number) {

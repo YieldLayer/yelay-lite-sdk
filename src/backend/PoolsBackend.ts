@@ -1,9 +1,7 @@
-import { IPoolsBackend } from '../../app/ports/backend/IPoolsBackend';
-import ApiWrapperService from '../../services/ApiWrapperService';
-import { PaginatedResponse } from '../../types/backend';
-import { HistoricalTVL, HistoricalTVLParams } from '../../types/pools';
+import ApiWrapperService from '../services/ApiWrapperService';
+import { HistoricalTVL, HistoricalTVLParams, PaginatedResponse } from '../types';
 
-export class PoolsBackend extends ApiWrapperService implements IPoolsBackend {
+export class PoolsBackend extends ApiWrapperService {
 	private chainId: number;
 
 	constructor(backendUrl: string, chainId: number) {

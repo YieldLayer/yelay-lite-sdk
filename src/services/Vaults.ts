@@ -1,22 +1,21 @@
 import { Provider } from '@ethersproject/providers';
 import { BigNumber, CallOverrides, ContractTransaction, ethers, Overrides, Signer } from 'ethers';
-import { VaultsBackend } from '../../adapters/backend/VaultsBackend';
-import { SmartContractAdapter } from '../../adapters/smartContract';
-import { ClientData } from '../../types/smartContract';
-import { Vault } from '../../types/vaults';
-import { tryCall } from '../../utils/smartContract';
-import { IContractFactory } from '../ports/IContractFactory';
+import { ClientData } from '../types/smartContract';
+import { Vault } from '../types/vaults';
+import { tryCall } from '../utils/smartContract';
 
-import { SwapArgsStruct } from '../../generated/typechain/VaultWrapper';
-import { IVaultsBackend } from '../ports/backend/IVaultsBackend';
+import { SwapArgsStruct } from '../generated/typechain/VaultWrapper';
+import { SmartContractAdapter } from '../smartContract';
+import { VaultsBackend } from '../backend/VaultsBackend';
+import { ContractFactory } from '../smartContract/ContractFactory';
 
 export class Vaults {
 	private smartContractAdapter: SmartContractAdapter;
-	private vaultsBackend: IVaultsBackend;
+	private vaultsBackend: VaultsBackend;
 	private signerOrProvider: Signer | Provider;
 
 	constructor(
-		contractFactory: IContractFactory,
+		contractFactory: ContractFactory,
 		backendUrl: string,
 		chainId: number,
 		signerOrProvider: Signer | Provider,

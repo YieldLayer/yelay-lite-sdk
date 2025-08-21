@@ -1,12 +1,12 @@
 import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
-import { ContractFactory } from './adapters/smartContract/ContractFactory';
-import { Pools } from './app/services/Pools';
-import { Vaults } from './app/services/Vaults';
-import { Yield } from './app/services/Yield';
-import { Strategies } from './app/services/Strategies';
+import { Pools } from './services/Pools';
+import { Vaults } from './services/Vaults';
+import { Yield } from './services/Yield';
+import { Strategies } from './services/Strategies';
 import { getEnvironment } from './environment';
 import { ChainId } from './types/config';
+import { ContractFactory } from './smartContract/ContractFactory';
 
 export class YelayLiteSdk {
 	public vaults: Vaults;

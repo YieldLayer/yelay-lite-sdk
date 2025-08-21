@@ -1,12 +1,11 @@
 import { BigNumber, ContractTransaction, Overrides } from 'ethers';
-import { IContractFactory } from '../../app/ports/IContractFactory';
-import { IYieldExtractor } from '../../app/ports/smartContract/IYieldExtractor';
-import { YieldClaimedEvent } from '../../generated/typechain/YieldExtractor';
-import { ClaimRequest } from '../../types';
-import { populateGasLimit, QUERY_EVENTS_BLOCK_RANGE } from '../../utils/smartContract';
+import { ContractFactory } from './ContractFactory';
+import { YieldClaimedEvent } from '../generated/typechain/YieldExtractor';
+import { populateGasLimit, QUERY_EVENTS_BLOCK_RANGE } from '../utils/smartContract';
+import { ClaimRequest } from '../types';
 
-export class YieldExtractor implements IYieldExtractor {
-	constructor(private contractFactory: IContractFactory) {}
+export class YieldExtractor {
+	constructor(private contractFactory: ContractFactory) {}
 
 	public async getClaimedShares(user: string, vault: string, pool: number): Promise<BigNumber> {
 		const yieldExtractor = this.contractFactory.getYieldExtractor(true);

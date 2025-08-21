@@ -1,11 +1,10 @@
 import { BigNumber, ContractTransaction, ethers, Overrides, PayableOverrides, Signer } from 'ethers';
-import { IContractFactory } from '../../app/ports/IContractFactory';
-import { IVaultWrapper } from '../../app/ports/smartContract/IVaultWrapper';
-import { SwapArgsStruct } from '../../generated/typechain/VaultWrapper';
-import { populateGasLimit } from '../../utils/smartContract';
+import { ContractFactory } from './ContractFactory';
+import { populateGasLimit } from '../utils/smartContract';
+import { SwapArgsStruct } from '../generated/typechain/IYelayLiteVault';
 
-export class VaultWrapper implements IVaultWrapper {
-	constructor(private contractFactory: IContractFactory) {}
+export class VaultWrapper {
+	constructor(private contractFactory: ContractFactory) {}
 
 	public async depositEth(
 		vault: string,

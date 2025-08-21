@@ -1,8 +1,7 @@
-import ApiWrapperService from '../../services/ApiWrapperService';
-import { IVaultsBackend } from '../../app/ports/backend/IVaultsBackend';
-import { Vault } from '../../types/vaults';
+import ApiWrapperService from '../services/ApiWrapperService';
+import { Vault } from '../types';
 
-export class VaultsBackend extends ApiWrapperService implements IVaultsBackend {
+export class VaultsBackend extends ApiWrapperService {
 	private chainId: string;
 
 	constructor(backendUrl: string, chainId: number) {

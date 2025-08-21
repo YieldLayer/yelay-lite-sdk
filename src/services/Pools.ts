@@ -1,14 +1,14 @@
-import { SmartContractAdapter } from '../../adapters/smartContract';
-import { PoolsBackend } from '../../adapters/backend/PoolsBackend';
-import { IContractFactory } from '../ports/IContractFactory';
-import { PaginatedResponse } from '../../types/backend';
-import { PoolsTvl, HistoricalTVL, HistoricalTVLParams } from '../../types/pools';
+import { PoolsBackend } from '../backend/PoolsBackend';
+import { SmartContractAdapter } from '../smartContract';
+import { ContractFactory } from '../smartContract/ContractFactory';
+import { PaginatedResponse } from '../types/backend';
+import { HistoricalTVL, HistoricalTVLParams, PoolsTvl } from '../types/pools';
 
 export class Pools {
 	private smartContractAdapter: SmartContractAdapter;
 	private poolsBackend: PoolsBackend;
 
-	constructor(contractFactory: IContractFactory, backendUrl: string, chainId: number) {
+	constructor(contractFactory: ContractFactory, backendUrl: string, chainId: number) {
 		this.smartContractAdapter = new SmartContractAdapter(contractFactory);
 		this.poolsBackend = new PoolsBackend(backendUrl, chainId);
 	}

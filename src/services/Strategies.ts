@@ -1,13 +1,13 @@
-import { SmartContractAdapter } from '../../adapters/smartContract';
-import { IContractFactory } from '../ports/IContractFactory';
-import { Protocol, Strategy } from '../../types/strategies';
-import { StrategiesBackend } from '../../adapters/backend/StrategiesBackend';
+import { StrategiesBackend } from '../backend/StrategiesBackend';
+import { SmartContractAdapter } from '../smartContract';
+import { ContractFactory } from '../smartContract/ContractFactory';
+import { Protocol, Strategy } from '../types/strategies';
 
 export class Strategies {
 	private smartContractAdapter: SmartContractAdapter;
 	private strategiesBackend: StrategiesBackend;
 
-	constructor(contractFactory: IContractFactory, backendUrl: string) {
+	constructor(contractFactory: ContractFactory, backendUrl: string) {
 		this.smartContractAdapter = new SmartContractAdapter(contractFactory);
 		this.strategiesBackend = new StrategiesBackend(backendUrl);
 	}

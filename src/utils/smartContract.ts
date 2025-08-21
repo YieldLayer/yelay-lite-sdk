@@ -1,6 +1,5 @@
 import { BigNumber, ContractTransaction, ethers, PayableOverrides } from 'ethers';
 import { LibErrors__factory } from '../generated/typechain';
-import { ChainId } from '../types/config';
 
 export const tryCall = async (call: Promise<ethers.ContractTransaction>): Promise<ContractTransaction> => {
 	try {

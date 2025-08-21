@@ -2,7 +2,6 @@ import { Provider } from '@ethersproject/providers';
 import { Signer } from 'ethers';
 
 import { MulticallWrapper } from 'ethers-multicall-provider';
-import { IContractFactory } from '../../app/ports/IContractFactory';
 import {
 	ERC20,
 	ERC20__factory,
@@ -12,10 +11,10 @@ import {
 	VaultWrapper__factory,
 	YieldExtractor,
 	YieldExtractor__factory,
-} from '../../generated/typechain';
-import { ContractAddresses } from '../../types/config';
+} from '../generated/typechain';
+import { ContractAddresses } from '../types/config';
 
-export class ContractFactory implements IContractFactory {
+export class ContractFactory {
 	private provider: Provider;
 
 	constructor(private signerOrProvider: Signer | Provider, private contractAddresses: ContractAddresses) {
