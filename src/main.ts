@@ -1,53 +1,45 @@
 import type { Drift } from '@delvtech/drift';
 import { getEnvironment } from './environment';
-import { Pools } from './services/Pools';
-import { Strategies } from './services/Strategies';
-import { Vaults } from './services/Vaults';
-import { Yield } from './services/Yield';
+import { Portfolio } from './services/Portfolio';
+import { DataProvider } from './services/DataProvider';
+import { ActionExecutor } from './services/ActionExecutor';
 import { ContractFactory } from './smartContract/ContractFactory';
 import { ChainId } from './types/config';
 
 export class YelayLiteSdk {
-	private _vaults: Vaults | null = null;
-	private _pools: Pools | null = null;
-	private _strategies: Strategies | null = null;
-	private _yield: Yield | null = null;
+	private _portfolio: Portfolio | null = null;
+	private _data: DataProvider | null = null;
+	private _actions: ActionExecutor | null = null;
 
 	async init(drift: Drift) {
 		const chainId = (await drift.getChainId()) as ChainId;
 		const config = getEnvironment(chainId, true);
 		const contractFactory = new ContractFactory(drift, config.contracts);
-		this._vaults = new Vaults(contractFactory, config.backendUrl, chainId);
-		this._pools = new Pools(contractFactory, config.backendUrl, chainId);
-		this._strategies = new Strategies(contractFactory, config.backendUrl);
-		this._yield = new Yield(contractFactory, config.backendUrl, chainId);
+
+		// Initialize services with proper dependencies
+		this._portfolio = new Portfolio(contractFactory, config.backendUrl, chainId);
+		this._data = new DataProvider(contractFactory, config.backendUrl, chainId);
+		this._actions = new ActionExecutor(contractFactory);
 	}
 
-	get vaults(): Vaults {
-		if (!this._vaults) {
+	get portfolio(): Portfolio {
+		if (!this._portfolio) {
 			throw new Error('SDK not initialized. Call init() first.');
 		}
-		return this._vaults;
+		return this._portfolio;
 	}
 
-	get pools(): Pools {
-		if (!this._pools) {
+	get data(): DataProvider {
+		if (!this._data) {
 			throw new Error('SDK not initialized. Call init() first.');
 		}
-		return this._pools;
+		return this._data;
 	}
 
-	get strategies(): Strategies {
-		if (!this._strategies) {
+	get actions(): ActionExecutor {
+		if (!this._actions) {
 			throw new Error('SDK not initialized. Call init() first.');
 		}
-		return this._strategies;
-	}
-
-	get yield(): Yield {
-		if (!this._yield) {
-			throw new Error('SDK not initialized. Call init() first.');
-		}
-		return this._yield;
+		return this._actions;
 	}
 }
