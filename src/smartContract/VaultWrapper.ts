@@ -1,10 +1,10 @@
-import { ContractFactory } from './ContractFactory.js';
+import { ContractFactory } from './ContractFactory';
 import { Address, HexString } from '@delvtech/drift';
 
 export type SwapArgsStruct = {
-	tokenIn: string;
-	swapTarget: string;
-	swapCallData: string;
+	tokenIn: HexString;
+	swapTarget: HexString;
+	swapCallData: HexString;
 };
 
 export class VaultWrapper {

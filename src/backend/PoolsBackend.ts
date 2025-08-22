@@ -1,5 +1,5 @@
-import ApiWrapperService from '../services/ApiWrapperService.js';
-import { HistoricalTVL, HistoricalTVLParams, PaginatedResponse } from '../types/index.js';
+import ApiWrapperService from '../services/ApiWrapperService';
+import { HistoricalTVL, HistoricalTVLParams, PaginatedResponse } from '../types/index';
 
 export class PoolsBackend extends ApiWrapperService {
 	private chainId: number;

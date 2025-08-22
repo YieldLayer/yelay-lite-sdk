@@ -1,11 +1,11 @@
-import { ClientData } from '../types/smartContract.js';
-import { Vault } from '../types/vaults.js';
+import { ClientData } from '../types/smartContract';
+import { Vault } from '../types/vaults';
 
-import { VaultsBackend } from '../backend/VaultsBackend.js';
+import { VaultsBackend } from '../backend/VaultsBackend';
 import { HexString } from '@delvtech/drift';
-import { SmartContractAdapter } from '../smartContract/index.js';
-import { ContractFactory } from '../smartContract/ContractFactory.js';
-import { SwapArgsStruct } from '../smartContract/VaultWrapper.js';
+import { SmartContractAdapter } from '../smartContract/index';
+import { ContractFactory } from '../smartContract/ContractFactory';
+import { SwapArgsStruct } from '../smartContract/VaultWrapper';
 
 export class Vaults {
 	private smartContractAdapter: SmartContractAdapter;

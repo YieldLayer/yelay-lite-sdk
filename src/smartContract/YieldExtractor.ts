@@ -1,6 +1,6 @@
 import { Address, HexString } from '@delvtech/drift';
-import { ClaimRequest } from '../types/yield.js';
-import { ContractFactory } from './ContractFactory.js';
+import { ClaimRequest } from '../types/yield';
+import { ContractFactory } from './ContractFactory';
 
 export type YieldClaimedEvent = {
 	user: string;

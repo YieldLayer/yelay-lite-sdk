@@ -1,7 +1,7 @@
-import { StrategiesBackend } from '../backend/StrategiesBackend.js';
-import { SmartContractAdapter } from '../smartContract/index.js';
-import { ContractFactory } from '../smartContract/ContractFactory.js';
-import { Protocol, Strategy } from '../types/strategies.js';
+import { StrategiesBackend } from '../backend/StrategiesBackend';
+import { SmartContractAdapter } from '../smartContract/index';
+import { ContractFactory } from '../smartContract/ContractFactory';
+import { Protocol, Strategy } from '../types/strategies';
 
 export class Strategies {
 	private smartContractAdapter: SmartContractAdapter;

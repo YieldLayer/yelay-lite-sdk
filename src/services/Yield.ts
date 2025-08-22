@@ -1,9 +1,9 @@
 import { HexString } from '@delvtech/drift';
-import { YieldBackend } from '../backend/YieldBackend.js';
-import { ContractFactory } from '../smartContract/ContractFactory.js';
-import { SmartContractAdapter } from '../smartContract/index.js';
-import { TimeFrame } from '../types/backend.js';
-import { ChainId } from '../types/config.js';
+import { YieldBackend } from '../backend/YieldBackend';
+import { ContractFactory } from '../smartContract/ContractFactory';
+import { SmartContractAdapter } from '../smartContract/index';
+import { TimeFrame } from '../types/backend';
+import { ChainId } from '../types/config';
 import {
 	ClaimRequest,
 	ClaimRequestParams,
@@ -12,8 +12,8 @@ import {
 	PoolYield,
 	VaultYield,
 	YieldAggregated,
-} from '../types/yield.js';
-import { getTimestampOneWeekAgo } from '../utils/backend.js';
+} from '../types/yield';
+import { getTimestampOneWeekAgo } from '../utils/backend';
 
 export class Yield {
 	private smartContractAdapter: SmartContractAdapter;

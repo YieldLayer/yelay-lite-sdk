@@ -1,11 +1,11 @@
 import type { Drift } from '@delvtech/drift';
-import { getEnvironment } from './environment.js';
-import { Pools } from './services/Pools.js';
-import { Strategies } from './services/Strategies.js';
-import { Vaults } from './services/Vaults.js';
-import { Yield } from './services/Yield.js';
-import { ContractFactory } from './smartContract/ContractFactory.js';
-import { ChainId } from './types/config.js';
+import { getEnvironment } from './environment';
+import { Pools } from './services/Pools';
+import { Strategies } from './services/Strategies';
+import { Vaults } from './services/Vaults';
+import { Yield } from './services/Yield';
+import { ContractFactory } from './smartContract/ContractFactory';
+import { ChainId } from './types/config';
 
 export class YelayLiteSdk {
 	private _vaults: Vaults | null = null;

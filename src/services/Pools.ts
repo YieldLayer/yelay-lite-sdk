@@ -1,8 +1,8 @@
-import { PoolsBackend } from '../backend/PoolsBackend.js';
-import { ContractFactory } from '../smartContract/ContractFactory.js';
-import { SmartContractAdapter } from '../smartContract/index.js';
-import { PaginatedResponse } from '../types/backend.js';
-import { HistoricalTVL, HistoricalTVLParams, PoolsTvl } from '../types/pools.js';
+import { PoolsBackend } from '../backend/PoolsBackend';
+import { ContractFactory } from '../smartContract/ContractFactory';
+import { SmartContractAdapter } from '../smartContract/index';
+import { PaginatedResponse } from '../types/backend';
+import { HistoricalTVL, HistoricalTVLParams, PoolsTvl } from '../types/pools';
 
 export class Pools {
 	private smartContractAdapter: SmartContractAdapter;

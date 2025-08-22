@@ -1,5 +1,5 @@
-import { ClientData, StrategyData } from '../types/index.js';
-import { ContractFactory } from './ContractFactory.js';
+import { ClientData, StrategyData } from '../types/index';
+import { ContractFactory } from './ContractFactory';
 import { Address, HexString } from '@delvtech/drift';
 
 export type PoolsSupply = {
