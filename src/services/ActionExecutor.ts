@@ -1,4 +1,4 @@
-import { HexString } from '@delvtech/drift';
+import { HexString, WriteOptions } from '@delvtech/drift';
 import { ContractFactory } from '../smartContract/ContractFactory';
 import { SmartContractAdapter } from '../smartContract/index';
 import { SwapArgsStruct } from '../smartContract/VaultWrapper';
@@ -18,8 +18,8 @@ export class ActionExecutor {
 	 * @param {bigint} amount - The amount to deposit.
 	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
 	 */
-	async deposit(vault: string, pool: number, amount: bigint): Promise<HexString> {
-		return this.smartContractAdapter.yelayLiteVault.deposit(vault, pool, amount);
+	async deposit(vault: string, pool: number, amount: bigint, options?: WriteOptions): Promise<HexString> {
+		return this.smartContractAdapter.yelayLiteVault.deposit(vault, pool, amount, options);
 	}
 
 	/**
@@ -32,8 +32,8 @@ export class ActionExecutor {
 	 * This method wraps the specified ETH amount and deposits it into the target vault for the given pool.
 	 * It uses the VaultWrapper contract to handle ETH wrapping and depositing in a single transaction.
 	 */
-	public async depositEth(vault: string, pool: number, amount: bigint): Promise<HexString> {
-		return this.smartContractAdapter.vaultWrapper.depositEth(vault, pool, amount);
+	public async depositEth(vault: string, pool: number, amount: bigint, options?: WriteOptions): Promise<HexString> {
+		return this.smartContractAdapter.vaultWrapper.depositEth(vault, pool, amount, options);
 	}
 
 	/**
@@ -43,8 +43,8 @@ export class ActionExecutor {
 	 * @param {bigint} amount - The amount to withdraw.
 	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
 	 */
-	async withdraw(vault: string, pool: number, amount: bigint): Promise<HexString> {
-		return this.smartContractAdapter.yelayLiteVault.redeem(vault, pool, amount);
+	async withdraw(vault: string, pool: number, amount: bigint, options?: WriteOptions): Promise<HexString> {
+		return this.smartContractAdapter.yelayLiteVault.redeem(vault, pool, amount, options);
 	}
 
 	/**
@@ -53,8 +53,8 @@ export class ActionExecutor {
 	 * @param {bigint} amount - The amount to approve.
 	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
 	 */
-	async approve(vault: string, amount: bigint): Promise<HexString> {
-		return this.smartContractAdapter.yelayLiteVault.approve(vault, amount);
+	async approve(vault: string, amount: bigint, options?: WriteOptions): Promise<HexString> {
+		return this.smartContractAdapter.yelayLiteVault.approve(vault, amount, options);
 	}
 
 	/**
@@ -63,8 +63,8 @@ export class ActionExecutor {
 	 * @param {bigint} amount - The amount to approve.
 	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
 	 */
-	async approveToken(tokenAddress: string, amount: bigint): Promise<HexString> {
-		return this.smartContractAdapter.vaultWrapper.approveVaultWrapper(tokenAddress, amount);
+	async approveToken(tokenAddress: string, amount: bigint, options?: WriteOptions): Promise<HexString> {
+		return this.smartContractAdapter.vaultWrapper.approveVaultWrapper(tokenAddress, amount, options);
 	}
 
 	/**
@@ -75,8 +75,14 @@ export class ActionExecutor {
 	 * @param {SwapArgsStruct} swapData - Swap args from 1inch.
 	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
 	 */
-	async swapAndDeposit(vault: string, pool: number, amount: bigint, swapData: SwapArgsStruct): Promise<HexString> {
-		return this.smartContractAdapter.vaultWrapper.swapAndDeposit(vault, pool, swapData, amount);
+	async swapAndDeposit(
+		vault: string,
+		pool: number,
+		amount: bigint,
+		swapData: SwapArgsStruct,
+		options?: WriteOptions,
+	): Promise<HexString> {
+		return this.smartContractAdapter.vaultWrapper.swapAndDeposit(vault, pool, swapData, amount, options);
 	}
 
 	/**
@@ -87,8 +93,14 @@ export class ActionExecutor {
 	 * @param {bigint} amount - The amount to migrate.
 	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
 	 */
-	async migrate(vault: string, fromPool: number, toPool: number, amount: bigint): Promise<HexString> {
-		return this.smartContractAdapter.yelayLiteVault.migrate(vault, fromPool, toPool, amount);
+	async migrate(
+		vault: string,
+		fromPool: number,
+		toPool: number,
+		amount: bigint,
+		options?: WriteOptions,
+	): Promise<HexString> {
+		return this.smartContractAdapter.yelayLiteVault.migrate(vault, fromPool, toPool, amount, options);
 	}
 
 	/**
@@ -97,8 +109,8 @@ export class ActionExecutor {
 	 * @param {number} pool - The ID of the pool to activate.
 	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
 	 */
-	async activatePool(vault: string, pool: number): Promise<HexString> {
-		return this.smartContractAdapter.yelayLiteVault.activatePool(vault, pool);
+	async activatePool(vault: string, pool: number, options?: WriteOptions): Promise<HexString> {
+		return this.smartContractAdapter.yelayLiteVault.activatePool(vault, pool, options);
 	}
 
 	/**
@@ -106,7 +118,7 @@ export class ActionExecutor {
 	 * @param {ClaimRequest[]} claimRequests - Array of claim requests to process.
 	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
 	 */
-	async claim(claimRequests: ClaimRequest[]): Promise<HexString> {
-		return this.smartContractAdapter.yieldExtractor.claim(claimRequests);
+	async claim(claimRequests: ClaimRequest[], options?: WriteOptions): Promise<HexString> {
+		return this.smartContractAdapter.yieldExtractor.claim(claimRequests, options);
 	}
 }

@@ -11,9 +11,9 @@ export class YelayLiteSdk {
 	private _data: DataProvider | null = null;
 	private _actions: ActionExecutor | null = null;
 
-	async init(drift: Drift) {
+	async init(drift: Drift, testing = false) {
 		const chainId = (await drift.getChainId()) as ChainId;
-		const config = getEnvironment(chainId, true);
+		const config = getEnvironment(chainId, testing);
 		const contractFactory = new ContractFactory(drift, config.contracts);
 
 		// Initialize services with proper dependencies

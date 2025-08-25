@@ -77,7 +77,6 @@ export class Portfolio {
 			params.vault.address,
 			params.poolId,
 			params.vault.createBlocknumber,
-			0,
 		);
 		if (!lastClaimEvent) {
 			return null;

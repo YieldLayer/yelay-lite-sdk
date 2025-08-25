@@ -31,3 +31,16 @@ export const getTimestampOneWeekAgo = () => {
 
 	return pastTimestamp;
 };
+
+export const decodeBytes32ToString = (bytes32: string): string => {
+	const hex = bytes32.startsWith('0x') ? bytes32.slice(2) : bytes32;
+	let result = '';
+	for (let i = 0; i < hex.length; i += 2) {
+		const byte = parseInt(hex.substring(i, i + 2), 16);
+		if (byte === 0) break;
+		result += String.fromCharCode(byte);
+	}
+	return result;
+};
+
+export const QUERY_EVENTS_BLOCK_RANGE = 10_000;

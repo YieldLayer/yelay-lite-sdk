@@ -1,6 +1,7 @@
 import { ClientData, StrategyData } from '../types/index';
 import { ContractFactory } from './ContractFactory';
-import { Address, HexString } from '@delvtech/drift';
+import { Address, HexString, WriteOptions } from '@delvtech/drift';
+import { decodeBytes32ToString } from '../utils';
 
 export type PoolsSupply = {
 	totalAssets: bigint;
@@ -41,73 +42,95 @@ export class YelayLiteVault {
 		}
 	}
 
-	async approve(vaultAddress: string, amount: bigint): Promise<HexString> {
+	async approve(vaultAddress: string, amount: bigint, options?: WriteOptions): Promise<HexString> {
 		const underlyingAsset = await this.getVaultUnderlyingAsset(vaultAddress);
 
 		const erc20 = this.contractFactory.getErc20(underlyingAsset);
 
 		if (erc20.isReadWrite()) {
-			const txHash = await erc20.write('approve', { spender: vaultAddress as Address, amount });
+			const txHash = await erc20.write('approve', { spender: vaultAddress as Address, amount }, options);
 			return txHash;
 		} else {
 			throw new Error('Not read');
 		}
 	}
 
-	async deposit(vault: string, pool: number, amount: bigint): Promise<HexString> {
+	async deposit(vault: string, pool: number, amount: bigint, options?: WriteOptions): Promise<HexString> {
 		const vaultContract = this.contractFactory.getYelayLiteVault(vault);
 
 		if (vaultContract.isReadWrite()) {
 			const signerAddress = await vaultContract.getSignerAddress();
-			const txHash = await vaultContract.write('deposit', {
-				assets: amount,
-				projectId: BigInt(pool),
-				receiver: signerAddress,
-			});
+			const txHash = await vaultContract.write(
+				'deposit',
+				{
+					assets: amount,
+					projectId: BigInt(pool),
+					receiver: signerAddress,
+				},
+				options,
+			);
 			return txHash;
 		} else {
 			throw new Error('Not read');
 		}
 	}
 
-	async redeem(vault: string, pool: number, amount: bigint): Promise<HexString> {
+	async redeem(vault: string, pool: number, amount: bigint, options?: WriteOptions): Promise<HexString> {
 		const vaultContract = this.contractFactory.getYelayLiteVault(vault);
 
 		if (vaultContract.isReadWrite()) {
 			const signerAddress = await vaultContract.getSignerAddress();
-			const txHash = await vaultContract.write('redeem', {
-				shares: amount,
-				projectId: BigInt(pool),
-				receiver: signerAddress as Address,
-			});
+			const txHash = await vaultContract.write(
+				'redeem',
+				{
+					shares: amount,
+					projectId: BigInt(pool),
+					receiver: signerAddress as Address,
+				},
+				options,
+			);
 			return txHash;
 		} else {
 			throw new Error('Not read');
 		}
 	}
 
-	async migrate(vault: string, fromPool: number, toPool: number, amount: bigint): Promise<HexString> {
+	async migrate(
+		vault: string,
+		fromPool: number,
+		toPool: number,
+		amount: bigint,
+		options?: WriteOptions,
+	): Promise<HexString> {
 		const vaultContract = this.contractFactory.getYelayLiteVault(vault);
 
 		if (vaultContract.isReadWrite()) {
-			const txHash = await vaultContract.write('migratePosition', {
-				fromProjectId: BigInt(fromPool),
-				toProjectId: BigInt(toPool),
-				amount,
-			});
+			const txHash = await vaultContract.write(
+				'migratePosition',
+				{
+					fromProjectId: BigInt(fromPool),
+					toProjectId: BigInt(toPool),
+					amount,
+				},
+				options,
+			);
 			return txHash;
 		} else {
 			throw new Error('Not read');
 		}
 	}
 
-	async activatePool(vault: string, pool: number): Promise<HexString> {
+	async activatePool(vault: string, pool: number, options?: WriteOptions): Promise<HexString> {
 		const vaultContract = this.contractFactory.getYelayLiteVault(vault);
 
 		if (vaultContract.isReadWrite()) {
-			const txHash = await vaultContract.write('activateProject', {
-				projectId: BigInt(pool),
-			});
+			const txHash = await vaultContract.write(
+				'activateProject',
+				{
+					projectId: BigInt(pool),
+				},
+				options,
+			);
 			return txHash;
 		} else {
 			throw new Error('Not read');
@@ -125,9 +148,7 @@ export class YelayLiteVault {
 		return {
 			minPool: Number(result.minProjectId),
 			maxPool: Number(result.maxProjectId),
-			// TODO:
-			// clientName: parseBytes32String(result.clientName),
-			clientName: result.clientName,
+			clientName: decodeBytes32ToString(result.clientName),
 		};
 	}
 
@@ -140,9 +161,7 @@ export class YelayLiteVault {
 		const vaultContract = this.contractFactory.getYelayLiteVault(vault);
 		const strategies = await vaultContract.read('getActiveStrategies');
 		return strategies.map((s: any) => ({
-			// TODO:
-			// name: parseBytes32String(s.name),
-			name: s.name,
+			name: decodeBytes32ToString(s.name),
 		}));
 	}
 

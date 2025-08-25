@@ -11,7 +11,7 @@ import { ClientData } from '../types/smartContract';
 import { Protocol, Strategy } from '../types/strategies';
 import { Vault } from '../types/vaults';
 import { PoolYield, VaultYield, YieldAggregated } from '../types/yield';
-import { getTimestampOneWeekAgo } from '../utils/backend';
+import { getTimestampOneWeekAgo } from '../utils';
 
 export class DataProvider {
 	private smartContractAdapter: SmartContractAdapter;

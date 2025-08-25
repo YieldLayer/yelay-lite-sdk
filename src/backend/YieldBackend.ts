@@ -8,7 +8,7 @@ import {
 	VaultYield,
 	YieldAggregated,
 } from '../types/index';
-import { appendTimeFrameQuery } from '../utils/backend';
+import { appendTimeFrameQuery } from '../utils';
 
 export class YieldBackend extends ApiWrapperService {
 	private chainId: string;
