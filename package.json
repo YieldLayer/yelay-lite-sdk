@@ -13,7 +13,7 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"version": "1.0.22",
+	"version": "2.0.0",
 	"description": "Yelay Lite SDK",
 	"repository": {
 		"type": "git",
@@ -34,9 +34,9 @@
 		"ethereum"
 	],
 	"license": "ISC",
-	"dependencies": {
-		"@delvtech/drift": "1.0.0",
-		"rimraf": "6.0.1"
+	"dependencies": {},
+	"peerDependencies": {
+		"@delvtech/drift": "^1.0.0"
 	},
 	"devDependencies": {
 		"@types/jest": "29.5.14",
@@ -45,6 +45,7 @@
 		"@typescript-eslint/parser": "8.17.0",
 		"dotenv": "16.4.7",
 		"jest": "29.7.0",
+		"rimraf": "6.0.1",
 		"ts-jest": "29.2.5",
 		"ts-node": "10.9.2",
 		"typescript": "5.6.2"

@@ -37,13 +37,13 @@ export class ActionExecutor {
 	}
 
 	/**
-	 * Withdraws a specified amount from a pool in the vault.
+	 * Redeems a specified amount of shares from a pool in the vault.
 	 * @param {string} vault - The address of the vault.
 	 * @param {number} pool - The pool ID.
-	 * @param {bigint} amount - The amount to withdraw.
+	 * @param {bigint} amount - The amount of shares to redeem.
 	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
 	 */
-	async withdraw(vault: string, pool: number, amount: bigint, options?: WriteOptions): Promise<HexString> {
+	async redeem(vault: string, pool: number, amount: bigint, options?: WriteOptions): Promise<HexString> {
 		return this.smartContractAdapter.yelayLiteVault.redeem(vault, pool, amount, options);
 	}
 
