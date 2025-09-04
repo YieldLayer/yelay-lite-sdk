@@ -9,6 +9,7 @@ The **Yelay Lite SDK** is a lightweight software development kit for interacting
 - Base (chainId: 8453)
 - Sonic (chainId: 146)
 - Arbitrum One (chainId: 42161)
+- Avalanche (chainId: 43114)
 
 ## Installation
 
