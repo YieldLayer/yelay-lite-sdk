@@ -18,6 +18,13 @@ export interface IYelayLiteVault {
 		amount: ethers.BigNumberish,
 		overrides?: Overrides,
 	): Promise<ContractTransaction>;
+	depositOnBehalf(
+		vault: string,
+		pool: number,
+		amount: ethers.BigNumberish,
+		receiver: string,
+		overrides?: Overrides,
+	): Promise<ContractTransaction>;
 	redeem(
 		signer: Signer,
 		vault: string,

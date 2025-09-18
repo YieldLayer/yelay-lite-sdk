@@ -5,11 +5,12 @@
 The **Yelay Lite SDK** is a lightweight software development kit for interacting with Yelay's blockchain ecosystem. It provides streamlined access to **vaults**, **yield farming**, and **projects** via smart contract interactions as well as Backend queries.
 
 ## Chains:
-- Ethereum Mainnet (chainId: 1) 
-- Base (chainId: 8453)
-- Sonic (chainId: 146)
-- Arbitrum One (chainId: 42161)
-- Avalanche (chainId: 43114)
+
+-   Ethereum Mainnet (chainId: 1)
+-   Base (chainId: 8453)
+-   Sonic (chainId: 146)
+-   Arbitrum One (chainId: 42161)
+-   Avalanche (chainId: 43114)
 
 ## Installation
 
@@ -76,6 +77,27 @@ if (allowance.isZero()) {
 }
 
 const depositTx = await sdk.vaults.deposit(vault, pool, amount);
+await depositTx.wait();
+```
+
+## Deposit ERC20 into the vault on behalf of another address
+
+This function allows you to deposit tokens into a vault pool, but the resulting shares will be credited to a different address (receiver). This is useful for scenarios like depositing on behalf of users.
+
+```ts
+const vault = '0x1234';
+const pool = 1234;
+const amount = '1000000';
+const receiver = '0x5678'; // Address that will receive the deposit shares
+
+const allowance = await sdk.vaults.allowance(vault);
+
+if (allowance.isZero()) {
+	const approveTx = await sdk.vaults.approve(vault, amount);
+	await approveTx.wait();
+}
+
+const depositTx = await sdk.vaults.depositOnBehalf(vault, pool, amount, receiver);
 await depositTx.wait();
 ```
 
@@ -244,26 +266,30 @@ const aggregatedYieldData = await sdk.yields.getYields();
 ```
 
 ## Get protocols
+
 ```ts
 const protocols = await sdk.strategies.getProtocols();
 ```
 
 ## Get active strategies
+
 ```ts
 const activeStrategies = await sdk.strategies.getActiveStrategies(vault);
 ```
 
 ### Response Format
+
 ```ts
 [
 	{
-		name: "MV-something",
+		name: 'MV-something',
 		protocolId: 'morpho',
-		allocation: 100 // Percentage allocated to the strategy
-	}
-]
+		allocation: 100, // Percentage allocated to the strategy
+	},
+];
 // Note: The sum of allocations for all active strategies doesn't have to be 100%; a portion of the funds can remain unallocated in the vault
 ```
+
 ## License
 
 This SDK is licensed under the **ISC License**.
