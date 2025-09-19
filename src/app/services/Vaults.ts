@@ -164,6 +164,31 @@ export class Vaults {
 	}
 
 	/**
+	 * Deposits a specified amount into a pool in the vault on behalf of another address.
+	 * @param {string} vault - The address of the vault.
+	 * @param {number} pool - The pool ID.
+	 * @param {ethers.BigNumberish} amount - The amount to deposit.
+	 * @param {string} receiver - The address that will receive the deposit shares.
+	 * @param {Overrides} overrides - Ethers overrides.
+	 * @returns {Promise<ContractTransaction>} A promise that resolves to the result of the deposit transaction.
+	 */
+	async depositOnBehalf(
+		vault: string,
+		pool: number,
+		amount: ethers.BigNumberish,
+		receiver: string,
+		overrides?: Overrides,
+	): Promise<ContractTransaction> {
+		if (!Signer.isSigner(this.signerOrProvider)) {
+			throw new Error('Signer is not instantiated in SDK');
+		}
+
+		return tryCall(
+			this.smartContractAdapter.yelayLiteVault.depositOnBehalf(vault, pool, amount, receiver, overrides),
+		);
+	}
+
+	/**
 	 * Deposits a specified amount into a pool in the vault.
 	 * @param {string} vault - The address of the vault.
 	 * @param {number} pool - The pool ID.

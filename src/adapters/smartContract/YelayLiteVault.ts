@@ -64,6 +64,22 @@ export class YelayLiteVault implements IYelayLiteVault {
 		return this.contractFactory.getYelayLiteVault(vault).deposit(amount, pool, userAddress, overrides);
 	}
 
+	async depositOnBehalf(
+		vault: string,
+		pool: number,
+		amount: ethers.BigNumberish,
+		receiver: string,
+		overrides: Overrides = {},
+	): Promise<ContractTransaction> {
+		await populateGasLimit(
+			this.contractFactory.getYelayLiteVault(vault).estimateGas.deposit,
+			[amount, pool, receiver],
+			overrides,
+		);
+
+		return this.contractFactory.getYelayLiteVault(vault).deposit(amount, pool, receiver, overrides);
+	}
+
 	async redeem(
 		signer: Signer,
 		vault: string,
