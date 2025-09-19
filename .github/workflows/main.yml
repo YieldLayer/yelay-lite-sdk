@@ -9,16 +9,18 @@ jobs:
     publish:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
             - name: Get the version
               id: get_version
-              run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+              run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
 
             - name: Get Tag
               id: tag
               env:
-                  IMAGE_TAG: ${{ steps.get-version.outputs.VERSION }}
-              run: if [[ $IMAGE_TAG == *'dev'* ]]; then echo ::set-output name=TAG::"dev"; else echo ::set-output name=TAG::"latest"; fi
+                  IMAGE_TAG: ${{ steps.get_version.outputs.VERSION }}
+              run: if [[ $IMAGE_TAG == *'dev'* ]]; then echo "TAG=dev" >> $GITHUB_OUTPUT; else echo "TAG=latest" >> $GITHUB_OUTPUT; fi
 
             - name: Replace version string
               id: replaced_version
@@ -27,7 +29,7 @@ jobs:
               run: |
                   string=$IMAGE_TAG
                   replaced=${string/v/}
-                  echo ::set-output name=VERSION::$replaced
+                  echo "VERSION=$replaced" >> $GITHUB_OUTPUT
 
             - name: Replace version inside package.json
               env:
@@ -44,9 +46,20 @@ jobs:
                   version: 8
                   run_install: false
 
+            - name: Verify lockfile exists
+              run: |
+                  if [ ! -f "pnpm-lock.yaml" ]; then
+                      echo "ERROR: pnpm-lock.yaml not found!"
+                      ls -la
+                      exit 1
+                  fi
+                  echo "✅ pnpm-lock.yaml found"
+
             - run: pnpm install -g @microsoft/api-extractor
-            - run: pnpm store prune
-            - run: pnpm install --frozen-lockfile
+            - name: Clear pnpm cache and install
+              run: |
+                  pnpm store prune
+                  pnpm install --frozen-lockfile
             - run: pnpm run build
 
             - uses: JS-DevTools/npm-publish@v1
