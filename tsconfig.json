@@ -1,17 +1,23 @@
 {
 	"compilerOptions": {
-		"target": "ES2021",
-		"module": "commonjs",
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
 		"declaration": true,
 		"strictNullChecks": true,
 		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
 		"downlevelIteration": true,
 		"outDir": "./build",
-		"rootDir": "src",
 		"sourceMap": true,
 		"strict": true,
-		"types": ["jest", "node"]
+		"lib": ["ES2022", "DOM"],
+		"skipLibCheck": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"]
+		}
 	},
 	"include": ["src/**/*"],
-	"exclude": ["node_modules", "**/__tests__/*", "tests/**/*"]
+	"exclude": ["node_modules", "build"]
 }

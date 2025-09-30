@@ -6,7 +6,7 @@ abstract class ApiWrapperService {
 	}
 
 	async get<T>(path: string): Promise<T> {
-		return fetch(`${this.apiUrl}${path}`).then(r => r.json());
+		return fetch(`${this.apiUrl}${path}`).then(r => r.json()) as T;
 	}
 }
 
