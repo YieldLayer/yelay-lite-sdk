@@ -23,6 +23,24 @@ export class ActionExecutor {
 	}
 
 	/**
+	 * Deposits a specified amount into a pool in the vault on behalf of another address.
+	 * @param {string} vault - The address of the vault.
+	 * @param {number} pool - The pool ID.
+	 * @param {bigint} amount - The amount to deposit.
+	 * @param {string} receiver - The address that will receive the deposit shares.
+	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
+	 */
+	async depositOnBehalf(
+		vault: string,
+		pool: number,
+		amount: bigint,
+		receiver: string,
+		options?: WriteOptions,
+	): Promise<HexString> {
+		return this.smartContractAdapter.yelayLiteVault.depositOnBehalf(vault, pool, amount, receiver, options);
+	}
+
+	/**
 	 * Deposits a specified amount of ETH into a pool in the vault.
 	 * @param {string} vault - The address of the vault.
 	 * @param {number} pool - The pool ID.

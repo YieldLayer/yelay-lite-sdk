@@ -10,6 +10,7 @@ The **Yelay Lite SDK** is a lightweight software development kit for interacting
 -   Base (chainId: 8453)
 -   Sonic (chainId: 146)
 -   Arbitrum One (chainId: 42161)
+-   Avalanche (chainId: 43114)
 
 ## Installation
 
@@ -156,6 +157,26 @@ if (allowance === 0n) {
 }
 
 const depositTx = await sdk.actions.deposit(vault, pool, amount);
+```
+
+## Deposit ERC20 into the vault on behalf of another address
+
+This function allows you to deposit tokens into a vault pool, but the resulting shares will be credited to a different address (receiver). This is useful for scenarios like depositing on behalf of users.
+
+```ts
+const vault = '0x1234';
+const pool = 1234;
+const amount = 1000000n; // Using bigint for amount
+const receiver = '0x5678'; // Address that will receive the deposit shares
+
+const allowance = await sdk.portfolio.getAllowance(vault);
+
+if (allowance === 0n) {
+	const approveTx = await sdk.actions.approve(vault, amount);
+	// Note: Drift returns transaction hash, wait method depends on your adapter
+}
+
+const depositTx = await sdk.actions.depositOnBehalf(vault, pool, amount, receiver);
 ```
 
 ## Deposit ETH into the vault

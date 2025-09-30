@@ -75,6 +75,31 @@ export class YelayLiteVault {
 		}
 	}
 
+	async depositOnBehalf(
+		vault: string,
+		pool: number,
+		amount: bigint,
+		receiver: string,
+		options?: WriteOptions,
+	): Promise<HexString> {
+		const vaultContract = this.contractFactory.getYelayLiteVault(vault);
+
+		if (vaultContract.isReadWrite()) {
+			const txHash = await vaultContract.write(
+				'deposit',
+				{
+					assets: amount,
+					projectId: BigInt(pool),
+					receiver: receiver as Address,
+				},
+				options,
+			);
+			return txHash;
+		} else {
+			throw new Error('Not read');
+		}
+	}
+
 	async redeem(vault: string, pool: number, amount: bigint, options?: WriteOptions): Promise<HexString> {
 		const vaultContract = this.contractFactory.getYelayLiteVault(vault);
 
