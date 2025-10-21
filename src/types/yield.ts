@@ -1,4 +1,4 @@
-import { Address } from '@delvtech/drift';
+import { Address } from '@gud/drift';
 import { EventsRange } from './backend';
 import { Vault } from './vaults';
 

@@ -1,4 +1,4 @@
-import { Address, HexString, WriteOptions } from '@delvtech/drift';
+import { Address, HexString, WriteOptions } from '@gud/drift';
 import { ClaimRequest } from '../types/yield';
 import { ContractFactory } from './ContractFactory';
 import { QUERY_EVENTS_BLOCK_RANGE } from '../utils';

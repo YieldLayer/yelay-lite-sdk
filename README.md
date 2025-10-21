@@ -25,25 +25,25 @@ The Yelay Lite SDK requires a drift web3 adapter and the drift core library. Ins
 **Core dependency (required for all setups):**
 
 ```sh
-npm install @delvtech/drift
+npm install @gud/drift
 ```
 
 **For Viem:**
 
 ```sh
-npm install @delvtech/drift-viem
+npm install @gud/drift-viem
 ```
 
 **For Ethers v6:**
 
 ```sh
-npm install @delvtech/drift-ethers
+npm install @gud/drift-ethers
 ```
 
 **For Ethers v5:**
 
 ```sh
-npm install @delvtech/drift-ethers-v5
+npm install @gud/drift-ethers-v5
 ```
 
 ## Initialization
@@ -54,8 +54,8 @@ The SDK uses a **drift adapter pattern** that works with any web3 library. The `
 
 ```ts
 import { YelayLiteSdk } from '@yelay-lite/sdk';
-import { viemAdapter } from '@delvtech/drift-viem';
-import { createDrift } from '@delvtech/drift';
+import { viemAdapter } from '@gud/drift-viem';
+import { createDrift } from '@gud/drift';
 import { createPublicClient, createWalletClient, http } from 'viem';
 import { base } from 'viem/chains';
 
@@ -83,8 +83,8 @@ await sdk.init(drift);
 
 ```ts
 import { YelayLiteSdk } from '@yelay-lite/sdk';
-import { ethersAdapter } from '@delvtech/drift-ethers';
-import { createDrift } from '@delvtech/drift';
+import { ethersAdapter } from '@gud/drift-ethers';
+import { createDrift } from '@gud/drift';
 import { ethers } from 'ethers';
 
 // Set up your ethers provider and signer
@@ -104,8 +104,8 @@ await sdk.init(drift);
 
 ```ts
 import { YelayLiteSdk } from '@yelay-lite/sdk';
-import { ethersV5Adapter } from '@delvtech/drift-ethers-v5';
-import { createDrift } from '@delvtech/drift';
+import { ethersV5Adapter } from '@gud/drift-ethers-v5';
+import { createDrift } from '@gud/drift';
 import { ethers } from 'ethers';
 
 // Set up your ethers v5 provider and signer

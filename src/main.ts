@@ -1,4 +1,4 @@
-import type { Drift } from '@delvtech/drift';
+import type { Drift } from '@gud/drift';
 import { getEnvironment } from './environment';
 import { Portfolio } from './services/Portfolio';
 import { DataProvider } from './services/DataProvider';

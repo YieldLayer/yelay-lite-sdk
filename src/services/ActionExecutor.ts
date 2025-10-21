@@ -1,4 +1,4 @@
-import { HexString, WriteOptions } from '@delvtech/drift';
+import { HexString, WriteOptions } from '@gud/drift';
 import { ContractFactory } from '../smartContract/ContractFactory';
 import { SmartContractAdapter } from '../smartContract/index';
 import { SwapArgsStruct } from '../smartContract/VaultWrapper';

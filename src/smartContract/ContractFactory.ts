@@ -1,4 +1,4 @@
-import { Address, Drift } from '@delvtech/drift';
+import { Address, Drift } from '@gud/drift';
 import { ERC20_ABI } from '../abis/ERC20Abi';
 import { YELAY_LITE_VAULT_ABI } from '../abis/YelayLiteVaultAbi';
 import { VAULT_WRAPPER_ABI } from '../abis/VaultWrapperAbi';

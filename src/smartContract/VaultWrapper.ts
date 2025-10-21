@@ -1,5 +1,5 @@
 import { ContractFactory } from './ContractFactory';
-import { Address, HexString, WriteOptions } from '@delvtech/drift';
+import { Address, HexString, WriteOptions } from '@gud/drift';
 
 export type SwapArgsStruct = {
 	tokenIn: HexString;

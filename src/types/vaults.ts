@@ -1,4 +1,4 @@
-import { Address } from '@delvtech/drift';
+import { Address } from '@gud/drift';
 
 export type Vault = {
 	address: Address;

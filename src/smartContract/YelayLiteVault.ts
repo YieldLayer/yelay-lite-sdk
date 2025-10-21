@@ -1,6 +1,6 @@
 import { ClientData, StrategyData } from '../types/index';
 import { ContractFactory } from './ContractFactory';
-import { Address, HexString, WriteOptions } from '@delvtech/drift';
+import { Address, HexString, WriteOptions } from '@gud/drift';
 import { decodeBytes32ToString } from '../utils';
 
 export type PoolsSupply = {
