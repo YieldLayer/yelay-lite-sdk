@@ -1,4 +1,6 @@
 import type { Drift } from '@gud/drift';
+import { LruStore } from '@gud/drift';
+import { NoOpCache } from './utils/NoOpCache';
 import { getEnvironment } from './environment';
 import { Portfolio } from './services/Portfolio';
 import { DataProvider } from './services/DataProvider';
@@ -12,6 +14,15 @@ export class YelayLiteSdk {
 	private _actions: ActionExecutor | null = null;
 
 	async init(drift: Drift, testing = false) {
+		// Check if user has set a custom cache store (not the default LruStore)
+		const currentStore = drift.cache.store;
+		if (!(currentStore instanceof LruStore)) {
+			throw new Error('Custom caching is not allowed');
+		}
+
+		// Disable caching by replacing the cache store with NoOpCache
+		drift.cache.store = new NoOpCache();
+
 		const chainId = (await drift.getChainId()) as ChainId;
 		const config = getEnvironment(chainId, testing);
 		const contractFactory = new ContractFactory(drift, config.contracts);

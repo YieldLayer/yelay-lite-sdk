@@ -46,6 +46,12 @@ npm install @gud/drift-ethers
 npm install @gud/drift-ethers-v5
 ```
 
+## Caching Configuration
+
+The Yelay Lite SDK automatically disables drift's internal caching to ensure fresh data on every request.
+
+When you call `sdk.init(drift)`, the SDK automatically replaces drift's default LRU cache with a no-op implementation, ensuring all contract calls fetch fresh data from the blockchain. The SDK will throw an error if you try to use custom caching.
+
 ## Initialization
 
 The SDK uses a **drift adapter pattern** that works with any web3 library. The `init()` method is **mandatory** and must be called before using any SDK features.
