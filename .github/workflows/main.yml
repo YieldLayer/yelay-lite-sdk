@@ -16,25 +16,16 @@ jobs:
               id: get_version
               run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
 
-            - name: Get Tag
+            - name: Determine npm tag
               id: tag
               env:
                   IMAGE_TAG: ${{ steps.get_version.outputs.VERSION }}
-              run: if [[ $IMAGE_TAG == *'dev'* ]]; then echo "TAG=dev" >> $GITHUB_OUTPUT; else echo "TAG=latest" >> $GITHUB_OUTPUT; fi
-
-            - name: Replace version string
-              id: replaced_version
-              env:
-                  IMAGE_TAG: ${{ steps.get_version.outputs.VERSION }}
               run: |
-                  string=$IMAGE_TAG
-                  replaced=${string/v/}
-                  echo "VERSION=$replaced" >> $GITHUB_OUTPUT
-
-            - name: Replace version inside package.json
-              env:
-                  VERSION: ${{ steps.replaced_version.outputs.VERSION }}
-              run: bash ./deployment-scripts/versioner.sh $VERSION
+                  if [[ $IMAGE_TAG == *'beta'* ]]; then
+                    echo "TAG=beta" >> $GITHUB_OUTPUT
+                  else
+                    echo "TAG=latest" >> $GITHUB_OUTPUT
+                  fi
 
             - uses: actions/setup-node@v3
               with:
