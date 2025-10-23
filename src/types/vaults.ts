@@ -1,9 +1,11 @@
+import { Address } from '@gud/drift';
+
 export type Vault = {
-	address: string;
+	address: Address;
 	name: string;
 	createBlocknumber: number;
 	createTimestamp: number;
-	underlying: string;
+	underlying: Address;
 	chainId: number;
 	pools: number[];
 };

@@ -1,3 +1,4 @@
+import { Address } from '@gud/drift';
 import { EventsRange } from './backend';
 import { Vault } from './vaults';
 
@@ -54,6 +55,6 @@ export type ClaimRequestParams = {
 
 export type GetLastClaimEventParams = {
 	vault: Vault;
-	user: string;
+	user: Address;
 	poolId: number;
 };

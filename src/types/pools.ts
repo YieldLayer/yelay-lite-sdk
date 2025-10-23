@@ -1,15 +1,13 @@
-import { BigNumber } from 'ethers';
-
 export type PoolsTvl = {
 	id: number;
-	tvl: BigNumber;
+	tvl: bigint;
 };
 
 export type HistoricalTVL = {
 	vaultAddress: string;
 	poolId: number;
 	createTimestamp: number;
-	assets: BigNumber;
+	assets: bigint;
 };
 
 export type HistoricalTVLParams = {

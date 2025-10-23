@@ -14,31 +14,117 @@ The **Yelay Lite SDK** is a lightweight software development kit for interacting
 
 ## Installation
 
-To install the SDK, use **npm** or **pnpm**:
-
 ```sh
 npm install @yelay-lite/sdk
 ```
 
-or
+### Required Dependencies
+
+The Yelay Lite SDK requires a drift web3 adapter and the drift core library. Install both the core drift library and choose one adapter based on your web3 library:
+
+**Core dependency (required for all setups):**
 
 ```sh
-pnpm add @yelay-lite/sdk
+npm install @gud/drift
 ```
+
+**For Viem:**
+
+```sh
+npm install @gud/drift-viem
+```
+
+**For Ethers v6:**
+
+```sh
+npm install @gud/drift-ethers
+```
+
+**For Ethers v5:**
+
+```sh
+npm install @gud/drift-ethers-v5
+```
+
+## Caching Configuration
+
+The Yelay Lite SDK automatically disables drift's internal caching to ensure fresh data on every request.
+
+When you call `sdk.init(drift)`, the SDK automatically replaces drift's default LRU cache with a no-op implementation, ensuring all contract calls fetch fresh data from the blockchain. The SDK will throw an error if you try to use custom caching.
 
 ## Initialization
 
-To start using the SDK, initialize it with an **Ethereum signer or provider** and a **network chainId**:
+The SDK uses a **drift adapter pattern** that works with any web3 library. The `init()` method is **mandatory** and must be called before using any SDK features.
+
+### With Viem
 
 ```ts
 import { YelayLiteSdk } from '@yelay-lite/sdk';
-import { Signer } from 'ethers';
-import { Provider } from '@ethersproject/abstract-provider';
+import { viemAdapter } from '@gud/drift-viem';
+import { createDrift } from '@gud/drift';
+import { createPublicClient, createWalletClient, http } from 'viem';
+import { base } from 'viem/chains';
 
-const signerOrProvider: Signer | Provider = /* Your signer or provider */;
-const chainId = 8453;
-const sdk = new YelayLiteSdk(signerOrProvider, chainId);
+// Set up your viem clients
+const publicClient = createPublicClient({
+	chain: base,
+	transport: http(),
+});
 
+const walletClient = createWalletClient({
+	chain: base,
+	transport: http(),
+});
+
+// Create the adapter and drift instance
+const adapter = viemAdapter({ publicClient, walletClient });
+const drift = createDrift({ adapter });
+
+// Initialize the SDK
+const sdk = new YelayLiteSdk();
+await sdk.init(drift);
+```
+
+### With Ethers v6
+
+```ts
+import { YelayLiteSdk } from '@yelay-lite/sdk';
+import { ethersAdapter } from '@gud/drift-ethers';
+import { createDrift } from '@gud/drift';
+import { ethers } from 'ethers';
+
+// Set up your ethers provider and signer
+const provider = new ethers.JsonRpcProvider('https://mainnet.base.org');
+const signer = new ethers.Wallet('YOUR_PRIVATE_KEY', provider);
+
+// Create the adapter and drift instance
+const adapter = ethersAdapter({ provider, signer });
+const drift = createDrift({ adapter });
+
+// Initialize the SDK
+const sdk = new YelayLiteSdk();
+await sdk.init(drift);
+```
+
+### With Ethers v5
+
+```ts
+import { YelayLiteSdk } from '@yelay-lite/sdk';
+import { ethersV5Adapter } from '@gud/drift-ethers-v5';
+import { createDrift } from '@gud/drift';
+import { ethers } from 'ethers';
+
+// Set up your ethers v5 provider and signer
+const provider = new ethers.providers.JsonRpcProvider('https://mainnet.base.org');
+const signer = new ethers.Wallet('YOUR_PRIVATE_KEY', provider);
+
+// Create the adapter and drift instance
+const adapter = ethersV5Adapter({ provider, signer });
+const drift = createDrift({ adapter });
+
+// Initialize the SDK
+const sdk = new YelayLiteSdk();
+await sdk.init(drift);
 ```
 
 ## Get vaults
@@ -46,7 +132,7 @@ const sdk = new YelayLiteSdk(signerOrProvider, chainId);
 Get all vaults managed on network.
 
 ```ts
-const vaults = await sdk.vaults.getVaults();
+const vaults = await sdk.data.getVaults();
 ```
 
 ## Pool management (for integrators only)
@@ -54,11 +140,11 @@ const vaults = await sdk.vaults.getVaults();
 ```ts
 const integratorAddress = '0x555';
 const vault = '0x1234';
-const { minPool, maxPool, clientName } = await sdk.vaults.clientData(integratorAddress, vault);
+const { minPool, maxPool, clientName } = await sdk.data.getClientData(integratorAddress, vault);
 const poolToActivate = minPool + 5; // should be in range: minPool < poolToActivate < maxPool
-const isPoolActive = await sdk.vaults.poolActive(vault, poolToActivate);
+const isPoolActive = await sdk.data.isPoolActive(vault, poolToActivate);
 if (!isPoolActive) {
-	await sdk.vaults.activatePool(vault, poolToActivate);
+	await sdk.actions.activatePool(vault, poolToActivate);
 }
 ```
 
@@ -67,17 +153,16 @@ if (!isPoolActive) {
 ```ts
 const vault = '0x1234';
 const pool = 1234;
-const amount = '1000000';
+const amount = 1000000n; // Using bigint for amount
 
-const allowance = await sdk.vaults.allowance(vault);
+const allowance = await sdk.portfolio.getAllowance(vault);
 
-if (allowance.isZero()) {
-	const approveTx = await sdk.vaults.approve(vault, amount);
-	await approveTx.wait();
+if (allowance === 0n) {
+	const approveTx = await sdk.actions.approve(vault, amount);
+	// Note: Drift returns transaction hash, wait method depends on your adapter
 }
 
-const depositTx = await sdk.vaults.deposit(vault, pool, amount);
-await depositTx.wait();
+const depositTx = await sdk.actions.deposit(vault, pool, amount);
 ```
 
 ## Deposit ERC20 into the vault on behalf of another address
@@ -87,25 +172,26 @@ This function allows you to deposit tokens into a vault pool, but the resulting 
 ```ts
 const vault = '0x1234';
 const pool = 1234;
-const amount = '1000000';
+const amount = 1000000n; // Using bigint for amount
 const receiver = '0x5678'; // Address that will receive the deposit shares
 
-const allowance = await sdk.vaults.allowance(vault);
+const allowance = await sdk.portfolio.getAllowance(vault);
 
-if (allowance.isZero()) {
-	const approveTx = await sdk.vaults.approve(vault, amount);
-	await approveTx.wait();
+if (allowance === 0n) {
+	const approveTx = await sdk.actions.approve(vault, amount);
+	// Note: Drift returns transaction hash, wait method depends on your adapter
 }
 
-const depositTx = await sdk.vaults.depositOnBehalf(vault, pool, amount, receiver);
-await depositTx.wait();
+const depositTx = await sdk.actions.depositOnBehalf(vault, pool, amount, receiver);
 ```
 
 ## Deposit ETH into the vault
 
 ```ts
-const tx = await sdk.vaults.depositEth(vault, pool, amount);
-await tx.wait();
+const vault = '0x1234';
+const pool = 1234;
+const amount = 1000000n; // Amount of ETH in wei
+const tx = await sdk.actions.depositEth(vault, pool, amount);
 ```
 
 ## Get claimable yield
@@ -114,27 +200,25 @@ You can retrieve the claimable yield for a user, optionally filtering by specifi
 
 ```ts
 // Get all claimable yield for the user
-const claimable = await sdk.yields.getClaimableYield({
+const claimable = await sdk.portfolio.getClaimable({
 	user: '0xUSER_ADDRESS',
 });
 
 // Filter by pools and vaults
-const claimableFullyFiltered = await sdk.yields.getClaimableYield({
+const claimableFullyFiltered = await sdk.portfolio.getClaimable({
 	user: '0xUSER_ADDRESS',
 	poolIds: [1, 2, 3],
 	vaultAddresses: ['0xVAULT_ADDRESS1'],
 });
-
-console.log(claimable);
 ```
 
 ## Claim yield
 
-Once you have retrieved claimable yield using `getClaimableYield`, you can claim it using the `claimYield` method:
+Once you have retrieved claimable yield using `getClaimable`, you can claim it using the `claim` method:
 
 ```ts
 // First, get the claimable yield to obtain claim requests
-const claimableYield = await sdk.yields.getClaimableYield({
+const claimableYield = await sdk.portfolio.getClaimable({
 	user: '0xUSER_ADDRESS',
 });
 
@@ -142,73 +226,76 @@ const claimableYield = await sdk.yields.getClaimableYield({
 const claimRequests = claimableYield.map(item => item.claimRequest);
 
 // Submit the transaction to claim the yield
-const claimTx = await sdk.yields.claimYield(claimRequests);
-
-// Wait for the transaction to be mined
-await claimTx.wait();
+const claimTx = await sdk.actions.claim(claimRequests);
 ```
 
-The `claimYield` method sends a transaction to the blockchain to claim yield based on the provided claim requests. It requires a valid signer with sufficient gas to execute the transaction. You can optionally provide gas overrides to customize the transaction parameters.
+The `claim` method sends a transaction to the blockchain to claim yield based on the provided claim requests. It requires a valid signer with sufficient gas to execute the transaction.
 
 ## Swap token and deposit into vault in one transaction
 
 ```ts
 const vault = '0x123';
 const pool = 1234;
-const amount = '1000000';
+const amount = 1000000n; // Using bigint for amount
 const tokenToSwap = '0x456';
 // only 1inch Aggregation Router v6 is supported
 const swapTarget = '1inch Aggregation Router v6 address';
 const swapCallData = '0x9...1';
 
-const allowance = await sdk.vaults.vaultWrapperAllowance(tokenToSwap);
+const allowance = await sdk.portfolio.getTokenAllowance(tokenToSwap);
 
-if (allowance.isZero()) {
-	const approveTx = await sdk.vaults.approveVaultWrapper(tokenToSwap, amount);
-	await approveTx.wait();
+if (allowance === 0n) {
+	const approveTx = await sdk.actions.approveToken(tokenToSwap, amount);
 }
 
-const swapAndDepositTX = await sdk.vaults.swapAndDeposit(vault, pool, amount, {
+const swapAndDepositTX = await sdk.actions.swapAndDeposit(vault, pool, amount, {
 	swapCallData,
 	swapTarget,
 	tokenIn: tokenToSwap,
 });
-await swapAndDepositTX.wait();
 ```
 
 ## Redeem from the vault
 
 ```ts
-const redeemTx = await sdk.vaults.redeem(vault, pool, amount);
-await redeemTx.wait();
+const vault = '0x1234';
+const pool = 1234;
+const amount = 1000000n; // Amount of shares to redeem
+const redeemTx = await sdk.actions.redeem(vault, pool, amount);
 ```
 
 ## Migrate to another pool
 
 ```ts
+const vault = '0x1234';
 const fromPool = 123;
 const toPool = 456;
-const migrateTx = await sdk.vaults.migrate(vault, fromPool, toPool, amount);
-await migrateTx.wait();
+const amount = 1000000n; // Amount of shares to migrate
+const migrateTx = await sdk.actions.migrate(vault, fromPool, toPool, amount);
 ```
 
 ## Get user share balance in particular pool
 
 ```ts
-const userPoolBalance = await sdk.vaults.balanceOf(vault, pool, await signer.getAddress());
+const vault = '0x1234';
+const pool = 1234;
+const userAddress = '0xUSER_ADDRESS'; // Get from your wallet/signer
+const userPoolBalance = await sdk.portfolio.getBalance(vault, pool, userAddress);
 ```
 
 ## Get pools TVL
 
 ```ts
-const poolsTvl = await sdk.pools.getPoolsTvl(vault, [pool]);
+const vault = '0x1234';
+const pool = 1234;
+const poolsTvl = await sdk.data.getPoolTvl(vault, [pool]);
 ```
 
 ## Get historical TVL data for a vault and pool
 
 ```ts
 // Fetch historical TVL data with various filter options
-const historicalTVL = await sdk.pools.historicalTVL({
+const historicalTVL = await sdk.data.getHistoricalTvl({
 	vaultAddress: '0x1234...5678', // Required: The vault address to get TVL for
 	poolId: 1, // Required: The specific pool ID to query
 	fromTimestamp: 1641034800, // Optional: Start time in seconds (Jan 1, 2022)
@@ -218,7 +305,7 @@ const historicalTVL = await sdk.pools.historicalTVL({
 });
 
 // Example with just the required parameters
-const currentTVL = await sdk.pools.historicalTVL({
+const currentTVL = await sdk.data.getHistoricalTvl({
 	vaultAddress: '0x1234...5678',
 	poolId: 1,
 });
@@ -250,31 +337,32 @@ The historicalTVL method returns a paginated response with the following structu
 ## Get yield data on vaults (filtering on vaults/timeframe)
 
 ```ts
-const vaultsYield = await sdk.yields.getVaultsYield();
+const vaultsYield = await sdk.data.getVaultYield();
 ```
 
 ## Get yield data on pools (filtering on vaults/pools/timeframe)
 
 ```ts
-const poolsYield = await sdk.yields.getPoolsYield();
+const poolsYield = await sdk.data.getPoolYield();
 ```
 
 ## Get aggregated yield data (filtering on vaults/pools/users/timeframe)
 
 ```ts
-const aggregatedYieldData = await sdk.yields.getYields();
+const aggregatedYieldData = await sdk.data.getAggregatedYield();
 ```
 
 ## Get protocols
 
 ```ts
-const protocols = await sdk.strategies.getProtocols();
+const protocols = await sdk.data.getProtocols();
 ```
 
 ## Get active strategies
 
 ```ts
-const activeStrategies = await sdk.strategies.getActiveStrategies(vault);
+const vault = '0x1234';
+const activeStrategies = await sdk.data.getActiveStrategies(vault);
 ```
 
 ### Response Format

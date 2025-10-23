@@ -1,43 +1,56 @@
-import { Provider } from '@ethersproject/providers';
-import { Signer } from 'ethers';
-import { ContractFactory } from './adapters/smartContract/ContractFactory';
-import { Pools } from './app/services/Pools';
-import { Vaults } from './app/services/Vaults';
-import { Yield } from './app/services/Yield';
-import { Strategies } from './app/services/Strategies';
+import type { Drift } from '@gud/drift';
+import { LruStore } from '@gud/drift';
+import { NoOpCache } from './utils/NoOpCache';
 import { getEnvironment } from './environment';
+import { Portfolio } from './services/Portfolio';
+import { DataProvider } from './services/DataProvider';
+import { ActionExecutor } from './services/ActionExecutor';
+import { ContractFactory } from './smartContract/ContractFactory';
 import { ChainId } from './types/config';
 
 export class YelayLiteSdk {
-	public vaults: Vaults;
-	public yields: Yield;
-	public pools: Pools;
-	public strategies: Strategies;
-	// TODO: remove after integrating gathering swapCalldata into the flow
-	public swapperAddress: string;
+	private _portfolio: Portfolio | null = null;
+	private _data: DataProvider | null = null;
+	private _actions: ActionExecutor | null = null;
 
-	/**
-	 * Creates a new instance of YelayLiteSdk.
-	 *
-	 * For chainId 8453, the Base testing environment is supported when the testing parameter is set to true.
-	 * For all other chainIds, only the production environment is available regardless of the testing flag.
-	 *
-	 * @param {Signer | Provider} signerOrProvider - A signer or provider instance for interacting with contracts.
-	 * @param {ChainId} chainId - The network chainId.
-	 * @param {boolean} [testing=false] - If true and chainId is 8453, uses the testing environment; otherwise, production is used.
-	 */
-	constructor(signerOrProvider: Signer | Provider, chainId: ChainId, testing = false) {
+	async init(drift: Drift, testing = false) {
+		// Check if user has set a custom cache store (not the default LruStore)
+		const currentStore = drift.cache.store;
+		if (!(currentStore instanceof LruStore)) {
+			throw new Error('Custom caching is not allowed');
+		}
+
+		// Disable caching by replacing the cache store with NoOpCache
+		drift.cache.store = new NoOpCache();
+
+		const chainId = (await drift.getChainId()) as ChainId;
 		const config = getEnvironment(chainId, testing);
-		const contractFactory = new ContractFactory(signerOrProvider, config.contracts);
+		const contractFactory = new ContractFactory(drift, config.contracts);
 
-		this.vaults = new Vaults(contractFactory, config.backendUrl, chainId, signerOrProvider);
+		// Initialize services with proper dependencies
+		this._portfolio = new Portfolio(contractFactory, config.backendUrl, chainId);
+		this._data = new DataProvider(contractFactory, config.backendUrl, chainId);
+		this._actions = new ActionExecutor(contractFactory);
+	}
 
-		this.yields = new Yield(contractFactory, config.backendUrl, chainId, signerOrProvider);
+	get portfolio(): Portfolio {
+		if (!this._portfolio) {
+			throw new Error('SDK not initialized. Call init() first.');
+		}
+		return this._portfolio;
+	}
 
-		this.pools = new Pools(contractFactory, config.backendUrl, chainId);
+	get data(): DataProvider {
+		if (!this._data) {
+			throw new Error('SDK not initialized. Call init() first.');
+		}
+		return this._data;
+	}
 
-		this.strategies = new Strategies(contractFactory, config.backendUrl);
-
-		this.swapperAddress = config.contracts.Swapper;
+	get actions(): ActionExecutor {
+		if (!this._actions) {
+			throw new Error('SDK not initialized. Call init() first.');
+		}
+		return this._actions;
 	}
 }
