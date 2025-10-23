@@ -23,8 +23,7 @@
 		"build"
 	],
 	"scripts": {
-		"gen-types": "typechain --target=ethers-v5 --out-dir=src/generated/typechain src/abis/*.json",
-		"build": "pnpm run gen-types && rimraf ./build && tsc",
+		"build": "rimraf ./build && tsc",
 		"test": "jest --config jest.config.ts",
 		"version:beta:new": "npm version preminor --preid=beta --no-git-tag-version",
 		"version:beta:patch": "npm version prepatch --preid=beta --no-git-tag-version",
