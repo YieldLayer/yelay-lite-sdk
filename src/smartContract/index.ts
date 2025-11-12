@@ -1,7 +1,7 @@
-import { ContractFactory } from './ContractFactory';
-import { VaultWrapper } from './VaultWrapper';
-import { YelayLiteVault } from './YelayLiteVault';
-import { YieldExtractor } from './YieldExtractor';
+import { ContractFactory } from './ContractFactory.js';
+import { VaultWrapper } from './VaultWrapper.js';
+import { YelayLiteVault } from './YelayLiteVault.js';
+import { YieldExtractor } from './YieldExtractor.js';
 
 export class SmartContractAdapter {
 	public vaultWrapper: VaultWrapper;

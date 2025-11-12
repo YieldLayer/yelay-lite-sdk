@@ -1,7 +1,7 @@
-import { ClientData, StrategyData } from '../types/index';
-import { ContractFactory } from './ContractFactory';
+import { ClientData, StrategyData } from '../types/index.js';
+import { ContractFactory } from './ContractFactory.js';
 import { Address, HexString, WriteOptions } from '@gud/drift';
-import { decodeBytes32ToString } from '../utils';
+import { decodeBytes32ToString } from '../utils/index.js';
 
 export type PoolsSupply = {
 	totalAssets: bigint;

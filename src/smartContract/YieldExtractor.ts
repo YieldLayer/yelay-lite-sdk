@@ -1,7 +1,7 @@
 import { Address, HexString, WriteOptions } from '@gud/drift';
-import { ClaimRequest } from '../types/yield';
-import { ContractFactory } from './ContractFactory';
-import { QUERY_EVENTS_BLOCK_RANGE } from '../utils';
+import { ClaimRequest } from '../types/yield.js';
+import { ContractFactory } from './ContractFactory.js';
+import { QUERY_EVENTS_BLOCK_RANGE } from '../utils/index.js';
 
 export type YieldClaimed = {
 	user: Address;

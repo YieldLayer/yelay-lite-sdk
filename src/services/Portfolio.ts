@@ -1,8 +1,8 @@
-import { SmartContractAdapter } from '../smartContract/index';
-import { ContractFactory } from '../smartContract/ContractFactory';
-import { YieldBackend } from '../backend/YieldBackend';
-import { ChainId } from '../types/config';
-import { ClaimRequestParams, ClaimableYield, GetLastClaimEventParams } from '../types/yield';
+import { SmartContractAdapter } from '../smartContract/index.js';
+import { ContractFactory } from '../smartContract/ContractFactory.js';
+import { YieldBackend } from '../backend/YieldBackend.js';
+import { ChainId } from '../types/config.js';
+import { ClaimRequestParams, ClaimableYield, GetLastClaimEventParams } from '../types/yield.js';
 
 export class Portfolio {
 	private smartContractAdapter: SmartContractAdapter;

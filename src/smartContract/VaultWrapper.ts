@@ -1,4 +1,4 @@
-import { ContractFactory } from './ContractFactory';
+import { ContractFactory } from './ContractFactory.js';
 import { Address, HexString, WriteOptions } from '@gud/drift';
 
 export type SwapArgsStruct = {

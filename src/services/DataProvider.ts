@@ -1,17 +1,17 @@
-import { PoolsBackend } from '../backend/PoolsBackend';
-import { StrategiesBackend } from '../backend/StrategiesBackend';
-import { YieldBackend } from '../backend/YieldBackend';
-import { VaultsBackend } from '../backend/VaultsBackend';
-import { ContractFactory } from '../smartContract/ContractFactory';
-import { SmartContractAdapter } from '../smartContract/index';
-import { PaginatedResponse, TimeFrame } from '../types/backend';
-import { ChainId } from '../types/config';
-import { HistoricalTVL, HistoricalTVLParams, PoolsTvl } from '../types/pools';
-import { ClientData } from '../types/smartContract';
-import { Protocol, Strategy } from '../types/strategies';
-import { Vault } from '../types/vaults';
-import { PoolYield, VaultYield, YieldAggregated } from '../types/yield';
-import { getTimestampOneWeekAgo } from '../utils';
+import { PoolsBackend } from '../backend/PoolsBackend.js';
+import { StrategiesBackend } from '../backend/StrategiesBackend.js';
+import { YieldBackend } from '../backend/YieldBackend.js';
+import { VaultsBackend } from '../backend/VaultsBackend.js';
+import { ContractFactory } from '../smartContract/ContractFactory.js';
+import { SmartContractAdapter } from '../smartContract/index.js';
+import { PaginatedResponse, TimeFrame } from '../types/backend.js';
+import { ChainId } from '../types/config.js';
+import { HistoricalTVL, HistoricalTVLParams, PoolsTvl } from '../types/pools.js';
+import { ClientData } from '../types/smartContract.js';
+import { Protocol, Strategy } from '../types/strategies.js';
+import { Vault } from '../types/vaults.js';
+import { PoolYield, VaultYield, YieldAggregated } from '../types/yield.js';
+import { getTimestampOneWeekAgo } from '../utils/index.js';
 
 export class DataProvider {
 	private smartContractAdapter: SmartContractAdapter;

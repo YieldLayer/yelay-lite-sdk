@@ -1,12 +1,12 @@
 import type { Drift } from '@gud/drift';
 import { LruStore } from '@gud/drift';
-import { NoOpCache } from './utils/NoOpCache';
-import { getEnvironment } from './environment';
-import { Portfolio } from './services/Portfolio';
-import { DataProvider } from './services/DataProvider';
-import { ActionExecutor } from './services/ActionExecutor';
-import { ContractFactory } from './smartContract/ContractFactory';
-import { ChainId } from './types/config';
+import { NoOpCache } from './utils/NoOpCache.js';
+import { getEnvironment } from './environment.js';
+import { Portfolio } from './services/Portfolio.js';
+import { DataProvider } from './services/DataProvider.js';
+import { ActionExecutor } from './services/ActionExecutor.js';
+import { ContractFactory } from './smartContract/ContractFactory.js';
+import { ChainId } from './types/config.js';
 
 export class YelayLiteSdk {
 	private _portfolio: Portfolio | null = null;

@@ -1,4 +1,4 @@
-import { ChainId, SDKConfig } from './types/config';
+import { ChainId, SDKConfig } from './types/config.js';
 
 export const getEnvironment = (chainId: ChainId, testing: boolean): SDKConfig => {
 	if (chainId !== 8453 && testing) {
