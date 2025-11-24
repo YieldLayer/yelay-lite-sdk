@@ -1,4 +1,4 @@
-import ApiWrapperService from '../services/ApiWrapperService.js';
+import ApiWrapperService from '../services/ApiWrapperService';
 import {
 	ClaimRequest,
 	ClaimRequestParams,
@@ -7,8 +7,8 @@ import {
 	TimeFrame,
 	VaultYield,
 	YieldAggregated,
-} from '../types/index.js';
-import { appendTimeFrameQuery } from '../utils/index.js';
+} from '../types/index';
+import { appendTimeFrameQuery } from '../utils/index';
 
 export class YieldBackend extends ApiWrapperService {
 	private chainId: string;

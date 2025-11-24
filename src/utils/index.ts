@@ -1,4 +1,4 @@
-import { TimeFrame } from '../types/index.js';
+import { TimeFrame } from '../types/index';
 
 export const appendTimeFrameQuery = (searchParams: URLSearchParams, timeframe?: TimeFrame) => {
 	if (timeframe?.fromBlock) {
