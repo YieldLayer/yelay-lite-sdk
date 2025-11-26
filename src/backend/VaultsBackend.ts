@@ -1,5 +1,5 @@
-import ApiWrapperService from '../services/ApiWrapperService.js';
-import { Vault } from '../types/index.js';
+import ApiWrapperService from '../services/ApiWrapperService';
+import { Vault } from '../types/index';
 
 export class VaultsBackend extends ApiWrapperService {
 	private chainId: string;

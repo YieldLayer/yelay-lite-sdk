@@ -1,14 +1,7 @@
 {
 	"name": "@yelay-lite/sdk",
-	"type": "module",
-	"main": "build/index.js",
+	"main": "build/index",
 	"types": "build/index.d.ts",
-	"exports": {
-		".": {
-			"types": "./build/index.d.ts",
-			"import": "./build/index.js"
-		}
-	},
 	"private": false,
 	"publishConfig": {
 		"access": "public"

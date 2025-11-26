@@ -1,6 +1,6 @@
 import { Address } from '@gud/drift';
-import { EventsRange } from './backend.js';
-import { Vault } from './vaults.js';
+import { EventsRange } from './backend';
+import { Vault } from './vaults';
 
 export type VaultYield = EventsRange & {
 	vault: string;

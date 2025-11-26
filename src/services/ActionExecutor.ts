@@ -1,8 +1,8 @@
 import { HexString, WriteOptions } from '@gud/drift';
-import { ContractFactory } from '../smartContract/ContractFactory.js';
-import { SmartContractAdapter } from '../smartContract/index.js';
-import { SwapArgsStruct } from '../smartContract/VaultWrapper.js';
-import { ClaimRequest } from '../types/yield.js';
+import { ContractFactory } from '../smartContract/ContractFactory';
+import { SmartContractAdapter } from '../smartContract/index';
+import { SwapArgsStruct } from '../smartContract/VaultWrapper';
+import { ClaimRequest } from '../types/yield';
 
 export class ActionExecutor {
 	private smartContractAdapter: SmartContractAdapter;
