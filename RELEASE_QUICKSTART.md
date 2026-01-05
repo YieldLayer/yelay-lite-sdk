@@ -10,7 +10,7 @@ pnpm run version:beta:new
 # OR increment existing beta: pnpm run version:beta:increment
 
 # 2. Commit, tag, and push
-git add package.json && git commit -m "chore: beta $(node -p "require('./package.json').version")"
+git add package.json && git commit -m "new: beta $(node -p "require('./package.json').version")"
 pnpm run release:tag
 pnpm run release:push
 
@@ -26,7 +26,7 @@ pnpm run version:stable:patch
 # OR: version:stable:minor / version:stable:major
 
 # 2. Commit, tag, and push
-git add package.json && git commit -m "chore: release $(node -p "require('./package.json').version")"
+git add package.json && git commit -m "new: release $(node -p "require('./package.json').version")"
 pnpm run release:tag
 pnpm run release:push
 
@@ -70,13 +70,13 @@ npm install @yelay-lite/sdk@beta
 **Beta Release:**
 
 ```bash
-pnpm run version:beta:new && git add package.json && git commit -m "chore: beta $(node -p "require('./package.json').version")" && pnpm run release:tag && pnpm run release:push
+pnpm run version:beta:new && git add package.json && git commit -m "new: beta $(node -p "require('./package.json').version")" && pnpm run release:tag && pnpm run release:push
 ```
 
 **Stable Release:**
 
 ```bash
-pnpm run version:stable:patch && git add package.json && git commit -m "chore: release $(node -p "require('./package.json').version")" && pnpm run release:tag && pnpm run release:push
+pnpm run version:stable:patch && git add package.json && git commit -m "new: release $(node -p "require('./package.json').version")" && pnpm run release:tag && pnpm run release:push
 ```
 
 ## Important Notes
