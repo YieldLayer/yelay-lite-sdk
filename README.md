@@ -1,10 +1,34 @@
 # Yelay Lite SDK
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Chains](#chains)
+- [Installation](#installation)
+- [Caching Configuration](#caching-configuration)
+- [Initialization](#initialization)
+- [Type Exports](#type-exports)
+- [Vaults](#get-vaults)
+- [Pool Management](#pool-management-for-integrators-only)
+- [Deposits](#deposit-erc20-into-the-vault)
+- [Claimable Yield](#get-claimable-yield)
+- [Claim Yield](#claim-yield)
+- [Get Last Claim Event](#get-last-claim-event)
+- [Swap and Deposit](#swap-token-and-deposit-into-vault-in-one-transaction)
+- [Redeem](#redeem-from-the-vault)
+- [Migrate](#migrate-to-another-pool)
+- [User Balance](#get-user-share-balance-in-particular-pool)
+- [TVL Data](#get-pools-tvl)
+- [Yield Data](#get-yield-data-on-vaults)
+- [Protocols](#get-protocols)
+- [Strategies](#get-active-strategies)
+- [License](#license)
+
 ## Overview
 
 The **Yelay Lite SDK** is a lightweight software development kit for interacting with Yelay's blockchain ecosystem. It provides streamlined access to **vaults**, **yield farming**, and **projects** via smart contract interactions as well as Backend queries.
 
-## Chains:
+## Chains
 
 -   Ethereum Mainnet (chainId: 1)
 -   Base (chainId: 8453)
@@ -127,6 +151,41 @@ const sdk = new YelayLiteSdk();
 await sdk.init(drift);
 ```
 
+## Type Exports
+
+The SDK exports various TypeScript types that you can use in your application:
+
+```ts
+import {
+	// Vault types
+	Vault,
+
+	// Yield types
+	VaultYield,
+	PoolYield,
+	YieldAggregated,
+	ClaimRequest,
+	ClaimableYield,
+	ClaimRequestParams,
+
+	// Pool types
+	PoolsTvl,
+	HistoricalTVL,
+	HistoricalTVLParams,
+
+	// Strategy types
+	Protocol,
+	Strategy,
+
+	// Backend types
+	TimeFrame,
+	PaginatedResponse,
+
+	// Config types
+	ChainId,
+} from '@yelay-lite/sdk';
+```
+
 ## Get vaults
 
 Get all vaults managed on network.
@@ -141,7 +200,7 @@ const vaults = await sdk.data.getVaults();
 const integratorAddress = '0x555';
 const vault = '0x1234';
 const { minPool, maxPool, clientName } = await sdk.data.getClientData(integratorAddress, vault);
-const poolToActivate = minPool + 5; // should be in range: minPool < poolToActivate < maxPool
+const poolToActivate = minPool + 5; // should be in range: minPool <= poolToActivate <= maxPool
 const isPoolActive = await sdk.data.isPoolActive(vault, poolToActivate);
 if (!isPoolActive) {
 	await sdk.actions.activatePool(vault, poolToActivate);
@@ -149,6 +208,8 @@ if (!isPoolActive) {
 ```
 
 ## Deposit ERC20 into the vault
+
+All action methods support an optional `options` parameter of type `WriteOptions` from `@gud/drift` for customizing transaction parameters (gas, nonce, etc.).
 
 ```ts
 const vault = '0x1234';
@@ -163,6 +224,11 @@ if (allowance === 0n) {
 }
 
 const depositTx = await sdk.actions.deposit(vault, pool, amount);
+
+// With optional WriteOptions
+const depositTxWithOptions = await sdk.actions.deposit(vault, pool, amount, {
+	gas: 300000n,
+});
 ```
 
 ## Deposit ERC20 into the vault on behalf of another address
@@ -230,6 +296,27 @@ const claimTx = await sdk.actions.claim(claimRequests);
 ```
 
 The `claim` method sends a transaction to the blockchain to claim yield based on the provided claim requests. It requires a valid signer with sufficient gas to execute the transaction.
+
+## Get last claim event
+
+Retrieve information about the last claim event for a user in a specific vault and pool:
+
+```ts
+const vault = await sdk.data.getVaults().then(vaults => vaults[0]); // Get a vault object
+
+const lastClaim = await sdk.portfolio.getLastClaim({
+	vault: vault,
+	user: '0xUserAddress',
+	poolId: 1,
+});
+
+if (lastClaim) {
+	console.log('Last claim block:', lastClaim.blockNumber);
+	console.log('Last claim tx:', lastClaim.transactionHash);
+} else {
+	console.log('No previous claims found');
+}
+```
 
 ## Swap token and deposit into vault in one transaction
 
@@ -313,10 +400,10 @@ const currentTVL = await sdk.data.getHistoricalTvl({
 
 ### Response Format
 
-The historicalTVL method returns a paginated response with the following structure:
+The `getHistoricalTvl` method returns a paginated response with the following structure:
 
 ```ts
-// Example response from historicalTVL
+// Example response from getHistoricalTvl
 {
   data: [
     {
@@ -336,20 +423,59 @@ The historicalTVL method returns a paginated response with the following structu
 
 ## Get yield data on vaults (filtering on vaults/timeframe)
 
+Retrieve yield data for vaults. If `TimeFrame` is not provided, it defaults to the last week.
+
 ```ts
+// Get all vault yields (defaults to last week)
 const vaultsYield = await sdk.data.getVaultYield();
+
+// Get yields for specific vaults
+const filteredVaultsYield = await sdk.data.getVaultYield(['0xVaultAddress1', '0xVaultAddress2']);
+
+// Get yields with custom timeframe
+const vaultsYieldWithTimeframe = await sdk.data.getVaultYield(
+	['0xVaultAddress'],
+	{ fromTimestamp: 1640000000, toTimestamp: 1650000000 }
+);
 ```
 
 ## Get yield data on pools (filtering on vaults/pools/timeframe)
 
+Retrieve yield data for pools within vaults.
+
 ```ts
+// Get all pool yields
 const poolsYield = await sdk.data.getPoolYield();
+
+// Get yields for specific vaults and pools
+const filteredPoolsYield = await sdk.data.getPoolYield(
+	['0xVaultAddress'],  // Optional: filter by vault addresses
+	[1, 2, 3],           // Optional: filter by pool IDs
+);
+
+// Get yields with custom timeframe
+const poolsYieldWithTimeframe = await sdk.data.getPoolYield(
+	['0xVaultAddress'],
+	[1, 2],
+	{ fromTimestamp: 1640000000, toTimestamp: 1650000000 }
+);
 ```
 
 ## Get aggregated yield data (filtering on vaults/pools/users/timeframe)
 
+Retrieve aggregated yield data filtered by vaults, pools, users, and timeframe.
+
 ```ts
+// Get all aggregated yield data
 const aggregatedYieldData = await sdk.data.getAggregatedYield();
+
+// Get aggregated yields with all filters
+const filteredAggregatedYield = await sdk.data.getAggregatedYield(
+	['0xVaultAddress'],              // Optional: filter by vault addresses
+	[1, 2, 3],                       // Optional: filter by pool IDs
+	['0xUserAddress1', '0xUserAddress2'], // Optional: filter by user addresses
+	{ fromTimestamp: 1640000000 }    // Optional: timeframe filter
+);
 ```
 
 ## Get protocols
