@@ -13,6 +13,7 @@
 - [Deposits](#deposit-erc20-into-the-vault)
 - [Claimable Yield](#get-claimable-yield)
 - [Claim Yield](#claim-yield)
+- [Claim yield and redeem](#claim-yield-and-redeem)
 - [Get Last Claim Event](#get-last-claim-event)
 - [Swap and Deposit](#swap-token-and-deposit-into-vault-in-one-transaction)
 - [Redeem](#redeem-from-the-vault)
@@ -296,6 +297,36 @@ const claimTx = await sdk.actions.claim(claimRequests);
 ```
 
 The `claim` method sends a transaction to the blockchain to claim yield based on the provided claim requests. It requires a valid signer with sufficient gas to execute the transaction.
+
+## Claim yield and redeem
+
+The vault exposes `claimAndRedeem`, which performs a yield claim (via transform to vault shares) and a share redemption in a single transaction on **YelayLiteVault**. The pool ID for that claim is taken from the claim request. The number of shares you redeem is separate from the amounts encoded in the claim proof.
+
+Use this when you want to claim yield and redeem underlying in one call, rather than separate `claim` (YieldExtractor) and `redeem` steps. If `getClaimable` returns no claim request for that user, use [`redeem`](#redeem-from-the-vault) alone to withdraw shares.
+
+```ts
+const vault = '0xVAULT_ADDRESS';
+const poolId = 1234;
+const user = '0xUSER_ADDRESS';
+
+const claimableYield = await sdk.portfolio.getClaimable({
+	user,
+	poolIds: [poolId],
+	vaultAddresses: [vault],
+});
+
+const entry = claimableYield[0];
+const { claimRequest } = entry;
+
+const balance = await sdk.portfolio.getBalance(vault, poolId, user);
+// Usual full-exit upper bound
+const sharesToRedeem = balance + BigInt(entry.claimable);
+
+// Redeemed underlying is sent to the signer
+const tx = await sdk.actions.claimAndRedeem(vault, claimRequest, sharesToRedeem);
+```
+
+Ensure `claimRequest.yelayLiteVault` matches the `vault` you pass; the proof is tied to that vault and pool.
 
 ## Get last claim event
 
