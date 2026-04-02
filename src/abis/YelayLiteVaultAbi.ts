@@ -243,6 +243,24 @@ export const YELAY_LITE_VAULT_ABI = [
 	{
 		inputs: [
 			{
+				internalType: 'address',
+				name: 'client',
+				type: 'address',
+			},
+			{
+				internalType: 'uint256',
+				name: 'projectId',
+				type: 'uint256',
+			},
+		],
+		name: 'activateProjectByManager',
+		outputs: [],
+		stateMutability: 'nonpayable',
+		type: 'function',
+	},
+	{
+		inputs: [
+			{
 				internalType: 'uint256',
 				name: 'index',
 				type: 'uint256',
@@ -259,6 +277,31 @@ export const YELAY_LITE_VAULT_ABI = [
 			},
 		],
 		name: 'activateStrategy',
+		outputs: [],
+		stateMutability: 'nonpayable',
+		type: 'function',
+	},
+	{
+		inputs: [
+			{
+				components: [
+					{
+						internalType: 'address',
+						name: 'facet',
+						type: 'address',
+					},
+					{
+						internalType: 'bytes4[]',
+						name: 'selectors',
+						type: 'bytes4[]',
+					},
+				],
+				internalType: 'struct SelectorsToFacet[]',
+				name: 'arr',
+				type: 'tuple[]',
+			},
+		],
+		name: 'addSelectors',
 		outputs: [],
 		stateMutability: 'nonpayable',
 		type: 'function',
@@ -375,6 +418,62 @@ export const YELAY_LITE_VAULT_ABI = [
 	{
 		inputs: [
 			{
+				components: [
+					{
+						internalType: 'address',
+						name: 'yelayLiteVault',
+						type: 'address',
+					},
+					{
+						internalType: 'uint256',
+						name: 'projectId',
+						type: 'uint256',
+					},
+					{
+						internalType: 'uint256',
+						name: 'cycle',
+						type: 'uint256',
+					},
+					{
+						internalType: 'uint256',
+						name: 'yieldSharesTotal',
+						type: 'uint256',
+					},
+					{
+						internalType: 'bytes32[]',
+						name: 'proof',
+						type: 'bytes32[]',
+					},
+				],
+				internalType: 'struct ClaimRequest',
+				name: 'data',
+				type: 'tuple',
+			},
+			{
+				internalType: 'uint256',
+				name: 'shares',
+				type: 'uint256',
+			},
+			{
+				internalType: 'address',
+				name: 'receiver',
+				type: 'address',
+			},
+		],
+		name: 'claimAndRedeem',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: 'assets',
+				type: 'uint256',
+			},
+		],
+		stateMutability: 'nonpayable',
+		type: 'function',
+	},
+	{
+		inputs: [
+			{
 				internalType: 'address[]',
 				name: 'tokens',
 				type: 'address[]',
@@ -419,6 +518,44 @@ export const YELAY_LITE_VAULT_ABI = [
 			},
 		],
 		stateMutability: 'nonpayable',
+		type: 'function',
+	},
+	{
+		inputs: [
+			{
+				internalType: 'uint256',
+				name: 'shares',
+				type: 'uint256',
+			},
+		],
+		name: 'convertToAssets',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256',
+			},
+		],
+		stateMutability: 'view',
+		type: 'function',
+	},
+	{
+		inputs: [
+			{
+				internalType: 'uint256',
+				name: 'assets',
+				type: 'uint256',
+			},
+		],
+		name: 'convertToShares',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256',
+			},
+		],
+		stateMutability: 'view',
 		type: 'function',
 	},
 	{
@@ -756,32 +893,6 @@ export const YELAY_LITE_VAULT_ABI = [
 		type: 'function',
 	},
 	{
-		inputs: [],
-		name: 'lastTotalAssetsTimestamp',
-		outputs: [
-			{
-				internalType: 'uint64',
-				name: '',
-				type: 'uint64',
-			},
-		],
-		stateMutability: 'view',
-		type: 'function',
-	},
-	{
-		inputs: [],
-		name: 'lastTotalAssetsUpdateInterval',
-		outputs: [
-			{
-				internalType: 'uint64',
-				name: '',
-				type: 'uint64',
-			},
-		],
-		stateMutability: 'view',
-		type: 'function',
-	},
-	{
 		inputs: [
 			{
 				components: [
@@ -952,6 +1063,44 @@ export const YELAY_LITE_VAULT_ABI = [
 		inputs: [
 			{
 				internalType: 'uint256',
+				name: 'shares',
+				type: 'uint256',
+			},
+		],
+		name: 'previewRedeem',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256',
+			},
+		],
+		stateMutability: 'view',
+		type: 'function',
+	},
+	{
+		inputs: [
+			{
+				internalType: 'uint256',
+				name: 'assets',
+				type: 'uint256',
+			},
+		],
+		name: 'previewWithdraw',
+		outputs: [
+			{
+				internalType: 'uint256',
+				name: '',
+				type: 'uint256',
+			},
+		],
+		stateMutability: 'view',
+		type: 'function',
+	},
+	{
+		inputs: [
+			{
+				internalType: 'uint256',
 				name: 'projectId',
 				type: 'uint256',
 			},
@@ -1054,6 +1203,19 @@ export const YELAY_LITE_VAULT_ABI = [
 				type: 'uint256',
 			},
 		],
+		stateMutability: 'nonpayable',
+		type: 'function',
+	},
+	{
+		inputs: [
+			{
+				internalType: 'bytes4[]',
+				name: 'selectors',
+				type: 'bytes4[]',
+			},
+		],
+		name: 'removeSelectors',
+		outputs: [],
 		stateMutability: 'nonpayable',
 		type: 'function',
 	},
@@ -1231,19 +1393,6 @@ export const YELAY_LITE_VAULT_ABI = [
 	{
 		inputs: [
 			{
-				internalType: 'uint64',
-				name: 'interval',
-				type: 'uint64',
-			},
-		],
-		name: 'setLastTotalAssetsUpdateInterval',
-		outputs: [],
-		stateMutability: 'nonpayable',
-		type: 'function',
-	},
-	{
-		inputs: [
-			{
 				internalType: 'bytes4',
 				name: 'selector',
 				type: 'bytes4',
@@ -1255,31 +1404,6 @@ export const YELAY_LITE_VAULT_ABI = [
 			},
 		],
 		name: 'setPaused',
-		outputs: [],
-		stateMutability: 'nonpayable',
-		type: 'function',
-	},
-	{
-		inputs: [
-			{
-				components: [
-					{
-						internalType: 'address',
-						name: 'facet',
-						type: 'address',
-					},
-					{
-						internalType: 'bytes4[]',
-						name: 'selectors',
-						type: 'bytes4[]',
-					},
-				],
-				internalType: 'struct SelectorsToFacet[]',
-				name: 'arr',
-				type: 'tuple[]',
-			},
-		],
-		name: 'setSelectorToFacets',
 		outputs: [],
 		stateMutability: 'nonpayable',
 		type: 'function',
@@ -1487,6 +1611,29 @@ export const YELAY_LITE_VAULT_ABI = [
 		type: 'function',
 	},
 	{
+		inputs: [
+			{
+				internalType: 'uint256',
+				name: 'projectId',
+				type: 'uint256',
+			},
+			{
+				internalType: 'uint256',
+				name: 'shares',
+				type: 'uint256',
+			},
+			{
+				internalType: 'address',
+				name: 'receiver',
+				type: 'address',
+			},
+		],
+		name: 'transformYieldShares',
+		outputs: [],
+		stateMutability: 'nonpayable',
+		type: 'function',
+	},
+	{
 		inputs: [],
 		name: 'underlyingAsset',
 		outputs: [
@@ -1521,6 +1668,31 @@ export const YELAY_LITE_VAULT_ABI = [
 			},
 		],
 		name: 'updateDepositQueue',
+		outputs: [],
+		stateMutability: 'nonpayable',
+		type: 'function',
+	},
+	{
+		inputs: [
+			{
+				components: [
+					{
+						internalType: 'address',
+						name: 'facet',
+						type: 'address',
+					},
+					{
+						internalType: 'bytes4[]',
+						name: 'selectors',
+						type: 'bytes4[]',
+					},
+				],
+				internalType: 'struct SelectorsToFacet[]',
+				name: 'arr',
+				type: 'tuple[]',
+			},
+		],
+		name: 'updateSelectors',
 		outputs: [],
 		stateMutability: 'nonpayable',
 		type: 'function',

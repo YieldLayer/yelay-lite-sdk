@@ -1,4 +1,5 @@
 import { ClientData, StrategyData } from '../types/index';
+import { ClaimRequest } from '../types/yield';
 import { ContractFactory } from './ContractFactory';
 import { Address, HexString, WriteOptions } from '@gud/drift';
 import { decodeBytes32ToString } from '../utils/index';
@@ -110,6 +111,41 @@ export class YelayLiteVault {
 				{
 					shares: amount,
 					projectId: BigInt(pool),
+					receiver: signerAddress as Address,
+				},
+				options,
+			);
+			return txHash;
+		} else {
+			throw new Error('Not read');
+		}
+	}
+
+	private claimRequestToVaultData(claimRequest: ClaimRequest) {
+		return {
+			yelayLiteVault: claimRequest.yelayLiteVault as Address,
+			projectId: BigInt(claimRequest.pool),
+			cycle: BigInt(claimRequest.cycle),
+			yieldSharesTotal: BigInt(claimRequest.yieldSharesTotal),
+			proof: claimRequest.proof as HexString[],
+		};
+	}
+
+	async claimAndRedeem(
+		vault: string,
+		claimRequest: ClaimRequest,
+		shares: bigint,
+		options?: WriteOptions,
+	): Promise<HexString> {
+		const vaultContract = this.contractFactory.getYelayLiteVault(vault);
+
+		if (vaultContract.isReadWrite()) {
+			const signerAddress = await vaultContract.getSignerAddress();
+			const txHash = await vaultContract.write(
+				'claimAndRedeem',
+				{
+					data: this.claimRequestToVaultData(claimRequest),
+					shares,
 					receiver: signerAddress as Address,
 				},
 				options,

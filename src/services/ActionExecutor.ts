@@ -139,4 +139,20 @@ export class ActionExecutor {
 	async claim(claimRequests: ClaimRequest[], options?: WriteOptions): Promise<HexString> {
 		return this.smartContractAdapter.yieldExtractor.claim(claimRequests, options);
 	}
+
+	/**
+	 * Claim yield via transform and redeem in one call.
+	 * @param {string} vault - The address of the vault.
+	 * @param {ClaimRequest} claimRequest - Claim request.
+	 * @param {bigint} shares - Amount of shares to redeem (independent of claim amount).
+	 * @returns {Promise<HexString>} A promise that resolves to the transaction hash.
+	 */
+	async claimAndRedeem(
+		vault: string,
+		claimRequest: ClaimRequest,
+		shares: bigint,
+		options?: WriteOptions,
+	): Promise<HexString> {
+		return this.smartContractAdapter.yelayLiteVault.claimAndRedeem(vault, claimRequest, shares, options);
+	}
 }
