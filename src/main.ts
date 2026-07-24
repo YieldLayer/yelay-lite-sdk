@@ -12,7 +12,7 @@ export class YelayLiteSdk {
 	private _data: DataProvider | null = null;
 	private _actions: ActionExecutor | null = null;
 
-	async init(drift: Drift, testing = false) {
+	async init(drift: Drift) {
 		// Check if user has set a custom cache store (not the default LruStore)
 		const currentStore = drift.cache.store;
 		
@@ -24,7 +24,7 @@ export class YelayLiteSdk {
 		drift.cache.store = new NoOpCache();
 
 		const chainId = (await drift.getChainId()) as ChainId;
-		const config = getEnvironment(chainId, testing);
+		const config = getEnvironment(chainId);
 		const contractFactory = new ContractFactory(drift, config.contracts);
 
 		// Initialize services with proper dependencies

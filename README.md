@@ -32,10 +32,6 @@ The **Yelay Lite SDK** is a lightweight software development kit for interacting
 ## Chains
 
 -   Ethereum Mainnet (chainId: 1)
--   Base (chainId: 8453)
--   Sonic (chainId: 146)
--   Arbitrum One (chainId: 42161)
--   Avalanche (chainId: 43114)
 
 ## Installation
 
@@ -88,16 +84,16 @@ import { YelayLiteSdk } from '@yelay-lite/sdk';
 import { viemAdapter } from '@gud/drift-viem';
 import { createDrift } from '@gud/drift';
 import { createPublicClient, createWalletClient, http } from 'viem';
-import { base } from 'viem/chains';
+import { mainnet } from 'viem/chains';
 
 // Set up your viem clients
 const publicClient = createPublicClient({
-	chain: base,
+	chain: mainnet,
 	transport: http(),
 });
 
 const walletClient = createWalletClient({
-	chain: base,
+	chain: mainnet,
 	transport: http(),
 });
 
@@ -119,7 +115,7 @@ import { createDrift } from '@gud/drift';
 import { ethers } from 'ethers';
 
 // Set up your ethers provider and signer
-const provider = new ethers.JsonRpcProvider('https://mainnet.base.org');
+const provider = new ethers.JsonRpcProvider('https://eth.llamarpc.com');
 const signer = new ethers.Wallet('YOUR_PRIVATE_KEY', provider);
 
 // Create the adapter and drift instance
@@ -140,7 +136,7 @@ import { createDrift } from '@gud/drift';
 import { ethers } from 'ethers';
 
 // Set up your ethers v5 provider and signer
-const provider = new ethers.providers.JsonRpcProvider('https://mainnet.base.org');
+const provider = new ethers.providers.JsonRpcProvider('https://eth.llamarpc.com');
 const signer = new ethers.Wallet('YOUR_PRIVATE_KEY', provider);
 
 // Create the adapter and drift instance
