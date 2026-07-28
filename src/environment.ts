@@ -31,7 +31,7 @@ export const getEnvironment = (chainId: ChainId, testing: boolean): SDKConfig =>
 			contracts: {
 				VaultWrapper: '0xf65d02700915259602D9105b66401513D1CB61ff',
 				Swapper: '0xD49Dc240CE448BE0513803AB82B85F8484748871',
-				YieldExtractor: '0x226239384EB7d78Cdf279BA6Fb458E2A4945E275',
+				YieldExtractor: '0xD86A5188094E83B83Aba907E0EAfB0222eb677F4',
 			},
 			backendUrl,
 		};
